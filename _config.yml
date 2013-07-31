@@ -1,0 +1,4 @@
+name: Opower Engineering Blog
+markdown: redcarpet
+pygments: true
+permalink: /:year/:month/:day/:title
