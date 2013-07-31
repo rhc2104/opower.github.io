@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Our Scala DSL for testing our web product</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Our Scala DSL for testing our web product</h2>
+<p class="meta">19 Sep 2011</p>
+
+<div class="post">
+<p>This is actually a fairly old bit of tech for us, but I&#39;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&#39;s DSL Book</a>, and thought it might be good to talk about what we&#39;ve done.</p>
+
+<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&#39;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&#39;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
+
+<h2>The domain of application: its architecture</h2>
+
+<p>To understand how it works, you need to understand how the apppilcation is architected.  While it&#39;s a Spring MVC web app, in the general sense, there&#39;s a lot more convention around how it&#39;s built.  If you&#39;ve used a &quot;web framework&quot; like Spring MVC, you know that it&#39;s really a giant library for responding to HTTP requests at its core, and that it&#39;s not very opinionated; it&#39;s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn&#39;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
+
+<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &quot;Hi, Dave!&quot; in the upper corner; that &quot;Hi, Dave&quot; would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what&#39;s needed to configure the modules on the page. All stateful information (e.g. &quot;who&#39;s logged in?&quot;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
+
+<p>This is all glued together via a souped-up version of a <code>&lt;jsp:include&gt;</code> tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.</p>
+
+<h2>Testing with Scala</h2>
+
+<p>Which brings us to our DSL for testing this stuff.  Essentially, a module&#39;s url can be requested and tested independently of any page; we don&#39;t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module&#39;s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
+
+<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&#39;s consider a module that renders a person&#39;s most recent bill.  Suppose we have two views of this module; in the &quot;large&quot; view, we want to see the bill&#39;s cost, KWh used, and an account number.  In the &quot;small&quot; view (that we might use on a dashboard page), we want to see just the bill&#39;s cost.  How might we test this?</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">resource for bill 34 from customer 123:
+  requires login as customer 123
+  contains &quot;45.67&quot; as the cost
+  has a view &quot;small&quot;
+  has a view &quot;large&quot;
+    that contains &quot;156&quot; as the kwh
+    that contains &quot;655321&quot; as the account number
+</code></pre></div>
+<p>I decided I wanted to write this in code, and have it work.  Not having time to write a parser (or invent a new language), I decided an internal DSL would be the way to go, and that Scala would let me get as close as possible to this:</p>
+
+<p>This code creates several data structures that our test can now walk.  Essentially, what this will test:</p>
+
+<ul>
+<li><p>That accessing the url without being logged in gets an error</p></li>
+<li><p>That, once logged in, requesting a view named &quot;small&quot; will not generate an error</p></li>
+<li><p>That, once logged in, requesting a view named &quot;large&quot; will not generate an error</p></li>
+<li><p>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</p></li>
+<li><p>That both views contain a div with the id price that contains the text &quot;45.67&quot;</p></li>
+<li><p>That the &quot;large&quot; view also contains a div with id kwh that contains &quot;156&quot; <strong>and</strong> a div with id &quot;accountNumber&quot; that contains &quot;655321&quot;</p></li>
+</ul>
+
+<h2>Getting fancy</h2>
+
+<p>Since this is just Scala code, you can use this to do more sophisitcated things:</p>
+
+<p>I don&#39;t know if the developers are totally in love with this DSL, but there&#39;s so much you get for free, I&#39;m certain they&#39;d hate testing that by hand even more (or, worse, simply not test some of these things):</p>
+
+<ul>
+<li><p>You never have to remember to check for authentication requirements</p></li>
+<li><p>You never have to remember to check for missing message properties</p></li>
+<li><p>You can dynamically generates tests via test-data (as demonstrated above)</p></li>
+<li><p>Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.</p></li>
+</ul>
+
+<p>Of course, this DSL is entirely useless to anyone but our web team.  It&#39;s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn&#39;t have to make the ultimate web-based tesitng DSL; just one that worked for our product.</p>
+
+<p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don&#39;t be afraid to use Scala for this; it&#39;s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala&#39;s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

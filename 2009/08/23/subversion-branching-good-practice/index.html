@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Subversion Branching "Good" Practice</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Subversion Branching "Good" Practice</h2>
+<p class="meta">23 Aug 2009</p>
+
+<div class="post">
+<p>I am relatively new to Subversion — well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the &quot;trunk/branches/tags&quot; directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
+
+<p><code>svn co http://domain.com/svnroot/project/trunk project</code></p>
+
+<p>That way, when I go to the <code>project</code> directory, I do not have to then go into the <code>trunk</code> directory to get to my files.  Saving an extra directory level is not the best benefit though.  When I set up my IDE (yes, I use an IDE), I put the IDE files in that one directory and do not have to recreate them for each branch or tag that I might check out.  I essentially treat the &quot;trunk/branches/tags&quot; part of the directory as pure metadata, which makes perfect sense to me.</p>
+
+<p>When I switched over to this system, there was one big drawback.  I could not easily tell where I am just by looking at my prompt.  I had to run <code>svn info | grep URL</code> to see if I was on a branch.  So instead of letting my prompt handicap me, I decided to get smart about my prompt.  Using bash, my prompt used to look like this:</p>
+
+<p><code>jeff:/opt/pose/main/report/src/main/java</code></p>
+
+<p>but now it looks like this (supercharged with Subversion metadata):</p>
+
+<p><code>jeff:/opt/pose/main/report/src/main/java [SVN: /main/report/trunk]</code></p>
+
+<p>I&#39;m no bash expert, so I dug around on the web and learned a bit about how <code>PROMPT_COMMAND</code> works.  Here is what I have in my <code>.bash_profile</code> now:</p>
+
+<p><code>
+function spwd () 
+{ 
+    stat .svn &gt; /dev/null 2&gt;&amp;1;
+    if [ &quot;$?&quot; == &quot;0&quot; ]; then
+        SURL=</code>svn info | grep URL | perl -pe &#39;s/URL: (.<em>)/\1/&#39;<code>;
+        if [</code>echo ${SURL} | grep -E &quot;branches|tags&quot;<code>]; then
+            SVER=</code>echo ${SURL} | perl -pe &#39;s{.</em>/(branches|tags)/(.<em>)}{\1/\2}&#39; | cut -d/ -f1-2<code>;
+            SPTH=</code>echo ${SURL} | perl -pe &#39;s{.</em>svnroot/(.<em>)/(branches|tags)/.</em>}{/\1}&#39;<code>;
+            SPWD=&quot;${SPTH}/${SVER}&quot;;
+        else
+            SPWD=</code>echo ${SURL} | perl -pe &#39;s{.<em>svnroot/(.</em>)/trunk(.*)}{/\1/trunk}&#39;<code>;
+        fi;
+        export PS1=&quot;\u:\w [SVN: $SPWD]\n$ &quot;;
+    else
+        export PS1=&quot;\u:\w $ &quot;;
+    fi
+}
+export PROMPT_COMMAND=spwd
+</code></p>
+
+<p>It may not be the most efficient way to do it, but it sure works well and lets me know in an instant what trunk, branch or tag I happen to be working on at that very moment.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

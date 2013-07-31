@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Boxed primitives and ==</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Boxed primitives and ==</h2>
+<p class="meta">27 May 2010</p>
+
+<div class="post">
+<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &quot;Person 1001&#39;s customer id 109032 didn&#39;t match the passed-in customer&#39;s id of 109032&quot; seemed logically impossible, but was somehow true.</p>
+
+<p>But first, let&#39;s talk about defensive coding and how we do it.  For example:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * frobs the bar and baz.
+ * @param bar the bar to frob; may not be null
+ * @param baz the baz to from; must be positive
+ */
+public String frob(String bar, int baz) {
+  if (bar.length() &gt; baz) {
+    return bar.substring(baz);
+  }
+  else {
+    return bar;
+  }
+}
+</code></pre></div>
+<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there&#39;s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
+ * frobs the bar and baz.
+ * @param bar the bar to frob; may not be null
+ * @param baz the baz to from; must be positive
+ */
+public String frob(String bar, int baz) {
+  Validate.notNull(bar,&quot;bar must not be null to frob&quot;);
+  Validate.isTrue(baz &gt; 0,&quot;baz must be positive&quot;);
+  if (bar.length() &gt; baz) {
+    return bar.substring(baz);
+  }
+  else {
+    return bar;
+  }
+}
+</code></pre></div>
+<p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
+We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>&#39;s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public PersonAndCustomer(Person p, Customer c) {
+  Validate.notNull(p,&quot;Person may not be null&quot;);
+  Validate.notNull(c,&quot;Customer may not be null&quot;);
+  Validate.isTrue(p.getCustomerId() == c.getId(),
+    &quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;,
+    p.getId(),
+    p.getCustomerId(),
+    c.getId());
+  ...
+}
+</code></pre></div>
+<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person&#39;s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer&#39;s <code>id</code> object.  What&#39;s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
+
+<p>Until this week; we were testing our application for a new client and I got the error posted above (&quot;Person 1001&#39;s customer id 109032 didn&#39;t match the passed-in customer&#39;s id of 109032&quot;).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">public PersonAndCustomer(Person p, Customer c) {
+  Validate.notNull(p,&quot;Person may not be null&quot;);
+  Validate.notNull(c,&quot;Customer may not be null&quot;);
+  Validate.isTrue(p.getCustomerId().equals(c.getId()),
+    &quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;,
+    p.getId(),
+    p.getCustomerId(),
+    c.getId());
+  ...
+}
+</code></pre></div>
+<p>What&#39;s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Long l1 = new Long(45L);
+Long l2 = new Long(45L);
+
+System.out.println(l1 == l2);      // false
+System.out.println(l1.equals(l2)); // true
+System.out.println(l1 == 45L);     // true!
+</code></pre></div>
+<p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

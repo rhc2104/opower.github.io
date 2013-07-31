@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Picking up your Mac OS environment in RubyMine</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Picking up your Mac OS environment in RubyMine</h2>
+<p class="meta">07 Sep 2010</p>
+
+<div class="post">
+<p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don&#39;t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
+
+<ol>
+<li>First launch a shell that you know has the environment variables you want already set, then:
+&gt; cd /Applications/RubyMine 2.0.2.app/Contents/MacOS
+&gt; ./rubymine</li>
+</ol>
+
+<p>or</p>
+
+<ol>
+<li>Follow <a href="http://www.digitaledgesw.com/node/31">these (untested) directions</a>. In summary, you would add commands like &quot;setenv VARIABLE<em>NAME variable</em>value&quot; in /etc/launchd.conf  -- the downside is that you have to reboot after making changes, so this doesn&#39;t help if the environment variables you need are somewhat dynamic.</li>
+</ol>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

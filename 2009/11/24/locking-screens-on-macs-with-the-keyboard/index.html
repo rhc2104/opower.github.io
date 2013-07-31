@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Locking screens on Macs with the keyboard</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Locking screens on Macs with the keyboard</h2>
+<p class="meta">24 Nov 2009</p>
+
+<div class="post">
+<p>Desktop security is a big issue when you have access to massive amounts of data.  As far as plain old terminal security, locking your computer while you&#39;re away is a pretty basic rule.</p>
+
+<p>We have lots of OSes around the office here - Ubuntu, Windows, and OSX.  Of those, Ubuntu and Windows natively provide a way to lock your desktop with a keystroke (Win+L or Ctrl+Alt+Del, Enter on Windows and Ctrl+Alt+L on Ubuntu).  Strangely, Mac gives no easy way to lock your desktop.</p>
+
+<p>We&#39;ve been using HotCorners for the screen saver, but who wants to touch the mouse if you don&#39;t have to (especially when you&#39;re racing to grab a free lunch)?</p>
+
+<p>Enter <a href="http://www.macupdate.com/info.php/id/14831">Quicksilver</a>, everyone&#39;s favorite application interface.  (There are all sorts of things you can do with Quicksilver and its various plug-ins, but you can look that up yourself.) To set up a keyboard shortcut with Quicksilver to lock your screen (hat tip to <a href="http://www.brynary.com/2007/4/11/mac-tip-keyboard-shortcut-for-screen-saver">Bryan Helmkamp</a>):</p>
+
+<ol>
+<li><p>Create a symbolic link to your screen saver application:
+<code>$ sudo ln -s /System/Library/Frameworks/ScreenSaver.framework/Versions/Current/Resources/ScreenSaverEngine.app/ /Applications/Screen\ Saver.app</code></p></li>
+<li><p>Quicksilver -&gt; Triggers -&gt; Custom Triggers</p></li>
+<li><p>Add a Hotkey</p></li>
+<li><p>Find the ScreenSaverEngine by typing and press enter</p></li>
+<li><p>Double-click the cell in the Trigger column</p></li>
+<li><p>Choose your hotkey (I like Ctrl+Cmd+\ since it&#39;s almost Ctrl+Alt+Del</p></li>
+<li><p>Close the window (you may also need to restart QS</p></li>
+</ol>
+
+<p>Now set up your System Prefs in Security -&gt; General to require a password immediately after screen saver begins and you&#39;re set.</p>
+
+<p>Sadly, you need to do this or your screen saver will awake as soon as you release your QS shortcut.  This even happens if you set QS to launch screen saver &quot;On Release&quot;.</p>
+
+<p>Anyway, after that, lock screen is just a keystroke away.
+  *[Ctrl+Cmd+]: control command backslash
+  *[OSes]: operating systems
+  *[Ctrl+Alt+L]: control alt L
+  *[Ctrl+Alt+Del]: control alt delete
+  *[QS]: Quicksilver</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

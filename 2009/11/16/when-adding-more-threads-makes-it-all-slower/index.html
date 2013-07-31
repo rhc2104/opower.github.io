@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>When adding more threads makes it all slower</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>When adding more threads makes it all slower</h2>
+<p class="meta">16 Nov 2009</p>
+
+<div class="post">
+<p>I&#39;ve been working on a new feature that requires analysis of each individual&#39;s entire energy-use history.  In other words, I have a process that will touch <strong>every single bit of data</strong> in our database. This should be a rare thing, so if it takes a while, it&#39;s not that big of a deal.  My initial implementation was on track to complete in...11 days.</p>
+
+<p>My first thought was: there&#39;s lots of blocking reading and writing from the database, so adding some threads should speed things up.  While one thread was analyzing Bob&#39;s energy data, another could be fetching Mary&#39;s, while another could be updating Joe&#39;s meta-data with the results.  Or so I thought.</p>
+
+<p>The more threads I added, the slower the entire thing became.  It turned out that <strong>the fastest implementation was a single-threaded one</strong>.  But why?  It all has to do with the diminishing returns one gets from scaling out.</p>
+
+<p>If you think of a task as having a serial component, which cannot be broken up concurrently, and then multiple tasks which <strong>can</strong> be done concurrently, we can analyze the returns we get by increasing the number of available processors (threads, in my case).  This is <a href="http://en.wikipedia.org/wiki/Amdahl%27s_law">Amdahl&#39;s Law</a> and is exemplified by the following equation (where &quot;x&quot; is the number of processors or threads, and &quot;s&quot; is the percentage of your overall task that must be serialized; &quot;y&quot; is the increase in speed you will see from scaling).
+<img src="/img/amdahl.png" alt="Amdahl&#39;s Equation"></p>
+
+<p>When you graph this, it&#39;s pretty obvious that there are diminishing returns to adding more threads/processors (the graph below assumes that 90% of the overall job can be done concurrently).  As we add threads, we get less and less of a gain in speed.
+But there&#39;s still a gain to get, so what happened to me?</p>
+
+<p><img src="/img/Picture-3-300x106.png" alt="Graph of Amdahl&#39;s Equation with 10% of our task serialized"></p>
+
+<p>Amdahl&#39;s law is actually pretty optimistic.  It doesn&#39;t account for the overhead required to synchronize the shared data.  If we account for this, with a new value &quot;k&quot; ( the percentage penalty for maintaining consistency), we see that increasing our processors/threads actually starts to hurt us (this equation is in red)!</p>
+
+<p><img src="/img/Coherence-300x105.png" alt="Taking shared state synchronization into account"></p>
+
+<p>In my case, almost all of this synchronization is happening within the database; it turns out that almost all the time my process needs is accessing data from the database.  So, I dialed it down to only one thread, and we should be done early next week.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

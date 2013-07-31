@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Timeshifting in HBase</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Timeshifting in HBase</h2>
+<p class="meta">29 Mar 2013</p>
+
+<div class="post">
+<p>For our HBase table layout, we are following an entity-centric model,
+evangelized to us by our friends at <a href="http://www.wibidata.com">WibiData</a>.  The idea is to put all of the
+data about a single entity into a single row in HBase.  When you need to run
+a computation that involves that entity&#39;s data, you have quick access to it by
+the row key, and all of the data is stored close together on disk.
+Additionally, against many <a href="http://www.ngdata.com/site/blog/62-ng.html">suggestions</a> from the HBase community,
+and general confusion about <a href="https://issues.apache.org/jira/browse/HBASE-2406">how timestamps work</a>, we are using
+timestamps with logical values.  Instead of just letting the region server
+assign a timestamp version to each cell, we are explicitly setting those values
+so that we can use timestamp as a true queryable dimension in our <code>get</code>s and
+<code>scan</code>s.  In addition to the real timeseries data that is indexed using the cell
+timestamp, we also have other columns that store metadata about the entity.
+That data does not need to be logically timestamped, and we always just want the
+most recent version of it.  Given this description, rows in the table look
+something like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">timestamp    data     metadata
+   2013      1.09
+   2012      0.87
+   2011      0.93     &quot;house&quot;
+   2010      1.02
+   2009      0.98
+</code></pre></div>
+<p>This shows a row that has five timeseries values in it and a piece of metadata
+that we keep, a label describing where the data came from.  The metadata is
+stored at the timestamp when we wrote it into the table, which in this example
+is in 2011.  Since we imported historical data, and we use logical timestamps
+for the data column, we have data going back to 2009.  One typical access
+pattern is to query for all data from the beginning of &quot;last year&quot; up to now,
+because we need that much data for many analyses.  If we ran a <code>get</code> for this
+data, it would normally be set up like this (in pseudo-code, of course):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Get get = new Get(rowkey);
+get.addColumn(&quot;data&quot;);
+get.addColumn(&quot;metadata&quot;);
+get.setTimeRange(2012, 2013);
+</code></pre></div>
+<p>Unfortunately that <code>get</code> would not return us any data for the metadata column,
+because there is no valid cell in that timerange.  We have two options: make
+a second <code>get</code> for the metadata or figure out some other solution.  That second
+solution is timeshifting.</p>
+
+<p>Instead of storing the metadata column with a true server timestamp of when it
+was written, we shift the timestamp by 50,000 years which makes the row data now
+look like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">timestamp    data     metadata
+  52011               &quot;house&quot;
+   2013      1.09
+   2012      0.87
+   2011      0.93
+   2010      1.02
+   2009      0.98
+</code></pre></div>
+<p>Since we imported the data in 2011 and timeshifted the metadata column
+timestamp, its new timestamp is 52,011.  We now change our <code>get</code> slightly by
+setting an ending timestamp to be the logical &quot;end of time&quot;:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Get get = new Get(rowkey);
+get.addColumn(&quot;data&quot;);
+get.addColumn(&quot;metadata&quot;);
+get.setTimeRange(2012, Long.MAX_LONG);
+</code></pre></div>
+<p>Now, we will get data for the data column and for the metadata column
+using only one RPC.  The benefit of HBase being a sparse datastore is that the
+data for the metadata column is stored on disk right next to the data for the
+data column even though they are logically separated by 50,000 years.
+There is no added overhead to the storage to account for this, and thus no added
+processing when fetching it.  Furthermore, fetching data for just the metadata column still works
+with <code>Result#getColumnLatest()</code>.</p>
+
+<p>Yes, there is a problem for the future us of the year 52,011, but I&#39;m betting we
+will all be using relational databases again by that point.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

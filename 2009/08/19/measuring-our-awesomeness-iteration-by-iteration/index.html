@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Measuring our awesomeness iteration by iteration</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Measuring our awesomeness iteration by iteration</h2>
+<p class="meta">19 Aug 2009</p>
+
+<div class="post">
+<p>Like a lot of startups (and big companies!) we use iterative development: we break up our work into &quot;stories&quot; describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)</p>
+
+<p>The easiest way to do that is to look at the bugs our QA staff find in the product updates.  Although we have a lot of automated tests, we still need some eyes on the applications to check for things like text overruns of our printed reports, or JavaScript weirdness in some <a href="http://blog.digg.com/?p=878">less-than-well-behaved</a>) browsers.</p>
+
+<p>After a few iterations, Anh (our beloved program manager) ran some queries on our bug-tracking database and, using some Excel magic, showed us numbers like &quot;number of defects in the web application&quot; and &quot;average number of days a critical bug sat unassigned&quot;.  This is good stuff; seeing hard data about what we&#39;re doing lets us focus on inefficiency.  Since we release software every month (and launch new clients almost as frequently), this is a <strong>huge</strong> help in making each iteration better than the previous.</p>
+
+<p>While Anh&#39;s hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using <a href="http://www.sinatrarb.com/">Sinatra</a> to automate most of what we&#39;d like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we&#39;re fixing and even the <em>root source</em> of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) </p>
+
+<p>We still need to show trends, however.  &quot;Classic&quot; thinking in software process improvement says to do that by dividing everything by lines of code; if we had 10 defects per 1,000 lines of code this month, but only 8 the following, we&#39;re doing better.  This is not a great measure for us, since we are changing and enhancing our product (as opposed to writing fresh code each time), so we decided to normalize our measurements by the story points we assigned to the iteration.  This way, we can see charts like the one below (which says we are doing better each time):</p>
+
+<p><img src="/img/MetricsChart.png" alt="Metrics Chart"></p>
+
+<p>This information is dead simple to collect; the burden on developers and testers when writing defects is almost nothing.  With only a priority, severity, and &quot;source of defect&quot;, we can collect a lot of advanced information about our development process -- and make it better iteration by iteration.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

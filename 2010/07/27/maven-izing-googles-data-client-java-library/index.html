@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Maven-izing Google's Data Client Java Library</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Maven-izing Google's Data Client Java Library</h2>
+<p class="meta">27 Jul 2010</p>
+
+<div class="post">
+<p>OPOWER&#39;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+
+<p>Clicking around google&#39;s well-documented &quot;get started&quot; guides, it looked like they haven&#39;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&#39;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&#39;s repo (thereby making them accessible to all our developer&#39;s boxes).</p>
+
+<p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
+
+<ul>
+<li><p>Grab latest JARs from the &quot;gdata-java&quot; link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></p></li>
+<li><p>Unzip on the server hosting your company&#39;s mvn repo</p></li>
+<li><p>cd down in to ./gdata/java/lib</p></li>
+<li><p>Make a file &#39;installall.pl&#39; in that lib directory:</p>
+
+<h1>!/usr/bin/perl -w</h1>
+
+<p>my @jars = <code>ls *.jar</code>;
+chomp(@jars);
+foreach my $jar (@jars) {
+  if($jar =~ /(.*)-(\d.\d).jar/) {
+    my $cmd = &quot;./install.pl --artifactId $1 --version $2 --jar $jar&quot;;
+    open(CMD, &quot;$cmd|&quot;) or die &quot;Could not execute $cmd $!&quot;;
+    while(<CMD>) {
+       print $_;
+    }
+   close(CMD);
+  }
+}</p></li>
+<li><p>Still in that directory, make another file &#39;install.pl&#39;:</p>
+
+<h1>!/usr/bin/perl -w</h1>
+
+<p>use strict;
+use warnings;
+use Getopt::Long;</p>
+
+<p>sub usage();</p>
+
+<p>my $artifactId;
+my $version;
+my $jar;
+GetOptions(&#39;artifactId=s&#39; =&gt; \$artifactId ,
+           &#39;version=s&#39; =&gt; \$version,
+           &#39;jar&#39; =&gt; \$jar);
+die usage() unless ($artifactId &amp;&amp; $version &amp;&amp; $jar);</p>
+
+<p>my $cmd = &quot;mvn deploy:deploy-file &quot; .
+      &quot;-DgroupId=com.google.gdata &quot; .
+      &quot;-DartifactId=$artifactId &quot; .
+      &quot;-Dversion=$version &quot; .
+      &quot;-Dfile=$jar &quot; .
+      &quot;-Dpackaging=jar &quot; .
+      &quot;-DgeneratePom=true &quot; .
+      &quot;-Durl=file:///opt/mvn<em>repo &quot; .  &lt;---  change this for your env
+      &quot;-Drepository=opower</em>local&quot;;  &lt;--- change this for your env
+print &quot;executing command = $cmd\n&quot;;
+$cmd = &quot;date&quot;;
+open(CMD, &quot;$cmd|&quot;) or die &quot;Could not exec $cmd $!&quot;;
+while(<CMD>) {
+    print $_;
+}
+close(CMD);</p>
+
+<p>sub usage() {
+    print &quot;Usage: ./install.pl [--artifactId artifactId] [--version version] [--jar jarfile]\n&quot;;
+    print &quot;Example: ./install.pl --artifactId gdata-webmastertools --version 1.0 --jar gdata-webmastertools-1.0.jar\n&quot;;
+    exit 1;
+}</p></li>
+<li><p>Don&#39;t forget to chmod 755 *.pl</p></li>
+<li><p>Then just run ./installall.pl and all those google JARs should get installed in your repo</p></li>
+</ul>
+
+<p>That assumes the &quot;mvn&quot; executable was in your path and that you run the scripts from within the same directory as all the JARs, but it&#39;s easily modified for whatever your situation may be.</p>
+
+<p>Note that relative to ./lib there are 2 jars in ../deps/ that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
+
+<p>Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
+  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
+  &lt;artifactId&gt;foo&lt;/artifactId&gt;
+  &lt;packaging&gt;jar&lt;/packaging&gt;
+  &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
+  &lt;name&gt;Google Client Example&lt;/name&gt;
+
+  &lt;scm&gt;
+    &lt;developerConnection&gt;foo&lt;/developerConnection&gt;
+  &lt;/scm&gt;
+
+  &lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
+        &lt;artifactId&gt;gdata-core&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
+        &lt;artifactId&gt;gdata-analytics&lt;/artifactId&gt;
+        &lt;version&gt;2.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
+        &lt;artifactId&gt;gdata-client&lt;/artifactId&gt;
+        &lt;version&gt;1.0&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google&lt;/groupId&gt;
+        &lt;artifactId&gt;google-collect&lt;/artifactId&gt;
+        &lt;version&gt;1.0-rc1&lt;/version&gt;
+    &lt;/dependency&gt;
+  &lt;/dependencies&gt;
+&lt;/project&gt;
+</code></pre></div>
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

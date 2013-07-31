@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>New Developer Law</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>New Developer Law</h2>
+<p class="meta">26 Aug 2009</p>
+
+<div class="post">
+<p>NEW LAW FOR DEVELOPERS:</p>
+
+<p><em>If you throw an exception about some connection being refused, you&#39;d better damn well put what connection you were attempting to make in the exception message.</em></p>
+
+<p>What inspired this law?  Thanks for asking.</p>
+
+<p>Check out this snippet in the middle of an 80 line stack dump:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">2009-08-25 17:23:42.373::WARN:  Nested in org.springframework.beans.factory.BeanCreationException: Error creating bean with name &#39;coreAutopatcher&#39; defined in class path resource [config/migrationContext.xml]: Invocation of init method failed; nested exception is com.tacitknowledge.util.migration.MigrationException: Error applying patches:
+com.mchange.v2.resourcepool.CannotAcquireResourceException: A ResourcePool could not acquire a resource from its primary factory or source.
+at com.mchange.v2.resourcepool.BasicResourcePool.awaitAvailable(BasicResourcePool.java:1319)
+at com.mchange.v2.resourcepool.BasicResourcePool.prelimCheckoutResource(BasicResourcePool.java:557)
+at com.mchange.v2.resourcepool.BasicResourcePool.checkoutResource(BasicResourcePool.java:477)
+at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool.checkoutPooledConnection(C3P0PooledConnectionPool.java:525)
+</code></pre></div>
+<p>&quot;A ResourcePool could not acquire a resource from its primary factory or source&quot;.  Awesome.  Sooo helpful.  /wristsemoragegrowl</p>
+
+<p>Also, a WARN?  Seriously?  You&#39;re a connection pool.  Do you think not connecting to your underlying datasource warrants maybe something as stern as an ERROR?  Or, heaven forbid, a FATAL?</p>
+
+<p>I&#39;m sure I could have turned up logging somewhere, but I noticed Spring&#39;s DelegatingDataSource bean standing out from among the stack lines and set a break point on its called method to figure out exactly which of my many connections was unable to be resolved:</p>
+
+<p><img src="/img/what_am_i_connecting_to.png" alt="what_am_i_connecting_to"></p>
+
+<p>There&#39;s the culprit!  localhost:5455.  You know, whoever the idiot is who runs that localhost server needs to get his act together.  I should call the guys from YouTube and have them do a Maury Povich-style video expose on why he can&#39;t keep any of his connections stable.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

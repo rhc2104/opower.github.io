@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Who's Inhabiting Your Code?</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Who's Inhabiting Your Code?</h2>
+<p class="meta">12 Apr 2012</p>
+
+<div class="post">
+<p>Lately I&#39;ve been thinking about the notion of &quot;beautiful code&quot;, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they&#39;re all wrong).  And second, even when you can label a piece of code as &quot;beautiful&quot;, it&#39;s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.</p>
+
+<p>In my reading, I came across a great article by Rebecca Wirfs-Brock [1] in which she discusses the notion of &quot;habitable code&quot;.  This idea isn&#39;t original to her (she credits Richard Gabriel in Patterns of Software [2]), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.</p>
+
+<p>Paraphrasing some key points ...</p>
+
+<ul>
+<li><p><em>Clarity for its own sake is an elusive goal</em>.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it&#39;s at the expense of clarity in some other area. It&#39;s a bit like a game of <a href="http://en.wikipedia.org/wiki/Whac-A-Mole">Whac-A-Mole</a>.  Just as you can&#39;t write code that&#39;s infinitely flexible in the face of unknown future requirements, I don&#39;t think you can write code that&#39;s infinitely clear to an unknown future audience.</p></li>
+<li><p><em>Beauty becomes a constraint for future authors</em>.  It&#39;s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design -- the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.</p></li>
+<li><p><em>Habitable code makes its structure and intentions easy to understand</em>.  Structure, sure, but as a professional developer, the &quot;and intentions&quot; part seems pretty important.  You can read code to understand what it&#39;s doing, but it&#39;s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right -- the best I&#39;ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.</p></li>
+<li><p><em>Habitable code makes developers feel at home</em>.  At <a href="http://www.opower.com">Opower</a> we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you&#39;ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.</p></li>
+</ul>
+
+<p>Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don&#39;t feel bad about rewriting it.  But it&#39;s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.</p>
+
+<p>So ... who&#39;s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?</p>
+
+<p><strong>References</strong></p>
+
+<p>[1] <a href="http://www.wirfs-brock.com/PDFs/DoesBeautifulCodeImply.pdf">http://www.wirfs-brock.com/PDFs/DoesBeautifulCodeImply.pdf</a>
+[2] <a href="http://dreamsongs.net/Files/PatternsOfSoftware.pdf">http://dreamsongs.net/Files/PatternsOfSoftware.pdf</a></p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>

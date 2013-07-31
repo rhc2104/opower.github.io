@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Just What is A Software Engineer in Test?</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="container">
+          <div class="site">
+            <div class="header">
+              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
+              <a class="extra" href="/">home</a>
+            </div>
+
+                <h2>Just What is A Software Engineer in Test?</h2>
+<p class="meta">26 Aug 2010</p>
+
+<div class="post">
+<p>OPOWER recently updated the job titles for our QA engineers to more  properly reflect the work that we do. We still love owning the  responsibility for pointing out when our product hasn&#39;t turned out the  best it can, and we have all held and loved &quot;QA&quot; titles at many points  in our careers. So why the change? Just what exactly is a Software  Engineer in Test at OPOWER?</p>
+
+<p>It&#39;s pretty clear to just about anyone what the goals of a software  engineer are when taken in a development context. Build software that  does useful work correctly and efficiently. It&#39;s a little more fuzzy  when you assess that title from a testing perspective.</p>
+
+<ul>
+<li><p>Is it a tool-smith? Building test frameworks and automation  tools for other testers to use? Not exclusively, but tools and  frameworks that more junior test engineers can use and learn from are  great side effects of the work.</p></li>
+<li><p>Is it someone who uses GUI testing frameworks to follow along behind  the developers and make sure they got the user experience right? Again,  a part of the job sometimes, but not the primary mission.</p></li>
+<li><p>Now  put on your tinfoil hat. Is it just a conceit meant to soothe the sting  of being a second class creator of software artifacts? Someone who can  code but not well enough to be a developer? Probably not anyone&#39;s  explicit intent, but some folks do feel that SEiT is a farm league for  the Big Show: being a developer. We are not among those people.</p></li>
+</ul>
+
+<p>A Software Engineer in Test is someone that builds software that  does useful work correctly and efficiently. Wait. That&#39;s exactly the  same definition as was given for a developer. What gives?</p>
+
+<p>The  useful work a developer creates is to render a web page, or process  messages, or update a database, all with an end goal of satisfying the  end consumer of the application being worked on. When developing test  systems, all those same elements are required, but the end goal is  providing actionable insight about the quality of the customer facing  system. This actionable insight is consumed by the developer and the  engineering and product managers. They use this insight to answer  questions. Those questions include: is it done, does it work, will it  scale, and many others.</p>
+
+<p>The SEiT needs to know how to build robust software, and on top of  that, they need to be able to understand the business purpose of the  customer facing system. The SEiT needs to judge what to test, how to  test it and when to test it. They also need to have great judgment about  what <em><strong>not</strong></em> to test.</p>
+
+<p>A fantastic test framework with sub-par tests is of little use. In  the same way, an excellent set of tests that cannot be run reliably does  not provide the needed insight either. The SEiT needs to be able to go  toe-to-toe with any of their developers and question choices on data  structures, algorithms and design. They also have to have great  judgement about when it best serves the business to take a shortcut in  exchange for an acceptable risk.</p>
+
+<p>A great example of dev and test collaborating to make both teams more productive coalesced around how we deal with the concept of &quot;today&quot;. When we exercise our software, the result you get depends on what day it is. Different months and days have differing levels of energy usage for both the customer and their neighbors. Without something built into the application, the only way to change &quot;today&quot; is to change the system time, which is not too practical in a shared environment. The ad-hoc and pre-collaboration solution was to add some kind of &#39;asOf&#39; property to particular logic when we happened to think of it. We tightened up the collaboration level by having test explicitly involved in the estimation, planning and design meetings. Through these discussions earlier in the iteration, we discovered that it is far better to have any code that changes behavior based on the current date to always have the date as a parameter, and any user facing behavior should allow for a seekrit URL parameter (or other test system accessible method) to set the &quot;asOf&quot; date for any particular test. Dev is more productive because they now have a default way of designing the code to make it more testable. Their unit and integration tests are more effective and easier to write. Test is more productive because the app is more testable at the integrated and system level, and their tests are also more effective and easier to write.</p>
+
+<p>It&#39;s hard enough to get a software system right. It&#39;s even harder to  get a system right whose job is making sure another system is correct.  OPOWER certainly doesn&#39;t want to hire anyone but the best for that job. For us, the best tester is someone who&#39;s a good developer, too.</p>
+
+</div>
+
+
+            <div class="footer">
+              <div class="contact">
+                <p>
+                  Your Name<br />
+                  What You Are<br />
+                  your@email.com
+                </p>
+              </div>
+              <div class="contact">
+                <p>
+                  <a href="http://github.com/yourusername/">github.com/yourusername</a><br />
+                  <a href="http://twitter.com/yourusername/">twitter.com/yourusername</a><br />
+                </p>
+              </div>
+            </div>
+          </div>
+        </div> <!-- /container -->
+
+    </body>
+</html>
