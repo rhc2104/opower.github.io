@@ -1,1 +1,0 @@
-Opower's Engineering Blog
