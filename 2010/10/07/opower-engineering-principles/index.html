@@ -1,77 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>OPOWER Engineering Principles</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | OPOWER Engineering Principles</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>OPOWER Engineering Principles</h2>
-<p class="meta">07 Oct 2010</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
+                <div class="page-header">
+  <h1>OPOWER Engineering Principles</h1>
+  <p class="meta pull-right">Written on October 07, 2010 by jeff.kolesky</p>
+  <div class="clearfix"></div>
+</div>
+
+<div class="post-content">
 <p>We are engineers.  Not programmers, developers, or coders; and certainly not hackers.  The distinction is important, because we are building a system for the long haul, not just a class or script or even an application.  It is our responsibility to keep the entire operating environment in mind as we think about what we build, because we must consider all components of the system in order to build it to sustain the life of the business.  Hackers do not do this type of work.  Engineers do.  We are engineers.</p>
 
 <p>As engineers our core principles include</p>
 
 <ul>
-<li><p>Thinking</p></li>
-<li><p>Testing</p></li>
-<li><p>Improving</p></li>
-<li><p>Tooling</p></li>
+  <li>Thinking</li>
+  <li>Testing</li>
+  <li>Improving</li>
+  <li>Tooling</li>
 </ul>
 
-<h2>Thinking</h2>
+<h3 id="thinking">Thinking</h3>
 
 <p>All projects need a certain amount of forethought put into them before code hits the screen.  In fact all need just the right amount.  As engineers, it is our responsibility to determine how much thought is needed and how to best communicate the output of that thought.  We rely on the maturity, discipline, and experience of our team to make the right decisions every day, balancing purity of design with what is most practical.  We should not expect to get a design wrong the first time, nor should we expect to get it right.  Rather we should expect to get it pointing in the right direction.  We do not create throw away designs that we expect to refactor later.  That is a flawed philosophy that allows people to design on the fly while coding.  We create designs that lay a a foundation for future functionality.  Our designs are informed by the past, focus on the present, and keep an eye on the future.</p>
 
-<h2>Testing</h2>
+<h3 id="testing">Testing</h3>
 
-<p>Quality of our product is very important, because our products affect millions of people daily.  As such, testing is baked into our philosophy and methodology from the start.  We do not necessarily employ test-driven development, but we start writing test specs when we begin a story.  All team members are responsible for quality, and all are responsible for writing tests: unit, integration, and regression -- whatever is appropriate for the feature.  When a bug is discovered, a test is written to reproduce the bug before code is changed to fix it.  This is the best way to ensure the bug does not creep back in later.  As much as possible, tests are fully automated and run with each continuous integration build.</p>
+<p>Quality of our product is very important, because our products affect millions of people daily.  As such, testing is baked into our philosophy and methodology from the start.  We do not necessarily employ test-driven development, but we start writing test specs when we begin a story.  All team members are responsible for quality, and all are responsible for writing tests: unit, integration, and regression – whatever is appropriate for the feature.  When a bug is discovered, a test is written to reproduce the bug before code is changed to fix it.  This is the best way to ensure the bug does not creep back in later.  As much as possible, tests are fully automated and run with each continuous integration build.</p>
 
-<h2>Improving</h2>
+<h3 id="improving">Improving</h3>
 
-<p>Continuous integration is old hat now.  People are talking about continuous deployment more and more.  We believe in continuous improvement and are on a constant mission to better our process, designs, code and knowledge.  For process, we run post-mortem reviews after each iteration, cataloging what worked well and what did not, resulting in suggestions of ways to change.  Since we are wedded only to what works, we can adapt until we find the right thing.  For designs and code, we run group reviews on a weekly basis, allowing for anyone to present a design or code sample for review by his peers.  These meetings are when we solidify our standards and conventions as well as informally teach good design thinking and share knowledge of the frameworks and tools we use to make our team more efficient.  Increasing individuals&#39; knowledge is a more self-directed activity; we rely on the team to investigate and research topics they are interested in and will support them through book purchases, course reimbursement and conference sponsorship.  To support our efforts at continuous improvement, we also follow a practice of continuous feedback.  In addition to formal performance evaluations, we collect short bits of feedback (&quot;tweets&quot; if you will) after each iteration to make sure all team members know where they are doing well and how they can improve.</p>
+<p>Continuous integration is old hat now.  People are talking about continuous deployment more and more.  We believe in continuous improvement and are on a constant mission to better our process, designs, code and knowledge.  For process, we run post-mortem reviews after each iteration, cataloging what worked well and what did not, resulting in suggestions of ways to change.  Since we are wedded only to what works, we can adapt until we find the right thing.  For designs and code, we run group reviews on a weekly basis, allowing for anyone to present a design or code sample for review by his peers.  These meetings are when we solidify our standards and conventions as well as informally teach good design thinking and share knowledge of the frameworks and tools we use to make our team more efficient.  Increasing individuals’ knowledge is a more self-directed activity; we rely on the team to investigate and research topics they are interested in and will support them through book purchases, course reimbursement and conference sponsorship.  To support our efforts at continuous improvement, we also follow a practice of continuous feedback.  In addition to formal performance evaluations, we collect short bits of feedback (“tweets” if you will) after each iteration to make sure all team members know where they are doing well and how they can improve.</p>
 
-<h2>Tooling</h2>
+<h3 id="tooling">Tooling</h3>
 
-<p>We choose the right tools for the job.  This is as much an imperative to consider legacy and the team&#39;s skills as it is to push the boundaries with new tools at our disposal.  The important aspect of this tenet is that any tool must be the right tool, which means its appropriateness must be evaluated before it is used.  We do not start using the latest tool just because it is new -- we use it because it solves a problem we have in a way better than any current tool without creating new bigger problems.  This is not an &quot;if you have a hammer&quot; kind of philosophy, but more along the lines of choosing the right size hammer for the job.</p>
+<p>We choose the right tools for the job.  This is as much an imperative to consider legacy and the team’s skills as it is to push the boundaries with new tools at our disposal.  The important aspect of this tenet is that any tool must be the right tool, which means its appropriateness must be evaluated before it is used.  We do not start using the latest tool just because it is new – we use it because it solves a problem we have in a way better than any current tool without creating new bigger problems.  This is not an “if you have a hammer” kind of philosophy, but more along the lines of choosing the right size hammer for the job.</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

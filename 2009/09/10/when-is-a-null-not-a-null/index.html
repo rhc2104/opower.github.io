@@ -1,109 +1,231 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>When is a null not a null?</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | When is a null not a null?</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>When is a null not a null?</h2>
-<p class="meta">10 Sep 2009</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>tl/dr: <em>Don&#39;t have a non-null object&#39;s .toString() display &quot;null&quot;. It&#39;s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
+                <div class="page-header">
+  <h1>When is a null not a null?</h1>
+  <p class="meta pull-right">Written on September 10, 2009 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>I recently converted the attribute of our Person POJO that stored a user&#39;s email address from a java.lang.String to a javax.mail.InternetAddress.  Call it not enough testing or lack of imagination, but I introduced a Null Pointer Exception in a back-office web flow where a new user is created for our customer service application.  When a new CSR account is created and the email address is left blank, an NPE gets thrown up.  Embarrassing, but easy to fix, right?</p>
+<div class="post-content">
+<p>tl/dr: <em>Don’t have a non-null object’s .toString() display “null”. It’s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
+
+<p>I recently converted the attribute of our Person POJO that stored a user’s email address from a java.lang.String to a javax.mail.InternetAddress.  Call it not enough testing or lack of imagination, but I introduced a Null Pointer Exception in a back-office web flow where a new user is created for our customer service application.  When a new CSR account is created and the email address is left blank, an NPE gets thrown up.  Embarrassing, but easy to fix, right?</p>
 
 <p>Just looking at the stack trace narrows it down immediately:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">2009-09-09 16:56:53,636 WARN  [btpool0-1] [REPORT] [WARN] Handler execution resulted in exception
+
+<pre><code>2009-09-09 16:56:53,636 WARN  [btpool0-1] [REPORT] [WARN] Handler execution resulted in exception
 java.lang.NullPointerException
-    at javax.mail.internet.InternetAddress.parse(InternetAddress.java:609)
-    at javax.mail.internet.InternetAddress.parse(InternetAddress.java:569)
-    at javax.mail.internet.InternetAddress.(InternetAddress.java:105)
-    at poscore.db.InternetAddressUserType.deepCopy(InternetAddressUserType.java:93)
-    at org.hibernate.type.CustomType.deepCopy(CustomType.java:179)
-    at org.hibernate.type.TypeFactory.deepCopy(TypeFactory.java:374)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:609)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:569)
+	at javax.mail.internet.InternetAddress.(InternetAddress.java:105)
+	at poscore.db.InternetAddressUserType.deepCopy(InternetAddressUserType.java:93)
+	at org.hibernate.type.CustomType.deepCopy(CustomType.java:179)
+	at org.hibernate.type.TypeFactory.deepCopy(TypeFactory.java:374)
+</code></pre>
+
+<p>Ahh…yeah…that custom hibernate type I wrote to translate VARCHARs to InternetAddresses and vice versa.  Ok, what does that deep copy method look like?</p>
+
+<div class="highlight"><pre><code class="java">    
+<span class="kd">public</span> <span class="n">Object</span> <span class="nf">deepCopy</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">HibernateException</span> <span class="o">{</span>
+    <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="o">}</span>
+    <span class="n">InternetAddress</span> <span class="n">original</span> <span class="o">=</span> <span class="o">(</span><span class="n">InternetAddress</span><span class="o">)</span><span class="n">value</span><span class="o">;</span>
+    <span class="n">InternetAddress</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+    <span class="k">try</span> <span class="o">{</span>
+        <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
+    <span class="o">}</span>
+    <span class="k">catch</span> <span class="o">(</span><span class="n">AddressException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">throw</span> <span class="k">new</span> <span class="nf">HibernateException</span><span class="o">(</span><span class="s">&quot;Unable to deep copy email address &#39;&quot;</span> <span class="o">+</span> <span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;&#39;&quot;</span><span class="o">);</span>
+    <span class="o">}</span>
+    <span class="k">return</span> <span class="n">copy</span><span class="o">;</span>
+<span class="o">}</span>
 </code></pre></div>
-<p>Ahh...yeah...that custom hibernate type I wrote to translate VARCHARs to InternetAddresses and vice versa.  Ok, what does that deep copy method look like?</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">    public Object deepCopy(Object value) throws HibernateException {
-        if(value == null) {
-            return null;
-        }
-        InternetAddress original = (InternetAddress)value;
-        InternetAddress copy = null;
-        try {
-            copy = new InternetAddress(original.getAddress());
-        }
-        catch (AddressException ex) {
-            throw new HibernateException(&quot;Unable to deep copy email address &#39;&quot; + original.getAddress() + &quot;&#39;&quot;);
-        }
-        return copy;
-    }
-</code></pre></div>
+
 <p>It turns out, the error is right here:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">            copy = new InternetAddress(original.getAddress());
+
+<div class="highlight"><pre><code class="java"><span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
 </code></pre></div>
-<p>You can&#39;t pass a null to the InternetAddress constructor.  It was late in the day and I must not have internalized that there&#39;s no way <em>value _or _original</em> could be null, because my first instinct was that the NPE was actually the result of calling &quot;.getAddress()&quot; on a null <em>original</em> object....not that the constructor can&#39;t take a null.</p>
 
-<p>While I was on that assumption (that it was the <em>original</em> object that was null), I fired up my debugger and got confused by what appeared to be null-checks failing to check nulls. Check out this screen shot of the NPE about to be thrown after what appears to be 2 null checks failing to prevent the NPE:
-<img src="/img/null_internet_address.png" alt="null_internet_address"></p>
+<p>You can’t pass a null to the InternetAddress constructor.  It was late in the day and I must not have internalized that there’s no way <em>value</em> or <em>original</em> could be null, because my first instinct was that the NPE was actually the result of calling “.getAddress()” on a null <em>original</em> object….not that the constructor can’t take a null.</p>
 
-<p>The arrows marked (A) and (B) shows what appear to be null objects passing null checks (in the top pane) even though they&#39;re being reported as null (in the bottom pane).  The green line (C) shows the code falling through to that line just before it throws up the NPE.</p>
+<p>While I was on that assumption (that it was the <em>original</em> object that was null), I fired up my debugger and got confused by what appeared to be null-checks failing to check nulls. Check out this screen shot of the NPE about to be thrown after what appears to be 2 null checks failing to prevent the NPE:</p>
 
-<p>Of course, <em>value</em> and <em>original</em> aren&#39;t null at all...it&#39;s just that their .toString() methods report them to be null.  Here&#39;s the InternetAddress.toString method:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">  276       public String toString() {
-  277       if (encodedPersonal == null &amp;&amp; personal != null)
-  278           try {
-  279           encodedPersonal = MimeUtility.encodeWord(personal);
-  280           } catch (UnsupportedEncodingException ex) { }
-  281
-  282       if (encodedPersonal != null)
-  283           return quotePhrase(encodedPersonal) + &quot; &lt;&quot; + address + &quot;&gt;&quot;;
-  284       else if (isGroup() || isSimple())
-  285           return address;
-  286       else
-  287           return &quot;&lt;&quot; + address + &quot;&gt;&quot;;
-  288       }
-</code></pre></div>
-<p>In my situation, I fell in to the &quot;else if(isGroup() || isSimple())&quot; case, which returns <em>address</em>, which is null, so the .toString() for the whole InternetAddress object is &quot;null.&quot;</p>
+<p><img src="/img/null_internet_address.png" alt="null_internet_address" /></p>
 
-<p>I think the toString() method could benefit from another null-check right at line 284, which would mean an InternetAddress object with a null internal <em>address</em> String would display as &quot;<null>&quot;...that&#39;s a more immediate clue that the object itself isn&#39;t null.</p>
+<p>The arrows marked (A) and (B) shows what appear to be null objects passing null checks (in the top pane) even though they’re being reported as null (in the bottom pane).  The green line (C) shows the code falling through to that line just before it throws up the NPE.</p>
+
+<p>Of course, <em>value</em> and <em>original</em> aren’t null at all…it’s just that their .toString() methods report them to be null.  Here’s the InternetAddress.toString method:</p>
+
+<pre><code>276   public String toString() {
+277       if (encodedPersonal == null &amp;&amp; personal != null)
+278           try {
+279	              encodedPersonal = MimeUtility.encodeWord(personal);
+280           } catch (UnsupportedEncodingException ex) { }
+281
+282       if (encodedPersonal != null)
+283           return quotePhrase(encodedPersonal) + " &lt;" + address + "&gt;";
+284       else if (isGroup() || isSimple())
+285           return address;
+286       else
+287           return "&lt;" + address + "&gt;";
+288   }
+</code></pre>
+
+<p>In my situation, I fell in to the <code>else if(isGroup() || isSimple())</code> case, which returns <code>address</code>, which is null, so the <code>.toString()</code> for the whole InternetAddress object is “null.”</p>
+
+<p>I think the toString() method could benefit from another null-check right at line 284, which would mean an InternetAddress object with a null internal <code>address</code> String would display as “&lt;null&gt;” …that’s a more immediate clue that the object itself isn’t null.</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

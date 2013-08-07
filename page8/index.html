@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Engineering Blog</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/custom.css">
+
+    </head>
+
+    <body>
+
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                <div class="page-header">
+  <h1>Blog Posts</h1>
+</div>
+<div class="posts">
+  
+  <div class="post">
+      <h2><a href="/2009/08/26/a-year-long-analysis-of-snack-consumption">A year-long analysis of snack consumption</a></h2>
+      <p class="meta pull-right">Written on August 26, 2009 by dave.copeland</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Consistently, month after month, the chips that get left in the giant ‘box-o-free-snacks’ are:</p>
+
+<p><img src="/img/snacks.jpg" alt="Doritos Are No Bueno" /></p>
+
+<p>Nacho Cheese Doritos. </p>
+
+<p><em>Honorable Mentions: Fritos and Cool Ranch Doritos</em>. </p>
+
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2009/08/26/new-developer-law">New Developer Law</a></h2>
+      <p class="meta pull-right">Written on August 26, 2009 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>NEW LAW FOR DEVELOPERS:</p>
+
+<p><em>If you throw an exception about some connection being refused, you’d better damn well put what connection you were attempting to make in the exception message.</em></p>
+
+<p>What inspired this law?  Thanks for asking.</p>
+
+<p>Check out this snippet in the middle of an 80 line stack dump:</p>
+
+<pre><code>2009-08-25 17:23:42.373::WARN:  Nested in org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'coreAutopatcher' defined in class path resource [config/migrationContext.xml]: Invocation of init method failed; nested exception is com.tacitknowledge.util.migration.MigrationException: Error applying patches:
+com.mchange.v2.resourcepool.CannotAcquireResourceException: A ResourcePool could not acquire a resource from its primary factory or source.
+at com.mchange.v2.resourcepool.BasicResourcePool.awaitAvailable(BasicResourcePool.java:1319)
+at com.mchange.v2.resourcepool.BasicResourcePool.prelimCheckoutResource(BasicResourcePool.java:557)
+at com.mchange.v2.resourcepool.BasicResourcePool.checkoutResource(BasicResourcePool.java:477)
+at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool.checkoutPooledConnection(C3P0PooledConnectionPool.java:525)
+</code></pre>
+
+<p>“A ResourcePool could not acquire a resource from its primary factory or source”.  Awesome.  Sooo helpful.  /wristsemoragegrowl</p>
+
+<p>Also, a WARN?  Seriously?  You’re a connection pool.  Do you think not connecting to your underlying datasource warrants maybe something as stern as an ERROR?  Or, heaven forbid, a FATAL?</p>
+
+<p>I’m sure I could have turned up logging somewhere, but I noticed Spring’s DelegatingDataSource bean standing out from among the stack lines and set a break point on its called method to figure out exactly which of my many connections was unable to be resolved:</p>
+
+<p><img src="/img/what_am_i_connecting_to.png" alt="what_am_i_connecting_to" /></p>
+
+<p>There’s the culprit!  <code>localhost:5455</code>.  You know, whoever the idiot is who runs that localhost server needs to get his act together.  I should call the guys from YouTube and have them do a Maury Povich-style video expose on why he can’t keep any of his connections stable.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h2>
+      <p class="meta pull-right">Written on August 23, 2009 by jeff.kolesky</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>I am relatively new to Subversion – well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the “trunk/branches/tags” directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
+
+<pre><code>svn co http://domain.com/svnroot/project/trunk project
+</code></pre>
+
+<p>That way, when I go to the <code>project</code> directory, I do not have to then go into the <code>trunk</code> directory to get to my files.  Saving an extra directory level is not the best benefit though.  When I set up my IDE (yes, I use an IDE), I put the IDE files in that one directory and do not have to recreate them for each branch or tag that I might check out.  I essentially treat the “trunk/branches/tags” part of the directory as pure metadata, which makes perfect sense to me.</p>
+
+<p>When I switched over to this system, there was one big drawback.  I could not easily tell where I am just by looking at my prompt.  I had to run <code>svn info | grep URL</code> to see if I was on a branch.  So instead of letting my prompt handicap me, I decided to get smart about my prompt.  Using bash, my prompt used to look like this:</p>
+
+<pre><code>jeff:/opt/pose/main/report/src/main/java
+</code></pre>
+
+<p>but now it looks like this (supercharged with Subversion metadata):</p>
+
+<pre><code>jeff:/opt/pose/main/report/src/main/java [SVN: /main/report/trunk]
+</code></pre>
+
+<p>I’m no bash expert, so I dug around on the web and learned a bit about how <code>PROMPT_COMMAND</code> works.  Here is what I have in my <code>.bash_profile</code> now:</p>
+
+<div class="highlight"><pre><code class="bash"><span class="k">function </span>spwd <span class="o">()</span> 
+<span class="o">{</span> 
+    stat .svn &gt; /dev/null 2&gt;&amp;1;
+    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">        </span><span class="nv">SURL</span><span class="o">=</span><span class="sb">`</span>svn info | grep URL | perl -pe <span class="s1">&#39;s/URL: (.*)/\1/&#39;</span><span class="sb">`</span>;
+        <span class="k">if</span> <span class="o">[</span> <span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | grep -E <span class="s2">&quot;branches|tags&quot;</span><span class="sb">`</span> <span class="o">]</span>; <span class="k">then</span>
+<span class="k">            </span><span class="nv">SVER</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*/(branches|tags)/(.*)}{\1/\2}&#39;</span> | cut -d/ -f1-2<span class="sb">`</span>;
+            <span class="nv">SPTH</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*svnroot/(.*)/(branches|tags)/.*}{/\1}&#39;</span><span class="sb">`</span>;
+            <span class="nv">SPWD</span><span class="o">=</span><span class="s2">&quot;${SPTH}/${SVER}&quot;</span>;
+        <span class="k">else</span>
+<span class="k">            </span><span class="nv">SPWD</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*svnroot/(.*)/trunk(.*)}{/\1/trunk}&#39;</span><span class="sb">`</span>;
+        <span class="k">fi</span>;
+        <span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\u:\w [SVN: $SPWD]\n$ &quot;</span>;
+    <span class="k">else</span>
+<span class="k">        </span><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\u:\w $ &quot;</span>;
+    <span class="k">fi</span>
+<span class="o">}</span>
+<span class="nb">export </span><span class="nv">PROMPT_COMMAND</span><span class="o">=</span>spwd
+</code></pre></div>
+
+<p>It may not be the most efficient way to do it, but it sure works well and lets me know in an instant what trunk, branch or tag I happen to be working on at that very moment.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2009/08/20/the-cheated-frogs-of-vim">The Cheated Frogs of Vim</a></h2>
+      <p class="meta pull-right">Written on August 20, 2009 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>We’re still too small of a company to have more than 1 or 2 logical groupings of the development team, and before today they’ve been basically “the web team” and “everyone else.”  Of course, there’s a lot of cross-pollination and everything nowadays ultimately manifests itself somehow as “‘web”.</p>
+
+<p>Still, the “everyone else” paint brush was wearing thin.  In addition to the “web team”, we had “the scale team” (a.k.a “Ops R&amp;D”) and “the AMI team” and “the core team” and “the report team”. . .but most of those were “teams” averaged size 1 and their membership varied from iteration-to-iteration.</p>
+
+<p>Sick of referring to ourselves with a hand-wave and a “you-know. . .the non-web-team,” I plugged our names in to an acronym engine and we found the perfect name for ourselves:</p>
+
+<p><strong><em>The Cheated Frogs of Vim</em></strong></p>
+
+<p>While I put in my fair share of vi time in previous development gigs, I’m a little too fond of modern debuggers to go whole-hog with Vim as my “IDE.”  Dave, on the other hand, is pretty hard-core with his Vim skills, so our new team name may have some sticking power.</p>
+
+<p>Our wizard graphics guy even cooked up a logo for us:</p>
+
+<p><img src="/img/CheatedFrogs-300x300.png" alt="New dev team logo!" /></p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2009/08/19/measuring-our-awesomeness-iteration-by-iteration">Measuring our awesomeness iteration by iteration</a></h2>
+      <p class="meta pull-right">Written on August 19, 2009 by dave.copeland</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Like a lot of startups (and big companies!) we use iterative development: we break up our work into “stories” describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)</p>
+
+<p>The easiest way to do that is to look at the bugs our QA staff find in the product updates.  Although we have a lot of automated tests, we still need some eyes on the applications to check for things like text overruns of our printed reports, or JavaScript weirdness in some <a href="http://blog.digg.com/?p=878">less-than-well-behaved</a>) browsers.</p>
+
+<p>After a few iterations, Anh (our beloved program manager) ran some queries on our bug-tracking database and, using some Excel magic, showed us numbers like “number of defects in the web application” and “average number of days a critical bug sat unassigned”.  This is good stuff; seeing hard data about what we’re doing lets us focus on inefficiency.  Since we release software every month (and launch new clients almost as frequently), this is a <strong>huge</strong> help in making each iteration better than the previous.</p>
+
+<p>While Anh’s hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using <a href="http://www.sinatrarb.com/">Sinatra</a> to automate most of what we’d like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we’re fixing and even the <em>root source</em> of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) </p>
+
+<p>We still need to show trends, however.  “Classic” thinking in software process improvement says to do that by dividing everything by lines of code; if we had 10 defects per 1,000 lines of code this month, but only 8 the following, we’re doing better.  This is not a great measure for us, since we are changing and enhancing our product (as opposed to writing fresh code each time), so we decided to normalize our measurements by the story points we assigned to the iteration.  This way, we can see charts like the one below (which says we are doing better each time):</p>
+
+<p><img src="/img/MetricsChart.png" alt="Metrics Chart" /></p>
+
+<p>This information is dead simple to collect; the burden on developers and testers when writing defects is almost nothing.  With only a priority, severity, and “source of defect”, we can collect a lot of advanced information about our development process – and make it better iteration by iteration.</p>
+
+
+      </div>
+  </div>
+  
+</div>
+
+<ul class="pager">
+  
+  <li class="previous disabled"><a href="#">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/page7">Newer &rarr;</a></li>
+  
+</ul>
+
+
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
+
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

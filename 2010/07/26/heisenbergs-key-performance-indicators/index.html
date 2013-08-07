@@ -1,77 +1,189 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Heisenberg's Key Performance Indicators</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Heisenberg's Key Performance Indicators</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Heisenberg's Key Performance Indicators</h2>
-<p class="meta">26 Jul 2010</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg."></p>
+                <div class="page-header">
+  <h1>Heisenberg's Key Performance Indicators</h1>
+  <p class="meta pull-right">Written on July 26, 2010 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>I was trolling trawling through reddit waiting for a JAR to compile and <a href="http://nerds-central.blogspot.com/2010/07/development-management-act-of.html">found this blog post</a>.  That blog made a couple claims that had crossed my mind a couple months ago when our engineering director solicited  feedback about using Key Performance Indicators for the dev team.  The blog post&#39;s point wasn&#39;t so much that the _act _of measuring a team changes its performance but rather that when the team is aware of what&#39;s being measured, it naturally &quot;cheats&quot; in ways to maximize the measured value.  The first comment on the blog post alerted me to a law I hadn&#39;t known about, but which sounds pretty intuitively correct:</p>
+<div class="post-content">
+<p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg." /></p>
 
-<p><a href="http://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart&#39;s Law</a>: <em>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes</em></p>
+<p>I was trolling trawling through reddit waiting for a JAR to compile and <a href="http://nerds-central.blogspot.com/2010/07/development-management-act-of.html">found this blog post</a>.  That blog made a couple claims that had crossed my mind a couple months ago when our engineering director solicited  feedback about using Key Performance Indicators for the dev team.  The blog post’s point wasn’t so much that the _act _of measuring a team changes its performance but rather that when the team is aware of what’s being measured, it naturally “cheats” in ways to maximize the measured value.  The first comment on the blog post alerted me to a law I hadn’t known about, but which sounds pretty intuitively correct:</p>
 
-<p>Here at OPOWER, developers and product managers don&#39;t deal with KPIs on a day-to-day basis....I think it&#39;s mostly a management-level &quot;let&#39;s starting capturing some numbers over several months and see if there&#39;s anything out-of-whack&quot; kind of thing.</p>
+<p><a href="http://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart’s Law</a>: <em>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes</em></p>
+
+<p>Here at OPOWER, developers and product managers don’t deal with KPIs on a day-to-day basis. I think it’s mostly a management-level “let’s starting capturing some numbers over several months and see if there’s anything out-of-whack” kind of thing.</p>
 
 <p>In terms of development KPIs, some of the things we thought it might be interesting to collect included:</p>
 
 <ul>
-<li><p>story points delivered per iteration</p></li>
-<li><p>% of story points (aggregate) done in an iteration that were planned at the beginning</p></li>
-<li><p>% QA coverage of production (automated)</p></li>
-<li><p>etc.</p></li>
+  <li>story points delivered per iteration</li>
+  <li>% of story points (aggregate) done in an iteration that were planned at the beginning</li>
+  <li>% QA coverage of production (automated)</li>
+  <li>etc.</li>
 </ul>
 
-<p>The &quot;story points delivered per iteration&quot; is, I think, precisely the kind of thing Goodhart was talking about when he made up his law.  <em>That said</em>, we are a business and we are expected to work and be productive, so it isn&#39;t exactly a satisfying for a VP or CEO to hear from their dev team &quot;sorry, you can&#39;t measure us because we&#39;ll just skew the measurement number to please you.&quot;  So what&#39;s management to do with their IT cabal?</p>
+<p>The “story points delivered per iteration” is, I think, precisely the kind of thing Goodhart was talking about when he made up his law.  <em>That said</em>, we are a business and we are expected to work and be productive, so it isn’t exactly a satisfying for a VP or CEO to hear from their dev team “sorry, you can’t measure us because we’ll just skew the measurement number to please you.”  So what’s management to do with their IT cabal?</p>
 
-<p><em>Assuming</em> you could normalize what story points mean across different teams, and <em>assuming</em> you can account for &quot;point inflation&quot; and <em>assuming</em> you accurately tracked vacations and network outages and late requirements and all the other stuff that goes along with uncertainty in exactly how much gets delivered in an iteration, must you also assume that the team gradually skews the number to meet the goal?  What if the goal was kept secret?  What if the team didn&#39;t know they were being measured?  That&#39;s hardly a way to foster a healthy relationship between management and product development.</p>
+<p><em>Assuming</em> you could normalize what story points mean across different teams, and <em>assuming</em> you can account for “point inflation” and <em>assuming</em> you accurately tracked vacations and network outages and late requirements and all the other stuff that goes along with uncertainty in exactly how much gets delivered in an iteration, must you also assume that the team gradually skews the number to meet the goal?  What if the goal was kept secret?  What if the team didn’t know they were being measured?  That’s hardly a way to foster a healthy relationship between management and product development.</p>
 
-<p><img src="/img/heisenberg_bb.jpg" alt="A picture of Walt from Breaking Bad"></p>
+<p><img src="/img/heisenberg_bb.jpg" alt="A picture of Walt from Breaking Bad" /></p>
 
-<p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to &quot;number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,&quot; what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn&#39;t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won&#39;t be holding my breath.</p>
+<p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to “number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,” what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn’t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won’t be holding my breath.</p>
 
-<p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart&#39;s Law.  After all, it&#39;s just a Law.  Like De Morgan&#39;s Law, except maybe with a bit more wiggle room.</p>
+<p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart’s Law.  After all, it’s just a Law.  Like De Morgan’s Law, except maybe with a bit more wiggle room.</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

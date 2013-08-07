@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Engineering Blog</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/custom.css">
+
+    </head>
+
+    <body>
+
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                <div class="page-header">
+  <h1>Blog Posts</h1>
+</div>
+<div class="posts">
+  
+  <div class="post">
+      <h2><a href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h2>
+      <p class="meta pull-right">Written on January 20, 2012 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Opower’s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we’ve expanded to the point where (not even counting all the Ruby or Scala stuff) we’re managing:</p>
+
+<ul>
+  <li>4 WAR applications</li>
+  <li>33 JAR libraries (1 open sourced @ <a href="https://github.com/opower/jpile">https://github.com/opower/jpile</a>)</li>
+  <li>14 “pom artifacts” that define groupings of projects and organize dependencies, versions, etc</li>
+</ul>
+
+<p>Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the “librarification” of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it’s a lot easier to focus on developing the stories in your iteration if you don’t need to worry about stepping on another team’s toes.  That’s more easily achievable when your team aligns to one specific code artifact.</p>
+
+<p>A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files – especially in an integration test context.  Here’s a crude picture of our initial state following some decomposition:</p>
+
+<p><a href="/img/pic11.png"><img src="/img/pic11-300x161.png" alt="One WAR depending on two JARs with duplicated spring bean configuration" /></a></p>
+
+<p>Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of “keep the tests close to the code that they stress.”  That’s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.</p>
+
+<p>Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible “default wiring” of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.</p>
+
+<ul>
+  <li>If a JAR includes a context file ending in “-spring.xml” then it’s automatically included by any WAR that declares a dependency on that JAR.</li>
+  <li>On the other hand, if a JAR includes a context file ending in “Context.xml” then it is only brought in to the WAR’s context with an explicitly declared inclusion of that file.</li>
+</ul>
+
+<p>Here’s what the picture looked like when we migrated to that model:</p>
+
+<p><a href="/img/pic21.png"><img src="/img/pic21-300x170.png" alt="One WAR with two JARs, but no duplicated bean configuration" /></a></p>
+
+<p>Integration tests that lived in our various JARs liked living in this model because they could always import “*-spring.xml” and their integration test context would come up and run just fine.</p>
+
+<p>This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the “*-spring.xml” rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here’s a picture to explain what I mean:</p>
+
+<p><a href="/img/pic31.png"><img src="/img/pic31-300x184.png" alt="Application properties starting to proliferate" /></a></p>
+
+<p>This problem just got worse as you got more and more descended from a given library – for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own “*-spring.xml” files we needed to define properties to configure C within jar-B <strong>and</strong> we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.</p>
+
+<p>To solve this we adopted a new standard that basically amounts to “provide sensible defaults for our sensible defaults”: any bean in a “*-spring.xml” snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;opower.Foo&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;locale&quot;</span> <span class="na">value=</span><span class="s">&quot;${locale}&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div>
+
+<p>After:</p>
+
+<div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;opower.Foo&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;locale&quot;</span> <span class="na">value=</span><span class="s">&quot;${locale:en_US}&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/bean&gt;</span>
+</code></pre></div>
+
+<p>The defaulting of application properties allowed us to eliminate 90% of the boilerplate test properties and code that we would have otherwise needed and allows for a greater abstraction of thought when a developer decides to pull in a library.  Thus, our current setup looks something like this:</p>
+
+<p><a href="/img/pic41.png"><img src="/img/pic41-300x150.png" alt="Defaulted properties eliminates almost all configuration" /></a></p>
+
+<p>A couple of tricks to note when using this model:</p>
+
+<ul>
+  <li>There’s a big difference in classpath context scanning between “classpath:/<em>-spring.xml” and “classpath</em>:/<em>-spring.xml”.  The first (with just one star) will pull in all the files that match “</em>-spring.xml” in the <em>first</em> directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you’d expect… it pulls in all files that match “*-spring.xml” from every directory in scans in your classpath.</li>
+  <li>Application property defaulting accepts literals after the colon, so it’s safe to do something like <code>${path:file:///blah}</code> to default the property to the string <code>file:///blah</code>.  You can also change the default string separator in the <code>PropertyPlaceholderConfigurer</code> bean so your defaults look more like this: <code>${path?file:///blah}</code>  (using a “?” as a separator)</li>
+  <li>It’s tempting to eliminate application.properties wherever there’s a default, but we avoided that for documentation reasons – we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR’s spring context snippet, we still explicitly declare that property in a WAR’s top-level application.property and document how that property affects the system.</li>
+</ul>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></h2>
+      <p class="meta pull-right">Written on September 19, 2011 by dave.copeland</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>This is actually a fairly old bit of tech for us, but I’ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler’s DSL Book</a>, and thought it might be good to talk about what we’ve done.</p>
+
+<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL’s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we’re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
+
+<h3 id="the-domain-of-application-its-architecture">The domain of application: its architecture</h3>
+
+<p>To understand how it works, you need to understand how the apppilcation is architected.  While it’s a Spring MVC web app, in the general sense, there’s a lot more convention around how it’s built.  If you’ve used a “web framework” like Spring MVC, you know that it’s really a giant library for responding to HTTP requests at its core, and that it’s not very opinionated; it’s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn’t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
+
+<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say “Hi, Dave!” in the upper corner; that “Hi, Dave” would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what’s needed to configure the modules on the page. All stateful information (e.g. “who’s logged in?”) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
+
+<p>This is all glued together via a souped-up version of a <code>&lt;jsp:include&gt;</code> tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.</p>
+
+<h3 id="testing-with-scala">Testing with Scala</h3>
+
+<p>Which brings us to our DSL for testing this stuff.  Essentially, a module’s url can be requested and tested independently of any page; we don’t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module’s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
+
+<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let’s consider a module that renders a person’s most recent bill.  Suppose we have two views of this module; in the “large” view, we want to see the bill’s cost, KWh used, and an account number.  In the “small” view (that we might use on a dashboard page), we want to see just the bill’s cost.  How might we test this?</p>
+
+<pre><code>resource for bill 34 from customer 123:
+  requires login as customer 123
+  contains "45.67" as the cost
+  has a view "small"
+  has a view "large"
+    that contains "156" as the kwh
+    that contains "655321" as the account number
+</code></pre>
+
+<p>I decided I wanted to write this in code, and have it work.  Not having time to write a parser (or invent a new language), I decided an internal DSL would be the way to go, and that Scala would let me get as close as possible to this:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/123/bill/34&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="mi">123</span><span class="o">))</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;156&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;655321&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>This code creates several data structures that our test can now walk.  Essentially, what this will test:</p>
+
+<ul>
+  <li>That accessing the url without being logged in gets an error</li>
+  <li>That, once logged in, requesting a view named “small” will not generate an error</li>
+  <li>That, once logged in, requesting a view named “large” will not generate an error</li>
+  <li>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</li>
+  <li>That both views contain a div with the id price that contains the text “45.67”</li>
+  <li>That the “large” view also contains a div with id kwh that contains “156” <strong>and</strong> a div with id “accountNumber” that contains “655321”</li>
+</ul>
+
+<h3 id="getting-fancy">Getting fancy</h3>
+
+<p>Since this is just Scala code, you can use this to do more sophisitcated things:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> 
+                <span class="n">kwh</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
+                <span class="n">accountNumber</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+
+<span class="nc">Map</span><span class="o">(</span>
+<span class="s">&quot;123&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">34</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">),</span>
+                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
+                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
+<span class="s">&quot;876&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">45</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
+                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
+<span class="s">&quot;4565&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">86</span><span class="o">,</span><span class="nc">None</span><span class="o">)</span>
+<span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">customerId</span><span class="o">,</span><span class="n">testData</span><span class="o">)</span> <span class="k">=&gt;</span> 
+
+  <span class="k">val</span> <span class="n">billId</span><span class="o">,</span><span class="n">bill</span> <span class="k">=</span> <span class="n">testData</span>
+
+  <span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/&quot;</span> <span class="o">+</span> <span class="n">customerId</span> <span class="o">+</span> <span class="s">&quot;/bill/&quot;</span> <span class="o">+</span> <span class="n">billId</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
+    <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="n">customerId</span><span class="o">))</span>
+
+    <span class="n">bill</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">bill</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="n">bill</span><span class="o">.</span><span class="n">cost</span> <span class="k">match</span> <span class="o">{</span>
+          <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">cost</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">cost</span><span class="o">).</span>
+                                      <span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+          <span class="k">case</span> <span class="nc">None</span>       <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">shouldNotContainElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
+                                      <span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+        <span class="o">}</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span> 
+          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">kwh</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
+          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">accountNumber</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
+                                            <span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">containsElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;noBill&quot;</span><span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>I don’t know if the developers are totally in love with this DSL, but there’s so much you get for free, I’m certain they’d hate testing that by hand even more (or, worse, simply not test some of these things):</p>
+
+<ul>
+  <li>You never have to remember to check for authentication requirements</li>
+  <li>You never have to remember to check for missing message properties</li>
+  <li>You can dynamically generates tests via test-data (as demonstrated above)</li>
+  <li>Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.</li>
+</ul>
+
+<p>Of course, this DSL is entirely useless to anyone but our web team.  It’s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn’t have to make the ultimate web-based tesitng DSL; just one that worked for our product.</p>
+
+<p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don’t be afraid to use Scala for this; it’s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala’s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2011/07/05/attentive-programming">Attentive Programming</a></h2>
+      <p class="meta pull-right">Written on July 05, 2011 by paul.vancleave</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>I’m currently reading Matthew Crawford’s ”Shop Class as Soulcraft” who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: <em>assertiveness</em> and <em>attentiveness</em>. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.</p>
+
+<p>I believe that Crawford’s categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is “assertive” and “attentive” software engineering? I’ve always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.</p>
+
+<p>The assertive programmer is one who makes new or improves features. In this case, the engineer is on the cutting edge of product development and essentially makes something out of nothing. He or she “asserts” him or herself by creating new code or by combining or expanding infrastructure in new ways to make new things.</p>
+
+<p>This type of programming is fun and rewarding because you get to see something made. You also get a craftsman-level satisfaction and the pride of ownership knowing that the software is built well and that other people find it useful. Contrast this with the attentive programmer. The attentive programmer generally works with software that he or she didn’t make. And is given a problem which has perplexed others.</p>
+
+<p>I think that I am more akin to this type of programmer. I am a Database Architect who works on the OPOWER Scale Team. On the Scale team, we handle problems that reflect scalability issues with the software. We also get a first crack at designing new features that are scalable out of the box, and I think that puts us firmly in the assertive camp.</p>
+
+<p>I want to reflect more upon our reactive scalability work because I think this sort of work takes a different mindset and possibly a different software engineering approach. To be an attentive programmer you almost have to have a Zen-like disposition and “listen” to the information that you find. You may think that you understand the problem but you must verify if the hypothesis is true. And if it’s not, you must reexamine your assumptions, read the data again, and develop a new hypothesis to test.</p>
+
+<p>The attentive programmer knows that truth is the path to the right solution, and that’s exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.</p>
+
+<p>To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I’m always ready for the next problem and always wondering what I’m going to learn from that puzzle.</p>
+
+<p>Are you an attentive or assertive programmer, or some combination of? Why? Thinking about how you approach software engineering may help you raise your game and bring with it the satisfaction of rising above the status quo.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2011/05/02/engineerings-second-bottom-line">Engineering's Second Bottom Line</a></h2>
+      <p class="meta pull-right">Written on May 02, 2011 by jeff.kolesky</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>OPOWER has a set of company values, the first of which is “We are double bottom line.”  Our two bottom lines are the environment (we want to improve that) and money (we want to make that).  Everyone in the company is fully bought in to the first bottom line.  Given our enterprisey business model, the engineering team cannot contribute directly to the company making money (accounting lingo deems us a liability, as does HR sometimes), so we have a slightly different second bottom line.</p>
+
+<p>We focus on how we build the product to ensure it supports the business for the long haul.  We take this part of our job very seriously and are constantly working to improve how we work.  We use some of the obvious practices from agile like scrum teams, story pointing, and short-term iteration planning to keep ourselves on track with the functionality we need to build over a three iteration horizon.  A more out-of-the-ordinary practice is having test team members fully embedded on our scrum teams.  The software engineers in test work alongside software engineers building functionality, and a task is not considered finished until it is tested through our automated regression suite.</p>
+
+<p>We do team retrospectives almost every iteration and keep a backlog of tasks to work on during regression weeks to keep improving our tools and process.  When it comes to coding, we have formal code reviews every three weeks as part of the iteration cycle, and ad hoc code reviews happen during the build.  Some of our reviews can get heated (though not personal), and everyone knows that the intent is to build the best product we can.  The reviews are also a lot of fun.</p>
+
+<p>The point of all of this work is to get everyone in line with building a product for the future.  OPOWER is only four years old, and our product has been live and generating energy efficiency gains for over three years.  We are pushing ourselves to build new products to improve those efficiency gains and to positively impact the environment in other ways.  Our clients are pushing us to deliver more functionality to them faster and faster, and in the meantime, they keep giving us more and more data to learn from and use.  If we took a short-term approach to our jobs as engineers, the platform we are building would collapse in on itself, and that would do no one any good.</p>
+
+<p>Wil Shipley, of Delicious Monster fame, wrote an <a href="http://blog.wilshipley.com/2011/04/success-and-farming-vs-mining.html">interesting article</a> recently, drawing an analogy comparing building software companies to either farming or mining.  When you mine, you take out a loan, purchase a ton of equipment, hire people to dig, strike gold, and profit.  When the gold runs out, you retire.  On the other hand, when you farm, you take out a loan, purchase some equipment and seed, and then you plant and tend.  If things go well, you reap some reward during the harvest season, after which you repeat the cycle, reinvesting your money back into your land.  If you are an adept farmer, you may figure out how to rotate crops and make the most of your land all year long, thus increasing profits.  In his analogy, farming is a long-term approach to building a company, and mining is what you do with a social network for dogs – build it to flip it.</p>
+
+<p>At OPOWER, this analogy is particularly apropos, because of our first bottom line.  What is more sustainable – farming or mining?  Clearly, OPOWER is a farming company, and the engineering team is working to ensure the harvest comes in season after season.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2011/03/23/helping-dc-area-agile-testers-help-themselves">Helping DC Area Agile Testers Help Themselves</a></h2>
+      <p class="meta pull-right">Written on March 23, 2011 by rob.fagen</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>The <a href="http://www.meetup.com/D-CAST/">DC Agile Software Testing MeetUp group</a> met for the <a href="http://www.meetup.com/D-CAST/events/16781293/">first time</a> yesterday. Thanks to everyone that attended for contributing to a very positive experience.</p>
+
+<p>We’re looking for “Better Ways To Make Better Software”.</p>
+
+<p>Agile software development is a great way to make good software that satisfies real needs and creates real value to those who build and use that software. Everyone on the team is concerned with the quality of the product. However, sometimes it can be an overwhelming task being the team member whose job it is to insure that the quality of the product is sufficient.</p>
+
+<p>DCAST was created to develop a community of those interested in agile software testing who are also interested in testing agile products more effectively and more efficiently. By sharing our hard won knowledge we can all help make each other’s lives easier and more productive.</p>
+
+<p>If you’re interested in sharing how you have raised the quality bar of your agile processes, we would love it if you were a part of this community. If you’re interested in learning (or want to all learn together), you’re even more welcome.</p>
+
+<p>We’re going to be <a href="http://www.meetup.com/D-CAST/events/17021962/">meeting again in about a month</a>. Come check out the group if you’re in the DC area.</p>
+
+      </div>
+  </div>
+  
+</div>
+
+<ul class="pager">
+  
+  <li class="previous"><a href="/page3">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/">Newer &rarr;</a></li>
+  
+</ul>
+
+
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
+
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

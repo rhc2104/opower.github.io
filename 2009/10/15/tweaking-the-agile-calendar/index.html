@@ -1,85 +1,197 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Tweaking the Agile Calendar</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Tweaking the Agile Calendar</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Tweaking the Agile Calendar</h2>
-<p class="meta">15 Oct 2009</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
+                <div class="page-header">
+  <h1>Tweaking the Agile Calendar</h1>
+  <p class="meta pull-right">Written on October 15, 2009 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
+
+<div class="post-content">
 <p>For the first five iterations, the dev team had been following this schedule:</p>
 
 <ul>
-<li><p>Iteration N, Week 1 = Design for iteration N and 2nd week of QA for iteration N-1</p></li>
-<li><p>Iteration N, Week 2 = Development</p></li>
-<li><p>Iteration N, Week 3 = Development</p></li>
-<li><p>Iteration N, Week 4 = 1st week of QA for iteration N</p></li>
-<li><p>Iteration N, Week 5 / Iteration N +1, Week 1 = 2nd week of QA for iteration N, design for iteration N + 1</p></li>
+  <li>Iteration N, Week 1 = Design for iteration N and 2nd week of QA for iteration N-1</li>
+  <li>Iteration N, Week 2 = Development</li>
+  <li>Iteration N, Week 3 = Development</li>
+  <li>Iteration N, Week 4 = 1st week of QA for iteration N</li>
+  <li>Iteration N, Week 5 / Iteration N +1, Week 1 = 2nd week of QA for iteration N, design for iteration N + 1</li>
 </ul>
 
 <p>We started to notice a couple things that have caused us to try out a new schedule in our upcoming 6th iteration.</p>
 
-<p>First, we realized that we left very little time for fit to hit the shan.  If we had a tough QA cycle, we didn&#39;t design enough.  If we didn&#39;t design enough, we underestimated how much development would be needed (i.e. too many story points).  If we had too many story points, we&#39;d go in to QA late.  And the cycle repeats.</p>
+<p>First, we realized that we left very little time for fit to hit the shan.  If we had a tough QA cycle, we didn’t design enough.  If we didn’t design enough, we underestimated how much development would be needed (i.e. too many story points).  If we had too many story points, we’d go in to QA late.  And the cycle repeats.</p>
 
-<p>Note that many of you Agile purists out there will cringe at the above description, especially this sentence: &quot;If we had too many story points, we&#39;d go in to QA late.&quot;</p>
+<p>Note that many of you Agile purists out there will cringe at the above description, especially this sentence: “If we had too many story points, we’d go in to QA late.”</p>
 
 <p>I know.  We cringed too.</p>
 
-<p>We&#39;re committing to a couple new explicit practices going in to our next iterations:</p>
+<p>We’re committing to a couple new explicit practices going in to our next iterations:</p>
 
 <ol>
-<li><p>More formal velocity check-ins.  If less than 50% of our story points are closed by COB of the first Friday, we should have a come-to-jeebus meeting on Monday morning.</p></li>
-<li><p>We absolutely need to respect the impact that dedicated design time has on the effectiveness of everything down-stream.  It&#39;s too easy to say &quot;Agile&quot; as a synonym for &quot;code by the seat of your pants,&quot; but that&#39;s not what it&#39;s about and we know that.  We just need to get better at dedicating time to it.</p></li>
+  <li>More formal velocity check-ins.  If less than 50% of our story points are closed by COB of the first Friday, we should have a come-to-jeebus meeting on Monday morning.</li>
+  <li>We absolutely need to respect the impact that dedicated design time has on the effectiveness of everything down-stream.  It’s too easy to say “Agile” as a synonym for “code by the seat of your pants,” but that’s not what it’s about and we know that.  We just need to get better at dedicating time to it.</li>
 </ol>
 
-<p>So with those ideas in mind, we&#39;re moving to something like the following:</p>
+<p>So with those ideas in mind, we’re moving to something like the following:</p>
 
-<p><img src="/img/iteration_detail_screenprint_cropped.png" alt="iteration_detail_screenprint_cropped"></p>
+<p><img src="/img/iteration_detail_screenprint_cropped.png" alt="iteration_detail_screenprint_cropped" /></p>
 
-<p>It&#39;s a five-week iteration, with 2 solid weeks built in for QA and 1 dedicated week of design.</p>
+<p>It’s a five-week iteration, with 2 solid weeks built in for QA and 1 dedicated week of design.</p>
 
-<p>I think if we can get to a point where our regression and automation testing is good enough (and we develop enough confidence our automated tests), that we may be able to get back to a 4 week cycle.  In the mean time, we&#39;re going to see if we can actually go faster by slowing down.</p>
+<p>I think if we can get to a point where our regression and automation testing is good enough (and we develop enough confidence our automated tests), that we may be able to get back to a 4 week cycle.  In the mean time, we’re going to see if we can actually go faster by slowing down.</p>
 
 <p>Stay tuned!</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

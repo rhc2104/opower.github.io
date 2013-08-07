@@ -1,130 +1,535 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Your New Jekyll Site</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Engineering Blog</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
-            </div>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
 
-                <div id="home">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                <div class="page-header">
   <h1>Blog Posts</h1>
-  <ul class="posts">
-    
-      <li><span>29 Mar 2013</span> &raquo; <a href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></li>
-    
-      <li><span>12 Oct 2012</span> &raquo; <a href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></li>
-    
-      <li><span>06 Sep 2012</span> &raquo; <a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></li>
-    
-      <li><span>12 Apr 2012</span> &raquo; <a href="/2012/04/12/whos-inhabiting-your-code">Who's Inhabiting Your Code?</a></li>
-    
-      <li><span>14 Feb 2012</span> &raquo; <a href="/2012/02/14/the-birth-of-omama">The Birth of OMAMA</a></li>
-    
-      <li><span>20 Jan 2012</span> &raquo; <a href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></li>
-    
-      <li><span>19 Sep 2011</span> &raquo; <a href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></li>
-    
-      <li><span>05 Jul 2011</span> &raquo; <a href="/2011/07/05/attentive-programming">Attentive Programming</a></li>
-    
-      <li><span>02 May 2011</span> &raquo; <a href="/2011/05/02/engineerings-second-bottom-line">Engineering's Second Bottom Line</a></li>
-    
-      <li><span>23 Mar 2011</span> &raquo; <a href="/2011/03/23/helping-dc-area-agile-testers-help-themselves">Helping DC Area Agile Testers Help Themselves</a></li>
-    
-      <li><span>10 Mar 2011</span> &raquo; <a href="/2011/03/10/why-homework">Why Homework?</a></li>
-    
-      <li><span>07 Feb 2011</span> &raquo; <a href="/2011/02/07/how-one-line-of-code-can-change-the-world">How One Line of Code Can Change the World</a></li>
-    
-      <li><span>03 Jan 2011</span> &raquo; <a href="/2011/01/03/how-to-get-hired-polish">How to Get Hired: Polish</a></li>
-    
-      <li><span>07 Oct 2010</span> &raquo; <a href="/2010/10/07/opower-engineering-principles">OPOWER Engineering Principles</a></li>
-    
-      <li><span>14 Sep 2010</span> &raquo; <a href="/2010/09/14/introducing-the-opower-engineering-dashboard">Introducing the OPOWER Engineering Dashboard</a></li>
-    
-      <li><span>07 Sep 2010</span> &raquo; <a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></li>
-    
-      <li><span>26 Aug 2010</span> &raquo; <a href="/2010/08/26/just-what-is-a-software-engineer-in-test">Just What is A Software Engineer in Test?</a></li>
-    
-      <li><span>27 Jul 2010</span> &raquo; <a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></li>
-    
-      <li><span>26 Jul 2010</span> &raquo; <a href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></li>
-    
-      <li><span>27 May 2010</span> &raquo; <a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></li>
-    
-      <li><span>24 May 2010</span> &raquo; <a href="/2010/05/24/the-standing-desk">The Standing Desk</a></li>
-    
-      <li><span>05 May 2010</span> &raquo; <a href="/2010/05/05/cinco-de-failure">Cinco de Failure</a></li>
-    
-      <li><span>03 May 2010</span> &raquo; <a href="/2010/05/03/daves-talk-at-scaladays-2010">Dave's Talk at ScalaDays 2010</a></li>
-    
-      <li><span>30 Apr 2010</span> &raquo; <a href="/2010/04/30/alfresco-3-3-lunch-learn">Alfresco 3.3 Lunch & Learn</a></li>
-    
-      <li><span>19 Jan 2010</span> &raquo; <a href="/2010/01/19/tie-tuesday-more-fun-that-it-sounds">Tie Tuesday - more fun that it sounds</a></li>
-    
-      <li><span>24 Nov 2009</span> &raquo; <a href="/2009/11/24/locking-screens-on-macs-with-the-keyboard">Locking screens on Macs with the keyboard</a></li>
-    
-      <li><span>16 Nov 2009</span> &raquo; <a href="/2009/11/16/when-adding-more-threads-makes-it-all-slower">When adding more threads makes it all slower</a></li>
-    
-      <li><span>30 Oct 2009</span> &raquo; <a href="/2009/10/30/moving-day">Moving Day</a></li>
-    
-      <li><span>29 Oct 2009</span> &raquo; <a href="/2009/10/29/slides-on-improving-your-agile-development-process">Slides on Improving Your Agile Development Process</a></li>
-    
-      <li><span>15 Oct 2009</span> &raquo; <a href="/2009/10/15/tweaking-the-agile-calendar">Tweaking the Agile Calendar</a></li>
-    
-      <li><span>15 Oct 2009</span> &raquo; <a href="/2009/10/15/agile-impressions-5-iterations-in">Agile impressions, 5 iterations in...</a></li>
-    
-      <li><span>18 Sep 2009</span> &raquo; <a href="/2009/09/18/best-javadoc-ever">Best javadoc ever</a></li>
-    
-      <li><span>13 Sep 2009</span> &raquo; <a href="/2009/09/13/expectationstrouble">expectations==trouble</a></li>
-    
-      <li><span>10 Sep 2009</span> &raquo; <a href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></li>
-    
-      <li><span>28 Aug 2009</span> &raquo; <a href="/2009/08/28/move-meetings-to-move-developers">Move meetings to move developers</a></li>
-    
-      <li><span>26 Aug 2009</span> &raquo; <a href="/2009/08/26/a-year-long-analysis-of-snack-consumption">A year-long analysis of snack consumption</a></li>
-    
-      <li><span>26 Aug 2009</span> &raquo; <a href="/2009/08/26/new-developer-law">New Developer Law</a></li>
-    
-      <li><span>23 Aug 2009</span> &raquo; <a href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></li>
-    
-      <li><span>20 Aug 2009</span> &raquo; <a href="/2009/08/20/the-cheated-frogs-of-vim">The Cheated Frogs of Vim</a></li>
-    
-      <li><span>19 Aug 2009</span> &raquo; <a href="/2009/08/19/measuring-our-awesomeness-iteration-by-iteration">Measuring our awesomeness iteration by iteration</a></li>
-    
-  </ul>
+</div>
+<div class="posts">
+  
+  <div class="post">
+      <h2><a href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
+      <p class="meta pull-right">Written on March 29, 2013 by jeff.kolesky</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>For our HBase table layout, we are following an entity-centric model,
+evangelized to us by our friends at <a href="http://www.wibidata.com">WibiData</a>.  The idea is to put all of the
+data about a single entity into a single row in HBase.  When you need to run
+a computation that involves that entity’s data, you have quick access to it by
+the row key, and all of the data is stored close together on disk.
+Additionally, against many <a href="http://www.ngdata.com/site/blog/62-ng.html">suggestions</a> from the HBase community,
+and general confusion about <a href="https://issues.apache.org/jira/browse/HBASE-2406">how timestamps work</a>, we are using
+timestamps with logical values.  Instead of just letting the region server
+assign a timestamp version to each cell, we are explicitly setting those values
+so that we can use timestamp as a true queryable dimension in our <code>get</code>s and
+<code>scan</code>s.  In addition to the real timeseries data that is indexed using the cell
+timestamp, we also have other columns that store metadata about the entity.
+That data does not need to be logically timestamped, and we always just want the
+most recent version of it.  Given this description, rows in the table look
+something like this:</p>
+
+<pre><code>timestamp    data     metadata
+   2013      1.09
+   2012      0.87
+   2011      0.93     "house"
+   2010      1.02
+   2009      0.98
+</code></pre>
+
+<p>This shows a row that has five timeseries values in it and a piece of metadata
+that we keep, a label describing where the data came from.  The metadata is
+stored at the timestamp when we wrote it into the table, which in this example
+is in 2011.  Since we imported historical data, and we use logical timestamps
+for the data column, we have data going back to 2009.  One typical access
+pattern is to query for all data from the beginning of “last year” up to now,
+because we need that much data for many analyses.  If we ran a <code>get</code> for this
+data, it would normally be set up like this (in pseudo-code, of course):</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Get</span><span class="o">(</span><span class="n">rowkey</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;data&quot;</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;metadata&quot;</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">setTimeRange</span><span class="o">(</span><span class="mi">2012</span><span class="o">,</span> <span class="mi">2013</span><span class="o">);</span>
+</code></pre></div>
+
+<p>Unfortunately that <code>get</code> would not return us any data for the metadata column,
+because there is no valid cell in that timerange.  We have two options: make
+a second <code>get</code> for the metadata or figure out some other solution.  That second
+solution is timeshifting.</p>
+
+<p>Instead of storing the metadata column with a true server timestamp of when it
+was written, we shift the timestamp by 50,000 years which makes the row data now
+look like this:</p>
+
+<pre><code>timestamp    data     metadata
+  52011               "house"
+   2013      1.09
+   2012      0.87
+   2011      0.93
+   2010      1.02
+   2009      0.98
+</code></pre>
+
+<p>Since we imported the data in 2011 and timeshifted the metadata column
+timestamp, its new timestamp is 52,011.  We now change our <code>get</code> slightly by
+setting an ending timestamp to be the logical “end of time”:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Get</span><span class="o">(</span><span class="n">rowkey</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;data&quot;</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;metadata&quot;</span><span class="o">);</span>
+<span class="n">get</span><span class="o">.</span><span class="na">setTimeRange</span><span class="o">(</span><span class="mi">2012</span><span class="o">,</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_LONG</span><span class="o">);</span>
+</code></pre></div>
+
+<p>Now, we will get data for the data column and for the metadata column
+using only one RPC.  The benefit of HBase being a sparse datastore is that the
+data for the metadata column is stored on disk right next to the data for the
+data column even though they are logically separated by 50,000 years.
+There is no added overhead to the storage to account for this, and thus no added
+processing when fetching it.  Furthermore, fetching data for just the metadata column still works
+with <code>Result#getColumnLatest()</code>.</p>
+
+<p>Yes, there is a problem for the future us of the year 52,011, but I’m betting we
+will all be using relational databases again by that point.</p>
+
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></h2>
+      <p class="meta pull-right">Written on October 12, 2012 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Friday afternoon snippet of South Korea’s Macarena by Opower’s own Wayne Lin and Eddy Leung in our Arlington HQ elevator bank.</p>
+
+<iframe width="420" height="315" src="//www.youtube.com/embed/7Fa7KW5AfXQ?rel=0" frameborder="0" allowfullscreen=""></iframe>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h2>
+      <p class="meta pull-right">Written on September 06, 2012 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn’t have a ton of solutions on stackoverflow or the google, so I thought I’d capture some of them here.</p>
+
+<p>Additionally, it’s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
+
+<h3 id="changes-to-theorgspringframeworkjdbccoresimple-package">Changes to the org.springframework.jdbc.core.simple package</h3>
+
+<p>The ‘.simple’ package is deprecated (including the <code>SimpleJdbcTemplate</code> class) and there are two new classes you need to know about as you make the transition:</p>
+
+<ol>
+  <li>The <code>org.springframework.jdbc.JdbcTemplate</code> class is a drop-in replacement for the old <code>SimpleJdbcTemplate</code> class, <em>unless you’re using named parameters in your queries.</em></li>
+  <li>If you run SQL queries with named parameters through the <code>JdbcTemplate</code> your code will compile fine but you’ll get odd <code>Serialization</code> exceptions or <code>ArrayIndexOutOfBoundsExceptions</code>.  For named parameter queries, you’ll need to use the <code>org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate</code>.</li>
+</ol>
+
+<p>Luckily, the <code>NamedParameterJdbcTemplate</code> wraps the new <code>JdbcTemplate</code> (well, actually the new <code>JdbcOperations</code>) so if you’re like Opower and you’ve got a top level <code>AbstractJdbcDAO</code> class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the <code>NamedParameterJdbcTemplate</code> and you’ll be off to a good start.</p>
+
+<h3 id="supporting-named-parameter-queries-in-spring-312">Supporting named parameter queries in Spring-3.1.2</h3>
+
+<p>One thing to be aware of is a swap in the argument list to the <code>.query()</code> method on the <code>NamedParameterJdbcTemplate</code> that used to work with the <code>SimpleJdbcTemplate</code>.  Note this signature difference between the <code>JdbcTemplate</code> and <code>NamedParameter</code> version isn’t “new” between Spring 3.0 and 3.1, it’s just that you used be able to get away with passing named parameters through the <code>SimpleJdbcTemplate</code> and now you can’t.  As you’re converting to the 3.1 spec, you’ll need to correct for that laziness.</p>
+
+<p>Let’s say you’ve got a SQL query containing named parameters and your code used to happily get by with this call to your <code>SimpleJdbcTemplate</code>’s <code>.query</code> method:</p>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// SQL query with named parameter ( the :zipCodes)</span>
+<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes)&quot;</span>
+
+<span class="c1">// Our row mapper</span>
+<span class="n">RowMapper</span> <span class="n">rowMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="o">...</span>
+
+<span class="c1">// Our parameter Map for named parameter substitution</span>
+<span class="n">ImmutableMap</span> <span class="n">paramMap</span> <span class="o">=</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;zipCodes&quot;</span><span class="o">,</span> <span class="n">zipCodes</span><span class="o">);</span>
+
+<span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getSimpleJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">);</span>
+</code></pre></div>
+
+<p>When using the <code>NamedParameterJdbcTemplate</code> in Spring-3.1.2 you’ll need switch the argument order of your <code>rowMapper</code> and your <code>paramMap</code>, e.g:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getNamedParameterJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">);</span>
+</code></pre></div>
+
+<p>If you don’t make the switch, your call to a <code>JdbcTemplate.query(sql, rowMapper, paramMap)</code> will happily compile because it meets the <code>JdbcTemplate</code>’s method signature of</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span>  <span class="n">List</span> <span class="nf">query</span><span class="o">(</span><span class="n">String</span> <span class="n">sql</span><span class="o">,</span> <span class="n">RowMapper</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">DataAccessException</span>
+</code></pre></div>
+
+<p>with the problem being that your <code>rowMapper</code> object gets passed in as the one and only varargs substitution variable to whatever “?” or “:foo” named parameter you may have in your query.  Depending on the query you’re trying to run you’ll get Serialization exceptions or something like this:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">;</span>
+    <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">SQLException</span><span class="o">:</span>
+        <span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span>
+</code></pre></div>
+
+<h3 id="spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations">Spring-Batch 2.x needs Spring 3.0’s deprecated JdbcOperations</h3>
+
+<p>If you use Spring Batch’s <code>org.springframework.batch.core.repository.dao.JdbcJobInstanceDao</code> you’ll need to continue to support the deprecated spring-3.0.x <code>SimpleJdbcTemplate</code> because that’s the only class allowed to be set on the <code>JdbcJobInstaceDAO</code> to help it query the DB to look up all the data out of your <code>BATCH_xxx</code> tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
+
+<h3 id="spring-securitys-accessdecisionvoter-became-parameterized">Spring Security’s AccessDecisionVoter became parameterized</h3>
+
+<p>We use Spring Security’s <code>AccessDecisionVoter</code> to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span> <span class="o">{</span>
+<span class="o">...</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// make a decision on authentication based on attributes</span>
+<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>With the parameterization of the <code>AccessDecisionVoter</code>, the new implementation looks like:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="o">...</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// make a decision on authentication based on attributes</span>
+<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="new-abstract-method-onorgspringframeworkhttpclientclienthttpresponse">New abstract method on org.springframework.http.client.ClientHttpResponse</h3>
+
+<p>If you use or mock Spring’s <code>ClientHttpResponse</code> object, there’s a new <code>public int getRawStatusCode() throws IOException</code> signature you’ve got to implement.  With access to an <code>HttpStatus</code> object, that’s pretty straightforward:</p>
+
+<div class="highlight"><pre><code class="java"><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRawStatusCode</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">httpStatus</span><span class="o">.</span><span class="na">value</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="pay-attention-to-your-spring-context-xsd-versions">Pay attention to your spring context XSD versions</h3>
+
+<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn’t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like “spring security tag 3.0 library incompatible with class … blah” make sure:</p>
+
+<ol>
+  <li>your spring context’s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
+  <li>your mvn dependency:tree is pulling in spring-security-3.1</li>
+</ol>
+
+<h3 id="spring-31-securitys-taglib-has-a-package-change">Spring 3.1 Security’s Taglib has a package change.</h3>
+
+<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at “TemplateModelException: Could not load taglib information” and ending at “Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag”.  The AuthorizeTag class has been renamed to “JspAuthorizeTag”, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring’s fisheye site (google search for “spring security.tld 3.1”).</p>
+
+<h3 id="spring-31-may-mean-an-update-to-your-oauth-dependency">Spring 3.1 may mean an update to your OAuth dependency</h3>
+
+<p>Several of Opower’s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you’re using ant-style filter chain maps in your <code>FilterChainProxy</code>.  For example, one of our <code>securityContext.xml</code> files contained this snippet:</p>
+
+<div class="highlight"><pre><code class="xml">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+http://www.springframework.org/schema/security
+http://www.springframework.org/schema/security/spring-security-3.1.xsd
+http://www.springframework.org/schema/security/oauth
+http://www.springframework.org/schema/security/spring-security-oauth.xsd&quot;
+default-autowire=&quot;byName&quot;&gt;
+...snip...
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;filterChainProxy&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.security.web.FilterChainProxy&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;sec:filter-chain-map</span> <span class="na">path-type=</span><span class="s">&quot;ant&quot;</span><span class="nt">&gt;</span>
+...snip...
+</code></pre></div>
+
+<p>When spinning up that context, I’d get an error: “java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.”  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
+
+<p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2012/04/12/whos-inhabiting-your-code">Who's Inhabiting Your Code?</a></h2>
+      <p class="meta pull-right">Written on April 12, 2012 by ed.peters</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Lately I’ve been thinking about the notion of “beautiful code”, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they’re all wrong).  And second, even when you can label a piece of code as “beautiful”, it’s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.</p>
+
+<p>In my reading, I came across a great article by Rebecca Wirfs-Brock<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> in which she discusses the notion of “habitable code”.  This idea isn’t original to her (she credits Richard Gabriel in Patterns of Software<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.</p>
+
+<p>Paraphrasing some key points …</p>
+
+<ul>
+  <li>
+    <p><em>Clarity for its own sake is an elusive goal</em>.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it’s at the expense of clarity in some other area. It’s a bit like a game of <a href="http://en.wikipedia.org/wiki/Whac-A-Mole">Whac-A-Mole</a>.  Just as you can’t write code that’s infinitely flexible in the face of unknown future requirements, I don’t think you can write code that’s infinitely clear to an unknown future audience.</p>
+  </li>
+  <li>
+    <p><em>Beauty becomes a constraint for future authors</em>.  It’s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design – the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.</p>
+  </li>
+  <li>
+    <p><em>Habitable code makes its structure and intentions easy to understand</em>.  Structure, sure, but as a professional developer, the “and intentions” part seems pretty important.  You can read code to understand what it’s doing, but it’s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right – the best I’ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.</p>
+  </li>
+  <li>
+    <p><em>Habitable code makes developers feel at home</em>.  At <a href="http://www.opower.com">Opower</a> we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you’ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.</p>
+  </li>
+</ul>
+
+<p>Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don’t feel bad about rewriting it.  But it’s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.</p>
+
+<p>So … who’s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p><a href="http://www.wirfs-brock.com/PDFs/DoesBeautifulCodeImply.pdf">Does Beautiful Code Imply Beautiful Design</a> by Rebecca Wirfs-Brock.<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p><a href="http://dreamsongs.net/Files/PatternsOfSoftware.pdf">Patterns of Software: Tales from the Software Community</a> by Richard P. Gabriel.<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
+    </li>
+  </ol>
 </div>
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2012/02/14/the-birth-of-omama">The Birth of OMAMA</a></h2>
+      <p class="meta pull-right">Written on February 14, 2012 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p><img src="/img/bieber.jpg" alt="Justin Bieber" /></p>
 
-    </body>
+<p>Over the last 6 months, I have been slowly filling up the empty wall spaces in the engineering department with various posters of Nickleback, Justin Bieber and Edward from “Twilight”. These posters tended to get relocated and repositioned behind the desks of engineers who had recently broken the build or accidentally replied-to-all on an email thread.</p>
+
+<p>The posters were fun but admittedly a bit of an eyesore.  Last Friday Ben Foster, our VP of Product, said “enough is enough” and sent an email to the engineering and product teams announcing the immediate departure of Justin, Edward and Nickleback.  Ben’s email was pretty good – complete with fake “goodbye, I’ll miss you” messages, but it immediately raised the rabble in engineering.  ”What was <em>product</em> doing removing <em>engineering</em> posters??”, etc. etc.  Adding fuel to the fire was Dan, our CEO, who saw that Ben had poked a sleeping bear and wondered aloud as to the state Ben would find his office when he came in to work on Monday morning…</p>
+
+<p>“Love thine enemy” formed the basis for engineering’s response:  if Ben didn’t appreciate crappy pop art, we’d provide him with some higher scale fare.  Thus was born the Opower Modern Art Museum, Arlington or “OMAMA.”   Internationalization Team Leader Tyler Bronder and I spent Sunday morning at Michael’s Arts &amp; Crafts and Home Depot collecting supplies and most of Sunday afternoon assembling the highest-brow art we could manage.</p>
+
+<p>Tyler and I thought a couple Rorschach knock-offs  would be quick and fun contributions to the museum’s collection so we experimented on a few different paint-to-plastic-to-canvas transfer techniques before committing to imprinting on the large 4’x3’ canvases we bought.</p>
+
+<p>It took a couple of trials and errors with transfer mediums and acrylic viscosity to get the exact technique down correctly, but once we had some confidence in what we were doing we produced a semi-creepy version of our logo which we titled “Pluggy Deconstructed” and a more traditional Rorschach blot that we titled “Interaction Model.”</p>
+
+<div class="gallery">
+<div class="row">
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/tom_cutting_transfer_plastic.jpg"><img width="150" height="150" src="/img/tom_cutting_transfer_plastic-150x150.jpg" alt="Me, cutting a plastic transfer for our large canvas" /></a>
+      <div class="caption">Me, cutting a plastic transfer for our large canvas</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/pluggy_decomposed.jpg"><img width="150" height="150" src="/img/pluggy_decomposed-150x150.jpg" alt="Pluggy Decomposed" /></a>
+      <div class="caption">Pluggy Decomposed</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/interaction_model.jpg"><img width="150" height="150" src="/img/interaction_model-150x150.jpg" alt="Interaction Model" /></a>
+      <div class="caption">Interaction Model</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/tyler_starting_to_rorschach1.jpg"><img width="150" height="150" src="/img/tyler_starting_to_rorschach1-150x150.jpg" alt="Tyler starting to Rorschach" /></a>
+      <div class="caption">Tyler starting to Rorschach</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/energy_calc.jpg"><img width="150" height="150" src="/img/energy_calc-150x150.jpg" alt="Energy Calculator" /></a>
+      <div class="caption">Energy Calculator</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/composition_w_eligibility.jpg"><img width="150" height="150" src="/img/composition_w_eligibility-150x150.jpg" alt="&quot;Composition with Eligibility&quot;" /></a>
+      <div class="caption">&#8220;Composition with Eligibility&#8221;</div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/self_portrait.jpg"><img width="150" height="150" src="/img/self_portrait-150x150.jpg" alt="Self Portrait" /></a>
+      <div class="caption">Self Portrait</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/self_portrait-back.jpg"><img width="150" height="150" src="/img/self_portrait-back-150x150.jpg" alt="Removing the &quot;Self Portrait&quot; will be difficult." /></a>
+      <div class="caption">Removing the &#8220;Self Portrait&#8221; will be difficult.</div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="thumbnail text-center">
+      <a href="/img/gallery_view.jpg"><img width="150" height="150" src="/img/gallery_view-150x150.jpg" alt="The final product came together nicely" /></a>
+      <div class="caption">The final product came together nicely</div>
+    </div>
+  </div>
+</div>
+</div>
+<p><!--/.gallery --></p>
+
+<p>We’ve got a couple pieces of code that are central to the business that cause some newcomers to scratch their heads – our participant eligibility code and the orchestrating energy calculator code in particular have a certain notoriety.  Tyler and I thought those would make good fodder for abstract art, so we knocked off a Modrian and a Pollock to produce the next two works, “Composition with Eligibility” and “Energy Calculator”:</p>
+
+<p>The final (and best) pieces were put up in Ben’s office.  ”Self Portrait” is an 42.5” x 77” blow up of his facebook photo, pasted up inside his office window.  To discourage tampering with the gallery’s centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80”s and industrial sealing foam.</p>
+
+<p>Ben’s been a great sport about it, but as the head of User Experience <em>and</em> Product, I’m starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!</p>
+
+      </div>
+  </div>
+  
+</div>
+
+<ul class="pager">
+  
+  <li class="previous"><a href="/page2">&larr; Older</a></li>
+  
+  
+  <li class="next disabled"><a href="#">Newer &rarr;</a></li>
+  
+</ul>
+
+
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
+
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Engineering Blog</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/custom.css">
+
+    </head>
+
+    <body>
+
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+
+                <div class="page-header">
+  <h1>Blog Posts</h1>
+</div>
+<div class="posts">
+  
+  <div class="post">
+      <h2><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h2>
+      <p class="meta pull-right">Written on September 07, 2010 by rob.fagen</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don’t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
+
+<ol>
+  <li>
+    <p>First launch a shell that you know has the environment variables you want already set, then:</p>
+
+    <pre><code> cd /Applications/RubyMine 2.0.2.app/Contents/MacOS
+ ./rubymine
+</code></pre>
+  </li>
+  <li>
+    <p>Follow <a href="http://www.digitaledgesw.com/node/31">these (untested) directions</a>. In summary, you would add commands like <code>setenv VARIABLE_NAME variable_value</code> in <code>/etc/launchd.conf</code> – the downside is that you have to reboot after making changes, so this doesn’t help if the environment variables you need are somewhat dynamic.</p>
+  </li>
+</ol>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2010/08/26/just-what-is-a-software-engineer-in-test">Just What is A Software Engineer in Test?</a></h2>
+      <p class="meta pull-right">Written on August 26, 2010 by rob.fagen</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>OPOWER recently updated the job titles for our QA engineers to more  properly reflect the work that we do. We still love owning the  responsibility for pointing out when our product hasn’t turned out the  best it can, and we have all held and loved “QA” titles at many points  in our careers. So why the change? Just what exactly is a Software  Engineer in Test at OPOWER?</p>
+
+<p>It’s pretty clear to just about anyone what the goals of a software  engineer are when taken in a development context. Build software that  does useful work correctly and efficiently. It’s a little more fuzzy  when you assess that title from a testing perspective.</p>
+
+<ul>
+  <li>Is it a tool-smith? Building test frameworks and automation  tools for other testers to use? Not exclusively, but tools and  frameworks that more junior test engineers can use and learn from are  great side effects of the work.</li>
+  <li>Is it someone who uses GUI testing frameworks to follow along behind  the developers and make sure they got the user experience right? Again,  a part of the job sometimes, but not the primary mission.</li>
+  <li>Now  put on your tinfoil hat. Is it just a conceit meant to soothe the sting  of being a second class creator of software artifacts? Someone who can  code but not well enough to be a developer? Probably not anyone’s  explicit intent, but some folks do feel that SEiT is a farm league for  the Big Show: being a developer. We are not among those people.</li>
+</ul>
+
+<p>A Software Engineer in Test is someone that builds software that  does useful work correctly and efficiently. Wait. That’s exactly the  same definition as was given for a developer. What gives?</p>
+
+<p>The  useful work a developer creates is to render a web page, or process  messages, or update a database, all with an end goal of satisfying the  end consumer of the application being worked on. When developing test  systems, all those same elements are required, but the end goal is  providing actionable insight about the quality of the customer facing  system. This actionable insight is consumed by the developer and the  engineering and product managers. They use this insight to answer  questions. Those questions include: is it done, does it work, will it  scale, and many others.</p>
+
+<p>The SEiT needs to know how to build robust software, and on top of  that, they need to be able to understand the business purpose of the  customer facing system. The SEiT needs to judge what to test, how to  test it and when to test it. They also need to have great judgment about  what <em><strong>not</strong></em> to test.</p>
+
+<p>A fantastic test framework with sub-par tests is of little use. In  the same way, an excellent set of tests that cannot be run reliably does  not provide the needed insight either. The SEiT needs to be able to go  toe-to-toe with any of their developers and question choices on data  structures, algorithms and design. They also have to have great  judgement about when it best serves the business to take a shortcut in  exchange for an acceptable risk.</p>
+
+<p>A great example of dev and test collaborating to make both teams more productive coalesced around how we deal with the concept of “today”. When we exercise our software, the result you get depends on what day it is. Different months and days have differing levels of energy usage for both the customer and their neighbors. Without something built into the application, the only way to change “today” is to change the system time, which is not too practical in a shared environment. The ad-hoc and pre-collaboration solution was to add some kind of ‘asOf’ property to particular logic when we happened to think of it. We tightened up the collaboration level by having test explicitly involved in the estimation, planning and design meetings. Through these discussions earlier in the iteration, we discovered that it is far better to have any code that changes behavior based on the current date to always have the date as a parameter, and any user facing behavior should allow for a seekrit URL parameter (or other test system accessible method) to set the “asOf” date for any particular test. Dev is more productive because they now have a default way of designing the code to make it more testable. Their unit and integration tests are more effective and easier to write. Test is more productive because the app is more testable at the integrated and system level, and their tests are also more effective and easier to write.</p>
+
+<p>It’s hard enough to get a software system right. It’s even harder to  get a system right whose job is making sure another system is correct.  OPOWER certainly doesn’t want to hire anyone but the best for that job. For us, the best tester is someone who’s a good developer, too.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h2>
+      <p class="meta pull-right">Written on July 27, 2010 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>OPOWER’s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+
+<p>Clicking around google’s well-documented “get started” guides, it looked like they haven’t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it’d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER’s repo (thereby making them accessible to all our developer’s boxes).</p>
+
+<p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
+
+<ol>
+  <li>Grab latest JARs from the “gdata-java” link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
+  <li>Unzip on the server hosting your company’s mvn repo</li>
+  <li>cd down in to ./gdata/java/lib</li>
+  <li>
+    <p>Make a file ‘installall.pl’ in that lib directory:</p>
+
+    <pre><code> #!/usr/bin/perl -w
+
+ my @jars = `ls *.jar`;
+ chomp(@jars);
+ foreach my $jar (@jars) {
+   if($jar =~ /(.*)-(\d\.\d)\.jar/) {
+     my $cmd = "./install.pl --artifactId $1 --version $2 --jar $jar";
+     open(CMD, "$cmd|") or die "Could not execute $cmd $!";
+     while(&lt;CMD&gt;) {
+        print $_;
+     }
+    close(CMD);
+   }
+ }
+</code></pre>
+  </li>
+  <li>
+    <p>Still in that directory, make another file <code>install.pl</code>:</p>
+
+    <pre><code> #!/usr/bin/perl -w
+
+ use strict;
+ use warnings;
+ use Getopt::Long;
+
+ sub usage();
+
+ my $artifactId;
+ my $version;
+ my $jar;
+ GetOptions('artifactId=s' =&gt; \$artifactId ,
+            'version=s' =&gt; \$version,
+            'jar' =&gt; \$jar);
+ die usage() unless ($artifactId &amp;&amp; $version &amp;&amp; $jar);
+
+ my $cmd = "mvn deploy:deploy-file " .
+       "-DgroupId=com.google.gdata " .
+       "-DartifactId=$artifactId " .
+       "-Dversion=$version " .
+       "-Dfile=$jar " .
+       "-Dpackaging=jar " .
+       "-DgeneratePom=true " .
+       "-Durl=file:///opt/mvn_repo " .  &lt;---  change this for your env
+       "-Drepository=opower_local";  &lt;--- change this for your env
+ print "executing command = $cmd\n";
+ $cmd = "date";
+ open(CMD, "$cmd|") or die "Could not exec $cmd $!";
+ while(&lt;CMD&gt;) {
+     print $_;
+ }
+ close(CMD);
+
+ sub usage() {
+     print "Usage: ./install.pl [--artifactId artifactId] [--version version] [--jar jarfile]\n";
+     print "Example: ./install.pl --artifactId gdata-webmastertools --version 1.0 --jar gdata-webmastertools-1.0.jar\n";
+     exit 1;
+ }
+</code></pre>
+  </li>
+  <li>Don’t forget to <code>chmod 755 *.pl</code></li>
+  <li>Then just run <code>./installall.pl</code> and all those google JARs should get installed in your repo</li>
+</ol>
+
+<p>That assumes the “mvn” executable was in your path and that you run the scripts from within the same directory as all the JARs, but it’s easily modified for whatever your situation may be.</p>
+
+<p>Note that relative to <code>./lib</code> there are 2 jars in <code>../deps/</code> that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
+
+<p>Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
+
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>foo<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>Google Client Example<span class="nt">&lt;/name&gt;</span>
+    
+  <span class="nt">&lt;scm&gt;</span>
+    <span class="nt">&lt;developerConnection&gt;</span>foo<span class="nt">&lt;/developerConnection&gt;</span>
+  <span class="nt">&lt;/scm&gt;</span>
+    
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-core<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-analytics<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-client<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>google-collect<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0-rc1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    dependencies&gt;
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div>
+
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></h2>
+      <p class="meta pull-right">Written on July 26, 2010 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg." /></p>
+
+<p>I was trolling trawling through reddit waiting for a JAR to compile and <a href="http://nerds-central.blogspot.com/2010/07/development-management-act-of.html">found this blog post</a>.  That blog made a couple claims that had crossed my mind a couple months ago when our engineering director solicited  feedback about using Key Performance Indicators for the dev team.  The blog post’s point wasn’t so much that the _act _of measuring a team changes its performance but rather that when the team is aware of what’s being measured, it naturally “cheats” in ways to maximize the measured value.  The first comment on the blog post alerted me to a law I hadn’t known about, but which sounds pretty intuitively correct:</p>
+
+<p><a href="http://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart’s Law</a>: <em>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes</em></p>
+
+<p>Here at OPOWER, developers and product managers don’t deal with KPIs on a day-to-day basis. I think it’s mostly a management-level “let’s starting capturing some numbers over several months and see if there’s anything out-of-whack” kind of thing.</p>
+
+<p>In terms of development KPIs, some of the things we thought it might be interesting to collect included:</p>
+
+<ul>
+  <li>story points delivered per iteration</li>
+  <li>% of story points (aggregate) done in an iteration that were planned at the beginning</li>
+  <li>% QA coverage of production (automated)</li>
+  <li>etc.</li>
+</ul>
+
+<p>The “story points delivered per iteration” is, I think, precisely the kind of thing Goodhart was talking about when he made up his law.  <em>That said</em>, we are a business and we are expected to work and be productive, so it isn’t exactly a satisfying for a VP or CEO to hear from their dev team “sorry, you can’t measure us because we’ll just skew the measurement number to please you.”  So what’s management to do with their IT cabal?</p>
+
+<p><em>Assuming</em> you could normalize what story points mean across different teams, and <em>assuming</em> you can account for “point inflation” and <em>assuming</em> you accurately tracked vacations and network outages and late requirements and all the other stuff that goes along with uncertainty in exactly how much gets delivered in an iteration, must you also assume that the team gradually skews the number to meet the goal?  What if the goal was kept secret?  What if the team didn’t know they were being measured?  That’s hardly a way to foster a healthy relationship between management and product development.</p>
+
+<p><img src="/img/heisenberg_bb.jpg" alt="A picture of Walt from Breaking Bad" /></p>
+
+<p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to “number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,” what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn’t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won’t be holding my breath.</p>
+
+<p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart’s Law.  After all, it’s just a Law.  Like De Morgan’s Law, except maybe with a bit more wiggle room.</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
+      <h2><a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h2>
+      <p class="meta pull-right">Written on May 27, 2010 by dave.copeland</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of “Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032” seemed logically impossible, but was somehow true.</p>
+
+<p>But first, let’s talk about defensive coding and how we do it.  For example:</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
+<span class="cm"> * frobs the bar and baz.</span>
+<span class="cm"> * @param bar the bar to frob; may not be null</span>
+<span class="cm"> * @param baz the baz to from; must be positive</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there’s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
+<span class="cm"> * frobs the bar and baz.</span>
+<span class="cm"> * @param bar the bar to frob; may not be null</span>
+<span class="cm"> * @param baz the baz to from; must be positive</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span><span class="s">&quot;bar must not be null to frob&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">baz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span><span class="s">&quot;baz must be positive&quot;</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
+We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>’s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
+    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person’s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer’s <code>id</code> object.  What’s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
+
+<p>Until this week; we were testing our application for a new client and I got the error posted above (“Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032”).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">()),</span>
+    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
+    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+  <span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>What’s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Long</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
+<span class="n">Long</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span><span class="o">);</span>      <span class="c1">// false</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">l2</span><span class="o">));</span> <span class="c1">// true</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="mi">45L</span><span class="o">);</span>     <span class="c1">// true!</span>
+</code></pre></div>
+
+<p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
+
+
+      </div>
+  </div>
+  
+</div>
+
+<ul class="pager">
+  
+  <li class="previous"><a href="/page5">&larr; Older</a></li>
+  
+  
+  <li class="next"><a href="/page3">Newer &rarr;</a></li>
+  
+</ul>
+
+
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
+
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>

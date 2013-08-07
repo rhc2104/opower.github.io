@@ -1,79 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Introducing the OPOWER Engineering Dashboard</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Introducing the OPOWER Engineering Dashboard</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Introducing the OPOWER Engineering Dashboard</h2>
-<p class="meta">14 Sep 2010</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
+                <div class="page-header">
+  <h1>Introducing the OPOWER Engineering Dashboard</h1>
+  <p class="meta pull-right">Written on September 14, 2010 by joel.strait</p>
+  <div class="clearfix"></div>
+</div>
+
+<div class="post-content">
 <p>As Tom <a href="/2010/07/27/maven-izing-googles-data-client-java-library">mentioned</a>, we recently conducted our first company-wide Innovation Day. Everyone split into groups of 3-4 and worked on whatever they wanted (as long as it was related to the company).</p>
 
 <p>Everyone did cool stuff. One group made a prototype of a website where you can enter your zip code, info about your home, and your last energy bill, and (via our Insight Engine) see how you compare to similar people across the country. Another group made an iPhone optimized version of our utility website. A third group went out and bought some plants to liven up the office.</p>
 
-<p>Adam, Jeff #3, Matt and I decided to focus our attention toward the TV we have mounted on the wall. It&#39;s been dormant since the World Cup, and we wanted to put it to better use. <a href="http://www.panic.com/blog/2010/03/the-panic-status-board/">Inspired by Panic</a>, we decided to build a dashboard for the engineering team.</p>
+<p>Adam, Jeff #3, Matt and I decided to focus our attention toward the TV we have mounted on the wall. It’s been dormant since the World Cup, and we wanted to put it to better use. <a href="http://www.panic.com/blog/2010/03/the-panic-status-board/">Inspired by Panic</a>, we decided to build a dashboard for the engineering team.</p>
 
 <p>We brainstormed beforehand, and came up with a lot of ideas. However, to make sure we had something working to demo the next day, we decided to just focus on getting 1 or 2 small things done as a proof of concept. We first set up a simple <a href="http://www.sinatrarb.com/">Sinatra</a> Ruby app to act as a shell. Next Matt, Jeff and I worked on pulling data from various APIs (<a href="http://docs.codehaus.org/display/JIRA4R/Examples">JIRA</a>, <a href="http://cookingandcoding.com/gcal4ruby/">Google Calendar</a>, Hudson, etc.) while Adam built a killer grid-based design.</p>
 
 <p>This turned out to be setting the bar way too low - 10 hours of non-stop coding later, we managed to have a working dashboard that displays the following:</p>
 
 <ul>
-<li><p>How much time is left in the current iteration.</p></li>
-<li><p>The number of story points each team has completed for the current iteration, and how many more are left.
-<img src="/img/story_points-300x189.png" alt="Dashboard story points"></p></li>
-<li><p>The status of our Hudson continuous integration server. If someone breaks the build, the dashboard bursts into flames.</p></li>
-<li><p>Any urgent production issues. (Once again, burning).</p></li>
-<li><p>The X-Train Wall of Shame. It tracks how many times everyone has broken the build, as well as how many times they have atoned for it by buying everyone a drink.<img src="/img/x_train-300x176.png" alt="The X train cometh"></p></li>
-<li><p>Who is on vacation, and who will be on vacation soon. (Courtesy of Google Calendar).<img src="/img/vacation-300x246.png" alt="Slackers on vacation"></p></li>
-<li><p>When the next trains are coming to the Courthouse Metro station.<img src="/img/metro.png" alt="Trains at Courthouse"></p></li>
-<li><p>A Twitter feed of tweets mentioning OPOWER.</p></li>
-<li><p>Random selections from the company quote wall.</p></li>
+  <li>How much time is left in the current iteration.</li>
+  <li>The number of story points each team has completed for the current iteration, and how many more are left. <img src="/img/story_points-300x189.png" alt="Dashboard story points" /></li>
+  <li>The status of our Hudson continuous integration server. If someone breaks the build, the dashboard bursts into flames.</li>
+  <li>Any urgent production issues. (Once again, burning).</li>
+  <li>The X-Train Wall of Shame. It tracks how many times everyone has broken the build, as well as how many times they have atoned for it by buying everyone a drink. <img src="/img/x_train-300x176.png" alt="The X train cometh" /></li>
+  <li>Who is on vacation, and who will be on vacation soon. (Courtesy of Google Calendar). <img src="/img/vacation-300x246.png" alt="Slackers on vacation" /></li>
+  <li>When the next trains are coming to the Courthouse Metro station. <img src="/img/metro.png" alt="Trains at Courthouse" /></li>
+  <li>A Twitter feed of tweets mentioning OPOWER.</li>
+  <li>Random selections from the company quote wall.</li>
 </ul>
 
-<p>We&#39;ve been using the dashboard for about an iteration now, and it&#39;s been a big success. It gives everyone (including people outside of engineering) an easy way to see where we are. Since the TV is mounted along one of the main office thoroughfares, people are always stopping to check it out throughout the day.</p>
+<p>We’ve been using the dashboard for about an iteration now, and it’s been a big success. It gives everyone (including people outside of engineering) an easy way to see where we are. Since the TV is mounted along one of the main office thoroughfares, people are always stopping to check it out throughout the day.</p>
 
-<p><img src="/img/engineering_dashboard-300x221.jpg" alt="The OPOWER Engineering Dashboard"></p>
+<p><img src="/img/engineering_dashboard-300x221.jpg" alt="The OPOWER Engineering Dashboard" /></p>
 
-<p>This was one of the most fun things I&#39;ve ever done at work. Looking forward to the next Innovation Day!</p>
+<p>This was one of the most fun things I’ve ever done at work. Looking forward to the next Innovation Day!</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

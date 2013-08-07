@@ -1,90 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Move meetings to move developers</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Move meetings to move developers</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Move meetings to move developers</h2>
-<p class="meta">28 Aug 2009</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>Here&#39;s the scenario:</p>
+                <div class="page-header">
+  <h1>Move meetings to move developers</h1>
+  <p class="meta pull-right">Written on August 28, 2009 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>You cruise in to the office at 8:45, get your coffee, check the reddits, and ignore that email from your parents asking if their computer picked up a virus because McAfee won&#39;t stop popping up a tooltray icon helpfully informing them that they&#39;re totally vulnerable.  Right around 9:15, you get motivated to tackle that 2 point user story for the current iteration.</p>
+<div class="post-content">
+<p>Here’s the scenario:</p>
 
-<p>You head over to the wiki, check out the specs for the requirement, find out what the Trac ticket number is and see if there are any comments with last minute advice or dependencies.  None?  Good. . . let&#39;s get started!</p>
+<p>You cruise in to the office at 8:45, get your coffee, check the reddits, and ignore that email from your parents asking if their computer picked up a virus because McAfee won’t stop popping up a tooltray icon helpfully informing them that they’re totally vulnerable.  Right around 9:15, you get motivated to tackle that 2 point user story for the current iteration.</p>
 
-<p>Oh, huh. . . it&#39;s 9:40.  There&#39;s that all-hands meeting at 10 o&#39;clock.  I <em>could</em> get started, but I&#39;m not really going to get anything done in 20 minutes really....and that link to the <a href="http://www.buzzfeed.com/akdobbins/three-keyboard-cat-moon-shirt">keyboard-cat-three-wolf-t-shirt</a> <em>did</em> look interesting.</p>
+<p>You head over to the wiki, check out the specs for the requirement, find out what the Trac ticket number is and see if there are any comments with last minute advice or dependencies.  None?  Good. . . let’s get started!</p>
 
-<p>The 10 o&#39;clock meeting runs a little long, and then there&#39;s the lunch train, and suddenly it&#39;s the afternoon and you haven&#39;t been in The Zone once.</p>
+<p>Oh, huh… it’s 9:40.  There’s that all-hands meeting at 10 o’clock.  I <em>could</em> get started, but I’m not really going to get anything done in 20 minutes really… and that link to the <a href="http://www.buzzfeed.com/akdobbins/three-keyboard-cat-moon-shirt">keyboard-cat-three-wolf-t-shirt</a> <em>did</em> look interesting.</p>
 
-<p><strong>The Zone</strong></p>
+<p>The 10 o’clock meeting runs a little long, and then there’s the lunch train, and suddenly it’s the afternoon and you haven’t been in The Zone once.</p>
 
-<p>We&#39;ve all been in The Zone - that magical place where time appears to stop and you rock out an insane amount of code in what seems like 10 minutes, but when you look up from your keyboard the sun is down and the cleaning crew is giving you a weird look because you didn&#39;t realize you were trying to sing along to Sigur Ros.</p>
+<h3 id="the-zone">The Zone</h3>
 
-<p>Trying to force yourself into The Zone is like trying to force yourself to see through those <a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">stereograms</a> (hint: it&#39;s always a Schooner).  And as hard as it is to get <em>in</em> The Zone, it&#39;s annoying easily to get <em>out</em> of The Zone.</p>
+<p>We’ve all been in The Zone – that magical place where time appears to stop and you rock out an insane amount of code in what seems like 10 minutes, but when you look up from your keyboard the sun is down and the cleaning crew is giving you a weird look because you didn’t realize you were trying to sing along to Sigur Ros.</p>
 
-<p>There are a lot of recommendations out there to help create &quot;zone-friendly&quot; work places including:</p>
+<p>Trying to force yourself into The Zone is like trying to force yourself to see through those <a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">stereograms</a> (hint: it’s always a Schooner).  And as hard as it is to get <em>in</em> The Zone, it’s annoying easily to get <em>out</em> of The Zone.</p>
+
+<p>There are a lot of recommendations out there to help create “zone-friendly” work places including:</p>
 
 <ul>
-<li><p>separate offices</p></li>
-<li><p>ambient music</p></li>
-<li><p>leaving something intentionally broken the night before to give you that excuse to dive in the next morning</p></li>
-<li><p><a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">shift your tasks to the upper right</a></p></li>
-<li><p><a href="http://www.paulgraham.com/makersschedule.html">Paul Graham&#39;s thoughts</a> on the matter</p></li>
-<li><p>etc. etc.</p></li>
+  <li>separate offices</li>
+  <li>ambient music</li>
+  <li>leaving something intentionally broken the night before to give you that excuse to dive in the next morning</li>
+  <li><a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">shift your tasks to the upper right</a></li>
+  <li><a href="http://www.paulgraham.com/makersschedule.html">Paul Graham’s thoughts</a> on the matter</li>
+  <li>etc. etc.</li>
 </ul>
 
-<p>We were wrapping up our all-hands meeting yesterday when the ever-perceptive Dave noted that our weekly meeting schedules were really not all that Zone-Friendly.  With a couple of exceptions, we had standing meetings along the following schedule:
-<img src="/img/zone_unfriendly.png" alt="Standing Meetings"></p>
+<p>We were wrapping up our all-hands meeting yesterday when the ever-perceptive Dave noted that our weekly meeting schedules were really not all that Zone-Friendly.  With a couple of exceptions, we had standing meetings along the following schedule:</p>
 
-<p>And keep in mind, that&#39;s just the standing meetings, so it&#39;s the bare-minimum one would expect.  Now let&#39;s add some &quot;procrastination shading&quot; to that calendar to demonstrate the actual standing meeting impact:
-<img src="/img/zone_unfriendly_shaded.png" alt="Standing Meetings"></p>
+<p><img src="/img/zone_unfriendly.png" alt="Standing Meetings" /></p>
 
-<p>If we shuffled some meetings around (especially around the meat of the middle of the week), I think we could end up &quot;finding&quot; 2 or 3 hours a week more conducive to The Zone:
-<img src="/img/zone_friendly_shaded.png" alt="Friendly Standing Meetings"></p>
+<p>And keep in mind, that’s just the standing meetings, so it’s the bare-minimum one would expect.  Now let’s add some “procrastination shading” to that calendar to demonstrate the actual standing meeting impact:</p>
 
-<p>Of course, this is an idealized example, but it&#39;s something we&#39;re thinking about and playing with.</p>
+<p><img src="/img/zone_unfriendly_shaded.png" alt="Standing Meetings" /></p>
+
+<p>If we shuffled some meetings around (especially around the meat of the middle of the week), I think we could end up “finding” 2 or 3 hours a week more conducive to The Zone:</p>
+
+<p><img src="/img/zone_friendly_shaded.png" alt="Friendly Standing Meetings" /></p>
+
+<p>Of course, this is an idealized example, but it’s something we’re thinking about and playing with.</p>
 
 <p>What do you guys out there in development land do?  Any recommendations of particular effectiveness?</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

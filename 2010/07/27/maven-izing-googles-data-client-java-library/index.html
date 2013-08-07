@@ -1,161 +1,282 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Maven-izing Google's Data Client Java Library</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Maven-izing Google's Data Client Java Library</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Maven-izing Google's Data Client Java Library</h2>
-<p class="meta">27 Jul 2010</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>OPOWER&#39;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+                <div class="page-header">
+  <h1>Maven-izing Google's Data Client Java Library</h1>
+  <p class="meta pull-right">Written on July 27, 2010 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>Clicking around google&#39;s well-documented &quot;get started&quot; guides, it looked like they haven&#39;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&#39;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&#39;s repo (thereby making them accessible to all our developer&#39;s boxes).</p>
+<div class="post-content">
+<p>OPOWER’s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+
+<p>Clicking around google’s well-documented “get started” guides, it looked like they haven’t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it’d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER’s repo (thereby making them accessible to all our developer’s boxes).</p>
 
 <p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
 
-<ul>
-<li><p>Grab latest JARs from the &quot;gdata-java&quot; link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></p></li>
-<li><p>Unzip on the server hosting your company&#39;s mvn repo</p></li>
-<li><p>cd down in to ./gdata/java/lib</p></li>
-<li><p>Make a file &#39;installall.pl&#39; in that lib directory:</p>
+<ol>
+  <li>Grab latest JARs from the “gdata-java” link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
+  <li>Unzip on the server hosting your company’s mvn repo</li>
+  <li>cd down in to ./gdata/java/lib</li>
+  <li>
+    <p>Make a file ‘installall.pl’ in that lib directory:</p>
 
-<h1>!/usr/bin/perl -w</h1>
+    <pre><code> #!/usr/bin/perl -w
 
-<p>my @jars = <code>ls *.jar</code>;
-chomp(@jars);
-foreach my $jar (@jars) {
-  if($jar =~ /(.*)-(\d.\d).jar/) {
-    my $cmd = &quot;./install.pl --artifactId $1 --version $2 --jar $jar&quot;;
-    open(CMD, &quot;$cmd|&quot;) or die &quot;Could not execute $cmd $!&quot;;
-    while(<CMD>) {
-       print $_;
-    }
-   close(CMD);
-  }
-}</p></li>
-<li><p>Still in that directory, make another file &#39;install.pl&#39;:</p>
+ my @jars = `ls *.jar`;
+ chomp(@jars);
+ foreach my $jar (@jars) {
+   if($jar =~ /(.*)-(\d\.\d)\.jar/) {
+     my $cmd = "./install.pl --artifactId $1 --version $2 --jar $jar";
+     open(CMD, "$cmd|") or die "Could not execute $cmd $!";
+     while(&lt;CMD&gt;) {
+        print $_;
+     }
+    close(CMD);
+   }
+ }
+</code></pre>
+  </li>
+  <li>
+    <p>Still in that directory, make another file <code>install.pl</code>:</p>
 
-<h1>!/usr/bin/perl -w</h1>
+    <pre><code> #!/usr/bin/perl -w
 
-<p>use strict;
-use warnings;
-use Getopt::Long;</p>
+ use strict;
+ use warnings;
+ use Getopt::Long;
 
-<p>sub usage();</p>
+ sub usage();
 
-<p>my $artifactId;
-my $version;
-my $jar;
-GetOptions(&#39;artifactId=s&#39; =&gt; \$artifactId ,
-           &#39;version=s&#39; =&gt; \$version,
-           &#39;jar&#39; =&gt; \$jar);
-die usage() unless ($artifactId &amp;&amp; $version &amp;&amp; $jar);</p>
+ my $artifactId;
+ my $version;
+ my $jar;
+ GetOptions('artifactId=s' =&gt; \$artifactId ,
+            'version=s' =&gt; \$version,
+            'jar' =&gt; \$jar);
+ die usage() unless ($artifactId &amp;&amp; $version &amp;&amp; $jar);
 
-<p>my $cmd = &quot;mvn deploy:deploy-file &quot; .
-      &quot;-DgroupId=com.google.gdata &quot; .
-      &quot;-DartifactId=$artifactId &quot; .
-      &quot;-Dversion=$version &quot; .
-      &quot;-Dfile=$jar &quot; .
-      &quot;-Dpackaging=jar &quot; .
-      &quot;-DgeneratePom=true &quot; .
-      &quot;-Durl=file:///opt/mvn<em>repo &quot; .  &lt;---  change this for your env
-      &quot;-Drepository=opower</em>local&quot;;  &lt;--- change this for your env
-print &quot;executing command = $cmd\n&quot;;
-$cmd = &quot;date&quot;;
-open(CMD, &quot;$cmd|&quot;) or die &quot;Could not exec $cmd $!&quot;;
-while(<CMD>) {
-    print $_;
-}
-close(CMD);</p>
+ my $cmd = "mvn deploy:deploy-file " .
+       "-DgroupId=com.google.gdata " .
+       "-DartifactId=$artifactId " .
+       "-Dversion=$version " .
+       "-Dfile=$jar " .
+       "-Dpackaging=jar " .
+       "-DgeneratePom=true " .
+       "-Durl=file:///opt/mvn_repo " .  &lt;---  change this for your env
+       "-Drepository=opower_local";  &lt;--- change this for your env
+ print "executing command = $cmd\n";
+ $cmd = "date";
+ open(CMD, "$cmd|") or die "Could not exec $cmd $!";
+ while(&lt;CMD&gt;) {
+     print $_;
+ }
+ close(CMD);
 
-<p>sub usage() {
-    print &quot;Usage: ./install.pl [--artifactId artifactId] [--version version] [--jar jarfile]\n&quot;;
-    print &quot;Example: ./install.pl --artifactId gdata-webmastertools --version 1.0 --jar gdata-webmastertools-1.0.jar\n&quot;;
-    exit 1;
-}</p></li>
-<li><p>Don&#39;t forget to chmod 755 *.pl</p></li>
-<li><p>Then just run ./installall.pl and all those google JARs should get installed in your repo</p></li>
-</ul>
+ sub usage() {
+     print "Usage: ./install.pl [--artifactId artifactId] [--version version] [--jar jarfile]\n";
+     print "Example: ./install.pl --artifactId gdata-webmastertools --version 1.0 --jar gdata-webmastertools-1.0.jar\n";
+     exit 1;
+ }
+</code></pre>
+  </li>
+  <li>Don’t forget to <code>chmod 755 *.pl</code></li>
+  <li>Then just run <code>./installall.pl</code> and all those google JARs should get installed in your repo</li>
+</ol>
 
-<p>That assumes the &quot;mvn&quot; executable was in your path and that you run the scripts from within the same directory as all the JARs, but it&#39;s easily modified for whatever your situation may be.</p>
+<p>That assumes the “mvn” executable was in your path and that you run the scripts from within the same directory as all the JARs, but it’s easily modified for whatever your situation may be.</p>
 
-<p>Note that relative to ./lib there are 2 jars in ../deps/ that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
+<p>Note that relative to <code>./lib</code> there are 2 jars in <code>../deps/</code> that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
 
 <p>Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
-&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;&gt;
-  &lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;
-  &lt;artifactId&gt;foo&lt;/artifactId&gt;
-  &lt;packaging&gt;jar&lt;/packaging&gt;
-  &lt;version&gt;1.0.0-SNAPSHOT&lt;/version&gt;
-  &lt;name&gt;Google Client Example&lt;/name&gt;
 
-  &lt;scm&gt;
-    &lt;developerConnection&gt;foo&lt;/developerConnection&gt;
-  &lt;/scm&gt;
-
-  &lt;dependencies&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
-        &lt;artifactId&gt;gdata-core&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
-        &lt;artifactId&gt;gdata-analytics&lt;/artifactId&gt;
-        &lt;version&gt;2.1&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google.gdata&lt;/groupId&gt;
-        &lt;artifactId&gt;gdata-client&lt;/artifactId&gt;
-        &lt;version&gt;1.0&lt;/version&gt;
-    &lt;/dependency&gt;
-    &lt;dependency&gt;
-        &lt;groupId&gt;com.google&lt;/groupId&gt;
-        &lt;artifactId&gt;google-collect&lt;/artifactId&gt;
-        &lt;version&gt;1.0-rc1&lt;/version&gt;
-    &lt;/dependency&gt;
-  &lt;/dependencies&gt;
-&lt;/project&gt;
+<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+  <span class="nt">&lt;artifactId&gt;</span>foo<span class="nt">&lt;/artifactId&gt;</span>
+  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+  <span class="nt">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+  <span class="nt">&lt;name&gt;</span>Google Client Example<span class="nt">&lt;/name&gt;</span>
+    
+  <span class="nt">&lt;scm&gt;</span>
+    <span class="nt">&lt;developerConnection&gt;</span>foo<span class="nt">&lt;/developerConnection&gt;</span>
+  <span class="nt">&lt;/scm&gt;</span>
+    
+  <span class="nt">&lt;dependencies&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-core<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-analytics<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>2.1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>gdata-client<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    <span class="nt">&lt;dependency&gt;</span>
+        <span class="nt">&lt;groupId&gt;</span>com.google<span class="nt">&lt;/groupId&gt;</span>
+        <span class="nt">&lt;artifactId&gt;</span>google-collect<span class="nt">&lt;/artifactId&gt;</span>
+        <span class="nt">&lt;version&gt;</span>1.0-rc1<span class="nt">&lt;/version&gt;</span>
+    <span class="nt">&lt;/dependency&gt;</span>
+    dependencies&gt;
+<span class="nt">&lt;/project&gt;</span>
 </code></pre></div>
+
+
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

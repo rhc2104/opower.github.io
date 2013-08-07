@@ -1,136 +1,170 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Upgrading from Spring 3.0.x to Spring 3.1.x</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Upgrading from Spring 3.0.x to Spring 3.1.x</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Upgrading from Spring 3.0.x to Spring 3.1.x</h2>
-<p class="meta">06 Sep 2012</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&#39;t have a ton of solutions on stackoverflow or the google, so I thought I&#39;d capture some of them here.</p>
+                <div class="page-header">
+  <h1>Upgrading from Spring 3.0.x to Spring 3.1.x</h1>
+  <p class="meta pull-right">Written on September 06, 2012 by tom.vaughan</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>Additionally, it&#39;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
+<div class="post-content">
+<p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn’t have a ton of solutions on stackoverflow or the google, so I thought I’d capture some of them here.</p>
 
-<p><strong>Changes to the org.springframework.jdbc.core.simple package</strong></p>
+<p>Additionally, it’s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
 
-<p>The &#39;.simple&#39; package is deprecated (including the SimpleJdbcTemplate class) and there are two new classes you need to know about as you make the transition:</p>
+<h3 id="changes-to-theorgspringframeworkjdbccoresimple-package">Changes to the org.springframework.jdbc.core.simple package</h3>
 
-<ol>
-<li><p>The org.springframework.jdbc.JdbcTemplate class is a drop-in replacement for the old SimpleJdbcTemplate class, <em>unless you&#39;re using named parameters in your queries.</em></p></li>
-<li><p>If you run SQL queries with named parameters through the JdbcTemplate your code will compile fine but you&#39;ll get odd Serialization exceptions or ArrayIndexOutOfBoundsExceptions.  For named parameter queries, you&#39;ll need to use the org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate.</p></li>
-</ol>
-
-<p>Luckily, the NamedParameterJdbcTemplate wraps the new JdbcTemplate (well, actually the new JdbcOperations) so if you&#39;re like Opower and you&#39;ve got a top level AbstractJdbcDAO class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the NamedParameterJdbcTemplate and you&#39;ll be off to a good start.</p>
-
-<p><strong>Supporting named parameter queries in Spring-3.1.2</strong></p>
-
-<p>One thing to be aware of is a swap in the argument list to the .query() method on the NamedParameterJdbcTemplate that used to work with the SimpleJdbcTemplate.  Note this signature difference between the JdbcTemplate and NamedParameter version isn&#39;t &quot;new&quot; between Spring 3.0 and 3.1, it&#39;s just that you used be able to get away with passing named parameters through the SimpleJdbcTemplate and now you can&#39;t.  As you&#39;re converting to the 3.1 spec, you&#39;ll need to correct for that laziness.</p>
-
-<p>Let&#39;s say you&#39;ve got a SQL query containing named parameters and your code used to happily get by with this call to your SimpleJdbcTemplate&#39;s .query method:</p>
-
-<p><code>
-// SQL query with named parameter ( the :zipCodes)
-String sql = &quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes) &quot;</code></p>
-
-<p><code>// Our row mapper
-RowMapper rowMapper = new ....</code></p>
-
-<p><code>// Our parameter Map for named parameter substitution
-ImmutableMap paramMap = ImmutableMap.of(&quot;zipCodes&quot;, zipCodes);</code></p>
-
-<p><code>List blah = getSimpleJdbcTemplate().query(sql, rowMapper, paramMap);</code></p>
-
-<p>When using the NamedParameterJdbcTemplate in Spring-3.1.2 you&#39;ll need switch the argument order of your rowMapper and your paramMap, e.g:
-<code>
-List blah = getNamedParameterJdbcTemplate().query(sql, paramMap, rowMapper);
-</code></p>
-
-<p>If you don&#39;t make the switch, your call to a JdbcTemplate.query(sql, rowMapper, paramMap) will happily compile because it meets the JdbcTemplate&#39;s method signature of
-<code>
-public  List query(String sql, RowMapper rowMapper, Object... args) throws DataAccessException</code></p>
-
-<p>with the problem being that your rowMapper object gets passed in as the one and only varargs substitution variable to whatever &quot;?&quot; or &quot;:foo&quot; named parameter you may have in your query.  Depending on the query you&#39;re trying to run you&#39;ll get Serialization exceptions or something like this:</p>
-
-<p><code>
-Invalid argument value: java.lang.ArrayIndexOutOfBoundsException; nested exception is java.sql.SQLException: Invalid argument value: java.lang.ArrayIndexOutOfBoundsException
-</code></p>
-
-<p><strong>Spring-Batch 2.x needs Spring 3.0&#39;s deprecated JdbcOperations</strong></p>
-
-<p>If you use Spring Batch&#39;s JdbcJobInstanceDAO (org.springframework.batch.core.repository.dao.JdbcJobInstanceDao) you&#39;ll need to continue to support the deprecated spring-3.0.x SimpleJdbcTemplate because that&#39;s the only class allowed to be set on the JdbcJobInstaceDAO to help it query the DB to look up all the data out of your BATCH_xxx tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
-
-<p><strong>Spring Security&#39;s AccessDecisionVoter became parameterized</strong></p>
-
-<p>We use Spring Security&#39;s AccessDecisionVoter to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:
-<code>
-public class SSOVoter implements AccessDecisionVoter {
-....
-@Override
-public int vote(Authentication authentication, Object object, Collection attributes) {
-// make a decision on authentication based on attributes
-....
-}
-</code></p>
-
-<p>With the parameterization of the AccessDecisionVoter, the new implementation looks like:
-<code>
-public class SSOVoter implements AccessDecisionVoter**&lt;Object&gt;** {
-....
-@Override
-public int vote(Authentication authentication, Object object, Collection attributes) {
-// make a decision on authentication based on attributes
-....
-}
-</code></p>
-
-<p><strong>New abstract method on org.springframework.http.client.ClientHttpResponse</strong></p>
-
-<p>If you use or mock Spring&#39;s ClientHttpResponse object, there&#39;s a new &quot;public int getRawStatusCode() throws IOException&quot; signature you&#39;ve got to implement.  With access to an HttpStatus object, that&#39;s pretty straightforward:
-<code>
-@Override
-public int getRawStatusCode() throws IOException {
-return this.httpStatus.value();
-}
-</code></p>
-
-<p><strong>Pay attention to your spring context XSD versions</strong></p>
-
-<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn&#39;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &quot;spring security tag 3.0 library incompatible with class ... blah&quot; make sure:</p>
+<p>The ‘.simple’ package is deprecated (including the <code>SimpleJdbcTemplate</code> class) and there are two new classes you need to know about as you make the transition:</p>
 
 <ol>
-<li><p>your spring context&#39;s XSD is pointing to http://www.springframework.org/schema/security/spring-security-3.1.xsd</p></li>
-<li><p>your mvn dependency:tree is pulling in spring-security-3.1</p></li>
+  <li>The <code>org.springframework.jdbc.JdbcTemplate</code> class is a drop-in replacement for the old <code>SimpleJdbcTemplate</code> class, <em>unless you’re using named parameters in your queries.</em></li>
+  <li>If you run SQL queries with named parameters through the <code>JdbcTemplate</code> your code will compile fine but you’ll get odd <code>Serialization</code> exceptions or <code>ArrayIndexOutOfBoundsExceptions</code>.  For named parameter queries, you’ll need to use the <code>org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate</code>.</li>
 </ol>
 
-<p><strong>Spring 3.1 Security&#39;s Taglib has a package change.</strong></p>
+<p>Luckily, the <code>NamedParameterJdbcTemplate</code> wraps the new <code>JdbcTemplate</code> (well, actually the new <code>JdbcOperations</code>) so if you’re like Opower and you’ve got a top level <code>AbstractJdbcDAO</code> class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the <code>NamedParameterJdbcTemplate</code> and you’ll be off to a good start.</p>
 
-<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at &quot;TemplateModelException: Could not load taglib information&quot; and ending at &quot;Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag&quot;.  The AuthorizeTag class has been renamed to &quot;JspAuthorizeTag&quot;, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring&#39;s fisheye site (google search for &quot;spring security.tld 3.1&quot;).</p>
+<h3 id="supporting-named-parameter-queries-in-spring-312">Supporting named parameter queries in Spring-3.1.2</h3>
 
-<p>**
-Spring 3.1 may mean an update to your OAuth dependency**</p>
+<p>One thing to be aware of is a swap in the argument list to the <code>.query()</code> method on the <code>NamedParameterJdbcTemplate</code> that used to work with the <code>SimpleJdbcTemplate</code>.  Note this signature difference between the <code>JdbcTemplate</code> and <code>NamedParameter</code> version isn’t “new” between Spring 3.0 and 3.1, it’s just that you used be able to get away with passing named parameters through the <code>SimpleJdbcTemplate</code> and now you can’t.  As you’re converting to the 3.1 spec, you’ll need to correct for that laziness.</p>
 
-<p>Several of Opower&#39;s web apps leverages OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you&#39;re using ant-style filter chain maps in your FilterChainProxy.  For example, one of our securityContext.xml files contained this snippet:
-<code>
-xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
+<p>Let’s say you’ve got a SQL query containing named parameters and your code used to happily get by with this call to your <code>SimpleJdbcTemplate</code>’s <code>.query</code> method:</p>
+
+<div class="highlight"><pre><code class="java"><span class="c1">// SQL query with named parameter ( the :zipCodes)</span>
+<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes)&quot;</span>
+
+<span class="c1">// Our row mapper</span>
+<span class="n">RowMapper</span> <span class="n">rowMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="o">...</span>
+
+<span class="c1">// Our parameter Map for named parameter substitution</span>
+<span class="n">ImmutableMap</span> <span class="n">paramMap</span> <span class="o">=</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;zipCodes&quot;</span><span class="o">,</span> <span class="n">zipCodes</span><span class="o">);</span>
+
+<span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getSimpleJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">);</span>
+</code></pre></div>
+
+<p>When using the <code>NamedParameterJdbcTemplate</code> in Spring-3.1.2 you’ll need switch the argument order of your <code>rowMapper</code> and your <code>paramMap</code>, e.g:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getNamedParameterJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">);</span>
+</code></pre></div>
+
+<p>If you don’t make the switch, your call to a <code>JdbcTemplate.query(sql, rowMapper, paramMap)</code> will happily compile because it meets the <code>JdbcTemplate</code>’s method signature of</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span>  <span class="n">List</span> <span class="nf">query</span><span class="o">(</span><span class="n">String</span> <span class="n">sql</span><span class="o">,</span> <span class="n">RowMapper</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span>
+    <span class="kd">throws</span> <span class="n">DataAccessException</span>
+</code></pre></div>
+
+<p>with the problem being that your <code>rowMapper</code> object gets passed in as the one and only varargs substitution variable to whatever “?” or “:foo” named parameter you may have in your query.  Depending on the query you’re trying to run you’ll get Serialization exceptions or something like this:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">;</span>
+    <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">SQLException</span><span class="o">:</span>
+        <span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span>
+</code></pre></div>
+
+<h3 id="spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations">Spring-Batch 2.x needs Spring 3.0’s deprecated JdbcOperations</h3>
+
+<p>If you use Spring Batch’s <code>org.springframework.batch.core.repository.dao.JdbcJobInstanceDao</code> you’ll need to continue to support the deprecated spring-3.0.x <code>SimpleJdbcTemplate</code> because that’s the only class allowed to be set on the <code>JdbcJobInstaceDAO</code> to help it query the DB to look up all the data out of your <code>BATCH_xxx</code> tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
+
+<h3 id="spring-securitys-accessdecisionvoter-became-parameterized">Spring Security’s AccessDecisionVoter became parameterized</h3>
+
+<p>We use Spring Security’s <code>AccessDecisionVoter</code> to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span> <span class="o">{</span>
+<span class="o">...</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// make a decision on authentication based on attributes</span>
+<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>With the parameterization of the <code>AccessDecisionVoter</code>, the new implementation looks like:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="o">{</span>
+<span class="o">...</span>
+<span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
+    <span class="c1">// make a decision on authentication based on attributes</span>
+<span class="o">...</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="new-abstract-method-onorgspringframeworkhttpclientclienthttpresponse">New abstract method on org.springframework.http.client.ClientHttpResponse</h3>
+
+<p>If you use or mock Spring’s <code>ClientHttpResponse</code> object, there’s a new <code>public int getRawStatusCode() throws IOException</code> signature you’ve got to implement.  With access to an <code>HttpStatus</code> object, that’s pretty straightforward:</p>
+
+<div class="highlight"><pre><code class="java"><span class="nd">@Override</span>
+<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRawStatusCode</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">httpStatus</span><span class="o">.</span><span class="na">value</span><span class="o">();</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<h3 id="pay-attention-to-your-spring-context-xsd-versions">Pay attention to your spring context XSD versions</h3>
+
+<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn’t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like “spring security tag 3.0 library incompatible with class … blah” make sure:</p>
+
+<ol>
+  <li>your spring context’s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
+  <li>your mvn dependency:tree is pulling in spring-security-3.1</li>
+</ol>
+
+<h3 id="spring-31-securitys-taglib-has-a-package-change">Spring 3.1 Security’s Taglib has a package change.</h3>
+
+<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at “TemplateModelException: Could not load taglib information” and ending at “Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag”.  The AuthorizeTag class has been renamed to “JspAuthorizeTag”, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring’s fisheye site (google search for “spring security.tld 3.1”).</p>
+
+<h3 id="spring-31-may-mean-an-update-to-your-oauth-dependency">Spring 3.1 may mean an update to your OAuth dependency</h3>
+
+<p>Several of Opower’s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you’re using ant-style filter chain maps in your <code>FilterChainProxy</code>.  For example, one of our <code>securityContext.xml</code> files contained this snippet:</p>
+
+<div class="highlight"><pre><code class="xml">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
 http://www.springframework.org/schema/security
 http://www.springframework.org/schema/security/spring-security-3.1.xsd
@@ -138,34 +172,114 @@ http://www.springframework.org/schema/security/oauth
 http://www.springframework.org/schema/security/spring-security-oauth.xsd&quot;
 default-autowire=&quot;byName&quot;&gt;
 ...snip...
-&lt;bean id=&quot;filterChainProxy&quot; class=&quot;org.springframework.security.web.FilterChainProxy&quot;&gt;
-&lt;sec:filter-chain-map path-type=&quot;ant&quot;&gt;
-....snip...
-</code></p>
+  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;filterChainProxy&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.security.web.FilterChainProxy&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;sec:filter-chain-map</span> <span class="na">path-type=</span><span class="s">&quot;ant&quot;</span><span class="nt">&gt;</span>
+...snip...
+</code></pre></div>
 
-<p>When spinning up that context, I&#39;d get an error java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.  Sure enough, there was no AntUrlPathMatcher in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
+<p>When spinning up that context, I’d get an error: “java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.”  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
 
-<p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the ProtectedResourceProcessingFilter class ended up moving from org.springframework.security.oauth.provider to org.springframework.security.oauth.provider.filter).</p>
+<p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

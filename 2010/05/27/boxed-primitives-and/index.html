@@ -1,121 +1,244 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Boxed primitives and ==</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Boxed primitives and ==</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Boxed primitives and ==</h2>
-<p class="meta">27 May 2010</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &quot;Person 1001&#39;s customer id 109032 didn&#39;t match the passed-in customer&#39;s id of 109032&quot; seemed logically impossible, but was somehow true.</p>
+                <div class="page-header">
+  <h1>Boxed primitives and ==</h1>
+  <p class="meta pull-right">Written on May 27, 2010 by dave.copeland</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>But first, let&#39;s talk about defensive coding and how we do it.  For example:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
- * frobs the bar and baz.
- * @param bar the bar to frob; may not be null
- * @param baz the baz to from; must be positive
- */
-public String frob(String bar, int baz) {
-  if (bar.length() &gt; baz) {
-    return bar.substring(baz);
-  }
-  else {
-    return bar;
-  }
-}
+<div class="post-content">
+<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of “Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032” seemed logically impossible, but was somehow true.</p>
+
+<p>But first, let’s talk about defensive coding and how we do it.  For example:</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
+<span class="cm"> * frobs the bar and baz.</span>
+<span class="cm"> * @param bar the bar to frob; may not be null</span>
+<span class="cm"> * @param baz the baz to from; must be positive</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
-<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there&#39;s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">/**
- * frobs the bar and baz.
- * @param bar the bar to frob; may not be null
- * @param baz the baz to from; must be positive
- */
-public String frob(String bar, int baz) {
-  Validate.notNull(bar,&quot;bar must not be null to frob&quot;);
-  Validate.isTrue(baz &gt; 0,&quot;baz must be positive&quot;);
-  if (bar.length() &gt; baz) {
-    return bar.substring(baz);
-  }
-  else {
-    return bar;
-  }
-}
+
+<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there’s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
+
+<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
+<span class="cm"> * frobs the bar and baz.</span>
+<span class="cm"> * @param bar the bar to frob; may not be null</span>
+<span class="cm"> * @param baz the baz to from; must be positive</span>
+<span class="cm"> */</span>
+<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span><span class="s">&quot;bar must not be null to frob&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">baz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span><span class="s">&quot;baz must be positive&quot;</span><span class="o">);</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
+  <span class="o">}</span>
+  <span class="k">else</span> <span class="o">{</span>
+    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
+  <span class="o">}</span>
+<span class="o">}</span>
 </code></pre></div>
+
 <p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
-We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>&#39;s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">public PersonAndCustomer(Person p, Customer c) {
-  Validate.notNull(p,&quot;Person may not be null&quot;);
-  Validate.notNull(c,&quot;Customer may not be null&quot;);
-  Validate.isTrue(p.getCustomerId() == c.getId(),
-    &quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;,
-    p.getId(),
-    p.getCustomerId(),
-    c.getId());
-  ...
-}
-</code></pre></div>
-<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person&#39;s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer&#39;s <code>id</code> object.  What&#39;s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
+We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>’s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
 
-<p>Until this week; we were testing our application for a new client and I got the error posted above (&quot;Person 1001&#39;s customer id 109032 didn&#39;t match the passed-in customer&#39;s id of 109032&quot;).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">public PersonAndCustomer(Person p, Customer c) {
-  Validate.notNull(p,&quot;Person may not be null&quot;);
-  Validate.notNull(c,&quot;Customer may not be null&quot;);
-  Validate.isTrue(p.getCustomerId().equals(c.getId()),
-    &quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;,
-    p.getId(),
-    p.getCustomerId(),
-    c.getId());
-  ...
-}
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
+    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+  <span class="o">...</span>
+<span class="o">}</span>
 </code></pre></div>
-<p>What&#39;s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Long l1 = new Long(45L);
-Long l2 = new Long(45L);
 
-System.out.println(l1 == l2);      // false
-System.out.println(l1.equals(l2)); // true
-System.out.println(l1 == 45L);     // true!
+<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person’s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer’s <code>id</code> object.  What’s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
+
+<p>Until this week; we were testing our application for a new client and I got the error posted above (“Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032”).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
+
+<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
+  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">()),</span>
+    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
+    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
+    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
+  <span class="o">...</span>
+<span class="o">}</span>
 </code></pre></div>
+
+<p>What’s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
+
+<div class="highlight"><pre><code class="java"><span class="n">Long</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
+<span class="n">Long</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
+
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span><span class="o">);</span>      <span class="c1">// false</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">l2</span><span class="o">));</span> <span class="c1">// true</span>
+<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="mi">45L</span><span class="o">);</span>     <span class="c1">// true!</span>
+</code></pre></div>
+
 <p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
+
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

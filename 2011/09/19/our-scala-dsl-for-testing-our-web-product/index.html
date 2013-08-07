@@ -1,105 +1,272 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Our Scala DSL for testing our web product</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Our Scala DSL for testing our web product</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Our Scala DSL for testing our web product</h2>
-<p class="meta">19 Sep 2011</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>This is actually a fairly old bit of tech for us, but I&#39;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&#39;s DSL Book</a>, and thought it might be good to talk about what we&#39;ve done.</p>
+                <div class="page-header">
+  <h1>Our Scala DSL for testing our web product</h1>
+  <p class="meta pull-right">Written on September 19, 2011 by dave.copeland</p>
+  <div class="clearfix"></div>
+</div>
 
-<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&#39;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&#39;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
+<div class="post-content">
+<p>This is actually a fairly old bit of tech for us, but I’ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler’s DSL Book</a>, and thought it might be good to talk about what we’ve done.</p>
 
-<h2>The domain of application: its architecture</h2>
+<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL’s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we’re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
 
-<p>To understand how it works, you need to understand how the apppilcation is architected.  While it&#39;s a Spring MVC web app, in the general sense, there&#39;s a lot more convention around how it&#39;s built.  If you&#39;ve used a &quot;web framework&quot; like Spring MVC, you know that it&#39;s really a giant library for responding to HTTP requests at its core, and that it&#39;s not very opinionated; it&#39;s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn&#39;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
+<h3 id="the-domain-of-application-its-architecture">The domain of application: its architecture</h3>
 
-<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &quot;Hi, Dave!&quot; in the upper corner; that &quot;Hi, Dave&quot; would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what&#39;s needed to configure the modules on the page. All stateful information (e.g. &quot;who&#39;s logged in?&quot;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
+<p>To understand how it works, you need to understand how the apppilcation is architected.  While it’s a Spring MVC web app, in the general sense, there’s a lot more convention around how it’s built.  If you’ve used a “web framework” like Spring MVC, you know that it’s really a giant library for responding to HTTP requests at its core, and that it’s not very opinionated; it’s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn’t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
+
+<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say “Hi, Dave!” in the upper corner; that “Hi, Dave” would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what’s needed to configure the modules on the page. All stateful information (e.g. “who’s logged in?”) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
 
 <p>This is all glued together via a souped-up version of a <code>&lt;jsp:include&gt;</code> tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.</p>
 
-<h2>Testing with Scala</h2>
+<h3 id="testing-with-scala">Testing with Scala</h3>
 
-<p>Which brings us to our DSL for testing this stuff.  Essentially, a module&#39;s url can be requested and tested independently of any page; we don&#39;t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module&#39;s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
+<p>Which brings us to our DSL for testing this stuff.  Essentially, a module’s url can be requested and tested independently of any page; we don’t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module’s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
 
-<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&#39;s consider a module that renders a person&#39;s most recent bill.  Suppose we have two views of this module; in the &quot;large&quot; view, we want to see the bill&#39;s cost, KWh used, and an account number.  In the &quot;small&quot; view (that we might use on a dashboard page), we want to see just the bill&#39;s cost.  How might we test this?</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">resource for bill 34 from customer 123:
+<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let’s consider a module that renders a person’s most recent bill.  Suppose we have two views of this module; in the “large” view, we want to see the bill’s cost, KWh used, and an account number.  In the “small” view (that we might use on a dashboard page), we want to see just the bill’s cost.  How might we test this?</p>
+
+<pre><code>resource for bill 34 from customer 123:
   requires login as customer 123
-  contains &quot;45.67&quot; as the cost
-  has a view &quot;small&quot;
-  has a view &quot;large&quot;
-    that contains &quot;156&quot; as the kwh
-    that contains &quot;655321&quot; as the account number
-</code></pre></div>
+  contains "45.67" as the cost
+  has a view "small"
+  has a view "large"
+    that contains "156" as the kwh
+    that contains "655321" as the account number
+</code></pre>
+
 <p>I decided I wanted to write this in code, and have it work.  Not having time to write a parser (or invent a new language), I decided an internal DSL would be the way to go, and that Scala would let me get as close as possible to this:</p>
+
+<div class="highlight"><pre><code class="scala"><span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/123/bill/34&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="mi">123</span><span class="o">))</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
+  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;156&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
+    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;655321&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
 
 <p>This code creates several data structures that our test can now walk.  Essentially, what this will test:</p>
 
 <ul>
-<li><p>That accessing the url without being logged in gets an error</p></li>
-<li><p>That, once logged in, requesting a view named &quot;small&quot; will not generate an error</p></li>
-<li><p>That, once logged in, requesting a view named &quot;large&quot; will not generate an error</p></li>
-<li><p>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</p></li>
-<li><p>That both views contain a div with the id price that contains the text &quot;45.67&quot;</p></li>
-<li><p>That the &quot;large&quot; view also contains a div with id kwh that contains &quot;156&quot; <strong>and</strong> a div with id &quot;accountNumber&quot; that contains &quot;655321&quot;</p></li>
+  <li>That accessing the url without being logged in gets an error</li>
+  <li>That, once logged in, requesting a view named “small” will not generate an error</li>
+  <li>That, once logged in, requesting a view named “large” will not generate an error</li>
+  <li>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</li>
+  <li>That both views contain a div with the id price that contains the text “45.67”</li>
+  <li>That the “large” view also contains a div with id kwh that contains “156” <strong>and</strong> a div with id “accountNumber” that contains “655321”</li>
 </ul>
 
-<h2>Getting fancy</h2>
+<h3 id="getting-fancy">Getting fancy</h3>
 
 <p>Since this is just Scala code, you can use this to do more sophisitcated things:</p>
 
-<p>I don&#39;t know if the developers are totally in love with this DSL, but there&#39;s so much you get for free, I&#39;m certain they&#39;d hate testing that by hand even more (or, worse, simply not test some of these things):</p>
+<div class="highlight"><pre><code class="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> 
+                <span class="n">kwh</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
+                <span class="n">accountNumber</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
+
+<span class="nc">Map</span><span class="o">(</span>
+<span class="s">&quot;123&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">34</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">),</span>
+                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
+                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
+<span class="s">&quot;876&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">45</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
+                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
+                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
+<span class="s">&quot;4565&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">86</span><span class="o">,</span><span class="nc">None</span><span class="o">)</span>
+<span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">customerId</span><span class="o">,</span><span class="n">testData</span><span class="o">)</span> <span class="k">=&gt;</span> 
+
+  <span class="k">val</span> <span class="n">billId</span><span class="o">,</span><span class="n">bill</span> <span class="k">=</span> <span class="n">testData</span>
+
+  <span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/&quot;</span> <span class="o">+</span> <span class="n">customerId</span> <span class="o">+</span> <span class="s">&quot;/bill/&quot;</span> <span class="o">+</span> <span class="n">billId</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
+    <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="n">customerId</span><span class="o">))</span>
+
+    <span class="n">bill</span> <span class="k">match</span> <span class="o">{</span>
+      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">bill</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="n">bill</span><span class="o">.</span><span class="n">cost</span> <span class="k">match</span> <span class="o">{</span>
+          <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">cost</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">cost</span><span class="o">).</span>
+                                      <span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+          <span class="k">case</span> <span class="nc">None</span>       <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">shouldNotContainElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
+                                      <span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
+        <span class="o">}</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span> 
+          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">kwh</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
+          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">accountNumber</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
+                                            <span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
+        <span class="o">}</span>
+      <span class="o">}</span>
+      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="o">{</span>
+        <span class="n">resource</span><span class="o">.</span><span class="n">containsElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;noBill&quot;</span><span class="o">)</span>
+      <span class="o">}</span>
+    <span class="o">}</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div>
+
+<p>I don’t know if the developers are totally in love with this DSL, but there’s so much you get for free, I’m certain they’d hate testing that by hand even more (or, worse, simply not test some of these things):</p>
 
 <ul>
-<li><p>You never have to remember to check for authentication requirements</p></li>
-<li><p>You never have to remember to check for missing message properties</p></li>
-<li><p>You can dynamically generates tests via test-data (as demonstrated above)</p></li>
-<li><p>Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.</p></li>
+  <li>You never have to remember to check for authentication requirements</li>
+  <li>You never have to remember to check for missing message properties</li>
+  <li>You can dynamically generates tests via test-data (as demonstrated above)</li>
+  <li>Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.</li>
 </ul>
 
-<p>Of course, this DSL is entirely useless to anyone but our web team.  It&#39;s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn&#39;t have to make the ultimate web-based tesitng DSL; just one that worked for our product.</p>
+<p>Of course, this DSL is entirely useless to anyone but our web team.  It’s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn’t have to make the ultimate web-based tesitng DSL; just one that worked for our product.</p>
 
-<p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don&#39;t be afraid to use Scala for this; it&#39;s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala&#39;s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
+<p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don’t be afraid to use Scala for this; it’s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala’s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

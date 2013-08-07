@@ -1,64 +1,177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Measuring our awesomeness iteration by iteration</title>
-        <meta name="viewport" content="width=device-width">
+        <meta name="description" content="Opower Engineering Blog">
+        <meta name="author" content="Opower's Engineering Team">
+
+        <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
+
+        <title>Opower | Measuring our awesomeness iteration by iteration</title>
+
+        <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
 
         <!-- syntax highlighting CSS -->
         <link rel="stylesheet" href="/css/syntax.css">
 
+        <!-- Pluggy Font -->
+        <link rel="stylesheet" href="/css/pluggyfont.css">
+
         <!-- Custom CSS -->
-        <link rel="stylesheet" href="/css/main.css">
+        <link rel="stylesheet" href="/css/custom.css">
 
     </head>
+
     <body>
 
-        <div class="container">
-          <div class="site">
-            <div class="header">
-              <h1 class="title"><a href="/">Opower Engineering Blog</a></h1>
-              <a class="extra" href="/">home</a>
+    <!-- Wraps page content to push the footer down -->
+    <div id="wrap">
+
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">OP<b>O</b>WER</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/archive.html">Archive</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
             </div>
+        </div>
 
-                <h2>Measuring our awesomeness iteration by iteration</h2>
-<p class="meta">19 Aug 2009</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
 
-<div class="post">
-<p>Like a lot of startups (and big companies!) we use iterative development: we break up our work into &quot;stories&quot; describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)</p>
+                <div class="page-header">
+  <h1>Measuring our awesomeness iteration by iteration</h1>
+  <p class="meta pull-right">Written on August 19, 2009 by dave.copeland</p>
+  <div class="clearfix"></div>
+</div>
+
+<div class="post-content">
+<p>Like a lot of startups (and big companies!) we use iterative development: we break up our work into “stories” describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)</p>
 
 <p>The easiest way to do that is to look at the bugs our QA staff find in the product updates.  Although we have a lot of automated tests, we still need some eyes on the applications to check for things like text overruns of our printed reports, or JavaScript weirdness in some <a href="http://blog.digg.com/?p=878">less-than-well-behaved</a>) browsers.</p>
 
-<p>After a few iterations, Anh (our beloved program manager) ran some queries on our bug-tracking database and, using some Excel magic, showed us numbers like &quot;number of defects in the web application&quot; and &quot;average number of days a critical bug sat unassigned&quot;.  This is good stuff; seeing hard data about what we&#39;re doing lets us focus on inefficiency.  Since we release software every month (and launch new clients almost as frequently), this is a <strong>huge</strong> help in making each iteration better than the previous.</p>
+<p>After a few iterations, Anh (our beloved program manager) ran some queries on our bug-tracking database and, using some Excel magic, showed us numbers like “number of defects in the web application” and “average number of days a critical bug sat unassigned”.  This is good stuff; seeing hard data about what we’re doing lets us focus on inefficiency.  Since we release software every month (and launch new clients almost as frequently), this is a <strong>huge</strong> help in making each iteration better than the previous.</p>
 
-<p>While Anh&#39;s hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using <a href="http://www.sinatrarb.com/">Sinatra</a> to automate most of what we&#39;d like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we&#39;re fixing and even the <em>root source</em> of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) </p>
+<p>While Anh’s hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using <a href="http://www.sinatrarb.com/">Sinatra</a> to automate most of what we’d like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we’re fixing and even the <em>root source</em> of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) </p>
 
-<p>We still need to show trends, however.  &quot;Classic&quot; thinking in software process improvement says to do that by dividing everything by lines of code; if we had 10 defects per 1,000 lines of code this month, but only 8 the following, we&#39;re doing better.  This is not a great measure for us, since we are changing and enhancing our product (as opposed to writing fresh code each time), so we decided to normalize our measurements by the story points we assigned to the iteration.  This way, we can see charts like the one below (which says we are doing better each time):</p>
+<p>We still need to show trends, however.  “Classic” thinking in software process improvement says to do that by dividing everything by lines of code; if we had 10 defects per 1,000 lines of code this month, but only 8 the following, we’re doing better.  This is not a great measure for us, since we are changing and enhancing our product (as opposed to writing fresh code each time), so we decided to normalize our measurements by the story points we assigned to the iteration.  This way, we can see charts like the one below (which says we are doing better each time):</p>
 
-<p><img src="/img/MetricsChart.png" alt="Metrics Chart"></p>
+<p><img src="/img/MetricsChart.png" alt="Metrics Chart" /></p>
 
-<p>This information is dead simple to collect; the burden on developers and testers when writing defects is almost nothing.  With only a priority, severity, and &quot;source of defect&quot;, we can collect a lot of advanced information about our development process -- and make it better iteration by iteration.</p>
+<p>This information is dead simple to collect; the burden on developers and testers when writing defects is almost nothing.  With only a priority, severity, and “source of defect”, we can collect a lot of advanced information about our development process – and make it better iteration by iteration.</p>
+
 
 </div>
 
 
-            <div class="footer">
-              <div class="contact">
-                <p>
-                  Opower<br />
-                  Energy Efficiency<br />
-                </p>
-              </div>
-              <div class="contact">
-                <p>
-                  <a href="http://github.com/opower/">github.com/opower</a><br />
-                  <a href="http://twitter.com/opower/">twitter.com/opower</a><br />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div> <!-- /container -->
+                </div>
+                <div class="sidebar col-lg-4">
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Opower Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/elroi">elroi</a></h4>
+                                <div class="description">A JavaScript charting &amp; graphing</div>
+                                <div class="stats">
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on August 2, 2013</div>
+                                    <div class="forks">11 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/sensu-metrics-relay">sensu-metrics-relay</a></h4>
+                                <div class="description">WizardVan: A Sensu Metrics Relay</div>
+                                <div class="stats">
+                                    <div class="language">null</div>
+                                    <div class="updatedon">Updated on July 30, 2013</div>
+                                    <div class="forks">0 forks</div>
+                                    <div class="watchers">0 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/opower/jpile">jpile</a></h4>
+                                <div class="description">Java Persistence Infile LoadEr</div>
+                                <div class="stats">
+                                    <div class="language">Java</div>
+                                    <div class="updatedon">Updated on July 31, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">7 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                    <div class="panel">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Personal Projects</h3>
+                        </div>
+                        <!-- TODO: Construct this list with live data from the Github API -->
+                        <ul class="list-group">
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/dylang/shortid">shortid</a></h4>
+                                <div class="description">Short id generator. Url-friendly. Non-predictable. Cluster-compatible.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/dylang">Dylan Greene</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 20, 2013</div>
+                                    <div class="forks">9 forks</div>
+                                    <div class="watchers">4 watchers</div>
+                                </div>
+                            </li>
+                            <li class="project list-group-item">
+                                <h4><a href="https://github.com/seancolyer/gmail-crypt">gmail-crypt</a></h4>
+                                <div class="description">An OpenPGP browser (currently Chrome) extension that integrates tightly with Gmail and does encryption/decryption via Javascript.</div>
+                                <div class="stats">
+                                    <div class="author"><a href="https://github.com/seancolyer">Sean Colyer</a></div>
+                                    <div class="language">JavaScript</div>
+                                    <div class="updatedon">Updated on July 14, 2013</div>
+                                    <div class="forks">7 forks</div>
+                                    <div class="watchers">18 watchers</div>
+                                </div>
+                            </li>
+                        </ul> <!-- /.list-group -->
+                    </div> <!-- /.panel -->
+                </div>
 
-    </body>
+            </div>
+        </div><!-- /.container -->
+
+    </div><!-- /#wrap -->
+
+    <div id="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    &copy; 2013 <a href="http://opower.com">Opower</a> &reg;
+                    All content represents the opinion of the author and does not represent Opower.<br/>
+                    <a href="http://opower.com/company/privacy-policy/">Privacy</a> :
+                    <a href="http://opower.com/company/terms/">Terms</a>
+                </div>
+                <div class="col-lg-6">
+                    <ul class="pull-right">
+                        <li><a href="http://github.com/opower">Github</a></li>
+                        <li><a href="http://twitter.com/opower">Twitter</a></li>
+                        <li><a href="http://www.linkedin.com/company/opower">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

@@ -1,0 +1,94 @@
+html,
+body {
+    height: 100%;
+    /* The html and body elements cannot have any padding or margin for the
+     * sticky footer to work. */
+}
+
+body {
+  background-color: #187ec0;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #187ec0;
+  color: #fff;
+  font-size: 75%;
+}
+
+#footer .container {
+  padding-top: 20px;
+}
+
+#footer a {
+  color: #fff;
+}
+
+#footer ul li {
+  display: inline;
+  margin-left: 10px;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+#wrap > .container {
+  padding: 60px 15px 0;
+  background-color: #fff;
+}
+
+.sidebar {
+  margin-top: 20px;
+}
+
+.gallery .row {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.navbar {
+  background-color: #187ec0;
+  color: #fff;
+}
+
+.navbar-inverse .navbar-brand,
+.navbar-inverse .navbar-nav>li>a {
+  color: #fff;
+}
+
+.navbar a.navbar-brand {
+  font-size: 200%;
+}
+
+.navbar a.navbar-brand b {
+  font-size: 75%;
+  font-family: "pluggy";
+}
+
+/* Make sure the list group within a panel does not duplicate the border */
+.panel .list-group-item {
+  border: none;
+}
+
+.project {
+  font-size: 75%;
+}
