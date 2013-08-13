@@ -7,6 +7,114 @@
         <atom:link href="http://opower.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>The Story of the Big Data Elders</title>
+            <description>&lt;p&gt;There was a time, not so long ago, when everything was dark. Everything was 
+dark except for a few rapidly moving glyphs that none could really understand. 
+None could understand except for a few elders who had spent months of studying.  &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Terminals, tiny fonts, hadoop command lines and hbase scans.&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;The elders were wise but, in their learnings, they forgot what it was like to 
+&lt;em&gt;not&lt;/em&gt; understand. They had forgotten what it was like before they finally 
+developed the ability to decipher it. &lt;/p&gt;
+
+&lt;p&gt;So it was in much frustration that they tried to share with the villagers the
+meanings of these cryptic glyphs. They waved their hands, talked slowly and in
+exhaustive details about what they saw. But the villagers weren’t seeing. 
+Nothing would do. They would stare in the darkness, not seeing the glyphs,
+not  interested. They would then stand up and walk away not knowing what they had been looking at.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;It’s just hard to show Big Data to the non-initiated in a compelling way.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The elders, sitting on their stools, wondered how they could get the villagers 
+interested. How could they ignite the fire of curiosity so that they too would 
+want to learn about these great things?&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;This might have happened on &lt;a href=&quot;http://campfirenow.com/&quot;&gt;campfire&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
+
+&lt;p&gt;One elder who had a funny accent was listening but didn’t say a word.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;That’s me, I’m a &lt;strong&gt;Québécois&lt;/strong&gt;&lt;/em&gt;.    &lt;/p&gt;
+
+&lt;p&gt;The next morning, when everyone was busy working, he said&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Dear friends, I have listened to you and I have a plan.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“I will make them interested if you give me your full trust and support.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;A 4 story point JIRA ticket.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;The others elders looked at him, puzzled. &lt;/p&gt;
+
+&lt;p&gt;They all offered their trust and the strange one told them what his plan was:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“I will first build the tools that will record all of what is happening.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;Such as a java command-line tool that polls the jobtracker for job progress&lt;/em&gt;
+&lt;em&gt;as well as counters + another one that polls and records the table sizes.&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“I will then summon the gods to make it rain the heaviest rain while the 
+tools record the history.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;A full test workflow executed via our runner runs while the tools record data&lt;/em&gt;
+&lt;em&gt;about it.&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“When the rain stops, I will gather the fruits from the tools and I will 
+arrange a grandiose spectacle.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;A d3 visual animation of the jobs running overlaid with bars showing the&lt;/em&gt;
+&lt;em&gt;tables growing as the map/reduce jobs progress.&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Finally, he added&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“The villagers will gather on the afternoon of the last Tuesday of the 6th 
+month to attend a showing of this majestic production.”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;em&gt;A video montage adding some jest to the whole extravaganza.&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;The elders cheered, albeit slightly skeptical at first. &lt;/p&gt;
+
+&lt;p&gt;After 7 days of uninterrupted work, it was ready. The elders and the villagers 
+gathered around the stage where everything was ready for all eyes to see. The 
+strange one was absent but the elders proceeded, both anxious and excited. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Demo day was on June 25th but I was on vacation so the team had to present&lt;/em&gt;
+&lt;em&gt;the video.&lt;/em&gt; &lt;/p&gt;
+
+&lt;p&gt;When the beautiful bright sight started before their eyes, the villages stood 
+silent. The elders watched as everyone was all ears, eyes wide open seemingly
+seeing for the first time what this was all about. They did not understand it 
+immediately. They couldn’t have. But when this was done, they asked to watch 
+it again. They reached to the elders to learn more about what it was that they 
+had seen. Some stayed and got interested enough to learn some of the glyphs. 
+The villagers talked for a while and came back to the elders with a reward. &lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;People were genuinely entertained, some people asked questions and some might&lt;/em&gt;
+&lt;em&gt;now think that this thing they weren’t sure what it was about looks pretty&lt;/em&gt;
+&lt;em&gt;interesting.&lt;/em&gt;  &lt;/p&gt;
+
+&lt;p&gt;And so, it started…&lt;/p&gt;
+
+&lt;iframe width=&quot;600&quot; height=&quot;337&quot; src=&quot;http://player.vimeo.com/video/70606335&quot; frameborder=&quot;0&quot; webkitallowfullscreen=&quot;&quot; mozallowfullscreen=&quot;&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
+</description>
+            <pubDate>Sun, 07 Jul 2013 00:00:00 -0700</pubDate>
+            <link>http://opower.github.io/2013/07/07/the-story-of-the-big-data-elders</link>
+            <guid isPermaLink="true">http://opower.github.io/2013/07/07/the-story-of-the-big-data-elders</guid>
+        </item>
+        
+        <item>
             <title>Timeshifting in HBase</title>
             <description>&lt;p&gt;For our HBase table layout, we are following an entity-centric model,
 evangelized to us by our friends at &lt;a href=&quot;http://www.wibidata.com&quot;&gt;WibiData&lt;/a&gt;.  The idea is to put all of the
@@ -594,25 +702,6 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
             <pubDate>Mon, 02 May 2011 06:27:07 -0700</pubDate>
             <link>http://opower.github.io/2011/05/02/engineerings-second-bottom-line</link>
             <guid isPermaLink="true">http://opower.github.io/2011/05/02/engineerings-second-bottom-line</guid>
-        </item>
-        
-        <item>
-            <title>Helping DC Area Agile Testers Help Themselves</title>
-            <description>&lt;p&gt;The &lt;a href=&quot;http://www.meetup.com/D-CAST/&quot;&gt;DC Agile Software Testing MeetUp group&lt;/a&gt; met for the &lt;a href=&quot;http://www.meetup.com/D-CAST/events/16781293/&quot;&gt;first time&lt;/a&gt; yesterday. Thanks to everyone that attended for contributing to a very positive experience.&lt;/p&gt;
-
-&lt;p&gt;We’re looking for “Better Ways To Make Better Software”.&lt;/p&gt;
-
-&lt;p&gt;Agile software development is a great way to make good software that satisfies real needs and creates real value to those who build and use that software. Everyone on the team is concerned with the quality of the product. However, sometimes it can be an overwhelming task being the team member whose job it is to insure that the quality of the product is sufficient.&lt;/p&gt;
-
-&lt;p&gt;DCAST was created to develop a community of those interested in agile software testing who are also interested in testing agile products more effectively and more efficiently. By sharing our hard won knowledge we can all help make each other’s lives easier and more productive.&lt;/p&gt;
-
-&lt;p&gt;If you’re interested in sharing how you have raised the quality bar of your agile processes, we would love it if you were a part of this community. If you’re interested in learning (or want to all learn together), you’re even more welcome.&lt;/p&gt;
-
-&lt;p&gt;We’re going to be &lt;a href=&quot;http://www.meetup.com/D-CAST/events/17021962/&quot;&gt;meeting again in about a month&lt;/a&gt;. Come check out the group if you’re in the DC area.&lt;/p&gt;
-</description>
-            <pubDate>Wed, 23 Mar 2011 06:55:43 -0700</pubDate>
-            <link>http://opower.github.io/2011/03/23/helping-dc-area-agile-testers-help-themselves</link>
-            <guid isPermaLink="true">http://opower.github.io/2011/03/23/helping-dc-area-agile-testers-help-themselves</guid>
         </item>
         
     </channel>

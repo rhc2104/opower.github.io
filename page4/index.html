@@ -57,6 +57,42 @@
 <div class="posts">
   
   <div class="post">
+      <h2><a href="/2010/09/14/introducing-the-opower-engineering-dashboard">Introducing the OPOWER Engineering Dashboard</a></h2>
+      <p class="meta pull-right">Written on September 14, 2010 by joel.strait</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>As Tom <a href="/2010/07/27/maven-izing-googles-data-client-java-library">mentioned</a>, we recently conducted our first company-wide Innovation Day. Everyone split into groups of 3-4 and worked on whatever they wanted (as long as it was related to the company).</p>
+
+<p>Everyone did cool stuff. One group made a prototype of a website where you can enter your zip code, info about your home, and your last energy bill, and (via our Insight Engine) see how you compare to similar people across the country. Another group made an iPhone optimized version of our utility website. A third group went out and bought some plants to liven up the office.</p>
+
+<p>Adam, Jeff #3, Matt and I decided to focus our attention toward the TV we have mounted on the wall. It’s been dormant since the World Cup, and we wanted to put it to better use. <a href="http://www.panic.com/blog/2010/03/the-panic-status-board/">Inspired by Panic</a>, we decided to build a dashboard for the engineering team.</p>
+
+<p>We brainstormed beforehand, and came up with a lot of ideas. However, to make sure we had something working to demo the next day, we decided to just focus on getting 1 or 2 small things done as a proof of concept. We first set up a simple <a href="http://www.sinatrarb.com/">Sinatra</a> Ruby app to act as a shell. Next Matt, Jeff and I worked on pulling data from various APIs (<a href="http://docs.codehaus.org/display/JIRA4R/Examples">JIRA</a>, <a href="http://cookingandcoding.com/gcal4ruby/">Google Calendar</a>, Hudson, etc.) while Adam built a killer grid-based design.</p>
+
+<p>This turned out to be setting the bar way too low - 10 hours of non-stop coding later, we managed to have a working dashboard that displays the following:</p>
+
+<ul>
+  <li>How much time is left in the current iteration.</li>
+  <li>The number of story points each team has completed for the current iteration, and how many more are left. <img src="/img/story_points-300x189.png" alt="Dashboard story points" /></li>
+  <li>The status of our Hudson continuous integration server. If someone breaks the build, the dashboard bursts into flames.</li>
+  <li>Any urgent production issues. (Once again, burning).</li>
+  <li>The X-Train Wall of Shame. It tracks how many times everyone has broken the build, as well as how many times they have atoned for it by buying everyone a drink. <img src="/img/x_train-300x176.png" alt="The X train cometh" /></li>
+  <li>Who is on vacation, and who will be on vacation soon. (Courtesy of Google Calendar). <img src="/img/vacation-300x246.png" alt="Slackers on vacation" /></li>
+  <li>When the next trains are coming to the Courthouse Metro station. <img src="/img/metro.png" alt="Trains at Courthouse" /></li>
+  <li>A Twitter feed of tweets mentioning OPOWER.</li>
+  <li>Random selections from the company quote wall.</li>
+</ul>
+
+<p>We’ve been using the dashboard for about an iteration now, and it’s been a big success. It gives everyone (including people outside of engineering) an easy way to see where we are. Since the TV is mounted along one of the main office thoroughfares, people are always stopping to check it out throughout the day.</p>
+
+<p><img src="/img/engineering_dashboard-300x221.jpg" alt="The OPOWER Engineering Dashboard" /></p>
+
+<p>This was one of the most fun things I’ve ever done at work. Looking forward to the next Innovation Day!</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
       <h2><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h2>
       <p class="meta pull-right">Written on September 07, 2010 by rob.fagen</p>
       <div class="clearfix"></div>
@@ -268,96 +304,6 @@
 <p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to “number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,” what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn’t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won’t be holding my breath.</p>
 
 <p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart’s Law.  After all, it’s just a Law.  Like De Morgan’s Law, except maybe with a bit more wiggle room.</p>
-
-      </div>
-  </div>
-  
-  <div class="post">
-      <h2><a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h2>
-      <p class="meta pull-right">Written on May 27, 2010 by dave.copeland</p>
-      <div class="clearfix"></div>
-      <div class="post-content">
-      <p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of “Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032” seemed logically impossible, but was somehow true.</p>
-
-<p>But first, let’s talk about defensive coding and how we do it.  For example:</p>
-
-<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
-<span class="cm"> * frobs the bar and baz.</span>
-<span class="cm"> * @param bar the bar to frob; may not be null</span>
-<span class="cm"> * @param baz the baz to from; must be positive</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
-  <span class="o">}</span>
-  <span class="k">else</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there’s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
-
-<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
-<span class="cm"> * frobs the bar and baz.</span>
-<span class="cm"> * @param bar the bar to frob; may not be null</span>
-<span class="cm"> * @param baz the baz to from; must be positive</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span><span class="s">&quot;bar must not be null to frob&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">baz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span><span class="s">&quot;baz must be positive&quot;</span><span class="o">);</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
-  <span class="o">}</span>
-  <span class="k">else</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
-We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>’s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
-    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person’s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer’s <code>id</code> object.  What’s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
-
-<p>Until this week; we were testing our application for a new client and I got the error posted above (“Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032”).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">()),</span>
-    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
-    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>What’s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">Long</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
-<span class="n">Long</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
-
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span><span class="o">);</span>      <span class="c1">// false</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">l2</span><span class="o">));</span> <span class="c1">// true</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="mi">45L</span><span class="o">);</span>     <span class="c1">// true!</span>
-</code></pre></div>
-
-<p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
-
 
       </div>
   </div>

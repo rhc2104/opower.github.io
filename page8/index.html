@@ -57,6 +57,57 @@
 <div class="posts">
   
   <div class="post">
+      <h2><a href="/2009/08/28/move-meetings-to-move-developers">Move meetings to move developers</a></h2>
+      <p class="meta pull-right">Written on August 28, 2009 by tom.vaughan</p>
+      <div class="clearfix"></div>
+      <div class="post-content">
+      <p>Here’s the scenario:</p>
+
+<p>You cruise in to the office at 8:45, get your coffee, check the reddits, and ignore that email from your parents asking if their computer picked up a virus because McAfee won’t stop popping up a tooltray icon helpfully informing them that they’re totally vulnerable.  Right around 9:15, you get motivated to tackle that 2 point user story for the current iteration.</p>
+
+<p>You head over to the wiki, check out the specs for the requirement, find out what the Trac ticket number is and see if there are any comments with last minute advice or dependencies.  None?  Good. . . let’s get started!</p>
+
+<p>Oh, huh… it’s 9:40.  There’s that all-hands meeting at 10 o’clock.  I <em>could</em> get started, but I’m not really going to get anything done in 20 minutes really… and that link to the <a href="http://www.buzzfeed.com/akdobbins/three-keyboard-cat-moon-shirt">keyboard-cat-three-wolf-t-shirt</a> <em>did</em> look interesting.</p>
+
+<p>The 10 o’clock meeting runs a little long, and then there’s the lunch train, and suddenly it’s the afternoon and you haven’t been in The Zone once.</p>
+
+<h3 id="the-zone">The Zone</h3>
+
+<p>We’ve all been in The Zone – that magical place where time appears to stop and you rock out an insane amount of code in what seems like 10 minutes, but when you look up from your keyboard the sun is down and the cleaning crew is giving you a weird look because you didn’t realize you were trying to sing along to Sigur Ros.</p>
+
+<p>Trying to force yourself into The Zone is like trying to force yourself to see through those <a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">stereograms</a> (hint: it’s always a Schooner).  And as hard as it is to get <em>in</em> The Zone, it’s annoying easily to get <em>out</em> of The Zone.</p>
+
+<p>There are a lot of recommendations out there to help create “zone-friendly” work places including:</p>
+
+<ul>
+  <li>separate offices</li>
+  <li>ambient music</li>
+  <li>leaving something intentionally broken the night before to give you that excuse to dive in the next morning</li>
+  <li><a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">shift your tasks to the upper right</a></li>
+  <li><a href="http://www.paulgraham.com/makersschedule.html">Paul Graham’s thoughts</a> on the matter</li>
+  <li>etc. etc.</li>
+</ul>
+
+<p>We were wrapping up our all-hands meeting yesterday when the ever-perceptive Dave noted that our weekly meeting schedules were really not all that Zone-Friendly.  With a couple of exceptions, we had standing meetings along the following schedule:</p>
+
+<p><img src="/img/zone_unfriendly.png" alt="Standing Meetings" /></p>
+
+<p>And keep in mind, that’s just the standing meetings, so it’s the bare-minimum one would expect.  Now let’s add some “procrastination shading” to that calendar to demonstrate the actual standing meeting impact:</p>
+
+<p><img src="/img/zone_unfriendly_shaded.png" alt="Standing Meetings" /></p>
+
+<p>If we shuffled some meetings around (especially around the meat of the middle of the week), I think we could end up “finding” 2 or 3 hours a week more conducive to The Zone:</p>
+
+<p><img src="/img/zone_friendly_shaded.png" alt="Friendly Standing Meetings" /></p>
+
+<p>Of course, this is an idealized example, but it’s something we’re thinking about and playing with.</p>
+
+<p>What do you guys out there in development land do?  Any recommendations of particular effectiveness?</p>
+
+      </div>
+  </div>
+  
+  <div class="post">
       <h2><a href="/2009/08/26/a-year-long-analysis-of-snack-consumption">A year-long analysis of snack consumption</a></h2>
       <p class="meta pull-right">Written on August 26, 2009 by dave.copeland</p>
       <div class="clearfix"></div>
@@ -178,34 +229,11 @@ at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool.checkoutPooledConnection(C3
       </div>
   </div>
   
-  <div class="post">
-      <h2><a href="/2009/08/19/measuring-our-awesomeness-iteration-by-iteration">Measuring our awesomeness iteration by iteration</a></h2>
-      <p class="meta pull-right">Written on August 19, 2009 by dave.copeland</p>
-      <div class="clearfix"></div>
-      <div class="post-content">
-      <p>Like a lot of startups (and big companies!) we use iterative development: we break up our work into “stories” describing features and implement as many as we can in one month.  We then repeat that until we conquer the world.  But, if we can do more, or work more efficiently with each iteration, our goal of world domination will approach that much quicker :)</p>
-
-<p>The easiest way to do that is to look at the bugs our QA staff find in the product updates.  Although we have a lot of automated tests, we still need some eyes on the applications to check for things like text overruns of our printed reports, or JavaScript weirdness in some <a href="http://blog.digg.com/?p=878">less-than-well-behaved</a>) browsers.</p>
-
-<p>After a few iterations, Anh (our beloved program manager) ran some queries on our bug-tracking database and, using some Excel magic, showed us numbers like “number of defects in the web application” and “average number of days a critical bug sat unassigned”.  This is good stuff; seeing hard data about what we’re doing lets us focus on inefficiency.  Since we release software every month (and launch new clients almost as frequently), this is a <strong>huge</strong> help in making each iteration better than the previous.</p>
-
-<p>While Anh’s hand-jammed report was awesome, manually connecting SQLite and Excel is no fun for anyone.  I whipped up a basic Ruby application using <a href="http://www.sinatrarb.com/">Sinatra</a> to automate most of what we’d like to see.  We can now see how long critical defects site open and unfixed, as well as how many overall defects we’re fixing and even the <em>root source</em> of our defects (e.g. did we get the wrong requirements, or just mess up implementing them?) </p>
-
-<p>We still need to show trends, however.  “Classic” thinking in software process improvement says to do that by dividing everything by lines of code; if we had 10 defects per 1,000 lines of code this month, but only 8 the following, we’re doing better.  This is not a great measure for us, since we are changing and enhancing our product (as opposed to writing fresh code each time), so we decided to normalize our measurements by the story points we assigned to the iteration.  This way, we can see charts like the one below (which says we are doing better each time):</p>
-
-<p><img src="/img/MetricsChart.png" alt="Metrics Chart" /></p>
-
-<p>This information is dead simple to collect; the burden on developers and testers when writing defects is almost nothing.  With only a priority, severity, and “source of defect”, we can collect a lot of advanced information about our development process – and make it better iteration by iteration.</p>
-
-
-      </div>
-  </div>
-  
 </div>
 
 <ul class="pager">
   
-  <li class="previous disabled"><a href="#">&larr; Older</a></li>
+  <li class="previous"><a href="/page9">&larr; Older</a></li>
   
   
   <li class="next"><a href="/page7">Newer &rarr;</a></li>
