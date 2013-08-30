@@ -52,24 +52,25 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Maven-izing Google's Data Client Java Library</h1>
-  <p class="meta pull-right">Written on July 27, 2010 by tom.vaughan</p>
+  <h1><a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h1>
+  <p class="meta pull-right">Written on July 27, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>OPOWER’s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+<p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
 
-<p>Clicking around google’s well-documented “get started” guides, it looked like they haven’t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it’d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER’s repo (thereby making them accessible to all our developer’s boxes).</p>
+<p>Clicking around google&rsquo;s well-documented &ldquo;get started&rdquo; guides, it looked like they haven&rsquo;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&rsquo;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&rsquo;s repo (thereby making them accessible to all our developer&rsquo;s boxes).</p>
 
 <p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
 
 <ol>
-  <li>Grab latest JARs from the “gdata-java” link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
-  <li>Unzip on the server hosting your company’s mvn repo</li>
+  <li>Grab latest JARs from the &ldquo;gdata-java&rdquo; link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
+  <li>Unzip on the server hosting your company&rsquo;s mvn repo</li>
   <li>cd down in to ./gdata/java/lib</li>
   <li>
-    <p>Make a file ‘installall.pl’ in that lib directory:</p>
+    <p>Make a file &lsquo;installall.pl&rsquo; in that lib directory:</p>
 
     <pre><code> #!/usr/bin/perl -w
 
@@ -130,11 +131,11 @@
  }
 </code></pre>
   </li>
-  <li>Don’t forget to <code>chmod 755 *.pl</code></li>
+  <li>Don&rsquo;t forget to <code>chmod 755 *.pl</code></li>
   <li>Then just run <code>./installall.pl</code> and all those google JARs should get installed in your repo</li>
 </ol>
 
-<p>That assumes the “mvn” executable was in your path and that you run the scripts from within the same directory as all the JARs, but it’s easily modified for whatever your situation may be.</p>
+<p>That assumes the &ldquo;mvn&rdquo; executable was in your path and that you run the scripts from within the same directory as all the JARs, but it&rsquo;s easily modified for whatever your situation may be.</p>
 
 <p>Note that relative to <code>./lib</code> there are 2 jars in <code>../deps/</code> that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
 

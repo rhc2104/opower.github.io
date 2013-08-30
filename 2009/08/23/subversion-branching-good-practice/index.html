@@ -52,18 +52,19 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Subversion Branching "Good" Practice</h1>
-  <p class="meta pull-right">Written on August 23, 2009 by jeff.kolesky</p>
+  <h1><a href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h1>
+  <p class="meta pull-right">Written on August 23, 2009 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>I am relatively new to Subversion – well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the “trunk/branches/tags” directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
+<p>I am relatively new to Subversion &ndash; well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the &ldquo;trunk/branches/tags&rdquo; directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
 
 <pre><code>svn co http://domain.com/svnroot/project/trunk project
 </code></pre>
 
-<p>That way, when I go to the <code>project</code> directory, I do not have to then go into the <code>trunk</code> directory to get to my files.  Saving an extra directory level is not the best benefit though.  When I set up my IDE (yes, I use an IDE), I put the IDE files in that one directory and do not have to recreate them for each branch or tag that I might check out.  I essentially treat the “trunk/branches/tags” part of the directory as pure metadata, which makes perfect sense to me.</p>
+<p>That way, when I go to the <code>project</code> directory, I do not have to then go into the <code>trunk</code> directory to get to my files.  Saving an extra directory level is not the best benefit though.  When I set up my IDE (yes, I use an IDE), I put the IDE files in that one directory and do not have to recreate them for each branch or tag that I might check out.  I essentially treat the &ldquo;trunk/branches/tags&rdquo; part of the directory as pure metadata, which makes perfect sense to me.</p>
 
 <p>When I switched over to this system, there was one big drawback.  I could not easily tell where I am just by looking at my prompt.  I had to run <code>svn info | grep URL</code> to see if I was on a branch.  So instead of letting my prompt handicap me, I decided to get smart about my prompt.  Using bash, my prompt used to look like this:</p>
 
@@ -75,7 +76,7 @@
 <pre><code>jeff:/opt/pose/main/report/src/main/java [SVN: /main/report/trunk]
 </code></pre>
 
-<p>I’m no bash expert, so I dug around on the web and learned a bit about how <code>PROMPT_COMMAND</code> works.  Here is what I have in my <code>.bash_profile</code> now:</p>
+<p>I&rsquo;m no bash expert, so I dug around on the web and learned a bit about how <code>PROMPT_COMMAND</code> works.  Here is what I have in my <code>.bash_profile</code> now:</p>
 
 <div class="highlight"><pre><code class="bash"><span class="k">function </span>spwd <span class="o">()</span> 
 <span class="o">{</span> 

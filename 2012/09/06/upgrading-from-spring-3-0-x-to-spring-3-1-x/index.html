@@ -52,32 +52,33 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Upgrading from Spring 3.0.x to Spring 3.1.x</h1>
-  <p class="meta pull-right">Written on September 06, 2012 by tom.vaughan</p>
+  <h1><a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h1>
+  <p class="meta pull-right">Written on September 06, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn’t have a ton of solutions on stackoverflow or the google, so I thought I’d capture some of them here.</p>
+<p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&rsquo;d capture some of them here.</p>
 
-<p>Additionally, it’s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
+<p>Additionally, it&rsquo;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
 
 <h3 id="changes-to-theorgspringframeworkjdbccoresimple-package">Changes to the org.springframework.jdbc.core.simple package</h3>
 
-<p>The ‘.simple’ package is deprecated (including the <code>SimpleJdbcTemplate</code> class) and there are two new classes you need to know about as you make the transition:</p>
+<p>The &lsquo;.simple&rsquo; package is deprecated (including the <code>SimpleJdbcTemplate</code> class) and there are two new classes you need to know about as you make the transition:</p>
 
 <ol>
-  <li>The <code>org.springframework.jdbc.JdbcTemplate</code> class is a drop-in replacement for the old <code>SimpleJdbcTemplate</code> class, <em>unless you’re using named parameters in your queries.</em></li>
-  <li>If you run SQL queries with named parameters through the <code>JdbcTemplate</code> your code will compile fine but you’ll get odd <code>Serialization</code> exceptions or <code>ArrayIndexOutOfBoundsExceptions</code>.  For named parameter queries, you’ll need to use the <code>org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate</code>.</li>
+  <li>The <code>org.springframework.jdbc.JdbcTemplate</code> class is a drop-in replacement for the old <code>SimpleJdbcTemplate</code> class, <em>unless you&rsquo;re using named parameters in your queries.</em></li>
+  <li>If you run SQL queries with named parameters through the <code>JdbcTemplate</code> your code will compile fine but you&rsquo;ll get odd <code>Serialization</code> exceptions or <code>ArrayIndexOutOfBoundsExceptions</code>.  For named parameter queries, you&rsquo;ll need to use the <code>org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate</code>.</li>
 </ol>
 
-<p>Luckily, the <code>NamedParameterJdbcTemplate</code> wraps the new <code>JdbcTemplate</code> (well, actually the new <code>JdbcOperations</code>) so if you’re like Opower and you’ve got a top level <code>AbstractJdbcDAO</code> class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the <code>NamedParameterJdbcTemplate</code> and you’ll be off to a good start.</p>
+<p>Luckily, the <code>NamedParameterJdbcTemplate</code> wraps the new <code>JdbcTemplate</code> (well, actually the new <code>JdbcOperations</code>) so if you&rsquo;re like Opower and you&rsquo;ve got a top level <code>AbstractJdbcDAO</code> class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the <code>NamedParameterJdbcTemplate</code> and you&rsquo;ll be off to a good start.</p>
 
 <h3 id="supporting-named-parameter-queries-in-spring-312">Supporting named parameter queries in Spring-3.1.2</h3>
 
-<p>One thing to be aware of is a swap in the argument list to the <code>.query()</code> method on the <code>NamedParameterJdbcTemplate</code> that used to work with the <code>SimpleJdbcTemplate</code>.  Note this signature difference between the <code>JdbcTemplate</code> and <code>NamedParameter</code> version isn’t “new” between Spring 3.0 and 3.1, it’s just that you used be able to get away with passing named parameters through the <code>SimpleJdbcTemplate</code> and now you can’t.  As you’re converting to the 3.1 spec, you’ll need to correct for that laziness.</p>
+<p>One thing to be aware of is a swap in the argument list to the <code>.query()</code> method on the <code>NamedParameterJdbcTemplate</code> that used to work with the <code>SimpleJdbcTemplate</code>.  Note this signature difference between the <code>JdbcTemplate</code> and <code>NamedParameter</code> version isn&rsquo;t &ldquo;new&rdquo; between Spring 3.0 and 3.1, it&rsquo;s just that you used be able to get away with passing named parameters through the <code>SimpleJdbcTemplate</code> and now you can&rsquo;t.  As you&rsquo;re converting to the 3.1 spec, you&rsquo;ll need to correct for that laziness.</p>
 
-<p>Let’s say you’ve got a SQL query containing named parameters and your code used to happily get by with this call to your <code>SimpleJdbcTemplate</code>’s <code>.query</code> method:</p>
+<p>Let&rsquo;s say you&rsquo;ve got a SQL query containing named parameters and your code used to happily get by with this call to your <code>SimpleJdbcTemplate</code>&rsquo;s <code>.query</code> method:</p>
 
 <div class="highlight"><pre><code class="java"><span class="c1">// SQL query with named parameter ( the :zipCodes)</span>
 <span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes)&quot;</span>
@@ -91,31 +92,31 @@
 <span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getSimpleJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">);</span>
 </code></pre></div>
 
-<p>When using the <code>NamedParameterJdbcTemplate</code> in Spring-3.1.2 you’ll need switch the argument order of your <code>rowMapper</code> and your <code>paramMap</code>, e.g:</p>
+<p>When using the <code>NamedParameterJdbcTemplate</code> in Spring-3.1.2 you&rsquo;ll need switch the argument order of your <code>rowMapper</code> and your <code>paramMap</code>, e.g:</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getNamedParameterJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">);</span>
 </code></pre></div>
 
-<p>If you don’t make the switch, your call to a <code>JdbcTemplate.query(sql, rowMapper, paramMap)</code> will happily compile because it meets the <code>JdbcTemplate</code>’s method signature of</p>
+<p>If you don&rsquo;t make the switch, your call to a <code>JdbcTemplate.query(sql, rowMapper, paramMap)</code> will happily compile because it meets the <code>JdbcTemplate</code>&rsquo;s method signature of</p>
 
 <div class="highlight"><pre><code class="java"><span class="kd">public</span>  <span class="n">List</span> <span class="nf">query</span><span class="o">(</span><span class="n">String</span> <span class="n">sql</span><span class="o">,</span> <span class="n">RowMapper</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span>
     <span class="kd">throws</span> <span class="n">DataAccessException</span>
 </code></pre></div>
 
-<p>with the problem being that your <code>rowMapper</code> object gets passed in as the one and only varargs substitution variable to whatever “?” or “:foo” named parameter you may have in your query.  Depending on the query you’re trying to run you’ll get Serialization exceptions or something like this:</p>
+<p>with the problem being that your <code>rowMapper</code> object gets passed in as the one and only varargs substitution variable to whatever &ldquo;?&rdquo; or &ldquo;:foo&rdquo; named parameter you may have in your query.  Depending on the query you&rsquo;re trying to run you&rsquo;ll get Serialization exceptions or something like this:</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">;</span>
     <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">SQLException</span><span class="o">:</span>
         <span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span>
 </code></pre></div>
 
-<h3 id="spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations">Spring-Batch 2.x needs Spring 3.0’s deprecated JdbcOperations</h3>
+<h3 id="spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations">Spring-Batch 2.x needs Spring 3.0&rsquo;s deprecated JdbcOperations</h3>
 
-<p>If you use Spring Batch’s <code>org.springframework.batch.core.repository.dao.JdbcJobInstanceDao</code> you’ll need to continue to support the deprecated spring-3.0.x <code>SimpleJdbcTemplate</code> because that’s the only class allowed to be set on the <code>JdbcJobInstaceDAO</code> to help it query the DB to look up all the data out of your <code>BATCH_xxx</code> tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
+<p>If you use Spring Batch&rsquo;s <code>org.springframework.batch.core.repository.dao.JdbcJobInstanceDao</code> you&rsquo;ll need to continue to support the deprecated spring-3.0.x <code>SimpleJdbcTemplate</code> because that&rsquo;s the only class allowed to be set on the <code>JdbcJobInstaceDAO</code> to help it query the DB to look up all the data out of your <code>BATCH_xxx</code> tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
 
-<h3 id="spring-securitys-accessdecisionvoter-became-parameterized">Spring Security’s AccessDecisionVoter became parameterized</h3>
+<h3 id="spring-securitys-accessdecisionvoter-became-parameterized">Spring Security&rsquo;s AccessDecisionVoter became parameterized</h3>
 
-<p>We use Spring Security’s <code>AccessDecisionVoter</code> to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:</p>
+<p>We use Spring Security&rsquo;s <code>AccessDecisionVoter</code> to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:</p>
 
 <div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span> <span class="o">{</span>
 <span class="o">...</span>
@@ -139,7 +140,7 @@
 
 <h3 id="new-abstract-method-onorgspringframeworkhttpclientclienthttpresponse">New abstract method on org.springframework.http.client.ClientHttpResponse</h3>
 
-<p>If you use or mock Spring’s <code>ClientHttpResponse</code> object, there’s a new <code>public int getRawStatusCode() throws IOException</code> signature you’ve got to implement.  With access to an <code>HttpStatus</code> object, that’s pretty straightforward:</p>
+<p>If you use or mock Spring&rsquo;s <code>ClientHttpResponse</code> object, there&rsquo;s a new <code>public int getRawStatusCode() throws IOException</code> signature you&rsquo;ve got to implement.  With access to an <code>HttpStatus</code> object, that&rsquo;s pretty straightforward:</p>
 
 <div class="highlight"><pre><code class="java"><span class="nd">@Override</span>
 <span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRawStatusCode</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
@@ -149,20 +150,20 @@
 
 <h3 id="pay-attention-to-your-spring-context-xsd-versions">Pay attention to your spring context XSD versions</h3>
 
-<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn’t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like “spring security tag 3.0 library incompatible with class … blah” make sure:</p>
+<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn&rsquo;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &ldquo;spring security tag 3.0 library incompatible with class &hellip; blah&rdquo; make sure:</p>
 
 <ol>
-  <li>your spring context’s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
+  <li>your spring context&rsquo;s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
   <li>your mvn dependency:tree is pulling in spring-security-3.1</li>
 </ol>
 
-<h3 id="spring-31-securitys-taglib-has-a-package-change">Spring 3.1 Security’s Taglib has a package change.</h3>
+<h3 id="spring-31-securitys-taglib-has-a-package-change">Spring 3.1 Security&rsquo;s Taglib has a package change.</h3>
 
-<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at “TemplateModelException: Could not load taglib information” and ending at “Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag”.  The AuthorizeTag class has been renamed to “JspAuthorizeTag”, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring’s fisheye site (google search for “spring security.tld 3.1”).</p>
+<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at &ldquo;TemplateModelException: Could not load taglib information&rdquo; and ending at &ldquo;Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag&rdquo;.  The AuthorizeTag class has been renamed to &ldquo;JspAuthorizeTag&rdquo;, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring&rsquo;s fisheye site (google search for &ldquo;spring security.tld 3.1&rdquo;).</p>
 
 <h3 id="spring-31-may-mean-an-update-to-your-oauth-dependency">Spring 3.1 may mean an update to your OAuth dependency</h3>
 
-<p>Several of Opower’s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you’re using ant-style filter chain maps in your <code>FilterChainProxy</code>.  For example, one of our <code>securityContext.xml</code> files contained this snippet:</p>
+<p>Several of Opower&rsquo;s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you&rsquo;re using ant-style filter chain maps in your <code>FilterChainProxy</code>.  For example, one of our <code>securityContext.xml</code> files contained this snippet:</p>
 
 <div class="highlight"><pre><code class="xml">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -177,7 +178,7 @@ default-autowire=&quot;byName&quot;&gt;
 ...snip...
 </code></pre></div>
 
-<p>When spinning up that context, I’d get an error: “java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.”  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
+<p>When spinning up that context, I&rsquo;d get an error: &ldquo;java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.&rdquo;  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
 
 <p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
 

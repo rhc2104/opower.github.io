@@ -20,11 +20,11 @@ developed the ability to decipher it. &lt;/p&gt;
 
 &lt;p&gt;So it was in much frustration that they tried to share with the villagers the
 meanings of these cryptic glyphs. They waved their hands, talked slowly and in
-exhaustive details about what they saw. But the villagers weren’t seeing. 
+exhaustive details about what they saw. But the villagers weren&amp;rsquo;t seeing. 
 Nothing would do. They would stare in the darkness, not seeing the glyphs,
 not  interested. They would then stand up and walk away not knowing what they had been looking at.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;It’s just hard to show Big Data to the non-initiated in a compelling way.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;It&amp;rsquo;s just hard to show Big Data to the non-initiated in a compelling way.&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;The elders, sitting on their stools, wondered how they could get the villagers 
 interested. How could they ignite the fire of curiosity so that they too would 
@@ -32,18 +32,18 @@ want to learn about these great things?&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;This might have happened on &lt;a href=&quot;http://campfirenow.com/&quot;&gt;campfire&lt;/a&gt;&lt;/em&gt;.&lt;/p&gt;
 
-&lt;p&gt;One elder who had a funny accent was listening but didn’t say a word.&lt;/p&gt;
+&lt;p&gt;One elder who had a funny accent was listening but didn&amp;rsquo;t say a word.&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;That’s me, I’m a &lt;strong&gt;Québécois&lt;/strong&gt;&lt;/em&gt;.    &lt;/p&gt;
+&lt;p&gt;&lt;em&gt;That&amp;rsquo;s me, I&amp;rsquo;m a &lt;strong&gt;Québécois&lt;/strong&gt;&lt;/em&gt;.    &lt;/p&gt;
 
 &lt;p&gt;The next morning, when everyone was busy working, he said&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“Dear friends, I have listened to you and I have a plan.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;Dear friends, I have listened to you and I have a plan.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“I will make them interested if you give me your full trust and support.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;I will make them interested if you give me your full trust and support.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;em&gt;A 4 story point JIRA ticket.&lt;/em&gt;&lt;/p&gt;
@@ -53,23 +53,23 @@ want to learn about these great things?&lt;/p&gt;
 &lt;p&gt;They all offered their trust and the strange one told them what his plan was:&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“I will first build the tools that will record all of what is happening.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;I will first build the tools that will record all of what is happening.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;em&gt;Such as a java command-line tool that polls the jobtracker for job progress&lt;/em&gt;
 &lt;em&gt;as well as counters + another one that polls and records the table sizes.&lt;/em&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“I will then summon the gods to make it rain the heaviest rain while the 
-tools record the history.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;I will then summon the gods to make it rain the heaviest rain while the 
+tools record the history.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;em&gt;A full test workflow executed via our runner runs while the tools record data&lt;/em&gt;
 &lt;em&gt;about it.&lt;/em&gt;&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“When the rain stops, I will gather the fruits from the tools and I will 
-arrange a grandiose spectacle.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;When the rain stops, I will gather the fruits from the tools and I will 
+arrange a grandiose spectacle.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;em&gt;A d3 visual animation of the jobs running overlaid with bars showing the&lt;/em&gt;
@@ -78,8 +78,8 @@ arrange a grandiose spectacle.”&lt;/p&gt;
 &lt;p&gt;Finally, he added&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;“The villagers will gather on the afternoon of the last Tuesday of the 6th 
-month to attend a showing of this majestic production.”&lt;/p&gt;
+  &lt;p&gt;&amp;ldquo;The villagers will gather on the afternoon of the last Tuesday of the 6th 
+month to attend a showing of this majestic production.&amp;rdquo;&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;&lt;em&gt;A video montage adding some jest to the whole extravaganza.&lt;/em&gt; &lt;/p&gt;
@@ -96,13 +96,13 @@ strange one was absent but the elders proceeded, both anxious and excited. &lt;/
 &lt;p&gt;When the beautiful bright sight started before their eyes, the villages stood 
 silent. The elders watched as everyone was all ears, eyes wide open seemingly
 seeing for the first time what this was all about. They did not understand it 
-immediately. They couldn’t have. But when this was done, they asked to watch 
+immediately. They couldn&amp;rsquo;t have. But when this was done, they asked to watch 
 it again. They reached to the elders to learn more about what it was that they 
 had seen. Some stayed and got interested enough to learn some of the glyphs. 
 The villagers talked for a while and came back to the elders with a reward. &lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;People were genuinely entertained, some people asked questions and some might&lt;/em&gt;
-&lt;em&gt;now think that this thing they weren’t sure what it was about looks pretty&lt;/em&gt;
+&lt;em&gt;now think that this thing they weren&amp;rsquo;t sure what it was about looks pretty&lt;/em&gt;
 &lt;em&gt;interesting.&lt;/em&gt;  &lt;/p&gt;
 
 &lt;p&gt;And so, it started…&lt;/p&gt;
@@ -119,7 +119,7 @@ The villagers talked for a while and came back to the elders with a reward. &lt;
             <description>&lt;p&gt;For our HBase table layout, we are following an entity-centric model,
 evangelized to us by our friends at &lt;a href=&quot;http://www.wibidata.com&quot;&gt;WibiData&lt;/a&gt;.  The idea is to put all of the
 data about a single entity into a single row in HBase.  When you need to run
-a computation that involves that entity’s data, you have quick access to it by
+a computation that involves that entity&amp;rsquo;s data, you have quick access to it by
 the row key, and all of the data is stored close together on disk.
 Additionally, against many &lt;a href=&quot;http://www.ngdata.com/site/blog/62-ng.html&quot;&gt;suggestions&lt;/a&gt; from the HBase community,
 and general confusion about &lt;a href=&quot;https://issues.apache.org/jira/browse/HBASE-2406&quot;&gt;how timestamps work&lt;/a&gt;, we are using
@@ -145,7 +145,7 @@ that we keep, a label describing where the data came from.  The metadata is
 stored at the timestamp when we wrote it into the table, which in this example
 is in 2011.  Since we imported historical data, and we use logical timestamps
 for the data column, we have data going back to 2009.  One typical access
-pattern is to query for all data from the beginning of “last year” up to now,
+pattern is to query for all data from the beginning of &amp;ldquo;last year&amp;rdquo; up to now,
 because we need that much data for many analyses.  If we ran a &lt;code&gt;get&lt;/code&gt; for this
 data, it would normally be set up like this (in pseudo-code, of course):&lt;/p&gt;
 
@@ -175,7 +175,7 @@ look like this:&lt;/p&gt;
 
 &lt;p&gt;Since we imported the data in 2011 and timeshifted the metadata column
 timestamp, its new timestamp is 52,011.  We now change our &lt;code&gt;get&lt;/code&gt; slightly by
-setting an ending timestamp to be the logical “end of time”:&lt;/p&gt;
+setting an ending timestamp to be the logical &amp;ldquo;end of time&amp;rdquo;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;rowkey&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;get&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addColumn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
@@ -191,7 +191,7 @@ There is no added overhead to the storage to account for this, and thus no added
 processing when fetching it.  Furthermore, fetching data for just the metadata column still works
 with &lt;code&gt;Result#getColumnLatest()&lt;/code&gt;.&lt;/p&gt;
 
-&lt;p&gt;Yes, there is a problem for the future us of the year 52,011, but I’m betting we
+&lt;p&gt;Yes, there is a problem for the future us of the year 52,011, but I&amp;rsquo;m betting we
 will all be using relational databases again by that point.&lt;/p&gt;
 
 </description>
@@ -202,7 +202,7 @@ will all be using relational databases again by that point.&lt;/p&gt;
         
         <item>
             <title>With all apologies to Psy</title>
-            <description>&lt;p&gt;Friday afternoon snippet of South Korea’s Macarena by Opower’s own Wayne Lin and Eddy Leung in our Arlington HQ elevator bank.&lt;/p&gt;
+            <description>&lt;p&gt;Friday afternoon snippet of South Korea&amp;rsquo;s Macarena by Opower&amp;rsquo;s own Wayne Lin and Eddy Leung in our Arlington HQ elevator bank.&lt;/p&gt;
 
 &lt;iframe width=&quot;420&quot; height=&quot;315&quot; src=&quot;//www.youtube.com/embed/7Fa7KW5AfXQ?rel=0&quot; frameborder=&quot;0&quot; allowfullscreen=&quot;&quot;&gt;&lt;/iframe&gt;
 </description>
@@ -213,26 +213,26 @@ will all be using relational databases again by that point.&lt;/p&gt;
         
         <item>
             <title>Upgrading from Spring 3.0.x to Spring 3.1.x</title>
-            <description>&lt;p&gt;I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn’t have a ton of solutions on stackoverflow or the google, so I thought I’d capture some of them here.&lt;/p&gt;
+            <description>&lt;p&gt;I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&amp;rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&amp;rsquo;d capture some of them here.&lt;/p&gt;
 
-&lt;p&gt;Additionally, it’s pretty useful to &lt;a href=&quot;http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html&quot;&gt;look over the method deprecation and removal page&lt;/a&gt; that the spring guys published for just this kind of operation.&lt;/p&gt;
+&lt;p&gt;Additionally, it&amp;rsquo;s pretty useful to &lt;a href=&quot;http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html&quot;&gt;look over the method deprecation and removal page&lt;/a&gt; that the spring guys published for just this kind of operation.&lt;/p&gt;
 
 &lt;h3 id=&quot;changes-to-theorgspringframeworkjdbccoresimple-package&quot;&gt;Changes to the org.springframework.jdbc.core.simple package&lt;/h3&gt;
 
-&lt;p&gt;The ‘.simple’ package is deprecated (including the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; class) and there are two new classes you need to know about as you make the transition:&lt;/p&gt;
+&lt;p&gt;The &amp;lsquo;.simple&amp;rsquo; package is deprecated (including the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; class) and there are two new classes you need to know about as you make the transition:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;The &lt;code&gt;org.springframework.jdbc.JdbcTemplate&lt;/code&gt; class is a drop-in replacement for the old &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; class, &lt;em&gt;unless you’re using named parameters in your queries.&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;If you run SQL queries with named parameters through the &lt;code&gt;JdbcTemplate&lt;/code&gt; your code will compile fine but you’ll get odd &lt;code&gt;Serialization&lt;/code&gt; exceptions or &lt;code&gt;ArrayIndexOutOfBoundsExceptions&lt;/code&gt;.  For named parameter queries, you’ll need to use the &lt;code&gt;org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;The &lt;code&gt;org.springframework.jdbc.JdbcTemplate&lt;/code&gt; class is a drop-in replacement for the old &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; class, &lt;em&gt;unless you&amp;rsquo;re using named parameters in your queries.&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;If you run SQL queries with named parameters through the &lt;code&gt;JdbcTemplate&lt;/code&gt; your code will compile fine but you&amp;rsquo;ll get odd &lt;code&gt;Serialization&lt;/code&gt; exceptions or &lt;code&gt;ArrayIndexOutOfBoundsExceptions&lt;/code&gt;.  For named parameter queries, you&amp;rsquo;ll need to use the &lt;code&gt;org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate&lt;/code&gt;.&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;Luckily, the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; wraps the new &lt;code&gt;JdbcTemplate&lt;/code&gt; (well, actually the new &lt;code&gt;JdbcOperations&lt;/code&gt;) so if you’re like Opower and you’ve got a top level &lt;code&gt;AbstractJdbcDAO&lt;/code&gt; class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; and you’ll be off to a good start.&lt;/p&gt;
+&lt;p&gt;Luckily, the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; wraps the new &lt;code&gt;JdbcTemplate&lt;/code&gt; (well, actually the new &lt;code&gt;JdbcOperations&lt;/code&gt;) so if you&amp;rsquo;re like Opower and you&amp;rsquo;ve got a top level &lt;code&gt;AbstractJdbcDAO&lt;/code&gt; class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; and you&amp;rsquo;ll be off to a good start.&lt;/p&gt;
 
 &lt;h3 id=&quot;supporting-named-parameter-queries-in-spring-312&quot;&gt;Supporting named parameter queries in Spring-3.1.2&lt;/h3&gt;
 
-&lt;p&gt;One thing to be aware of is a swap in the argument list to the &lt;code&gt;.query()&lt;/code&gt; method on the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; that used to work with the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt;.  Note this signature difference between the &lt;code&gt;JdbcTemplate&lt;/code&gt; and &lt;code&gt;NamedParameter&lt;/code&gt; version isn’t “new” between Spring 3.0 and 3.1, it’s just that you used be able to get away with passing named parameters through the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; and now you can’t.  As you’re converting to the 3.1 spec, you’ll need to correct for that laziness.&lt;/p&gt;
+&lt;p&gt;One thing to be aware of is a swap in the argument list to the &lt;code&gt;.query()&lt;/code&gt; method on the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; that used to work with the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt;.  Note this signature difference between the &lt;code&gt;JdbcTemplate&lt;/code&gt; and &lt;code&gt;NamedParameter&lt;/code&gt; version isn&amp;rsquo;t &amp;ldquo;new&amp;rdquo; between Spring 3.0 and 3.1, it&amp;rsquo;s just that you used be able to get away with passing named parameters through the &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; and now you can&amp;rsquo;t.  As you&amp;rsquo;re converting to the 3.1 spec, you&amp;rsquo;ll need to correct for that laziness.&lt;/p&gt;
 
-&lt;p&gt;Let’s say you’ve got a SQL query containing named parameters and your code used to happily get by with this call to your &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt;’s &lt;code&gt;.query&lt;/code&gt; method:&lt;/p&gt;
+&lt;p&gt;Let&amp;rsquo;s say you&amp;rsquo;ve got a SQL query containing named parameters and your code used to happily get by with this call to your &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt;&amp;rsquo;s &lt;code&gt;.query&lt;/code&gt; method:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;c1&quot;&gt;// SQL query with named parameter ( the :zipCodes)&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes)&amp;quot;&lt;/span&gt;
@@ -246,31 +246,31 @@ will all be using relational databases again by that point.&lt;/p&gt;
 &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blah&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSimpleJdbcTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rowMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paramMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;When using the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; in Spring-3.1.2 you’ll need switch the argument order of your &lt;code&gt;rowMapper&lt;/code&gt; and your &lt;code&gt;paramMap&lt;/code&gt;, e.g:&lt;/p&gt;
+&lt;p&gt;When using the &lt;code&gt;NamedParameterJdbcTemplate&lt;/code&gt; in Spring-3.1.2 you&amp;rsquo;ll need switch the argument order of your &lt;code&gt;rowMapper&lt;/code&gt; and your &lt;code&gt;paramMap&lt;/code&gt;, e.g:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;blah&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getNamedParameterJdbcTemplate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;paramMap&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rowMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;If you don’t make the switch, your call to a &lt;code&gt;JdbcTemplate.query(sql, rowMapper, paramMap)&lt;/code&gt; will happily compile because it meets the &lt;code&gt;JdbcTemplate&lt;/code&gt;’s method signature of&lt;/p&gt;
+&lt;p&gt;If you don&amp;rsquo;t make the switch, your call to a &lt;code&gt;JdbcTemplate.query(sql, rowMapper, paramMap)&lt;/code&gt; will happily compile because it meets the &lt;code&gt;JdbcTemplate&lt;/code&gt;&amp;rsquo;s method signature of&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;List&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;query&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;RowMapper&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rowMapper&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;...&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DataAccessException&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;with the problem being that your &lt;code&gt;rowMapper&lt;/code&gt; object gets passed in as the one and only varargs substitution variable to whatever “?” or “:foo” named parameter you may have in your query.  Depending on the query you’re trying to run you’ll get Serialization exceptions or something like this:&lt;/p&gt;
+&lt;p&gt;with the problem being that your &lt;code&gt;rowMapper&lt;/code&gt; object gets passed in as the one and only varargs substitution variable to whatever &amp;ldquo;?&amp;rdquo; or &amp;ldquo;:foo&amp;rdquo; named parameter you may have in your query.  Depending on the query you&amp;rsquo;re trying to run you&amp;rsquo;ll get Serialization exceptions or something like this:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argument&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;value:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ArrayIndexOutOfBoundsException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;nested&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;is&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;sql&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;SQLException&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
         &lt;span class=&quot;n&quot;&gt;Invalid&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argument&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;value:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;java&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;lang&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ArrayIndexOutOfBoundsException&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3 id=&quot;spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations&quot;&gt;Spring-Batch 2.x needs Spring 3.0’s deprecated JdbcOperations&lt;/h3&gt;
+&lt;h3 id=&quot;spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations&quot;&gt;Spring-Batch 2.x needs Spring 3.0&amp;rsquo;s deprecated JdbcOperations&lt;/h3&gt;
 
-&lt;p&gt;If you use Spring Batch’s &lt;code&gt;org.springframework.batch.core.repository.dao.JdbcJobInstanceDao&lt;/code&gt; you’ll need to continue to support the deprecated spring-3.0.x &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; because that’s the only class allowed to be set on the &lt;code&gt;JdbcJobInstaceDAO&lt;/code&gt; to help it query the DB to look up all the data out of your &lt;code&gt;BATCH_xxx&lt;/code&gt; tables.  Track &lt;a href=&quot;https://jira.springsource.org/browse/BATCH-1685&quot;&gt;https://jira.springsource.org/browse/BATCH-1685&lt;/a&gt; for details about when that deprecated requirement goes away.&lt;/p&gt;
+&lt;p&gt;If you use Spring Batch&amp;rsquo;s &lt;code&gt;org.springframework.batch.core.repository.dao.JdbcJobInstanceDao&lt;/code&gt; you&amp;rsquo;ll need to continue to support the deprecated spring-3.0.x &lt;code&gt;SimpleJdbcTemplate&lt;/code&gt; because that&amp;rsquo;s the only class allowed to be set on the &lt;code&gt;JdbcJobInstaceDAO&lt;/code&gt; to help it query the DB to look up all the data out of your &lt;code&gt;BATCH_xxx&lt;/code&gt; tables.  Track &lt;a href=&quot;https://jira.springsource.org/browse/BATCH-1685&quot;&gt;https://jira.springsource.org/browse/BATCH-1685&lt;/a&gt; for details about when that deprecated requirement goes away.&lt;/p&gt;
 
-&lt;h3 id=&quot;spring-securitys-accessdecisionvoter-became-parameterized&quot;&gt;Spring Security’s AccessDecisionVoter became parameterized&lt;/h3&gt;
+&lt;h3 id=&quot;spring-securitys-accessdecisionvoter-became-parameterized&quot;&gt;Spring Security&amp;rsquo;s AccessDecisionVoter became parameterized&lt;/h3&gt;
 
-&lt;p&gt;We use Spring Security’s &lt;code&gt;AccessDecisionVoter&lt;/code&gt; to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:&lt;/p&gt;
+&lt;p&gt;We use Spring Security&amp;rsquo;s &lt;code&gt;AccessDecisionVoter&lt;/code&gt; to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;SSOVoter&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AccessDecisionVoter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
@@ -294,7 +294,7 @@ will all be using relational databases again by that point.&lt;/p&gt;
 
 &lt;h3 id=&quot;new-abstract-method-onorgspringframeworkhttpclientclienthttpresponse&quot;&gt;New abstract method on org.springframework.http.client.ClientHttpResponse&lt;/h3&gt;
 
-&lt;p&gt;If you use or mock Spring’s &lt;code&gt;ClientHttpResponse&lt;/code&gt; object, there’s a new &lt;code&gt;public int getRawStatusCode() throws IOException&lt;/code&gt; signature you’ve got to implement.  With access to an &lt;code&gt;HttpStatus&lt;/code&gt; object, that’s pretty straightforward:&lt;/p&gt;
+&lt;p&gt;If you use or mock Spring&amp;rsquo;s &lt;code&gt;ClientHttpResponse&lt;/code&gt; object, there&amp;rsquo;s a new &lt;code&gt;public int getRawStatusCode() throws IOException&lt;/code&gt; signature you&amp;rsquo;ve got to implement.  With access to an &lt;code&gt;HttpStatus&lt;/code&gt; object, that&amp;rsquo;s pretty straightforward:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
 &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getRawStatusCode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IOException&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
@@ -304,20 +304,20 @@ will all be using relational databases again by that point.&lt;/p&gt;
 
 &lt;h3 id=&quot;pay-attention-to-your-spring-context-xsd-versions&quot;&gt;Pay attention to your spring context XSD versions&lt;/h3&gt;
 
-&lt;p&gt;At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn’t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like “spring security tag 3.0 library incompatible with class … blah” make sure:&lt;/p&gt;
+&lt;p&gt;At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn&amp;rsquo;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &amp;ldquo;spring security tag 3.0 library incompatible with class &amp;hellip; blah&amp;rdquo; make sure:&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;your spring context’s XSD is pointing to &lt;code&gt;http://www.springframework.org/schema/security/spring-security-3.1.xsd&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;your spring context&amp;rsquo;s XSD is pointing to &lt;code&gt;http://www.springframework.org/schema/security/spring-security-3.1.xsd&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;your mvn dependency:tree is pulling in spring-security-3.1&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;spring-31-securitys-taglib-has-a-package-change&quot;&gt;Spring 3.1 Security’s Taglib has a package change.&lt;/h3&gt;
+&lt;h3 id=&quot;spring-31-securitys-taglib-has-a-package-change&quot;&gt;Spring 3.1 Security&amp;rsquo;s Taglib has a package change.&lt;/h3&gt;
 
-&lt;p&gt;On first load of one of WARs, our login page greeted me with a fat stack trace starting at “TemplateModelException: Could not load taglib information” and ending at “Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag”.  The AuthorizeTag class has been renamed to “JspAuthorizeTag”, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring’s fisheye site (google search for “spring security.tld 3.1”).&lt;/p&gt;
+&lt;p&gt;On first load of one of WARs, our login page greeted me with a fat stack trace starting at &amp;ldquo;TemplateModelException: Could not load taglib information&amp;rdquo; and ending at &amp;ldquo;Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag&amp;rdquo;.  The AuthorizeTag class has been renamed to &amp;ldquo;JspAuthorizeTag&amp;rdquo;, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring&amp;rsquo;s fisheye site (google search for &amp;ldquo;spring security.tld 3.1&amp;rdquo;).&lt;/p&gt;
 
 &lt;h3 id=&quot;spring-31-may-mean-an-update-to-your-oauth-dependency&quot;&gt;Spring 3.1 may mean an update to your OAuth dependency&lt;/h3&gt;
 
-&lt;p&gt;Several of Opower’s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you’re using ant-style filter chain maps in your &lt;code&gt;FilterChainProxy&lt;/code&gt;.  For example, one of our &lt;code&gt;securityContext.xml&lt;/code&gt; files contained this snippet:&lt;/p&gt;
+&lt;p&gt;Several of Opower&amp;rsquo;s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you&amp;rsquo;re using ant-style filter chain maps in your &lt;code&gt;FilterChainProxy&lt;/code&gt;.  For example, one of our &lt;code&gt;securityContext.xml&lt;/code&gt; files contained this snippet:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;xsi:schemaLocation=&amp;quot;http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
@@ -332,7 +332,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 ...snip...
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;When spinning up that context, I’d get an error: “java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.”  Sure enough, there was no &lt;code&gt;AntUrlPathMatcher&lt;/code&gt; in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6&lt;/p&gt;
+&lt;p&gt;When spinning up that context, I&amp;rsquo;d get an error: &amp;ldquo;java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.&amp;rdquo;  Sure enough, there was no &lt;code&gt;AntUrlPathMatcher&lt;/code&gt; in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6&lt;/p&gt;
 
 &lt;p&gt;Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the &lt;code&gt;ProtectedResourceProcessingFilter&lt;/code&gt; class ended up moving from &lt;code&gt;org.springframework.security.oauth.provider&lt;/code&gt; to &lt;code&gt;org.springframework.security.oauth.provider.filter&lt;/code&gt;).&lt;/p&gt;
 </description>
@@ -343,30 +343,30 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
         
         <item>
             <title>Who's Inhabiting Your Code?</title>
-            <description>&lt;p&gt;Lately I’ve been thinking about the notion of “beautiful code”, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they’re all wrong).  And second, even when you can label a piece of code as “beautiful”, it’s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.&lt;/p&gt;
+            <description>&lt;p&gt;Lately I&amp;rsquo;ve been thinking about the notion of &amp;ldquo;beautiful code&amp;rdquo;, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they&amp;rsquo;re all wrong).  And second, even when you can label a piece of code as &amp;ldquo;beautiful&amp;rdquo;, it&amp;rsquo;s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.&lt;/p&gt;
 
-&lt;p&gt;In my reading, I came across a great article by Rebecca Wirfs-Brock&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; in which she discusses the notion of “habitable code”.  This idea isn’t original to her (she credits Richard Gabriel in Patterns of Software&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.&lt;/p&gt;
+&lt;p&gt;In my reading, I came across a great article by Rebecca Wirfs-Brock&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; in which she discusses the notion of &amp;ldquo;habitable code&amp;rdquo;.  This idea isn&amp;rsquo;t original to her (she credits Richard Gabriel in Patterns of Software&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.&lt;/p&gt;
 
-&lt;p&gt;Paraphrasing some key points …&lt;/p&gt;
+&lt;p&gt;Paraphrasing some key points &amp;hellip;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Clarity for its own sake is an elusive goal&lt;/em&gt;.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it’s at the expense of clarity in some other area. It’s a bit like a game of &lt;a href=&quot;http://en.wikipedia.org/wiki/Whac-A-Mole&quot;&gt;Whac-A-Mole&lt;/a&gt;.  Just as you can’t write code that’s infinitely flexible in the face of unknown future requirements, I don’t think you can write code that’s infinitely clear to an unknown future audience.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Clarity for its own sake is an elusive goal&lt;/em&gt;.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it&amp;rsquo;s at the expense of clarity in some other area. It&amp;rsquo;s a bit like a game of &lt;a href=&quot;http://en.wikipedia.org/wiki/Whac-A-Mole&quot;&gt;Whac-A-Mole&lt;/a&gt;.  Just as you can&amp;rsquo;t write code that&amp;rsquo;s infinitely flexible in the face of unknown future requirements, I don&amp;rsquo;t think you can write code that&amp;rsquo;s infinitely clear to an unknown future audience.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Beauty becomes a constraint for future authors&lt;/em&gt;.  It’s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design – the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Beauty becomes a constraint for future authors&lt;/em&gt;.  It&amp;rsquo;s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design &amp;ndash; the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Habitable code makes its structure and intentions easy to understand&lt;/em&gt;.  Structure, sure, but as a professional developer, the “and intentions” part seems pretty important.  You can read code to understand what it’s doing, but it’s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right – the best I’ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Habitable code makes its structure and intentions easy to understand&lt;/em&gt;.  Structure, sure, but as a professional developer, the &amp;ldquo;and intentions&amp;rdquo; part seems pretty important.  You can read code to understand what it&amp;rsquo;s doing, but it&amp;rsquo;s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right &amp;ndash; the best I&amp;rsquo;ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.&lt;/p&gt;
   &lt;/li&gt;
   &lt;li&gt;
-    &lt;p&gt;&lt;em&gt;Habitable code makes developers feel at home&lt;/em&gt;.  At &lt;a href=&quot;http://www.opower.com&quot;&gt;Opower&lt;/a&gt; we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you’ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.&lt;/p&gt;
+    &lt;p&gt;&lt;em&gt;Habitable code makes developers feel at home&lt;/em&gt;.  At &lt;a href=&quot;http://www.opower.com&quot;&gt;Opower&lt;/a&gt; we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you&amp;rsquo;ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.&lt;/p&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don’t feel bad about rewriting it.  But it’s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.&lt;/p&gt;
+&lt;p&gt;Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don&amp;rsquo;t feel bad about rewriting it.  But it&amp;rsquo;s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.&lt;/p&gt;
 
-&lt;p&gt;So … who’s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?&lt;/p&gt;
+&lt;p&gt;So &amp;hellip; who&amp;rsquo;s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?&lt;/p&gt;
 
 &lt;div class=&quot;footnotes&quot;&gt;
   &lt;ol&gt;
@@ -388,15 +388,15 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
             <title>The Birth of OMAMA</title>
             <description>&lt;p&gt;&lt;img src=&quot;/img/bieber.jpg&quot; alt=&quot;Justin Bieber&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Over the last 6 months, I have been slowly filling up the empty wall spaces in the engineering department with various posters of Nickleback, Justin Bieber and Edward from “Twilight”. These posters tended to get relocated and repositioned behind the desks of engineers who had recently broken the build or accidentally replied-to-all on an email thread.&lt;/p&gt;
+&lt;p&gt;Over the last 6 months, I have been slowly filling up the empty wall spaces in the engineering department with various posters of Nickleback, Justin Bieber and Edward from &amp;ldquo;Twilight&amp;rdquo;. These posters tended to get relocated and repositioned behind the desks of engineers who had recently broken the build or accidentally replied-to-all on an email thread.&lt;/p&gt;
 
-&lt;p&gt;The posters were fun but admittedly a bit of an eyesore.  Last Friday Ben Foster, our VP of Product, said “enough is enough” and sent an email to the engineering and product teams announcing the immediate departure of Justin, Edward and Nickleback.  Ben’s email was pretty good – complete with fake “goodbye, I’ll miss you” messages, but it immediately raised the rabble in engineering.  ”What was &lt;em&gt;product&lt;/em&gt; doing removing &lt;em&gt;engineering&lt;/em&gt; posters??”, etc. etc.  Adding fuel to the fire was Dan, our CEO, who saw that Ben had poked a sleeping bear and wondered aloud as to the state Ben would find his office when he came in to work on Monday morning…&lt;/p&gt;
+&lt;p&gt;The posters were fun but admittedly a bit of an eyesore.  Last Friday Ben Foster, our VP of Product, said &amp;ldquo;enough is enough&amp;rdquo; and sent an email to the engineering and product teams announcing the immediate departure of Justin, Edward and Nickleback.  Ben&amp;rsquo;s email was pretty good &amp;ndash; complete with fake &amp;ldquo;goodbye, I&amp;rsquo;ll miss you&amp;rdquo; messages, but it immediately raised the rabble in engineering.  &amp;rdquo;What was &lt;em&gt;product&lt;/em&gt; doing removing &lt;em&gt;engineering&lt;/em&gt; posters??&amp;rdquo;, etc. etc.  Adding fuel to the fire was Dan, our CEO, who saw that Ben had poked a sleeping bear and wondered aloud as to the state Ben would find his office when he came in to work on Monday morning&amp;hellip;&lt;/p&gt;
 
-&lt;p&gt;“Love thine enemy” formed the basis for engineering’s response:  if Ben didn’t appreciate crappy pop art, we’d provide him with some higher scale fare.  Thus was born the Opower Modern Art Museum, Arlington or “OMAMA.”   Internationalization Team Leader Tyler Bronder and I spent Sunday morning at Michael’s Arts &amp;amp; Crafts and Home Depot collecting supplies and most of Sunday afternoon assembling the highest-brow art we could manage.&lt;/p&gt;
+&lt;p&gt;&amp;ldquo;Love thine enemy&amp;rdquo; formed the basis for engineering&amp;rsquo;s response:  if Ben didn&amp;rsquo;t appreciate crappy pop art, we&amp;rsquo;d provide him with some higher scale fare.  Thus was born the Opower Modern Art Museum, Arlington or &amp;ldquo;OMAMA.&amp;rdquo;   Internationalization Team Leader Tyler Bronder and I spent Sunday morning at Michael&amp;rsquo;s Arts &amp;amp; Crafts and Home Depot collecting supplies and most of Sunday afternoon assembling the highest-brow art we could manage.&lt;/p&gt;
 
-&lt;p&gt;Tyler and I thought a couple Rorschach knock-offs  would be quick and fun contributions to the museum’s collection so we experimented on a few different paint-to-plastic-to-canvas transfer techniques before committing to imprinting on the large 4’x3’ canvases we bought.&lt;/p&gt;
+&lt;p&gt;Tyler and I thought a couple Rorschach knock-offs  would be quick and fun contributions to the museum&amp;rsquo;s collection so we experimented on a few different paint-to-plastic-to-canvas transfer techniques before committing to imprinting on the large 4&amp;rsquo;x3&amp;rsquo; canvases we bought.&lt;/p&gt;
 
-&lt;p&gt;It took a couple of trials and errors with transfer mediums and acrylic viscosity to get the exact technique down correctly, but once we had some confidence in what we were doing we produced a semi-creepy version of our logo which we titled “Pluggy Deconstructed” and a more traditional Rorschach blot that we titled “Interaction Model.”&lt;/p&gt;
+&lt;p&gt;It took a couple of trials and errors with transfer mediums and acrylic viscosity to get the exact technique down correctly, but once we had some confidence in what we were doing we produced a semi-creepy version of our logo which we titled &amp;ldquo;Pluggy Deconstructed&amp;rdquo; and a more traditional Rorschach blot that we titled &amp;ldquo;Interaction Model.&amp;rdquo;&lt;/p&gt;
 
 &lt;div class=&quot;gallery&quot;&gt;
 &lt;div class=&quot;row&quot;&gt;
@@ -464,11 +464,11 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 &lt;/div&gt;
 &lt;p&gt;&lt;!--/.gallery --&gt;&lt;/p&gt;
 
-&lt;p&gt;We’ve got a couple pieces of code that are central to the business that cause some newcomers to scratch their heads – our participant eligibility code and the orchestrating energy calculator code in particular have a certain notoriety.  Tyler and I thought those would make good fodder for abstract art, so we knocked off a Modrian and a Pollock to produce the next two works, “Composition with Eligibility” and “Energy Calculator”:&lt;/p&gt;
+&lt;p&gt;We&amp;rsquo;ve got a couple pieces of code that are central to the business that cause some newcomers to scratch their heads &amp;ndash; our participant eligibility code and the orchestrating energy calculator code in particular have a certain notoriety.  Tyler and I thought those would make good fodder for abstract art, so we knocked off a Modrian and a Pollock to produce the next two works, &amp;ldquo;Composition with Eligibility&amp;rdquo; and &amp;ldquo;Energy Calculator&amp;rdquo;:&lt;/p&gt;
 
-&lt;p&gt;The final (and best) pieces were put up in Ben’s office.  ”Self Portrait” is an 42.5” x 77” blow up of his facebook photo, pasted up inside his office window.  To discourage tampering with the gallery’s centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80”s and industrial sealing foam.&lt;/p&gt;
+&lt;p&gt;The final (and best) pieces were put up in Ben&amp;rsquo;s office.  &amp;rdquo;Self Portrait&amp;rdquo; is an 42.5&amp;rdquo; x 77&amp;rdquo; blow up of his facebook photo, pasted up inside his office window.  To discourage tampering with the gallery&amp;rsquo;s centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80&amp;rdquo;s and industrial sealing foam.&lt;/p&gt;
 
-&lt;p&gt;Ben’s been a great sport about it, but as the head of User Experience &lt;em&gt;and&lt;/em&gt; Product, I’m starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!&lt;/p&gt;
+&lt;p&gt;Ben&amp;rsquo;s been a great sport about it, but as the head of User Experience &lt;em&gt;and&lt;/em&gt; Product, I&amp;rsquo;m starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!&lt;/p&gt;
 </description>
             <pubDate>Tue, 14 Feb 2012 08:05:22 -0800</pubDate>
             <link>http://opower.github.io/2012/02/14/the-birth-of-omama</link>
@@ -477,42 +477,42 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
         
         <item>
             <title>Spring Configuration and Library Decomposition</title>
-            <description>&lt;p&gt;Opower’s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we’ve expanded to the point where (not even counting all the Ruby or Scala stuff) we’re managing:&lt;/p&gt;
+            <description>&lt;p&gt;Opower&amp;rsquo;s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&amp;rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&amp;rsquo;re managing:&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;4 WAR applications&lt;/li&gt;
   &lt;li&gt;33 JAR libraries (1 open sourced @ &lt;a href=&quot;https://github.com/opower/jpile&quot;&gt;https://github.com/opower/jpile&lt;/a&gt;)&lt;/li&gt;
-  &lt;li&gt;14 “pom artifacts” that define groupings of projects and organize dependencies, versions, etc&lt;/li&gt;
+  &lt;li&gt;14 &amp;ldquo;pom artifacts&amp;rdquo; that define groupings of projects and organize dependencies, versions, etc&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the “librarification” of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it’s a lot easier to focus on developing the stories in your iteration if you don’t need to worry about stepping on another team’s toes.  That’s more easily achievable when your team aligns to one specific code artifact.&lt;/p&gt;
+&lt;p&gt;Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the &amp;ldquo;librarification&amp;rdquo; of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it&amp;rsquo;s a lot easier to focus on developing the stories in your iteration if you don&amp;rsquo;t need to worry about stepping on another team&amp;rsquo;s toes.  That&amp;rsquo;s more easily achievable when your team aligns to one specific code artifact.&lt;/p&gt;
 
-&lt;p&gt;A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files – especially in an integration test context.  Here’s a crude picture of our initial state following some decomposition:&lt;/p&gt;
+&lt;p&gt;A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files &amp;ndash; especially in an integration test context.  Here&amp;rsquo;s a crude picture of our initial state following some decomposition:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/img/pic11.png&quot;&gt;&lt;img src=&quot;/img/pic11-300x161.png&quot; alt=&quot;One WAR depending on two JARs with duplicated spring bean configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of “keep the tests close to the code that they stress.”  That’s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.&lt;/p&gt;
+&lt;p&gt;Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of &amp;ldquo;keep the tests close to the code that they stress.&amp;rdquo;  That&amp;rsquo;s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.&lt;/p&gt;
 
-&lt;p&gt;Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible “default wiring” of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.&lt;/p&gt;
+&lt;p&gt;Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible &amp;ldquo;default wiring&amp;rdquo; of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;If a JAR includes a context file ending in “-spring.xml” then it’s automatically included by any WAR that declares a dependency on that JAR.&lt;/li&gt;
-  &lt;li&gt;On the other hand, if a JAR includes a context file ending in “Context.xml” then it is only brought in to the WAR’s context with an explicitly declared inclusion of that file.&lt;/li&gt;
+  &lt;li&gt;If a JAR includes a context file ending in &amp;ldquo;-spring.xml&amp;rdquo; then it&amp;rsquo;s automatically included by any WAR that declares a dependency on that JAR.&lt;/li&gt;
+  &lt;li&gt;On the other hand, if a JAR includes a context file ending in &amp;ldquo;Context.xml&amp;rdquo; then it is only brought in to the WAR&amp;rsquo;s context with an explicitly declared inclusion of that file.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Here’s what the picture looked like when we migrated to that model:&lt;/p&gt;
+&lt;p&gt;Here&amp;rsquo;s what the picture looked like when we migrated to that model:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/img/pic21.png&quot;&gt;&lt;img src=&quot;/img/pic21-300x170.png&quot; alt=&quot;One WAR with two JARs, but no duplicated bean configuration&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Integration tests that lived in our various JARs liked living in this model because they could always import “*-spring.xml” and their integration test context would come up and run just fine.&lt;/p&gt;
+&lt;p&gt;Integration tests that lived in our various JARs liked living in this model because they could always import &amp;ldquo;*-spring.xml&amp;rdquo; and their integration test context would come up and run just fine.&lt;/p&gt;
 
-&lt;p&gt;This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the “*-spring.xml” rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here’s a picture to explain what I mean:&lt;/p&gt;
+&lt;p&gt;This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the &amp;ldquo;*-spring.xml&amp;rdquo; rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here&amp;rsquo;s a picture to explain what I mean:&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;/img/pic31.png&quot;&gt;&lt;img src=&quot;/img/pic31-300x184.png&quot; alt=&quot;Application properties starting to proliferate&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;This problem just got worse as you got more and more descended from a given library – for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own “*-spring.xml” files we needed to define properties to configure C within jar-B &lt;strong&gt;and&lt;/strong&gt; we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.&lt;/p&gt;
+&lt;p&gt;This problem just got worse as you got more and more descended from a given library &amp;ndash; for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own &amp;ldquo;*-spring.xml&amp;rdquo; files we needed to define properties to configure C within jar-B &lt;strong&gt;and&lt;/strong&gt; we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.&lt;/p&gt;
 
-&lt;p&gt;To solve this we adopted a new standard that basically amounts to “provide sensible defaults for our sensible defaults”: any bean in a “*-spring.xml” snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:&lt;/p&gt;
+&lt;p&gt;To solve this we adopted a new standard that basically amounts to &amp;ldquo;provide sensible defaults for our sensible defaults&amp;rdquo;: any bean in a &amp;ldquo;*-spring.xml&amp;rdquo; snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;xml&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;bean&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;foo&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;opower.Foo&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
   &lt;span class=&quot;nt&quot;&gt;&amp;lt;property&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;name=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;locale&amp;quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;value=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;${locale}&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;/&amp;gt;&lt;/span&gt;
@@ -533,9 +533,9 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 &lt;p&gt;A couple of tricks to note when using this model:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;There’s a big difference in classpath context scanning between “classpath:/&lt;em&gt;-spring.xml” and “classpath&lt;/em&gt;:/&lt;em&gt;-spring.xml”.  The first (with just one star) will pull in all the files that match “&lt;/em&gt;-spring.xml” in the &lt;em&gt;first&lt;/em&gt; directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you’d expect… it pulls in all files that match “*-spring.xml” from every directory in scans in your classpath.&lt;/li&gt;
-  &lt;li&gt;Application property defaulting accepts literals after the colon, so it’s safe to do something like &lt;code&gt;${path:file:///blah}&lt;/code&gt; to default the property to the string &lt;code&gt;file:///blah&lt;/code&gt;.  You can also change the default string separator in the &lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt; bean so your defaults look more like this: &lt;code&gt;${path?file:///blah}&lt;/code&gt;  (using a “?” as a separator)&lt;/li&gt;
-  &lt;li&gt;It’s tempting to eliminate application.properties wherever there’s a default, but we avoided that for documentation reasons – we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR’s spring context snippet, we still explicitly declare that property in a WAR’s top-level application.property and document how that property affects the system.&lt;/li&gt;
+  &lt;li&gt;There&amp;rsquo;s a big difference in classpath context scanning between &amp;ldquo;classpath:/&lt;em&gt;-spring.xml&amp;rdquo; and &amp;ldquo;classpath&lt;/em&gt;:/&lt;em&gt;-spring.xml&amp;rdquo;.  The first (with just one star) will pull in all the files that match &amp;ldquo;&lt;/em&gt;-spring.xml&amp;rdquo; in the &lt;em&gt;first&lt;/em&gt; directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you&amp;rsquo;d expect&amp;hellip; it pulls in all files that match &amp;ldquo;*-spring.xml&amp;rdquo; from every directory in scans in your classpath.&lt;/li&gt;
+  &lt;li&gt;Application property defaulting accepts literals after the colon, so it&amp;rsquo;s safe to do something like &lt;code&gt;${path:file:///blah}&lt;/code&gt; to default the property to the string &lt;code&gt;file:///blah&lt;/code&gt;.  You can also change the default string separator in the &lt;code&gt;PropertyPlaceholderConfigurer&lt;/code&gt; bean so your defaults look more like this: &lt;code&gt;${path?file:///blah}&lt;/code&gt;  (using a &amp;ldquo;?&amp;rdquo; as a separator)&lt;/li&gt;
+  &lt;li&gt;It&amp;rsquo;s tempting to eliminate application.properties wherever there&amp;rsquo;s a default, but we avoided that for documentation reasons &amp;ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&amp;rsquo;s spring context snippet, we still explicitly declare that property in a WAR&amp;rsquo;s top-level application.property and document how that property affects the system.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
             <pubDate>Fri, 20 Jan 2012 09:26:07 -0800</pubDate>
@@ -545,23 +545,23 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
         
         <item>
             <title>Our Scala DSL for testing our web product</title>
-            <description>&lt;p&gt;This is actually a fairly old bit of tech for us, but I’ve been reading &lt;a href=&quot;http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943&quot;&gt;Martin Fowler’s DSL Book&lt;/a&gt;, and thought it might be good to talk about what we’ve done.&lt;/p&gt;
+            <description>&lt;p&gt;This is actually a fairly old bit of tech for us, but I&amp;rsquo;ve been reading &lt;a href=&quot;http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943&quot;&gt;Martin Fowler&amp;rsquo;s DSL Book&lt;/a&gt;, and thought it might be good to talk about what we&amp;rsquo;ve done.&lt;/p&gt;
 
-&lt;p&gt;Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL’s domain is &lt;em&gt;our web product&lt;/em&gt;.  Not any web product, not any Spring app, &lt;em&gt;our&lt;/em&gt; web app.  This is important, as it allows us to creating something that is very focused and specific to what we’re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.&lt;/p&gt;
+&lt;p&gt;Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&amp;rsquo;s domain is &lt;em&gt;our web product&lt;/em&gt;.  Not any web product, not any Spring app, &lt;em&gt;our&lt;/em&gt; web app.  This is important, as it allows us to creating something that is very focused and specific to what we&amp;rsquo;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.&lt;/p&gt;
 
 &lt;h3 id=&quot;the-domain-of-application-its-architecture&quot;&gt;The domain of application: its architecture&lt;/h3&gt;
 
-&lt;p&gt;To understand how it works, you need to understand how the apppilcation is architected.  While it’s a Spring MVC web app, in the general sense, there’s a lot more convention around how it’s built.  If you’ve used a “web framework” like Spring MVC, you know that it’s really a giant library for responding to HTTP requests at its core, and that it’s not very opinionated; it’s generally just as easy to do things one way as it is another (check out &lt;a href=&quot;http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html&quot;&gt;this&lt;/a&gt; if you disgree).  As such, you need conventions around how to use it. Developers shouldn’t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.&lt;/p&gt;
+&lt;p&gt;To understand how it works, you need to understand how the apppilcation is architected.  While it&amp;rsquo;s a Spring MVC web app, in the general sense, there&amp;rsquo;s a lot more convention around how it&amp;rsquo;s built.  If you&amp;rsquo;ve used a &amp;ldquo;web framework&amp;rdquo; like Spring MVC, you know that it&amp;rsquo;s really a giant library for responding to HTTP requests at its core, and that it&amp;rsquo;s not very opinionated; it&amp;rsquo;s generally just as easy to do things one way as it is another (check out &lt;a href=&quot;http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html&quot;&gt;this&lt;/a&gt; if you disgree).  As such, you need conventions around how to use it. Developers shouldn&amp;rsquo;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.&lt;/p&gt;
 
-&lt;p&gt;Our app is built along two main concepts: &lt;em&gt;pages&lt;/em&gt;, and &lt;em&gt;modules&lt;/em&gt;.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say “Hi, Dave!” in the upper corner; that “Hi, Dave” would be controlled by  a module.  Each page is backed by a controller whose job it is to expose &lt;strong&gt;only&lt;/strong&gt; what’s needed to configure the modules on the page. All stateful information (e.g. “who’s logged in?”) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.&lt;/p&gt;
+&lt;p&gt;Our app is built along two main concepts: &lt;em&gt;pages&lt;/em&gt;, and &lt;em&gt;modules&lt;/em&gt;.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &amp;ldquo;Hi, Dave!&amp;rdquo; in the upper corner; that &amp;ldquo;Hi, Dave&amp;rdquo; would be controlled by  a module.  Each page is backed by a controller whose job it is to expose &lt;strong&gt;only&lt;/strong&gt; what&amp;rsquo;s needed to configure the modules on the page. All stateful information (e.g. &amp;ldquo;who&amp;rsquo;s logged in?&amp;rdquo;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.&lt;/p&gt;
 
 &lt;p&gt;This is all glued together via a souped-up version of a &lt;code&gt;&amp;lt;jsp:include&amp;gt;&lt;/code&gt; tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.&lt;/p&gt;
 
 &lt;h3 id=&quot;testing-with-scala&quot;&gt;Testing with Scala&lt;/h3&gt;
 
-&lt;p&gt;Which brings us to our DSL for testing this stuff.  Essentially, a module’s url can be requested and tested independently of any page; we don’t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module’s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.&lt;/p&gt;
+&lt;p&gt;Which brings us to our DSL for testing this stuff.  Essentially, a module&amp;rsquo;s url can be requested and tested independently of any page; we don&amp;rsquo;t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module&amp;rsquo;s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.&lt;/p&gt;
 
-&lt;p&gt;This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let’s consider a module that renders a person’s most recent bill.  Suppose we have two views of this module; in the “large” view, we want to see the bill’s cost, KWh used, and an account number.  In the “small” view (that we might use on a dashboard page), we want to see just the bill’s cost.  How might we test this?&lt;/p&gt;
+&lt;p&gt;This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&amp;rsquo;s consider a module that renders a person&amp;rsquo;s most recent bill.  Suppose we have two views of this module; in the &amp;ldquo;large&amp;rdquo; view, we want to see the bill&amp;rsquo;s cost, KWh used, and an account number.  In the &amp;ldquo;small&amp;rdquo; view (that we might use on a dashboard page), we want to see just the bill&amp;rsquo;s cost.  How might we test this?&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;resource for bill 34 from customer 123:
   requires login as customer 123
@@ -589,11 +589,11 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 
 &lt;ul&gt;
   &lt;li&gt;That accessing the url without being logged in gets an error&lt;/li&gt;
-  &lt;li&gt;That, once logged in, requesting a view named “small” will not generate an error&lt;/li&gt;
-  &lt;li&gt;That, once logged in, requesting a view named “large” will not generate an error&lt;/li&gt;
+  &lt;li&gt;That, once logged in, requesting a view named &amp;ldquo;small&amp;rdquo; will not generate an error&lt;/li&gt;
+  &lt;li&gt;That, once logged in, requesting a view named &amp;ldquo;large&amp;rdquo; will not generate an error&lt;/li&gt;
   &lt;li&gt;That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)&lt;/li&gt;
-  &lt;li&gt;That both views contain a div with the id price that contains the text “45.67”&lt;/li&gt;
-  &lt;li&gt;That the “large” view also contains a div with id kwh that contains “156” &lt;strong&gt;and&lt;/strong&gt; a div with id “accountNumber” that contains “655321”&lt;/li&gt;
+  &lt;li&gt;That both views contain a div with the id price that contains the text &amp;ldquo;45.67&amp;rdquo;&lt;/li&gt;
+  &lt;li&gt;That the &amp;ldquo;large&amp;rdquo; view also contains a div with id kwh that contains &amp;ldquo;156&amp;rdquo; &lt;strong&gt;and&lt;/strong&gt; a div with id &amp;ldquo;accountNumber&amp;rdquo; that contains &amp;ldquo;655321&amp;rdquo;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;getting-fancy&quot;&gt;Getting fancy&lt;/h3&gt;
@@ -642,7 +642,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;I don’t know if the developers are totally in love with this DSL, but there’s so much you get for free, I’m certain they’d hate testing that by hand even more (or, worse, simply not test some of these things):&lt;/p&gt;
+&lt;p&gt;I don&amp;rsquo;t know if the developers are totally in love with this DSL, but there&amp;rsquo;s so much you get for free, I&amp;rsquo;m certain they&amp;rsquo;d hate testing that by hand even more (or, worse, simply not test some of these things):&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;You never have to remember to check for authentication requirements&lt;/li&gt;
@@ -651,9 +651,9 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
   &lt;li&gt;Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Of course, this DSL is entirely useless to anyone but our web team.  It’s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn’t have to make the ultimate web-based tesitng DSL; just one that worked for our product.&lt;/p&gt;
+&lt;p&gt;Of course, this DSL is entirely useless to anyone but our web team.  It&amp;rsquo;s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn&amp;rsquo;t have to make the ultimate web-based tesitng DSL; just one that worked for our product.&lt;/p&gt;
 
-&lt;p&gt;If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don’t be afraid to use Scala for this; it’s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala’s features to do this; developers only need to learn a few new concepts to understand what this code does.&lt;/p&gt;
+&lt;p&gt;If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don&amp;rsquo;t be afraid to use Scala for this; it&amp;rsquo;s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala&amp;rsquo;s features to do this; developers only need to learn a few new concepts to understand what this code does.&lt;/p&gt;
 </description>
             <pubDate>Mon, 19 Sep 2011 10:34:57 -0700</pubDate>
             <link>http://opower.github.io/2011/09/19/our-scala-dsl-for-testing-our-web-product</link>
@@ -662,21 +662,21 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
         
         <item>
             <title>Attentive Programming</title>
-            <description>&lt;p&gt;I’m currently reading Matthew Crawford’s ”Shop Class as Soulcraft” who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: &lt;em&gt;assertiveness&lt;/em&gt; and &lt;em&gt;attentiveness&lt;/em&gt;. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.&lt;/p&gt;
+            <description>&lt;p&gt;I&amp;rsquo;m currently reading Matthew Crawford&amp;rsquo;s &amp;rdquo;Shop Class as Soulcraft&amp;rdquo; who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: &lt;em&gt;assertiveness&lt;/em&gt; and &lt;em&gt;attentiveness&lt;/em&gt;. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.&lt;/p&gt;
 
-&lt;p&gt;I believe that Crawford’s categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is “assertive” and “attentive” software engineering? I’ve always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.&lt;/p&gt;
+&lt;p&gt;I believe that Crawford&amp;rsquo;s categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is &amp;ldquo;assertive&amp;rdquo; and &amp;ldquo;attentive&amp;rdquo; software engineering? I&amp;rsquo;ve always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.&lt;/p&gt;
 
-&lt;p&gt;The assertive programmer is one who makes new or improves features. In this case, the engineer is on the cutting edge of product development and essentially makes something out of nothing. He or she “asserts” him or herself by creating new code or by combining or expanding infrastructure in new ways to make new things.&lt;/p&gt;
+&lt;p&gt;The assertive programmer is one who makes new or improves features. In this case, the engineer is on the cutting edge of product development and essentially makes something out of nothing. He or she &amp;ldquo;asserts&amp;rdquo; him or herself by creating new code or by combining or expanding infrastructure in new ways to make new things.&lt;/p&gt;
 
-&lt;p&gt;This type of programming is fun and rewarding because you get to see something made. You also get a craftsman-level satisfaction and the pride of ownership knowing that the software is built well and that other people find it useful. Contrast this with the attentive programmer. The attentive programmer generally works with software that he or she didn’t make. And is given a problem which has perplexed others.&lt;/p&gt;
+&lt;p&gt;This type of programming is fun and rewarding because you get to see something made. You also get a craftsman-level satisfaction and the pride of ownership knowing that the software is built well and that other people find it useful. Contrast this with the attentive programmer. The attentive programmer generally works with software that he or she didn&amp;rsquo;t make. And is given a problem which has perplexed others.&lt;/p&gt;
 
 &lt;p&gt;I think that I am more akin to this type of programmer. I am a Database Architect who works on the OPOWER Scale Team. On the Scale team, we handle problems that reflect scalability issues with the software. We also get a first crack at designing new features that are scalable out of the box, and I think that puts us firmly in the assertive camp.&lt;/p&gt;
 
-&lt;p&gt;I want to reflect more upon our reactive scalability work because I think this sort of work takes a different mindset and possibly a different software engineering approach. To be an attentive programmer you almost have to have a Zen-like disposition and “listen” to the information that you find. You may think that you understand the problem but you must verify if the hypothesis is true. And if it’s not, you must reexamine your assumptions, read the data again, and develop a new hypothesis to test.&lt;/p&gt;
+&lt;p&gt;I want to reflect more upon our reactive scalability work because I think this sort of work takes a different mindset and possibly a different software engineering approach. To be an attentive programmer you almost have to have a Zen-like disposition and “listen” to the information that you find. You may think that you understand the problem but you must verify if the hypothesis is true. And if it&amp;rsquo;s not, you must reexamine your assumptions, read the data again, and develop a new hypothesis to test.&lt;/p&gt;
 
-&lt;p&gt;The attentive programmer knows that truth is the path to the right solution, and that’s exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.&lt;/p&gt;
+&lt;p&gt;The attentive programmer knows that truth is the path to the right solution, and that&amp;rsquo;s exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.&lt;/p&gt;
 
-&lt;p&gt;To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I’m always ready for the next problem and always wondering what I’m going to learn from that puzzle.&lt;/p&gt;
+&lt;p&gt;To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I&amp;rsquo;m always ready for the next problem and always wondering what I&amp;rsquo;m going to learn from that puzzle.&lt;/p&gt;
 
 &lt;p&gt;Are you an attentive or assertive programmer, or some combination of? Why? Thinking about how you approach software engineering may help you raise your game and bring with it the satisfaction of rising above the status quo.&lt;/p&gt;
 </description>
@@ -687,7 +687,7 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
         
         <item>
             <title>Engineering's Second Bottom Line</title>
-            <description>&lt;p&gt;OPOWER has a set of company values, the first of which is “We are double bottom line.”  Our two bottom lines are the environment (we want to improve that) and money (we want to make that).  Everyone in the company is fully bought in to the first bottom line.  Given our enterprisey business model, the engineering team cannot contribute directly to the company making money (accounting lingo deems us a liability, as does HR sometimes), so we have a slightly different second bottom line.&lt;/p&gt;
+            <description>&lt;p&gt;OPOWER has a set of company values, the first of which is &amp;ldquo;We are double bottom line.&amp;rdquo;  Our two bottom lines are the environment (we want to improve that) and money (we want to make that).  Everyone in the company is fully bought in to the first bottom line.  Given our enterprisey business model, the engineering team cannot contribute directly to the company making money (accounting lingo deems us a liability, as does HR sometimes), so we have a slightly different second bottom line.&lt;/p&gt;
 
 &lt;p&gt;We focus on how we build the product to ensure it supports the business for the long haul.  We take this part of our job very seriously and are constantly working to improve how we work.  We use some of the obvious practices from agile like scrum teams, story pointing, and short-term iteration planning to keep ourselves on track with the functionality we need to build over a three iteration horizon.  A more out-of-the-ordinary practice is having test team members fully embedded on our scrum teams.  The software engineers in test work alongside software engineers building functionality, and a task is not considered finished until it is tested through our automated regression suite.&lt;/p&gt;
 
@@ -695,9 +695,9 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
 
 &lt;p&gt;The point of all of this work is to get everyone in line with building a product for the future.  OPOWER is only four years old, and our product has been live and generating energy efficiency gains for over three years.  We are pushing ourselves to build new products to improve those efficiency gains and to positively impact the environment in other ways.  Our clients are pushing us to deliver more functionality to them faster and faster, and in the meantime, they keep giving us more and more data to learn from and use.  If we took a short-term approach to our jobs as engineers, the platform we are building would collapse in on itself, and that would do no one any good.&lt;/p&gt;
 
-&lt;p&gt;Wil Shipley, of Delicious Monster fame, wrote an &lt;a href=&quot;http://blog.wilshipley.com/2011/04/success-and-farming-vs-mining.html&quot;&gt;interesting article&lt;/a&gt; recently, drawing an analogy comparing building software companies to either farming or mining.  When you mine, you take out a loan, purchase a ton of equipment, hire people to dig, strike gold, and profit.  When the gold runs out, you retire.  On the other hand, when you farm, you take out a loan, purchase some equipment and seed, and then you plant and tend.  If things go well, you reap some reward during the harvest season, after which you repeat the cycle, reinvesting your money back into your land.  If you are an adept farmer, you may figure out how to rotate crops and make the most of your land all year long, thus increasing profits.  In his analogy, farming is a long-term approach to building a company, and mining is what you do with a social network for dogs – build it to flip it.&lt;/p&gt;
+&lt;p&gt;Wil Shipley, of Delicious Monster fame, wrote an &lt;a href=&quot;http://blog.wilshipley.com/2011/04/success-and-farming-vs-mining.html&quot;&gt;interesting article&lt;/a&gt; recently, drawing an analogy comparing building software companies to either farming or mining.  When you mine, you take out a loan, purchase a ton of equipment, hire people to dig, strike gold, and profit.  When the gold runs out, you retire.  On the other hand, when you farm, you take out a loan, purchase some equipment and seed, and then you plant and tend.  If things go well, you reap some reward during the harvest season, after which you repeat the cycle, reinvesting your money back into your land.  If you are an adept farmer, you may figure out how to rotate crops and make the most of your land all year long, thus increasing profits.  In his analogy, farming is a long-term approach to building a company, and mining is what you do with a social network for dogs &amp;ndash; build it to flip it.&lt;/p&gt;
 
-&lt;p&gt;At OPOWER, this analogy is particularly apropos, because of our first bottom line.  What is more sustainable – farming or mining?  Clearly, OPOWER is a farming company, and the engineering team is working to ensure the harvest comes in season after season.&lt;/p&gt;
+&lt;p&gt;At OPOWER, this analogy is particularly apropos, because of our first bottom line.  What is more sustainable &amp;ndash; farming or mining?  Clearly, OPOWER is a farming company, and the engineering team is working to ensure the harvest comes in season after season.&lt;/p&gt;
 </description>
             <pubDate>Mon, 02 May 2011 06:27:07 -0700</pubDate>
             <link>http://opower.github.io/2011/05/02/engineerings-second-bottom-line</link>

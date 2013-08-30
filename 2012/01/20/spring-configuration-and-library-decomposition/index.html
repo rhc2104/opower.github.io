@@ -52,48 +52,49 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Spring Configuration and Library Decomposition</h1>
-  <p class="meta pull-right">Written on January 20, 2012 by tom.vaughan</p>
+  <h1><a href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h1>
+  <p class="meta pull-right">Written on January 20, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>Opower’s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we’ve expanded to the point where (not even counting all the Ruby or Scala stuff) we’re managing:</p>
+<p>Opower&rsquo;s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&rsquo;re managing:</p>
 
 <ul>
   <li>4 WAR applications</li>
   <li>33 JAR libraries (1 open sourced @ <a href="https://github.com/opower/jpile">https://github.com/opower/jpile</a>)</li>
-  <li>14 “pom artifacts” that define groupings of projects and organize dependencies, versions, etc</li>
+  <li>14 &ldquo;pom artifacts&rdquo; that define groupings of projects and organize dependencies, versions, etc</li>
 </ul>
 
-<p>Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the “librarification” of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it’s a lot easier to focus on developing the stories in your iteration if you don’t need to worry about stepping on another team’s toes.  That’s more easily achievable when your team aligns to one specific code artifact.</p>
+<p>Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the &ldquo;librarification&rdquo; of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it&rsquo;s a lot easier to focus on developing the stories in your iteration if you don&rsquo;t need to worry about stepping on another team&rsquo;s toes.  That&rsquo;s more easily achievable when your team aligns to one specific code artifact.</p>
 
-<p>A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files – especially in an integration test context.  Here’s a crude picture of our initial state following some decomposition:</p>
+<p>A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files &ndash; especially in an integration test context.  Here&rsquo;s a crude picture of our initial state following some decomposition:</p>
 
 <p><a href="/img/pic11.png"><img src="/img/pic11-300x161.png" alt="One WAR depending on two JARs with duplicated spring bean configuration" /></a></p>
 
-<p>Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of “keep the tests close to the code that they stress.”  That’s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.</p>
+<p>Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of &ldquo;keep the tests close to the code that they stress.&rdquo;  That&rsquo;s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.</p>
 
-<p>Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible “default wiring” of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.</p>
+<p>Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible &ldquo;default wiring&rdquo; of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.</p>
 
 <ul>
-  <li>If a JAR includes a context file ending in “-spring.xml” then it’s automatically included by any WAR that declares a dependency on that JAR.</li>
-  <li>On the other hand, if a JAR includes a context file ending in “Context.xml” then it is only brought in to the WAR’s context with an explicitly declared inclusion of that file.</li>
+  <li>If a JAR includes a context file ending in &ldquo;-spring.xml&rdquo; then it&rsquo;s automatically included by any WAR that declares a dependency on that JAR.</li>
+  <li>On the other hand, if a JAR includes a context file ending in &ldquo;Context.xml&rdquo; then it is only brought in to the WAR&rsquo;s context with an explicitly declared inclusion of that file.</li>
 </ul>
 
-<p>Here’s what the picture looked like when we migrated to that model:</p>
+<p>Here&rsquo;s what the picture looked like when we migrated to that model:</p>
 
 <p><a href="/img/pic21.png"><img src="/img/pic21-300x170.png" alt="One WAR with two JARs, but no duplicated bean configuration" /></a></p>
 
-<p>Integration tests that lived in our various JARs liked living in this model because they could always import “*-spring.xml” and their integration test context would come up and run just fine.</p>
+<p>Integration tests that lived in our various JARs liked living in this model because they could always import &ldquo;*-spring.xml&rdquo; and their integration test context would come up and run just fine.</p>
 
-<p>This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the “*-spring.xml” rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here’s a picture to explain what I mean:</p>
+<p>This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the &ldquo;*-spring.xml&rdquo; rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here&rsquo;s a picture to explain what I mean:</p>
 
 <p><a href="/img/pic31.png"><img src="/img/pic31-300x184.png" alt="Application properties starting to proliferate" /></a></p>
 
-<p>This problem just got worse as you got more and more descended from a given library – for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own “*-spring.xml” files we needed to define properties to configure C within jar-B <strong>and</strong> we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.</p>
+<p>This problem just got worse as you got more and more descended from a given library &ndash; for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own &ldquo;*-spring.xml&rdquo; files we needed to define properties to configure C within jar-B <strong>and</strong> we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.</p>
 
-<p>To solve this we adopted a new standard that basically amounts to “provide sensible defaults for our sensible defaults”: any bean in a “*-spring.xml” snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:</p>
+<p>To solve this we adopted a new standard that basically amounts to &ldquo;provide sensible defaults for our sensible defaults&rdquo;: any bean in a &ldquo;*-spring.xml&rdquo; snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:</p>
 
 <div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;opower.Foo&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;locale&quot;</span> <span class="na">value=</span><span class="s">&quot;${locale}&quot;</span><span class="nt">/&gt;</span>
@@ -114,9 +115,9 @@
 <p>A couple of tricks to note when using this model:</p>
 
 <ul>
-  <li>There’s a big difference in classpath context scanning between “classpath:/<em>-spring.xml” and “classpath</em>:/<em>-spring.xml”.  The first (with just one star) will pull in all the files that match “</em>-spring.xml” in the <em>first</em> directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you’d expect… it pulls in all files that match “*-spring.xml” from every directory in scans in your classpath.</li>
-  <li>Application property defaulting accepts literals after the colon, so it’s safe to do something like <code>${path:file:///blah}</code> to default the property to the string <code>file:///blah</code>.  You can also change the default string separator in the <code>PropertyPlaceholderConfigurer</code> bean so your defaults look more like this: <code>${path?file:///blah}</code>  (using a “?” as a separator)</li>
-  <li>It’s tempting to eliminate application.properties wherever there’s a default, but we avoided that for documentation reasons – we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR’s spring context snippet, we still explicitly declare that property in a WAR’s top-level application.property and document how that property affects the system.</li>
+  <li>There&rsquo;s a big difference in classpath context scanning between &ldquo;classpath:/<em>-spring.xml&rdquo; and &ldquo;classpath</em>:/<em>-spring.xml&rdquo;.  The first (with just one star) will pull in all the files that match &ldquo;</em>-spring.xml&rdquo; in the <em>first</em> directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you&rsquo;d expect&hellip; it pulls in all files that match &ldquo;*-spring.xml&rdquo; from every directory in scans in your classpath.</li>
+  <li>Application property defaulting accepts literals after the colon, so it&rsquo;s safe to do something like <code>${path:file:///blah}</code> to default the property to the string <code>file:///blah</code>.  You can also change the default string separator in the <code>PropertyPlaceholderConfigurer</code> bean so your defaults look more like this: <code>${path?file:///blah}</code>  (using a &ldquo;?&rdquo; as a separator)</li>
+  <li>It&rsquo;s tempting to eliminate application.properties wherever there&rsquo;s a default, but we avoided that for documentation reasons &ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&rsquo;s spring context snippet, we still explicitly declare that property in a WAR&rsquo;s top-level application.property and document how that property affects the system.</li>
 </ul>
 
 </div>

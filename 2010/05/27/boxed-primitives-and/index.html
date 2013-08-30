@@ -52,15 +52,16 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Boxed primitives and ==</h1>
-  <p class="meta pull-right">Written on May 27, 2010 by dave.copeland</p>
+  <h1><a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h1>
+  <p class="meta pull-right">Written on May 27, 2010 by <a href="/authors/dave-copeland">Dave Copeland</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of “Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032” seemed logically impossible, but was somehow true.</p>
+<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo; seemed logically impossible, but was somehow true.</p>
 
-<p>But first, let’s talk about defensive coding and how we do it.  For example:</p>
+<p>But first, let&rsquo;s talk about defensive coding and how we do it.  For example:</p>
 
 <div class="highlight"><pre><code class="java"><span class="cm">/**</span>
 <span class="cm"> * frobs the bar and baz.</span>
@@ -77,7 +78,7 @@
 <span class="o">}</span>
 </code></pre></div>
 
-<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there’s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
+<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there&rsquo;s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
 
 <div class="highlight"><pre><code class="java"><span class="cm">/**</span>
 <span class="cm"> * frobs the bar and baz.</span>
@@ -97,7 +98,7 @@
 </code></pre></div>
 
 <p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
-We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>’s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
+We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>&rsquo;s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
 
 <div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
@@ -111,9 +112,9 @@ We use this pattern extensively, even in constructors of simple data-structure s
 <span class="o">}</span>
 </code></pre></div>
 
-<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person’s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer’s <code>id</code> object.  What’s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
+<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person&rsquo;s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer&rsquo;s <code>id</code> object.  What&rsquo;s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
 
-<p>Until this week; we were testing our application for a new client and I got the error posted above (“Person 1001’s customer id 109032 didn’t match the passed-in customer’s id of 109032”).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
+<p>Until this week; we were testing our application for a new client and I got the error posted above (&ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo;).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
 
 <div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
   <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
@@ -127,7 +128,7 @@ We use this pattern extensively, even in constructors of simple data-structure s
 <span class="o">}</span>
 </code></pre></div>
 
-<p>What’s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
+<p>What&rsquo;s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
 
 <div class="highlight"><pre><code class="java"><span class="n">Long</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
 <span class="n">Long</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>

@@ -52,13 +52,14 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>Picking up your Mac OS environment in RubyMine</h1>
-  <p class="meta pull-right">Written on September 07, 2010 by rob.fagen</p>
+  <h1><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h1>
+  <p class="meta pull-right">Written on September 07, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
-<p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don’t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
+<p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don&rsquo;t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
 
 <ol>
   <li>
@@ -69,7 +70,7 @@
 </code></pre>
   </li>
   <li>
-    <p>Follow <a href="http://www.digitaledgesw.com/node/31">these (untested) directions</a>. In summary, you would add commands like <code>setenv VARIABLE_NAME variable_value</code> in <code>/etc/launchd.conf</code> – the downside is that you have to reboot after making changes, so this doesn’t help if the environment variables you need are somewhat dynamic.</p>
+    <p>Follow <a href="http://www.digitaledgesw.com/node/31">these (untested) directions</a>. In summary, you would add commands like <code>setenv VARIABLE_NAME variable_value</code> in <code>/etc/launchd.conf</code> &ndash; the downside is that you have to reboot after making changes, so this doesn&rsquo;t help if the environment variables you need are somewhat dynamic.</p>
   </li>
 </ol>
 

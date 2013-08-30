@@ -52,15 +52,16 @@
                 <div class="col-lg-8">
 
                 <div class="page-header">
-  <h1>New Developer Law</h1>
-  <p class="meta pull-right">Written on August 26, 2009 by tom.vaughan</p>
+  <h1><a href="/2009/08/26/new-developer-law">New Developer Law</a></h1>
+  <p class="meta pull-right">Written on August 26, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+</p>
   <div class="clearfix"></div>
 </div>
 
 <div class="post-content">
 <p>NEW LAW FOR DEVELOPERS:</p>
 
-<p><em>If you throw an exception about some connection being refused, you’d better damn well put what connection you were attempting to make in the exception message.</em></p>
+<p><em>If you throw an exception about some connection being refused, you&rsquo;d better damn well put what connection you were attempting to make in the exception message.</em></p>
 
 <p>What inspired this law?  Thanks for asking.</p>
 
@@ -74,15 +75,15 @@ at com.mchange.v2.resourcepool.BasicResourcePool.checkoutResource(BasicResourceP
 at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool.checkoutPooledConnection(C3P0PooledConnectionPool.java:525)
 </code></pre>
 
-<p>“A ResourcePool could not acquire a resource from its primary factory or source”.  Awesome.  Sooo helpful.  /wristsemoragegrowl</p>
+<p>&ldquo;A ResourcePool could not acquire a resource from its primary factory or source&rdquo;.  Awesome.  Sooo helpful.  /wristsemoragegrowl</p>
 
-<p>Also, a WARN?  Seriously?  You’re a connection pool.  Do you think not connecting to your underlying datasource warrants maybe something as stern as an ERROR?  Or, heaven forbid, a FATAL?</p>
+<p>Also, a WARN?  Seriously?  You&rsquo;re a connection pool.  Do you think not connecting to your underlying datasource warrants maybe something as stern as an ERROR?  Or, heaven forbid, a FATAL?</p>
 
-<p>I’m sure I could have turned up logging somewhere, but I noticed Spring’s DelegatingDataSource bean standing out from among the stack lines and set a break point on its called method to figure out exactly which of my many connections was unable to be resolved:</p>
+<p>I&rsquo;m sure I could have turned up logging somewhere, but I noticed Spring&rsquo;s DelegatingDataSource bean standing out from among the stack lines and set a break point on its called method to figure out exactly which of my many connections was unable to be resolved:</p>
 
 <p><img src="/img/what_am_i_connecting_to.png" alt="what_am_i_connecting_to" /></p>
 
-<p>There’s the culprit!  <code>localhost:5455</code>.  You know, whoever the idiot is who runs that localhost server needs to get his act together.  I should call the guys from YouTube and have them do a Maury Povich-style video expose on why he can’t keep any of his connections stable.</p>
+<p>There&rsquo;s the culprit!  <code>localhost:5455</code>.  You know, whoever the idiot is who runs that localhost server needs to get his act together.  I should call the guys from YouTube and have them do a Maury Povich-style video expose on why he can&rsquo;t keep any of his connections stable.</p>
 
 </div>
 
