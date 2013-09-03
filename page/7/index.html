@@ -57,8 +57,23 @@
 <div class="posts">
   
   <div class="post">
+    <h2><a href="/2009/10/29/slides-on-improving-your-agile-development-process">Slides on Improving Your Agile Development Process</a></h2>
+    <p class="meta pull-right">Written on October 29, 2009 by <a href="/authors/dave-copeland">Dave Copeland</a>
+</p>
+    <div class="clearfix"></div>
+    <div class="post-content">
+    <p>Dead last, after the headline act, and after Joel Spolsky told everyone to go home, I did a lightning talk at DC&rsquo;s recent DevDays (<a href="http://www.stackoverflow.com">A StackOverflow</a> production) on how we have used <a href="/2009/08/19/measuring-our-awesomeness-iteration-by-iteration">process metrics</a> from our bug tracker to improve our process.</p>
+
+<p><a href="http://www.slideshare.net/davetron5000/measuring-agile-process-shorter-2359457">Improving your Agile Process</a></p>
+
+<p>View more <a href="http://www.slideshare.net/">documents</a> from <a href="http://www.slideshare.net/davetron5000">David Copeland</a>.</p>
+
+
+    </div>
+  </div>
+  
+  <div class="post">
     <h2><a href="/2009/10/15/tweaking-the-agile-calendar">Tweaking the Agile Calendar</a></h2>
-    
     <p class="meta pull-right">Written on October 15, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
 </p>
     <div class="clearfix"></div>
@@ -103,7 +118,6 @@
   
   <div class="post">
     <h2><a href="/2009/10/15/agile-impressions-5-iterations-in">Agile impressions, 5 iterations in...</a></h2>
-    
     <p class="meta pull-right">Written on October 15, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
 </p>
     <div class="clearfix"></div>
@@ -148,7 +162,6 @@
   
   <div class="post">
     <h2><a href="/2009/09/18/best-javadoc-ever">Best javadoc ever</a></h2>
-    
     <p class="meta pull-right">Written on September 18, 2009 by <a href="/authors/yoni-ben-meshulam">Yoni Ben-Meshulam</a>
 </p>
     <div class="clearfix"></div>
@@ -166,91 +179,11 @@
   
   <div class="post">
     <h2><a href="/2009/09/13/expectationstrouble">expectations==trouble</a></h2>
-    
     <p class="meta pull-right">Written on September 13, 2009 by <a href="/authors/yoni-ben-meshulam">Yoni Ben-Meshulam</a>
 </p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p><img src="/img/wtf_javascript.png" alt="expectations will get you in trouble :)" /></p>
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></h2>
-    
-    <p class="meta pull-right">Written on September 10, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>tl/dr: <em>Don&rsquo;t have a non-null object&rsquo;s .toString() display &ldquo;null&rdquo;. It&rsquo;s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
-
-<p>I recently converted the attribute of our Person POJO that stored a user&rsquo;s email address from a java.lang.String to a javax.mail.InternetAddress.  Call it not enough testing or lack of imagination, but I introduced a Null Pointer Exception in a back-office web flow where a new user is created for our customer service application.  When a new CSR account is created and the email address is left blank, an NPE gets thrown up.  Embarrassing, but easy to fix, right?</p>
-
-<p>Just looking at the stack trace narrows it down immediately:</p>
-
-<pre><code>2009-09-09 16:56:53,636 WARN  [btpool0-1] [REPORT] [WARN] Handler execution resulted in exception
-java.lang.NullPointerException
-	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:609)
-	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:569)
-	at javax.mail.internet.InternetAddress.(InternetAddress.java:105)
-	at poscore.db.InternetAddressUserType.deepCopy(InternetAddressUserType.java:93)
-	at org.hibernate.type.CustomType.deepCopy(CustomType.java:179)
-	at org.hibernate.type.TypeFactory.deepCopy(TypeFactory.java:374)
-</code></pre>
-
-<p>Ahh&hellip;yeah&hellip;that custom hibernate type I wrote to translate VARCHARs to InternetAddresses and vice versa.  Ok, what does that deep copy method look like?</p>
-
-<div class="highlight"><pre><code class="java">    
-<span class="kd">public</span> <span class="n">Object</span> <span class="nf">deepCopy</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">HibernateException</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="n">InternetAddress</span> <span class="n">original</span> <span class="o">=</span> <span class="o">(</span><span class="n">InternetAddress</span><span class="o">)</span><span class="n">value</span><span class="o">;</span>
-    <span class="n">InternetAddress</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="k">catch</span> <span class="o">(</span><span class="n">AddressException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">HibernateException</span><span class="o">(</span><span class="s">&quot;Unable to deep copy email address &#39;&quot;</span> <span class="o">+</span> <span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;&#39;&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">copy</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>It turns out, the error is right here:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
-</code></pre></div>
-
-<p>You can&rsquo;t pass a null to the InternetAddress constructor.  It was late in the day and I must not have internalized that there&rsquo;s no way <em>value</em> or <em>original</em> could be null, because my first instinct was that the NPE was actually the result of calling &ldquo;.getAddress()&rdquo; on a null <em>original</em> object&hellip;.not that the constructor can&rsquo;t take a null.</p>
-
-<p>While I was on that assumption (that it was the <em>original</em> object that was null), I fired up my debugger and got confused by what appeared to be null-checks failing to check nulls. Check out this screen shot of the NPE about to be thrown after what appears to be 2 null checks failing to prevent the NPE:</p>
-
-<p><img src="/img/null_internet_address.png" alt="null_internet_address" /></p>
-
-<p>The arrows marked (A) and (B) shows what appear to be null objects passing null checks (in the top pane) even though they&rsquo;re being reported as null (in the bottom pane).  The green line (C) shows the code falling through to that line just before it throws up the NPE.</p>
-
-<p>Of course, <em>value</em> and <em>original</em> aren&rsquo;t null at all&hellip;it&rsquo;s just that their .toString() methods report them to be null.  Here&rsquo;s the InternetAddress.toString method:</p>
-
-<pre><code>276   public String toString() {
-277       if (encodedPersonal == null &amp;&amp; personal != null)
-278           try {
-279	              encodedPersonal = MimeUtility.encodeWord(personal);
-280           } catch (UnsupportedEncodingException ex) { }
-281
-282       if (encodedPersonal != null)
-283           return quotePhrase(encodedPersonal) + " &lt;" + address + "&gt;";
-284       else if (isGroup() || isSimple())
-285           return address;
-286       else
-287           return "&lt;" + address + "&gt;";
-288   }
-</code></pre>
-
-<p>In my situation, I fell in to the <code>else if(isGroup() || isSimple())</code> case, which returns <code>address</code>, which is null, so the <code>.toString()</code> for the whole InternetAddress object is &ldquo;null.&rdquo;</p>
-
-<p>I think the toString() method could benefit from another null-check right at line 284, which would mean an InternetAddress object with a null internal <code>address</code> String would display as &ldquo;&lt;null&gt;&rdquo; &hellip;that&rsquo;s a more immediate clue that the object itself isn&rsquo;t null.</p>
 
     </div>
   </div>

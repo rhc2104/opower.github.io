@@ -57,8 +57,104 @@
 <div class="posts">
   
   <div class="post">
+    <h2><a href="/2013/09/01/the-big-data-elders-archeology-hour">The Big Data Elders, Archeology Hour</a></h2>
+    <p class="meta pull-right">Written on September 01, 2013 by <a href="/authors/alexandre-normand">Alexandre Normand</a>
+ and <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+</p>
+    <div class="clearfix"></div>
+    <div class="post-content">
+    <p>After all that&rsquo;s been written about the <a href="/2013/07/07/the-story-of-the-big-data-elders">ancient Big Data elders</a>
+and their artful discoveries, it seems appropriate to now lift the curtain and
+reveal the modern, specific, and, sometimes dirty, details.</p>
+
+<p>Before we do, let&rsquo;s get something out in the open right now: working at 
+<a href="http://opower.com">Opower</a> is pretty great. We get to make an impact on this
+ world, using fancy and effective behavioral science while working with cool 
+ and exciting tech. Awesome, right?</p>
+
+<h3 id="a-brief-history-of-data-storage-at-opower">A brief history of data storage at Opower</h3>
+<p>We have been using MySQL as our main database since day one.  It has been good 
+to us, and we have figured out how to scale it well enough.  But as our 
+business has grown, so have our data storage needs.  Each of our utility 
+company clients gives us historical energy data for their customers, and we 
+store it indefinitely.  For utility companies that have smart meters 
+installed, we store energy reads that occur every 15 minutes, hour, or day.<br />
+For a meter with 15 minute resolution, we store 3000 times as much data as a 
+standard meter that is read once a month.</p>
+
+<p>As more and more utility companies install smart meters, we ingest more and 
+more of this higher resolution data, which comes in more frequently than 
+standard monthly data.  Those last two characteristics hit on two of the 
+&ldquo;<a href="http://whatis.techtarget.com/definition/3Vs">three V’s</a>&rdquo; that define &ldquo;Big
+Data&rdquo;: volume and velocity.  As we have collected the smart meter data over
+the last several years, we have figured out innovative ways to use it, and we 
+want to accelerate our learning using the data.  To achieve that, we needed a 
+system better suited to processing large amounts of data, and that is where 
+Hadoop and HBase fit in.</p>
+
+<p>We have a business case that fits HBase perfectly, because we need to perform 
+large batch calculations (running a disaggregation of A/C usage from your 
+energy data, for instance), and we need to serve up the results of those 
+calculations with low latency.  HBase gives us the perfect mix of those two 
+access patterns, and we have spent the last year working on our new storage 
+system to do exactly this.</p>
+
+<h3 id="using-it-is-one-thing-showing-it-is-another">Using it is one thing, showing it is another</h3>
+<p>All of this fancy Big Data is pretty amazing but it&rsquo;s also not very sexy to 
+the untrained eye. After several low-level demos making use of the terminal, 
+logs and job tracker UI, we decided it was time to try a little harder. Let&rsquo;s 
+ponder: what can we show to illustrate the fact that we process and store all 
+of this energy data without breaking a sweat? </p>
+
+<h4 id="table-size">Table size</h4>
+<p>Showing table size is an obvious one. People understand what a terabyte 
+represents (at the very least, they know it&rsquo;s bigger than their inbox). </p>
+
+<p>For the demo, we gathered the table size data while our big test was running. 
+We built a simple command-line tool that polls hdfs for the size of each 
+table&rsquo;s directory. It keeps track of the sizes and outputs a json time series 
+when the tool shuts down. It&rsquo;s designed to run from a gateway node that can 
+run the hadoop command and run <code>hadoop fs du</code> on hdfs.</p>
+
+<p>Source: <a href="https://github.com/opower/giant-squash">giant-squash</a></p>
+
+<h4 id="job-progress">Job progress</h4>
+<p>Showing the tables growing is interesting but it doesn&rsquo;t show all the work 
+that&rsquo;s done in Hadoop to get this data in HBase. Let&rsquo;s add the job progress 
+and input/output sizes. </p>
+
+<p>This is very similar to <a href="https://github.com/opower/giant-squash">giant-squash</a> 
+except that it collects data from the job tracker on the jobs that are running 
+on the cluster. It also collects the data in-memory and dumps a json time 
+series of the input/output sizes as well as map/reduce progress on exit.  </p>
+
+<p>Source: <a href="https://github.com/opower/little-rabbit">little-rabbit</a></p>
+
+<h4 id="putting-it-together">Putting it together</h4>
+<p>Now that we&rsquo;ve got the data collected and our test is complete, let&rsquo;s animate 
+it in fast-motion.</p>
+
+<p>Based on this nice d3.js <a href="http://bost.ocks.org/mike/nations/">Motion Chart</a> 
+demo, we created our version to animate the time series data. It reads the two 
+json dumps and merges this in one visualization. Granted, it violates some of 
+the <a href="http://moz.com/blog/data-visualization-principles-lessons-from-tufte">principles of data information visualization</a>
+but it does make for a cool presentation and it gets people interested enough to
+ask questions about it.</p>
+
+<p>Source: <a href="https://github.com/opower/bloom-harvester">bloom-harvester</a></p>
+
+<h4 id="hollywood-production">Hollywood production</h4>
+<p>Finally we wrapped it in with a nice summary of the digestible numbers and a 
+nice soundtrack and voilà.</p>
+
+<p>Where are the explosions I hear you say? Well, maybe next time. After all, 
+this is going to production in just a few weeks.</p>
+
+    </div>
+  </div>
+  
+  <div class="post">
     <h2><a href="/2013/07/07/the-story-of-the-big-data-elders">The Story of the Big Data Elders</a></h2>
-    
     <p class="meta pull-right">Written on July 07, 2013 by <a href="/authors/alexandre-normand">Alexandre Normand</a>
 </p>
     <div class="clearfix"></div>
@@ -169,7 +265,6 @@ The villagers talked for a while and came back to the elders with a reward. </p>
   
   <div class="post">
     <h2><a href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
-    
     <p class="meta pull-right">Written on March 29, 2013 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
 </p>
     <div class="clearfix"></div>
@@ -258,7 +353,6 @@ will all be using relational databases again by that point.</p>
   
   <div class="post">
     <h2><a href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></h2>
-    
     <p class="meta pull-right">Written on October 12, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
 </p>
     <div class="clearfix"></div>
@@ -272,7 +366,6 @@ will all be using relational databases again by that point.</p>
   
   <div class="post">
     <h2><a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h2>
-    
     <p class="meta pull-right">Written on September 06, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
 </p>
     <div class="clearfix"></div>
@@ -399,52 +492,6 @@ default-autowire=&quot;byName&quot;&gt;
 <p>When spinning up that context, I&rsquo;d get an error: &ldquo;java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.&rdquo;  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
 
 <p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a href="/2012/04/12/whos-inhabiting-your-code">Who's Inhabiting Your Code?</a></h2>
-    
-    <p class="meta pull-right">Written on April 12, 2012 by <a href="/authors/ed-peters">Ed Peters</a>
-</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>Lately I&rsquo;ve been thinking about the notion of &ldquo;beautiful code&rdquo;, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they&rsquo;re all wrong).  And second, even when you can label a piece of code as &ldquo;beautiful&rdquo;, it&rsquo;s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.</p>
-
-<p>In my reading, I came across a great article by Rebecca Wirfs-Brock<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> in which she discusses the notion of &ldquo;habitable code&rdquo;.  This idea isn&rsquo;t original to her (she credits Richard Gabriel in Patterns of Software<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.</p>
-
-<p>Paraphrasing some key points &hellip;</p>
-
-<ul>
-  <li>
-    <p><em>Clarity for its own sake is an elusive goal</em>.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it&rsquo;s at the expense of clarity in some other area. It&rsquo;s a bit like a game of <a href="http://en.wikipedia.org/wiki/Whac-A-Mole">Whac-A-Mole</a>.  Just as you can&rsquo;t write code that&rsquo;s infinitely flexible in the face of unknown future requirements, I don&rsquo;t think you can write code that&rsquo;s infinitely clear to an unknown future audience.</p>
-  </li>
-  <li>
-    <p><em>Beauty becomes a constraint for future authors</em>.  It&rsquo;s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design &ndash; the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.</p>
-  </li>
-  <li>
-    <p><em>Habitable code makes its structure and intentions easy to understand</em>.  Structure, sure, but as a professional developer, the &ldquo;and intentions&rdquo; part seems pretty important.  You can read code to understand what it&rsquo;s doing, but it&rsquo;s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right &ndash; the best I&rsquo;ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.</p>
-  </li>
-  <li>
-    <p><em>Habitable code makes developers feel at home</em>.  At <a href="http://www.opower.com">Opower</a> we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you&rsquo;ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.</p>
-  </li>
-</ul>
-
-<p>Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don&rsquo;t feel bad about rewriting it.  But it&rsquo;s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.</p>
-
-<p>So &hellip; who&rsquo;s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?</p>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="http://www.wirfs-brock.com/PDFs/DoesBeautifulCodeImply.pdf">Does Beautiful Code Imply Beautiful Design</a> by Rebecca Wirfs-Brock.<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p><a href="http://dreamsongs.net/Files/PatternsOfSoftware.pdf">Patterns of Software: Tales from the Software Community</a> by Richard P. Gabriel.<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 
     </div>
   </div>

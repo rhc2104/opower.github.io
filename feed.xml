@@ -7,6 +7,100 @@
         <atom:link href="http://opower.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>The Big Data Elders, Archeology Hour</title>
+            <description>&lt;p&gt;After all that&amp;rsquo;s been written about the &lt;a href=&quot;/2013/07/07/the-story-of-the-big-data-elders&quot;&gt;ancient Big Data elders&lt;/a&gt;
+and their artful discoveries, it seems appropriate to now lift the curtain and
+reveal the modern, specific, and, sometimes dirty, details.&lt;/p&gt;
+
+&lt;p&gt;Before we do, let&amp;rsquo;s get something out in the open right now: working at 
+&lt;a href=&quot;http://opower.com&quot;&gt;Opower&lt;/a&gt; is pretty great. We get to make an impact on this
+ world, using fancy and effective behavioral science while working with cool 
+ and exciting tech. Awesome, right?&lt;/p&gt;
+
+&lt;h3 id=&quot;a-brief-history-of-data-storage-at-opower&quot;&gt;A brief history of data storage at Opower&lt;/h3&gt;
+&lt;p&gt;We have been using MySQL as our main database since day one.  It has been good 
+to us, and we have figured out how to scale it well enough.  But as our 
+business has grown, so have our data storage needs.  Each of our utility 
+company clients gives us historical energy data for their customers, and we 
+store it indefinitely.  For utility companies that have smart meters 
+installed, we store energy reads that occur every 15 minutes, hour, or day.&lt;br /&gt;
+For a meter with 15 minute resolution, we store 3000 times as much data as a 
+standard meter that is read once a month.&lt;/p&gt;
+
+&lt;p&gt;As more and more utility companies install smart meters, we ingest more and 
+more of this higher resolution data, which comes in more frequently than 
+standard monthly data.  Those last two characteristics hit on two of the 
+&amp;ldquo;&lt;a href=&quot;http://whatis.techtarget.com/definition/3Vs&quot;&gt;three V’s&lt;/a&gt;&amp;rdquo; that define &amp;ldquo;Big
+Data&amp;rdquo;: volume and velocity.  As we have collected the smart meter data over
+the last several years, we have figured out innovative ways to use it, and we 
+want to accelerate our learning using the data.  To achieve that, we needed a 
+system better suited to processing large amounts of data, and that is where 
+Hadoop and HBase fit in.&lt;/p&gt;
+
+&lt;p&gt;We have a business case that fits HBase perfectly, because we need to perform 
+large batch calculations (running a disaggregation of A/C usage from your 
+energy data, for instance), and we need to serve up the results of those 
+calculations with low latency.  HBase gives us the perfect mix of those two 
+access patterns, and we have spent the last year working on our new storage 
+system to do exactly this.&lt;/p&gt;
+
+&lt;h3 id=&quot;using-it-is-one-thing-showing-it-is-another&quot;&gt;Using it is one thing, showing it is another&lt;/h3&gt;
+&lt;p&gt;All of this fancy Big Data is pretty amazing but it&amp;rsquo;s also not very sexy to 
+the untrained eye. After several low-level demos making use of the terminal, 
+logs and job tracker UI, we decided it was time to try a little harder. Let&amp;rsquo;s 
+ponder: what can we show to illustrate the fact that we process and store all 
+of this energy data without breaking a sweat? &lt;/p&gt;
+
+&lt;h4 id=&quot;table-size&quot;&gt;Table size&lt;/h4&gt;
+&lt;p&gt;Showing table size is an obvious one. People understand what a terabyte 
+represents (at the very least, they know it&amp;rsquo;s bigger than their inbox). &lt;/p&gt;
+
+&lt;p&gt;For the demo, we gathered the table size data while our big test was running. 
+We built a simple command-line tool that polls hdfs for the size of each 
+table&amp;rsquo;s directory. It keeps track of the sizes and outputs a json time series 
+when the tool shuts down. It&amp;rsquo;s designed to run from a gateway node that can 
+run the hadoop command and run &lt;code&gt;hadoop fs du&lt;/code&gt; on hdfs.&lt;/p&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;https://github.com/opower/giant-squash&quot;&gt;giant-squash&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;job-progress&quot;&gt;Job progress&lt;/h4&gt;
+&lt;p&gt;Showing the tables growing is interesting but it doesn&amp;rsquo;t show all the work 
+that&amp;rsquo;s done in Hadoop to get this data in HBase. Let&amp;rsquo;s add the job progress 
+and input/output sizes. &lt;/p&gt;
+
+&lt;p&gt;This is very similar to &lt;a href=&quot;https://github.com/opower/giant-squash&quot;&gt;giant-squash&lt;/a&gt; 
+except that it collects data from the job tracker on the jobs that are running 
+on the cluster. It also collects the data in-memory and dumps a json time 
+series of the input/output sizes as well as map/reduce progress on exit.  &lt;/p&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;https://github.com/opower/little-rabbit&quot;&gt;little-rabbit&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;putting-it-together&quot;&gt;Putting it together&lt;/h4&gt;
+&lt;p&gt;Now that we&amp;rsquo;ve got the data collected and our test is complete, let&amp;rsquo;s animate 
+it in fast-motion.&lt;/p&gt;
+
+&lt;p&gt;Based on this nice d3.js &lt;a href=&quot;http://bost.ocks.org/mike/nations/&quot;&gt;Motion Chart&lt;/a&gt; 
+demo, we created our version to animate the time series data. It reads the two 
+json dumps and merges this in one visualization. Granted, it violates some of 
+the &lt;a href=&quot;http://moz.com/blog/data-visualization-principles-lessons-from-tufte&quot;&gt;principles of data information visualization&lt;/a&gt;
+but it does make for a cool presentation and it gets people interested enough to
+ask questions about it.&lt;/p&gt;
+
+&lt;p&gt;Source: &lt;a href=&quot;https://github.com/opower/bloom-harvester&quot;&gt;bloom-harvester&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;hollywood-production&quot;&gt;Hollywood production&lt;/h4&gt;
+&lt;p&gt;Finally we wrapped it in with a nice summary of the digestible numbers and a 
+nice soundtrack and voilà.&lt;/p&gt;
+
+&lt;p&gt;Where are the explosions I hear you say? Well, maybe next time. After all, 
+this is going to production in just a few weeks.&lt;/p&gt;
+</description>
+            <pubDate>Sun, 01 Sep 2013 00:00:00 -0700</pubDate>
+            <link>http://opower.github.io/2013/09/01/the-big-data-elders-archeology-hour</link>
+            <guid isPermaLink="true">http://opower.github.io/2013/09/01/the-big-data-elders-archeology-hour</guid>
+        </item>
+        
+        <item>
             <title>The Story of the Big Data Elders</title>
             <description>&lt;p&gt;There was a time, not so long ago, when everything was dark. Everything was 
 dark except for a few rapidly moving glyphs that none could really understand. 
@@ -683,25 +777,6 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
             <pubDate>Tue, 05 Jul 2011 11:00:34 -0700</pubDate>
             <link>http://opower.github.io/2011/07/05/attentive-programming</link>
             <guid isPermaLink="true">http://opower.github.io/2011/07/05/attentive-programming</guid>
-        </item>
-        
-        <item>
-            <title>Engineering's Second Bottom Line</title>
-            <description>&lt;p&gt;OPOWER has a set of company values, the first of which is &amp;ldquo;We are double bottom line.&amp;rdquo;  Our two bottom lines are the environment (we want to improve that) and money (we want to make that).  Everyone in the company is fully bought in to the first bottom line.  Given our enterprisey business model, the engineering team cannot contribute directly to the company making money (accounting lingo deems us a liability, as does HR sometimes), so we have a slightly different second bottom line.&lt;/p&gt;
-
-&lt;p&gt;We focus on how we build the product to ensure it supports the business for the long haul.  We take this part of our job very seriously and are constantly working to improve how we work.  We use some of the obvious practices from agile like scrum teams, story pointing, and short-term iteration planning to keep ourselves on track with the functionality we need to build over a three iteration horizon.  A more out-of-the-ordinary practice is having test team members fully embedded on our scrum teams.  The software engineers in test work alongside software engineers building functionality, and a task is not considered finished until it is tested through our automated regression suite.&lt;/p&gt;
-
-&lt;p&gt;We do team retrospectives almost every iteration and keep a backlog of tasks to work on during regression weeks to keep improving our tools and process.  When it comes to coding, we have formal code reviews every three weeks as part of the iteration cycle, and ad hoc code reviews happen during the build.  Some of our reviews can get heated (though not personal), and everyone knows that the intent is to build the best product we can.  The reviews are also a lot of fun.&lt;/p&gt;
-
-&lt;p&gt;The point of all of this work is to get everyone in line with building a product for the future.  OPOWER is only four years old, and our product has been live and generating energy efficiency gains for over three years.  We are pushing ourselves to build new products to improve those efficiency gains and to positively impact the environment in other ways.  Our clients are pushing us to deliver more functionality to them faster and faster, and in the meantime, they keep giving us more and more data to learn from and use.  If we took a short-term approach to our jobs as engineers, the platform we are building would collapse in on itself, and that would do no one any good.&lt;/p&gt;
-
-&lt;p&gt;Wil Shipley, of Delicious Monster fame, wrote an &lt;a href=&quot;http://blog.wilshipley.com/2011/04/success-and-farming-vs-mining.html&quot;&gt;interesting article&lt;/a&gt; recently, drawing an analogy comparing building software companies to either farming or mining.  When you mine, you take out a loan, purchase a ton of equipment, hire people to dig, strike gold, and profit.  When the gold runs out, you retire.  On the other hand, when you farm, you take out a loan, purchase some equipment and seed, and then you plant and tend.  If things go well, you reap some reward during the harvest season, after which you repeat the cycle, reinvesting your money back into your land.  If you are an adept farmer, you may figure out how to rotate crops and make the most of your land all year long, thus increasing profits.  In his analogy, farming is a long-term approach to building a company, and mining is what you do with a social network for dogs &amp;ndash; build it to flip it.&lt;/p&gt;
-
-&lt;p&gt;At OPOWER, this analogy is particularly apropos, because of our first bottom line.  What is more sustainable &amp;ndash; farming or mining?  Clearly, OPOWER is a farming company, and the engineering team is working to ensure the harvest comes in season after season.&lt;/p&gt;
-</description>
-            <pubDate>Mon, 02 May 2011 06:27:07 -0700</pubDate>
-            <link>http://opower.github.io/2011/05/02/engineerings-second-bottom-line</link>
-            <guid isPermaLink="true">http://opower.github.io/2011/05/02/engineerings-second-bottom-line</guid>
         </item>
         
     </channel>

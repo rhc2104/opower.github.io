@@ -57,8 +57,43 @@
 <div class="posts">
   
   <div class="post">
+    <h2><a href="/2010/10/07/opower-engineering-principles">OPOWER Engineering Principles</a></h2>
+    <p class="meta pull-right">Written on October 07, 2010 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+</p>
+    <div class="clearfix"></div>
+    <div class="post-content">
+    <p>We are engineers.  Not programmers, developers, or coders; and certainly not hackers.  The distinction is important, because we are building a system for the long haul, not just a class or script or even an application.  It is our responsibility to keep the entire operating environment in mind as we think about what we build, because we must consider all components of the system in order to build it to sustain the life of the business.  Hackers do not do this type of work.  Engineers do.  We are engineers.</p>
+
+<p>As engineers our core principles include</p>
+
+<ul>
+  <li>Thinking</li>
+  <li>Testing</li>
+  <li>Improving</li>
+  <li>Tooling</li>
+</ul>
+
+<h3 id="thinking">Thinking</h3>
+
+<p>All projects need a certain amount of forethought put into them before code hits the screen.  In fact all need just the right amount.  As engineers, it is our responsibility to determine how much thought is needed and how to best communicate the output of that thought.  We rely on the maturity, discipline, and experience of our team to make the right decisions every day, balancing purity of design with what is most practical.  We should not expect to get a design wrong the first time, nor should we expect to get it right.  Rather we should expect to get it pointing in the right direction.  We do not create throw away designs that we expect to refactor later.  That is a flawed philosophy that allows people to design on the fly while coding.  We create designs that lay a a foundation for future functionality.  Our designs are informed by the past, focus on the present, and keep an eye on the future.</p>
+
+<h3 id="testing">Testing</h3>
+
+<p>Quality of our product is very important, because our products affect millions of people daily.  As such, testing is baked into our philosophy and methodology from the start.  We do not necessarily employ test-driven development, but we start writing test specs when we begin a story.  All team members are responsible for quality, and all are responsible for writing tests: unit, integration, and regression &ndash; whatever is appropriate for the feature.  When a bug is discovered, a test is written to reproduce the bug before code is changed to fix it.  This is the best way to ensure the bug does not creep back in later.  As much as possible, tests are fully automated and run with each continuous integration build.</p>
+
+<h3 id="improving">Improving</h3>
+
+<p>Continuous integration is old hat now.  People are talking about continuous deployment more and more.  We believe in continuous improvement and are on a constant mission to better our process, designs, code and knowledge.  For process, we run post-mortem reviews after each iteration, cataloging what worked well and what did not, resulting in suggestions of ways to change.  Since we are wedded only to what works, we can adapt until we find the right thing.  For designs and code, we run group reviews on a weekly basis, allowing for anyone to present a design or code sample for review by his peers.  These meetings are when we solidify our standards and conventions as well as informally teach good design thinking and share knowledge of the frameworks and tools we use to make our team more efficient.  Increasing individuals&rsquo; knowledge is a more self-directed activity; we rely on the team to investigate and research topics they are interested in and will support them through book purchases, course reimbursement and conference sponsorship.  To support our efforts at continuous improvement, we also follow a practice of continuous feedback.  In addition to formal performance evaluations, we collect short bits of feedback (&ldquo;tweets&rdquo; if you will) after each iteration to make sure all team members know where they are doing well and how they can improve.</p>
+
+<h3 id="tooling">Tooling</h3>
+
+<p>We choose the right tools for the job.  This is as much an imperative to consider legacy and the team&rsquo;s skills as it is to push the boundaries with new tools at our disposal.  The important aspect of this tenet is that any tool must be the right tool, which means its appropriateness must be evaluated before it is used.  We do not start using the latest tool just because it is new &ndash; we use it because it solves a problem we have in a way better than any current tool without creating new bigger problems.  This is not an &ldquo;if you have a hammer&rdquo; kind of philosophy, but more along the lines of choosing the right size hammer for the job.</p>
+
+    </div>
+  </div>
+  
+  <div class="post">
     <h2><a href="/2010/09/14/introducing-the-opower-engineering-dashboard">Introducing the OPOWER Engineering Dashboard</a></h2>
-    
     <p class="meta pull-right">Written on September 14, 2010 by <a href="/authors/joel-strait">Joel Strait</a>
 </p>
     <div class="clearfix"></div>
@@ -96,7 +131,6 @@
   
   <div class="post">
     <h2><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h2>
-    
     <p class="meta pull-right">Written on September 07, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
 </p>
     <div class="clearfix"></div>
@@ -121,7 +155,6 @@
   
   <div class="post">
     <h2><a href="/2010/08/26/just-what-is-a-software-engineer-in-test">Just What is A Software Engineer in Test?</a></h2>
-    
     <p class="meta pull-right">Written on August 26, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
 </p>
     <div class="clearfix"></div>
@@ -153,7 +186,6 @@
   
   <div class="post">
     <h2><a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h2>
-    
     <p class="meta pull-right">Written on July 27, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
 </p>
     <div class="clearfix"></div>
@@ -277,43 +309,6 @@
 <span class="nt">&lt;/project&gt;</span>
 </code></pre></div>
 
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></h2>
-    
-    <p class="meta pull-right">Written on July 26, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg." /></p>
-
-<p>I was trolling trawling through reddit waiting for a JAR to compile and <a href="http://nerds-central.blogspot.com/2010/07/development-management-act-of.html">found this blog post</a>.  That blog made a couple claims that had crossed my mind a couple months ago when our engineering director solicited  feedback about using Key Performance Indicators for the dev team.  The blog post&rsquo;s point wasn&rsquo;t so much that the _act _of measuring a team changes its performance but rather that when the team is aware of what&rsquo;s being measured, it naturally &ldquo;cheats&rdquo; in ways to maximize the measured value.  The first comment on the blog post alerted me to a law I hadn&rsquo;t known about, but which sounds pretty intuitively correct:</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart&rsquo;s Law</a>: <em>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes</em></p>
-
-<p>Here at OPOWER, developers and product managers don&rsquo;t deal with KPIs on a day-to-day basis. I think it&rsquo;s mostly a management-level &ldquo;let&rsquo;s starting capturing some numbers over several months and see if there&rsquo;s anything out-of-whack&rdquo; kind of thing.</p>
-
-<p>In terms of development KPIs, some of the things we thought it might be interesting to collect included:</p>
-
-<ul>
-  <li>story points delivered per iteration</li>
-  <li>% of story points (aggregate) done in an iteration that were planned at the beginning</li>
-  <li>% QA coverage of production (automated)</li>
-  <li>etc.</li>
-</ul>
-
-<p>The &ldquo;story points delivered per iteration&rdquo; is, I think, precisely the kind of thing Goodhart was talking about when he made up his law.  <em>That said</em>, we are a business and we are expected to work and be productive, so it isn&rsquo;t exactly a satisfying for a VP or CEO to hear from their dev team &ldquo;sorry, you can&rsquo;t measure us because we&rsquo;ll just skew the measurement number to please you.&rdquo;  So what&rsquo;s management to do with their IT cabal?</p>
-
-<p><em>Assuming</em> you could normalize what story points mean across different teams, and <em>assuming</em> you can account for &ldquo;point inflation&rdquo; and <em>assuming</em> you accurately tracked vacations and network outages and late requirements and all the other stuff that goes along with uncertainty in exactly how much gets delivered in an iteration, must you also assume that the team gradually skews the number to meet the goal?  What if the goal was kept secret?  What if the team didn&rsquo;t know they were being measured?  That&rsquo;s hardly a way to foster a healthy relationship between management and product development.</p>
-
-<p><img src="/img/heisenberg_bb.jpg" alt="A picture of Walt from Breaking Bad" /></p>
-
-<p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to &ldquo;number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,&rdquo; what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn&rsquo;t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won&rsquo;t be holding my breath.</p>
-
-<p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart&rsquo;s Law.  After all, it&rsquo;s just a Law.  Like De Morgan&rsquo;s Law, except maybe with a bit more wiggle room.</p>
 
     </div>
   </div>
