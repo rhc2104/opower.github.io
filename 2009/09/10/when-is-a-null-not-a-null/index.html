@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></h1>
-  <p class="meta pull-right">Written on September 10, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></h1>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | September 10, 2009</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>tl/dr: <em>Don&rsquo;t have a non-null object&rsquo;s .toString() display &ldquo;null&rdquo;. It&rsquo;s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
+  <div class="post-content">
+    <p>tl/dr: <em>Don&rsquo;t have a non-null object&rsquo;s .toString() display &ldquo;null&rdquo;. It&rsquo;s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
 
 <p>I recently converted the attribute of our Person POJO that stored a user&rsquo;s email address from a java.lang.String to a javax.mail.InternetAddress.  Call it not enough testing or lack of imagination, but I introduced a Null Pointer Exception in a back-office web flow where a new user is created for our customer service application.  When a new CSR account is created and the email address is left blank, an NPE gets thrown up.  Embarrassing, but easy to fix, right?</p>
 
@@ -128,6 +132,7 @@ java.lang.NullPointerException
 
 <p>I think the toString() method could benefit from another null-check right at line 284, which would mean an InternetAddress object with a null internal <code>address</code> String would display as &ldquo;&lt;null&gt;&rdquo; &hellip;that&rsquo;s a more immediate clue that the object itself isn&rsquo;t null.</p>
 
+  </div>
 </div>
 
 

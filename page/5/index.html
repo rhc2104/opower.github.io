@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,216 +54,65 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1>Blog Posts</h1>
-</div>
-<div class="posts">
+                <div class="posts">
   
   <div class="post">
-    <h2><a href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></h2>
-    <p class="meta pull-right">Written on July 26, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | July 26, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg." /></p>
 
-<p>I was trolling trawling through reddit waiting for a JAR to compile and <a href="http://nerds-central.blogspot.com/2010/07/development-management-act-of.html">found this blog post</a>.  That blog made a couple claims that had crossed my mind a couple months ago when our engineering director solicited  feedback about using Key Performance Indicators for the dev team.  The blog post&rsquo;s point wasn&rsquo;t so much that the _act _of measuring a team changes its performance but rather that when the team is aware of what&rsquo;s being measured, it naturally &ldquo;cheats&rdquo; in ways to maximize the measured value.  The first comment on the blog post alerted me to a law I hadn&rsquo;t known about, but which sounds pretty intuitively correct:</p>
-
-<p><a href="http://en.wikipedia.org/wiki/Goodhart%27s_law">Goodhart&rsquo;s Law</a>: <em>Any observed statistical regularity will tend to collapse once pressure is placed upon it for control purposes</em></p>
-
-<p>Here at OPOWER, developers and product managers don&rsquo;t deal with KPIs on a day-to-day basis. I think it&rsquo;s mostly a management-level &ldquo;let&rsquo;s starting capturing some numbers over several months and see if there&rsquo;s anything out-of-whack&rdquo; kind of thing.</p>
-
-<p>In terms of development KPIs, some of the things we thought it might be interesting to collect included:</p>
-
-<ul>
-  <li>story points delivered per iteration</li>
-  <li>% of story points (aggregate) done in an iteration that were planned at the beginning</li>
-  <li>% QA coverage of production (automated)</li>
-  <li>etc.</li>
-</ul>
-
-<p>The &ldquo;story points delivered per iteration&rdquo; is, I think, precisely the kind of thing Goodhart was talking about when he made up his law.  <em>That said</em>, we are a business and we are expected to work and be productive, so it isn&rsquo;t exactly a satisfying for a VP or CEO to hear from their dev team &ldquo;sorry, you can&rsquo;t measure us because we&rsquo;ll just skew the measurement number to please you.&rdquo;  So what&rsquo;s management to do with their IT cabal?</p>
-
-<p><em>Assuming</em> you could normalize what story points mean across different teams, and <em>assuming</em> you can account for &ldquo;point inflation&rdquo; and <em>assuming</em> you accurately tracked vacations and network outages and late requirements and all the other stuff that goes along with uncertainty in exactly how much gets delivered in an iteration, must you also assume that the team gradually skews the number to meet the goal?  What if the goal was kept secret?  What if the team didn&rsquo;t know they were being measured?  That&rsquo;s hardly a way to foster a healthy relationship between management and product development.</p>
-
-<p><img src="/img/heisenberg_bb.jpg" alt="A picture of Walt from Breaking Bad" /></p>
-
-<p>One way around this dilemma is to find some totally objective metric in the software engineering process.  In other words, if you could apply KPIs to &ldquo;number of sprockets coming off the assembly line such that each sprocket is within .1% tolerance,&rdquo; what is a similar kind of thing in our iteration process we could measure?  I.e., one that doesn&rsquo;t easily fall prey to inflation or manipulation?  If you can find something like that, lemme know.  Until then, I won&rsquo;t be holding my breath.</p>
-
-<p>Another possible option would be to go ahead and publicly measure highly subjective KPIs anyway and ask the measurees (us) to be as objective as possible when measuring.  I.e., fly in the face of Goodhart&rsquo;s Law.  After all, it&rsquo;s just a Law.  Like De Morgan&rsquo;s Law, except maybe with a bit more wiggle room.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h2>
-    <p class="meta pull-right">Written on May 27, 2010 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
+    <h2><a class="title" href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h2>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | May 27, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo; seemed logically impossible, but was somehow true.</p>
 
-<p>But first, let&rsquo;s talk about defensive coding and how we do it.  For example:</p>
-
-<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
-<span class="cm"> * frobs the bar and baz.</span>
-<span class="cm"> * @param bar the bar to frob; may not be null</span>
-<span class="cm"> * @param baz the baz to from; must be positive</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
-  <span class="o">}</span>
-  <span class="k">else</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>If the contract is violated by the caller, we will get a <code>NullPointerException</code> or some other <code>StringIndexOutOfBoundsException</code>.  Not too helpful.  Instead, we use an internal validator helper class to provide useful messages.  This is <strong>crucial</strong> for properly understanding bugs that occur in production; there&rsquo;s nothing worse than coming into work to find a <code>NullPointerException</code> in your inbox and no clue what went wrong.</p>
-
-<div class="highlight"><pre><code class="java"><span class="cm">/**</span>
-<span class="cm"> * frobs the bar and baz.</span>
-<span class="cm"> * @param bar the bar to frob; may not be null</span>
-<span class="cm"> * @param baz the baz to from; must be positive</span>
-<span class="cm"> */</span>
-<span class="kd">public</span> <span class="n">String</span> <span class="nf">frob</span><span class="o">(</span><span class="n">String</span> <span class="n">bar</span><span class="o">,</span> <span class="kt">int</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">bar</span><span class="o">,</span><span class="s">&quot;bar must not be null to frob&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">baz</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="o">,</span><span class="s">&quot;baz must be positive&quot;</span><span class="o">);</span>
-  <span class="k">if</span> <span class="o">(</span><span class="n">bar</span><span class="o">.</span><span class="na">length</span><span class="o">()</span> <span class="o">&gt;</span> <span class="n">baz</span><span class="o">)</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">.</span><span class="na">substring</span><span class="o">(</span><span class="n">baz</span><span class="o">);</span>
-  <span class="o">}</span>
-  <span class="k">else</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="n">bar</span><span class="o">;</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
-We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>&rsquo;s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">()</span> <span class="o">==</span> <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
-    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>Looks pretty inocuous, right?  Well, because these objects are Hibernate-managed, all of our ids are <code>Long</code> and not <code>long</code>.  So, my <code>isTrue</code> validation is really checking that the person&rsquo;s <code>customerId</code> <em>object</em> is the <em>same object</em> as the customer&rsquo;s <code>id</code> object.  What&rsquo;s worse, in several months of development and production deployment, these two objects <em>happened to be the same</em>.</p>
-
-<p>Until this week; we were testing our application for a new client and I got the error posted above (&ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo;).  It seems that much like how the JVM will re-use string objects, it also will sometimes re-use boxed objects as well.  But not always.  The fix for this is obvious, but I wanted to make sure I could actually recreate this situation.  So, I created a test that gave both the <code>Person</code> and <code>Customer</code> the same <em>value</em> for the customer id, but as different objects. and verified that the class could still be constructed.  Sure enough, the test failed.  The fix:</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">p</span><span class="o">,</span><span class="s">&quot;Person may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">notNull</span><span class="o">(</span><span class="n">c</span><span class="o">,</span><span class="s">&quot;Customer may not be null&quot;</span><span class="o">);</span>
-  <span class="n">Validate</span><span class="o">.</span><span class="na">isTrue</span><span class="o">(</span><span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">()),</span>
-    <span class="s">&quot;Person %d&#39;s customer id %d didn&#39;t match passed-in customer&#39;s id %d&quot;</span><span class="o">,</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getId</span><span class="o">(),</span>
-    <span class="n">p</span><span class="o">.</span><span class="na">getCustomerId</span><span class="o">(),</span>
-    <span class="n">c</span><span class="o">.</span><span class="na">getId</span><span class="o">());</span>
-  <span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>What&rsquo;s interesting is that if one end of the <code>==</code> is a primitive, the JVM will unbox the other one and the test succeeds:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">Long</span> <span class="n">l1</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
-<span class="n">Long</span> <span class="n">l2</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Long</span><span class="o">(</span><span class="mi">45L</span><span class="o">);</span>
-
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="n">l2</span><span class="o">);</span>      <span class="c1">// false</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">l2</span><span class="o">));</span> <span class="c1">// true</span>
-<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">l1</span> <span class="o">==</span> <span class="mi">45L</span><span class="o">);</span>     <span class="c1">// true!</span>
-</code></pre></div>
-
-<p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
-
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/05/24/the-standing-desk">The Standing Desk</a></h2>
-    <p class="meta pull-right">Written on May 24, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2010/05/24/the-standing-desk">The Standing Desk</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | May 24, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Dave, My OPOWER colleague switched from a normal office desk &amp; chair situation to a standing desk more than a year ago and ever since, I&rsquo;d been considering doing the same.  For my entire programming career, I&rsquo;ve had terrible posture in my chair and tended to do &ldquo;the maxell pose&rdquo; where my wrists are resting at a severe angle on the lip of my desk.</p>
 
-<p><img src="/img/maxell_blown_away.jpg" alt="The Maxwell Pose" /></p>
-
-<p>There have been a couple articles recently about the effects of sitting in a chair all day that pushed me to action.  This <a href="http://www.businessweek.com/magazine/content/10_19/b4177071221162.htm">article from business week</a> was particularly eye opening.</p>
-
-<p>OPOWER is super cool about empowering developers to be more productive/comfortable/happy/etc so getting approval for expensing some generic Ikea furniture was as easy as a head nod.  A couple weekends ago, I drove down to Ikea and picked up an <a href="http://www.ikea.com/us/en/catalog/products/S49843462">Utby desk</a> for about $100 and an <a href="http://www.ikea.com/us/en/catalog/products/90167477">Ekby Viktor</a> shelf with <a href="http://www.ikea.com/us/en/catalog/products/00054564">Capita</a> legs for another $20 or so.  I didn&rsquo;t think the desk by itself was going to be quite at the recommended elbow height, so I swung by Home Depot and got 4 cinder blocks too.</p>
-
-<p>I ended up putting a stack of paper between my monitor and the shelf to really get it up at eye level and I&rsquo;m pretty happy with the way it turned out:</p>
-
-<p><img src="/img/standing_desk_tom.jpg" alt="Me enjoying my new standing desk." /></p>
-
-<p>Dave&rsquo;s setup is very similar, but he seems to like focusing <em>down</em> on his single screen whereas I like having a couple monitors at different focus points where I can physically distinguish tasks (documentation, music, images on my laptop off to the side and development tasks on the main monitor straight ahead).</p>
-
-<p><img src="/img/standing_desk_dave-225x300.jpg" alt="Dave at his standing desk" /></p>
-
-<p>It&rsquo;s been a couple weeks since I switched and I can draw the following conclusions so far:</p>
-
-<ul>
-  <li>Your feet hurt like a sonofabitch at the end of 8, 9, 10 hours if you&rsquo;re not used to standing that whole time</li>
-  <li>A little bar stool or some off-the-floor step helps a lot in shifting your weight around so you&rsquo;re not always bearing down on both heels</li>
-  <li>My back feels a ton better</li>
-  <li>I <em>feel</em> more productive (though I don&rsquo;t know empirically if I actually am) because (a) I feel really focused on the monitor right in front of me &ndash; more so than when sitting down and (b) I&rsquo;m a little more self-conscious of my screen being visible to everyone walking by, so I suspect I&rsquo;ve got a higher percentage of work-related stuff on my screen at all times than I did before.</li>
-</ul>
-
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/05/05/cinco-de-failure">Cinco de Failure</a></h2>
-    <p class="meta pull-right">Written on May 05, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2010/05/05/cinco-de-failure">Cinco de Failure</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | May 05, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>If you&rsquo;ve ever seen Yoni or Jeff K, you would know that I have absolutely no chance of competing in a facial-hair competition with them on raw natural talent.  Thus, for the 2010 Cinco de Mustache event, I felt compelled to compete on ingenuity and engineering.</p>
 
-<p>To the disgust of myself and my wife, I collected shavings for approximately 4 months in a plastic cream cheese jar labeled &ldquo;Not Cream Cheese.&rdquo;</p>
-
-<p>This last weekend, I took a trip to AC Moore Arts &amp; Crafts and bought some clay.  I fashioned a mold into that clay of a mustache that would dominate all other mustaches.</p>
-
-<p>Into that mold, I poured elmer&rsquo;s glue, hair shavings, 14 gauge electrical copper wiring, more hair, more glue, more hair.</p>
-
-<p><a href="http://www.flickr.com/photos/tom_vaughan/4581864452/"><img src="http://farm5.static.flickr.com/4035/4581864452_ba14d1b7ab.jpg" alt="cinco_assembly" /></a></p>
-
-<p>This morning, the <em>plan</em> was to simply glue the assembled mustache on to my real mustache.  Unfortunately, the plan involved entirely too much super glue and the assembled mustache pieces proved to be entirely too heavy.  My previous experience with krazy-glue-on-skin is probably like most people&rsquo;s&hellip; stick your thumb and index finger together.  Thanks to callouses, a lack of hair on your fingertips and the relative strength of your digits, it&rsquo;s not that big of a deal.  I also don&rsquo;t remember the glue <em>burning like lava on contact.</em></p>
-
-<p>A split second before squirting a liberal does of krazy glue on the mustache I wondered: &ldquo;is this really a good idea?&rdquo;  But not wanting to pysch myself out, I quickly brought the assembled mustache up to my lip and pressed down hard.</p>
-
-<p>The first thing I remember thinking is that this was going to look <em>really</em> good.  Like, maybe champion-quality entry.</p>
-
-<p>That thought was quickly replaced with a rising alarm about the rapidly increasing burning sensation I was experiencing between the mustache and my lip.  That alarm was then replaced with the growing realization that I was inhaling quite a bit of vapor and that my throat was starting to burn.</p>
-
-<p>Not-quite-panicked, but not totally calm either, I gently tried to remove the mustache and got as far as pulling my lip about an inch off my face before giving up.  Over the next 10 minutes I was able to saw, snip and shave the &lsquo;stache down with a combination of electric shaver, electrical pliers, scissors and razor blade.  By that time, of course, the fumes had dissipated and the burning was just a low heat and my grand mustache plans were wrecked.</p>
-
-<p><a href="http://www.flickr.com/photos/tom_vaughan/4581214623/"><img src="http://farm5.staticflickr.com/4021/4581214623_05e508de62_d.jpg" alt="cincofail2" /></a></p>
-
-<p><em>The redness of my eyes is due to the fumes and pain.</em></p>
-
-<p>There&rsquo;s always 2011&hellip;</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/05/03/daves-talk-at-scaladays-2010">Dave's Talk at ScalaDays 2010</a></h2>
-    <p class="meta pull-right">Written on May 03, 2010 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
+    <h2><a class="title" href="/2010/05/03/daves-talk-at-scaladays-2010">Dave's Talk at ScalaDays 2010</a></h2>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | May 03, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>OPOWER graciously sent me to Switzerland this year for ScalaDays 2010.  I was lucky enough to be asked to present on &ldquo;Sneaking Scala into the Enterprise&rdquo;.  OPOWER sponsored the videography.  My talk, on starting to use Scala in your organization (based on my experience at OPOWER), is linked below; all the talks are online <a href="http://days2010.scala-lang.org/node/136">here</a>.
 <a href="http://days2010.scala-lang.org/node/138/169"><img src="/img/Video-Scala-Days-2010.jpg" alt="Video | Scala Days 2010" /></a></p>
+
 
     </div>
   </div>

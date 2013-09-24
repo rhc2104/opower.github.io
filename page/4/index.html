@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,263 +54,63 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1>Blog Posts</h1>
-</div>
-<div class="posts">
+                <div class="posts">
   
   <div class="post">
-    <h2><a href="/2010/10/07/opower-engineering-principles">OPOWER Engineering Principles</a></h2>
-    <p class="meta pull-right">Written on October 07, 2010 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
+    <h2><a class="title" href="/2010/10/07/opower-engineering-principles">OPOWER Engineering Principles</a></h2>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | October 07, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>We are engineers.  Not programmers, developers, or coders; and certainly not hackers.  The distinction is important, because we are building a system for the long haul, not just a class or script or even an application.  It is our responsibility to keep the entire operating environment in mind as we think about what we build, because we must consider all components of the system in order to build it to sustain the life of the business.  Hackers do not do this type of work.  Engineers do.  We are engineers.</p>
 
-<p>As engineers our core principles include</p>
-
-<ul>
-  <li>Thinking</li>
-  <li>Testing</li>
-  <li>Improving</li>
-  <li>Tooling</li>
-</ul>
-
-<h3 id="thinking">Thinking</h3>
-
-<p>All projects need a certain amount of forethought put into them before code hits the screen.  In fact all need just the right amount.  As engineers, it is our responsibility to determine how much thought is needed and how to best communicate the output of that thought.  We rely on the maturity, discipline, and experience of our team to make the right decisions every day, balancing purity of design with what is most practical.  We should not expect to get a design wrong the first time, nor should we expect to get it right.  Rather we should expect to get it pointing in the right direction.  We do not create throw away designs that we expect to refactor later.  That is a flawed philosophy that allows people to design on the fly while coding.  We create designs that lay a a foundation for future functionality.  Our designs are informed by the past, focus on the present, and keep an eye on the future.</p>
-
-<h3 id="testing">Testing</h3>
-
-<p>Quality of our product is very important, because our products affect millions of people daily.  As such, testing is baked into our philosophy and methodology from the start.  We do not necessarily employ test-driven development, but we start writing test specs when we begin a story.  All team members are responsible for quality, and all are responsible for writing tests: unit, integration, and regression &ndash; whatever is appropriate for the feature.  When a bug is discovered, a test is written to reproduce the bug before code is changed to fix it.  This is the best way to ensure the bug does not creep back in later.  As much as possible, tests are fully automated and run with each continuous integration build.</p>
-
-<h3 id="improving">Improving</h3>
-
-<p>Continuous integration is old hat now.  People are talking about continuous deployment more and more.  We believe in continuous improvement and are on a constant mission to better our process, designs, code and knowledge.  For process, we run post-mortem reviews after each iteration, cataloging what worked well and what did not, resulting in suggestions of ways to change.  Since we are wedded only to what works, we can adapt until we find the right thing.  For designs and code, we run group reviews on a weekly basis, allowing for anyone to present a design or code sample for review by his peers.  These meetings are when we solidify our standards and conventions as well as informally teach good design thinking and share knowledge of the frameworks and tools we use to make our team more efficient.  Increasing individuals&rsquo; knowledge is a more self-directed activity; we rely on the team to investigate and research topics they are interested in and will support them through book purchases, course reimbursement and conference sponsorship.  To support our efforts at continuous improvement, we also follow a practice of continuous feedback.  In addition to formal performance evaluations, we collect short bits of feedback (&ldquo;tweets&rdquo; if you will) after each iteration to make sure all team members know where they are doing well and how they can improve.</p>
-
-<h3 id="tooling">Tooling</h3>
-
-<p>We choose the right tools for the job.  This is as much an imperative to consider legacy and the team&rsquo;s skills as it is to push the boundaries with new tools at our disposal.  The important aspect of this tenet is that any tool must be the right tool, which means its appropriateness must be evaluated before it is used.  We do not start using the latest tool just because it is new &ndash; we use it because it solves a problem we have in a way better than any current tool without creating new bigger problems.  This is not an &ldquo;if you have a hammer&rdquo; kind of philosophy, but more along the lines of choosing the right size hammer for the job.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/09/14/introducing-the-opower-engineering-dashboard">Introducing the OPOWER Engineering Dashboard</a></h2>
-    <p class="meta pull-right">Written on September 14, 2010 by <a href="/authors/joel-strait">Joel Strait</a>
-</p>
+    <h2><a class="title" href="/2010/09/14/introducing-the-opower-engineering-dashboard">Introducing the OPOWER Engineering Dashboard</a></h2>
+    <p class="meta">by <a href="/authors/joel-strait">Joel Strait</a>
+ | September 14, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>As Tom <a href="/2010/07/27/maven-izing-googles-data-client-java-library">mentioned</a>, we recently conducted our first company-wide Innovation Day. Everyone split into groups of 3-4 and worked on whatever they wanted (as long as it was related to the company).</p>
 
-<p>Everyone did cool stuff. One group made a prototype of a website where you can enter your zip code, info about your home, and your last energy bill, and (via our Insight Engine) see how you compare to similar people across the country. Another group made an iPhone optimized version of our utility website. A third group went out and bought some plants to liven up the office.</p>
-
-<p>Adam, Jeff #3, Matt and I decided to focus our attention toward the TV we have mounted on the wall. It&rsquo;s been dormant since the World Cup, and we wanted to put it to better use. <a href="http://www.panic.com/blog/2010/03/the-panic-status-board/">Inspired by Panic</a>, we decided to build a dashboard for the engineering team.</p>
-
-<p>We brainstormed beforehand, and came up with a lot of ideas. However, to make sure we had something working to demo the next day, we decided to just focus on getting 1 or 2 small things done as a proof of concept. We first set up a simple <a href="http://www.sinatrarb.com/">Sinatra</a> Ruby app to act as a shell. Next Matt, Jeff and I worked on pulling data from various APIs (<a href="http://docs.codehaus.org/display/JIRA4R/Examples">JIRA</a>, <a href="http://cookingandcoding.com/gcal4ruby/">Google Calendar</a>, Hudson, etc.) while Adam built a killer grid-based design.</p>
-
-<p>This turned out to be setting the bar way too low - 10 hours of non-stop coding later, we managed to have a working dashboard that displays the following:</p>
-
-<ul>
-  <li>How much time is left in the current iteration.</li>
-  <li>The number of story points each team has completed for the current iteration, and how many more are left. <img src="/img/story_points-300x189.png" alt="Dashboard story points" /></li>
-  <li>The status of our Hudson continuous integration server. If someone breaks the build, the dashboard bursts into flames.</li>
-  <li>Any urgent production issues. (Once again, burning).</li>
-  <li>The X-Train Wall of Shame. It tracks how many times everyone has broken the build, as well as how many times they have atoned for it by buying everyone a drink. <img src="/img/x_train-300x176.png" alt="The X train cometh" /></li>
-  <li>Who is on vacation, and who will be on vacation soon. (Courtesy of Google Calendar). <img src="/img/vacation-300x246.png" alt="Slackers on vacation" /></li>
-  <li>When the next trains are coming to the Courthouse Metro station. <img src="/img/metro.png" alt="Trains at Courthouse" /></li>
-  <li>A Twitter feed of tweets mentioning OPOWER.</li>
-  <li>Random selections from the company quote wall.</li>
-</ul>
-
-<p>We&rsquo;ve been using the dashboard for about an iteration now, and it&rsquo;s been a big success. It gives everyone (including people outside of engineering) an easy way to see where we are. Since the TV is mounted along one of the main office thoroughfares, people are always stopping to check it out throughout the day.</p>
-
-<p><img src="/img/engineering_dashboard-300x221.jpg" alt="The OPOWER Engineering Dashboard" /></p>
-
-<p>This was one of the most fun things I&rsquo;ve ever done at work. Looking forward to the next Innovation Day!</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h2>
-    <p class="meta pull-right">Written on September 07, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
-</p>
+    <h2><a class="title" href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h2>
+    <p class="meta">by <a href="/authors/rob-fagen">Rob Fagen</a>
+ | September 07, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don&rsquo;t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
 
-<ol>
-  <li>
-    <p>First launch a shell that you know has the environment variables you want already set, then:</p>
-
-    <pre><code> cd /Applications/RubyMine 2.0.2.app/Contents/MacOS
- ./rubymine
-</code></pre>
-  </li>
-  <li>
-    <p>Follow <a href="http://www.digitaledgesw.com/node/31">these (untested) directions</a>. In summary, you would add commands like <code>setenv VARIABLE_NAME variable_value</code> in <code>/etc/launchd.conf</code> &ndash; the downside is that you have to reboot after making changes, so this doesn&rsquo;t help if the environment variables you need are somewhat dynamic.</p>
-  </li>
-</ol>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/08/26/just-what-is-a-software-engineer-in-test">Just What is A Software Engineer in Test?</a></h2>
-    <p class="meta pull-right">Written on August 26, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
-</p>
+    <h2><a class="title" href="/2010/08/26/just-what-is-a-software-engineer-in-test">Just What is A Software Engineer in Test?</a></h2>
+    <p class="meta">by <a href="/authors/rob-fagen">Rob Fagen</a>
+ | August 26, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>OPOWER recently updated the job titles for our QA engineers to more  properly reflect the work that we do. We still love owning the  responsibility for pointing out when our product hasn&rsquo;t turned out the  best it can, and we have all held and loved &ldquo;QA&rdquo; titles at many points  in our careers. So why the change? Just what exactly is a Software  Engineer in Test at OPOWER?</p>
 
-<p>It&rsquo;s pretty clear to just about anyone what the goals of a software  engineer are when taken in a development context. Build software that  does useful work correctly and efficiently. It&rsquo;s a little more fuzzy  when you assess that title from a testing perspective.</p>
-
-<ul>
-  <li>Is it a tool-smith? Building test frameworks and automation  tools for other testers to use? Not exclusively, but tools and  frameworks that more junior test engineers can use and learn from are  great side effects of the work.</li>
-  <li>Is it someone who uses GUI testing frameworks to follow along behind  the developers and make sure they got the user experience right? Again,  a part of the job sometimes, but not the primary mission.</li>
-  <li>Now  put on your tinfoil hat. Is it just a conceit meant to soothe the sting  of being a second class creator of software artifacts? Someone who can  code but not well enough to be a developer? Probably not anyone&rsquo;s  explicit intent, but some folks do feel that SEiT is a farm league for  the Big Show: being a developer. We are not among those people.</li>
-</ul>
-
-<p>A Software Engineer in Test is someone that builds software that  does useful work correctly and efficiently. Wait. That&rsquo;s exactly the  same definition as was given for a developer. What gives?</p>
-
-<p>The  useful work a developer creates is to render a web page, or process  messages, or update a database, all with an end goal of satisfying the  end consumer of the application being worked on. When developing test  systems, all those same elements are required, but the end goal is  providing actionable insight about the quality of the customer facing  system. This actionable insight is consumed by the developer and the  engineering and product managers. They use this insight to answer  questions. Those questions include: is it done, does it work, will it  scale, and many others.</p>
-
-<p>The SEiT needs to know how to build robust software, and on top of  that, they need to be able to understand the business purpose of the  customer facing system. The SEiT needs to judge what to test, how to  test it and when to test it. They also need to have great judgment about  what <em><strong>not</strong></em> to test.</p>
-
-<p>A fantastic test framework with sub-par tests is of little use. In  the same way, an excellent set of tests that cannot be run reliably does  not provide the needed insight either. The SEiT needs to be able to go  toe-to-toe with any of their developers and question choices on data  structures, algorithms and design. They also have to have great  judgement about when it best serves the business to take a shortcut in  exchange for an acceptable risk.</p>
-
-<p>A great example of dev and test collaborating to make both teams more productive coalesced around how we deal with the concept of &ldquo;today&rdquo;. When we exercise our software, the result you get depends on what day it is. Different months and days have differing levels of energy usage for both the customer and their neighbors. Without something built into the application, the only way to change &ldquo;today&rdquo; is to change the system time, which is not too practical in a shared environment. The ad-hoc and pre-collaboration solution was to add some kind of &lsquo;asOf&rsquo; property to particular logic when we happened to think of it. We tightened up the collaboration level by having test explicitly involved in the estimation, planning and design meetings. Through these discussions earlier in the iteration, we discovered that it is far better to have any code that changes behavior based on the current date to always have the date as a parameter, and any user facing behavior should allow for a seekrit URL parameter (or other test system accessible method) to set the &ldquo;asOf&rdquo; date for any particular test. Dev is more productive because they now have a default way of designing the code to make it more testable. Their unit and integration tests are more effective and easier to write. Test is more productive because the app is more testable at the integrated and system level, and their tests are also more effective and easier to write.</p>
-
-<p>It&rsquo;s hard enough to get a software system right. It&rsquo;s even harder to  get a system right whose job is making sure another system is correct.  OPOWER certainly doesn&rsquo;t want to hire anyone but the best for that job. For us, the best tester is someone who&rsquo;s a good developer, too.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h2>
-    <p class="meta pull-right">Written on July 27, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | July 27, 2010</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
-
-<p>Clicking around google&rsquo;s well-documented &ldquo;get started&rdquo; guides, it looked like they haven&rsquo;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&rsquo;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&rsquo;s repo (thereby making them accessible to all our developer&rsquo;s boxes).</p>
-
-<p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
-
-<ol>
-  <li>Grab latest JARs from the &ldquo;gdata-java&rdquo; link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
-  <li>Unzip on the server hosting your company&rsquo;s mvn repo</li>
-  <li>cd down in to ./gdata/java/lib</li>
-  <li>
-    <p>Make a file &lsquo;installall.pl&rsquo; in that lib directory:</p>
-
-    <pre><code> #!/usr/bin/perl -w
-
- my @jars = `ls *.jar`;
- chomp(@jars);
- foreach my $jar (@jars) {
-   if($jar =~ /(.*)-(\d\.\d)\.jar/) {
-     my $cmd = "./install.pl --artifactId $1 --version $2 --jar $jar";
-     open(CMD, "$cmd|") or die "Could not execute $cmd $!";
-     while(&lt;CMD&gt;) {
-        print $_;
-     }
-    close(CMD);
-   }
- }
-</code></pre>
-  </li>
-  <li>
-    <p>Still in that directory, make another file <code>install.pl</code>:</p>
-
-    <pre><code> #!/usr/bin/perl -w
-
- use strict;
- use warnings;
- use Getopt::Long;
-
- sub usage();
-
- my $artifactId;
- my $version;
- my $jar;
- GetOptions('artifactId=s' =&gt; \$artifactId ,
-            'version=s' =&gt; \$version,
-            'jar' =&gt; \$jar);
- die usage() unless ($artifactId &amp;&amp; $version &amp;&amp; $jar);
-
- my $cmd = "mvn deploy:deploy-file " .
-       "-DgroupId=com.google.gdata " .
-       "-DartifactId=$artifactId " .
-       "-Dversion=$version " .
-       "-Dfile=$jar " .
-       "-Dpackaging=jar " .
-       "-DgeneratePom=true " .
-       "-Durl=file:///opt/mvn_repo " .  &lt;---  change this for your env
-       "-Drepository=opower_local";  &lt;--- change this for your env
- print "executing command = $cmd\n";
- $cmd = "date";
- open(CMD, "$cmd|") or die "Could not exec $cmd $!";
- while(&lt;CMD&gt;) {
-     print $_;
- }
- close(CMD);
-
- sub usage() {
-     print "Usage: ./install.pl [--artifactId artifactId] [--version version] [--jar jarfile]\n";
-     print "Example: ./install.pl --artifactId gdata-webmastertools --version 1.0 --jar gdata-webmastertools-1.0.jar\n";
-     exit 1;
- }
-</code></pre>
-  </li>
-  <li>Don&rsquo;t forget to <code>chmod 755 *.pl</code></li>
-  <li>Then just run <code>./installall.pl</code> and all those google JARs should get installed in your repo</li>
-</ol>
-
-<p>That assumes the &ldquo;mvn&rdquo; executable was in your path and that you run the scripts from within the same directory as all the JARs, but it&rsquo;s easily modified for whatever your situation may be.</p>
-
-<p>Note that relative to <code>./lib</code> there are 2 jars in <code>../deps/</code> that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
-
-<p>Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
-
-<div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
-<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
-  <span class="nt">&lt;artifactId&gt;</span>foo<span class="nt">&lt;/artifactId&gt;</span>
-  <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
-  <span class="nt">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
-  <span class="nt">&lt;name&gt;</span>Google Client Example<span class="nt">&lt;/name&gt;</span>
-    
-  <span class="nt">&lt;scm&gt;</span>
-    <span class="nt">&lt;developerConnection&gt;</span>foo<span class="nt">&lt;/developerConnection&gt;</span>
-  <span class="nt">&lt;/scm&gt;</span>
-    
-  <span class="nt">&lt;dependencies&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>gdata-core<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>gdata-analytics<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>2.1<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>gdata-client<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>1.0<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-    <span class="nt">&lt;dependency&gt;</span>
-        <span class="nt">&lt;groupId&gt;</span>com.google<span class="nt">&lt;/groupId&gt;</span>
-        <span class="nt">&lt;artifactId&gt;</span>google-collect<span class="nt">&lt;/artifactId&gt;</span>
-        <span class="nt">&lt;version&gt;</span>1.0-rc1<span class="nt">&lt;/version&gt;</span>
-    <span class="nt">&lt;/dependency&gt;</span>
-    dependencies&gt;
-<span class="nt">&lt;/project&gt;</span>
-</code></pre></div>
 
 
     </div>

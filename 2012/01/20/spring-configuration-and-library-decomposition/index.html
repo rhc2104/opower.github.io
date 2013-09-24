@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h1>
-  <p class="meta pull-right">Written on January 20, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h1>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | January 20, 2012</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>Opower&rsquo;s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&rsquo;re managing:</p>
+  <div class="post-content">
+    <p>Opower&rsquo;s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&rsquo;re managing:</p>
 
 <ul>
   <li>4 WAR applications</li>
@@ -120,6 +124,7 @@
   <li>It&rsquo;s tempting to eliminate application.properties wherever there&rsquo;s a default, but we avoided that for documentation reasons &ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&rsquo;s spring context snippet, we still explicitly declare that property in a WAR&rsquo;s top-level application.property and document how that property affects the system.</li>
 </ul>
 
+  </div>
 </div>
 
 

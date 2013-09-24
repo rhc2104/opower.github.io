@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2009/11/16/when-adding-more-threads-makes-it-all-slower">When adding more threads makes it all slower</a></h1>
-  <p class="meta pull-right">Written on November 16, 2009 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2009/11/16/when-adding-more-threads-makes-it-all-slower">When adding more threads makes it all slower</a></h1>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | November 16, 2009</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>I&rsquo;ve been working on a new feature that requires analysis of each individual&rsquo;s entire energy-use history.  In other words, I have a process that will touch <strong>every single bit of data</strong> in our database. This should be a rare thing, so if it takes a while, it&rsquo;s not that big of a deal.  My initial implementation was on track to complete in&hellip;11 days.</p>
+  <div class="post-content">
+    <p>I&rsquo;ve been working on a new feature that requires analysis of each individual&rsquo;s entire energy-use history.  In other words, I have a process that will touch <strong>every single bit of data</strong> in our database. This should be a rare thing, so if it takes a while, it&rsquo;s not that big of a deal.  My initial implementation was on track to complete in&hellip;11 days.</p>
 
 <p>My first thought was: there&rsquo;s lots of blocking reading and writing from the database, so adding some threads should speed things up.  While one thread was analyzing Bob&rsquo;s energy data, another could be fetching Mary&rsquo;s, while another could be updating Joe&rsquo;s meta-data with the results.  Or so I thought.</p>
 
@@ -79,6 +83,7 @@ But there&rsquo;s still a gain to get, so what happened to me?</p>
 
 <p>In my case, almost all of this synchronization is happening within the database; it turns out that almost all the time my process needs is accessing data from the database.  So, I dialed it down to only one thread, and we should be done early next week.</p>
 
+  </div>
 </div>
 
 

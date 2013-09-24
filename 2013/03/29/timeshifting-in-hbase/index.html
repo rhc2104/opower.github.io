@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h1>
-  <p class="meta pull-right">Written on March 29, 2013 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h1>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | March 29, 2013</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>For our HBase table layout, we are following an entity-centric model,
+  <div class="post-content">
+    <p>For our HBase table layout, we are following an entity-centric model,
 evangelized to us by our friends at <a href="http://www.wibidata.com">WibiData</a>.  The idea is to put all of the
 data about a single entity into a single row in HBase.  When you need to run
 a computation that involves that entity&rsquo;s data, you have quick access to it by
@@ -138,6 +142,7 @@ with <code>Result#getColumnLatest()</code>.</p>
 will all be using relational databases again by that point.</p>
 
 
+  </div>
 </div>
 
 

@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h1>
-  <p class="meta pull-right">Written on September 06, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h1>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | September 06, 2012</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&rsquo;d capture some of them here.</p>
+  <div class="post-content">
+    <p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&rsquo;d capture some of them here.</p>
 
 <p>Additionally, it&rsquo;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
 
@@ -182,6 +186,7 @@ default-autowire=&quot;byName&quot;&gt;
 
 <p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
 
+  </div>
 </div>
 
 

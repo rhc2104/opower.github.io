@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h1>
-  <p class="meta pull-right">Written on May 27, 2010 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h1>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | May 27, 2010</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo; seemed logically impossible, but was somehow true.</p>
+  <div class="post-content">
+    <p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo; seemed logically impossible, but was somehow true.</p>
 
 <p>But first, let&rsquo;s talk about defensive coding and how we do it.  For example:</p>
 
@@ -141,6 +145,7 @@ We use this pattern extensively, even in constructors of simple data-structure s
 <p>The moral of the story is to always know what you are comparing.  Might even be best to always use <code>.equals()</code> unless the compiler complains.</p>
 
 
+  </div>
 </div>
 
 

@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h1>
-  <p class="meta pull-right">Written on September 07, 2010 by <a href="/authors/rob-fagen">Rob Fagen</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2010/09/07/picking-up-your-mac-os-environment-in-rubymine">Picking up your Mac OS environment in RubyMine</a></h1>
+    <p class="meta">by <a href="/authors/rob-fagen">Rob Fagen</a>
+ | September 07, 2010</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don&rsquo;t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
+  <div class="post-content">
+    <p>Many of us are using <a href="http://www.jetbrains.com/ruby/">RubyMine</a> on MacOS to build our <a href="http://cukes.info/">Cucumber based tests</a>, and have had issues with picking up environment variables needed for working with some of our other internal utilities. Turns out that this is because applications launched from anywhere other than the command line don&rsquo;t run through the same environment initialization as when you launch a shell. There are two possible solutions that I know of:</p>
 
 <ol>
   <li>
@@ -74,6 +78,7 @@
   </li>
 </ol>
 
+  </div>
 </div>
 
 

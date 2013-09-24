@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h1>
-  <p class="meta pull-right">Written on July 27, 2010 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h1>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | July 27, 2010</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+  <div class="post-content">
+    <p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
 
 <p>Clicking around google&rsquo;s well-documented &ldquo;get started&rdquo; guides, it looked like they haven&rsquo;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&rsquo;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&rsquo;s repo (thereby making them accessible to all our developer&rsquo;s boxes).</p>
 
@@ -179,6 +183,7 @@
 </code></pre></div>
 
 
+  </div>
 </div>
 
 

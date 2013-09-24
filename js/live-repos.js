@@ -15,8 +15,8 @@ $(document).ready(function() {
                 html += '<div class="language">' + data.language + '</div>';
             }
             html += '<div class="updatedon">Updated on ' + new Date(data.updated_at).toLocaleDateString() + '</div>' +
-                    '<div class="forks">' + data.forks_count + ' forks</div>' +
-                    '<div class="watchers">' + data.watchers_count + ' watchers</div>' +
+                    '<div class="forks"><span class="count">' + data.forks_count + '</span> forks</div>' +
+                    '<div class="watchers"><span class="count">' + data.watchers_count + '</span> watchers</div>' +
                     '</div>';
             project.append(html);
         });

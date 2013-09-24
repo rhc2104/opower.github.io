@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></h1>
-  <p class="meta pull-right">Written on September 19, 2011 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></h1>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | September 19, 2011</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>This is actually a fairly old bit of tech for us, but I&rsquo;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&rsquo;s DSL Book</a>, and thought it might be good to talk about what we&rsquo;ve done.</p>
+  <div class="post-content">
+    <p>This is actually a fairly old bit of tech for us, but I&rsquo;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&rsquo;s DSL Book</a>, and thought it might be good to talk about what we&rsquo;ve done.</p>
 
 <p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&rsquo;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&rsquo;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
 
@@ -169,6 +173,7 @@
 
 <p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don&rsquo;t be afraid to use Scala for this; it&rsquo;s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala&rsquo;s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
 
+  </div>
 </div>
 
 

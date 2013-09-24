@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,240 +54,64 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1>Blog Posts</h1>
-</div>
-<div class="posts">
+                <div class="posts">
   
   <div class="post">
-    <h2><a href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></h2>
-    <p class="meta pull-right">Written on September 10, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2009/09/10/when-is-a-null-not-a-null">When is a null not a null?</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | September 10, 2009</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>tl/dr: <em>Don&rsquo;t have a non-null object&rsquo;s .toString() display &ldquo;null&rdquo;. It&rsquo;s confusing and not helpful when looking at object states in IDE debuggers.</em></p>
 
-<p>I recently converted the attribute of our Person POJO that stored a user&rsquo;s email address from a java.lang.String to a javax.mail.InternetAddress.  Call it not enough testing or lack of imagination, but I introduced a Null Pointer Exception in a back-office web flow where a new user is created for our customer service application.  When a new CSR account is created and the email address is left blank, an NPE gets thrown up.  Embarrassing, but easy to fix, right?</p>
-
-<p>Just looking at the stack trace narrows it down immediately:</p>
-
-<pre><code>2009-09-09 16:56:53,636 WARN  [btpool0-1] [REPORT] [WARN] Handler execution resulted in exception
-java.lang.NullPointerException
-	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:609)
-	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:569)
-	at javax.mail.internet.InternetAddress.(InternetAddress.java:105)
-	at poscore.db.InternetAddressUserType.deepCopy(InternetAddressUserType.java:93)
-	at org.hibernate.type.CustomType.deepCopy(CustomType.java:179)
-	at org.hibernate.type.TypeFactory.deepCopy(TypeFactory.java:374)
-</code></pre>
-
-<p>Ahh&hellip;yeah&hellip;that custom hibernate type I wrote to translate VARCHARs to InternetAddresses and vice versa.  Ok, what does that deep copy method look like?</p>
-
-<div class="highlight"><pre><code class="java">    
-<span class="kd">public</span> <span class="n">Object</span> <span class="nf">deepCopy</span><span class="o">(</span><span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">HibernateException</span> <span class="o">{</span>
-    <span class="k">if</span><span class="o">(</span><span class="n">value</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="o">}</span>
-    <span class="n">InternetAddress</span> <span class="n">original</span> <span class="o">=</span> <span class="o">(</span><span class="n">InternetAddress</span><span class="o">)</span><span class="n">value</span><span class="o">;</span>
-    <span class="n">InternetAddress</span> <span class="n">copy</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
-    <span class="k">try</span> <span class="o">{</span>
-        <span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
-    <span class="o">}</span>
-    <span class="k">catch</span> <span class="o">(</span><span class="n">AddressException</span> <span class="n">ex</span><span class="o">)</span> <span class="o">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nf">HibernateException</span><span class="o">(</span><span class="s">&quot;Unable to deep copy email address &#39;&quot;</span> <span class="o">+</span> <span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;&#39;&quot;</span><span class="o">);</span>
-    <span class="o">}</span>
-    <span class="k">return</span> <span class="n">copy</span><span class="o">;</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>It turns out, the error is right here:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">copy</span> <span class="o">=</span> <span class="k">new</span> <span class="n">InternetAddress</span><span class="o">(</span><span class="n">original</span><span class="o">.</span><span class="na">getAddress</span><span class="o">());</span>
-</code></pre></div>
-
-<p>You can&rsquo;t pass a null to the InternetAddress constructor.  It was late in the day and I must not have internalized that there&rsquo;s no way <em>value</em> or <em>original</em> could be null, because my first instinct was that the NPE was actually the result of calling &ldquo;.getAddress()&rdquo; on a null <em>original</em> object&hellip;.not that the constructor can&rsquo;t take a null.</p>
-
-<p>While I was on that assumption (that it was the <em>original</em> object that was null), I fired up my debugger and got confused by what appeared to be null-checks failing to check nulls. Check out this screen shot of the NPE about to be thrown after what appears to be 2 null checks failing to prevent the NPE:</p>
-
-<p><img src="/img/null_internet_address.png" alt="null_internet_address" /></p>
-
-<p>The arrows marked (A) and (B) shows what appear to be null objects passing null checks (in the top pane) even though they&rsquo;re being reported as null (in the bottom pane).  The green line (C) shows the code falling through to that line just before it throws up the NPE.</p>
-
-<p>Of course, <em>value</em> and <em>original</em> aren&rsquo;t null at all&hellip;it&rsquo;s just that their .toString() methods report them to be null.  Here&rsquo;s the InternetAddress.toString method:</p>
-
-<pre><code>276   public String toString() {
-277       if (encodedPersonal == null &amp;&amp; personal != null)
-278           try {
-279	              encodedPersonal = MimeUtility.encodeWord(personal);
-280           } catch (UnsupportedEncodingException ex) { }
-281
-282       if (encodedPersonal != null)
-283           return quotePhrase(encodedPersonal) + " &lt;" + address + "&gt;";
-284       else if (isGroup() || isSimple())
-285           return address;
-286       else
-287           return "&lt;" + address + "&gt;";
-288   }
-</code></pre>
-
-<p>In my situation, I fell in to the <code>else if(isGroup() || isSimple())</code> case, which returns <code>address</code>, which is null, so the <code>.toString()</code> for the whole InternetAddress object is &ldquo;null.&rdquo;</p>
-
-<p>I think the toString() method could benefit from another null-check right at line 284, which would mean an InternetAddress object with a null internal <code>address</code> String would display as &ldquo;&lt;null&gt;&rdquo; &hellip;that&rsquo;s a more immediate clue that the object itself isn&rsquo;t null.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2009/08/28/move-meetings-to-move-developers">Move meetings to move developers</a></h2>
-    <p class="meta pull-right">Written on August 28, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2009/08/28/move-meetings-to-move-developers">Move meetings to move developers</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | August 28, 2009</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Here&rsquo;s the scenario:</p>
 
-<p>You cruise in to the office at 8:45, get your coffee, check the reddits, and ignore that email from your parents asking if their computer picked up a virus because McAfee won&rsquo;t stop popping up a tooltray icon helpfully informing them that they&rsquo;re totally vulnerable.  Right around 9:15, you get motivated to tackle that 2 point user story for the current iteration.</p>
-
-<p>You head over to the wiki, check out the specs for the requirement, find out what the Trac ticket number is and see if there are any comments with last minute advice or dependencies.  None?  Good. . . let&rsquo;s get started!</p>
-
-<p>Oh, huh&hellip; it&rsquo;s 9:40.  There&rsquo;s that all-hands meeting at 10 o&rsquo;clock.  I <em>could</em> get started, but I&rsquo;m not really going to get anything done in 20 minutes really&hellip; and that link to the <a href="http://www.buzzfeed.com/akdobbins/three-keyboard-cat-moon-shirt">keyboard-cat-three-wolf-t-shirt</a> <em>did</em> look interesting.</p>
-
-<p>The 10 o&rsquo;clock meeting runs a little long, and then there&rsquo;s the lunch train, and suddenly it&rsquo;s the afternoon and you haven&rsquo;t been in The Zone once.</p>
-
-<h3 id="the-zone">The Zone</h3>
-
-<p>We&rsquo;ve all been in The Zone &ndash; that magical place where time appears to stop and you rock out an insane amount of code in what seems like 10 minutes, but when you look up from your keyboard the sun is down and the cleaning crew is giving you a weird look because you didn&rsquo;t realize you were trying to sing along to Sigur Ros.</p>
-
-<p>Trying to force yourself into The Zone is like trying to force yourself to see through those <a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">stereograms</a> (hint: it&rsquo;s always a Schooner).  And as hard as it is to get <em>in</em> The Zone, it&rsquo;s annoying easily to get <em>out</em> of The Zone.</p>
-
-<p>There are a lot of recommendations out there to help create &ldquo;zone-friendly&rdquo; work places including:</p>
-
-<ul>
-  <li>separate offices</li>
-  <li>ambient music</li>
-  <li>leaving something intentionally broken the night before to give you that excuse to dive in the next morning</li>
-  <li><a href="http://cdn-write.demandstudios.com/upload//0000/000/90/4/94.gif">shift your tasks to the upper right</a></li>
-  <li><a href="http://www.paulgraham.com/makersschedule.html">Paul Graham&rsquo;s thoughts</a> on the matter</li>
-  <li>etc. etc.</li>
-</ul>
-
-<p>We were wrapping up our all-hands meeting yesterday when the ever-perceptive Dave noted that our weekly meeting schedules were really not all that Zone-Friendly.  With a couple of exceptions, we had standing meetings along the following schedule:</p>
-
-<p><img src="/img/zone_unfriendly.png" alt="Standing Meetings" /></p>
-
-<p>And keep in mind, that&rsquo;s just the standing meetings, so it&rsquo;s the bare-minimum one would expect.  Now let&rsquo;s add some &ldquo;procrastination shading&rdquo; to that calendar to demonstrate the actual standing meeting impact:</p>
-
-<p><img src="/img/zone_unfriendly_shaded.png" alt="Standing Meetings" /></p>
-
-<p>If we shuffled some meetings around (especially around the meat of the middle of the week), I think we could end up &ldquo;finding&rdquo; 2 or 3 hours a week more conducive to The Zone:</p>
-
-<p><img src="/img/zone_friendly_shaded.png" alt="Friendly Standing Meetings" /></p>
-
-<p>Of course, this is an idealized example, but it&rsquo;s something we&rsquo;re thinking about and playing with.</p>
-
-<p>What do you guys out there in development land do?  Any recommendations of particular effectiveness?</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2009/08/26/a-year-long-analysis-of-snack-consumption">A year-long analysis of snack consumption</a></h2>
-    <p class="meta pull-right">Written on August 26, 2009 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
+    <h2><a class="title" href="/2009/08/26/a-year-long-analysis-of-snack-consumption">A year-long analysis of snack consumption</a></h2>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | August 26, 2009</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Consistently, month after month, the chips that get left in the giant &lsquo;box-o-free-snacks&rsquo; are:</p>
 
-<p><img src="/img/snacks.jpg" alt="Doritos Are No Bueno" /></p>
-
-<p>Nacho Cheese Doritos. </p>
-
-<p><em>Honorable Mentions: Fritos and Cool Ranch Doritos</em>. </p>
-
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2009/08/26/new-developer-law">New Developer Law</a></h2>
-    <p class="meta pull-right">Written on August 26, 2009 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2009/08/26/new-developer-law">New Developer Law</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | August 26, 2009</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>NEW LAW FOR DEVELOPERS:</p>
 
-<p><em>If you throw an exception about some connection being refused, you&rsquo;d better damn well put what connection you were attempting to make in the exception message.</em></p>
-
-<p>What inspired this law?  Thanks for asking.</p>
-
-<p>Check out this snippet in the middle of an 80 line stack dump:</p>
-
-<pre><code>2009-08-25 17:23:42.373::WARN:  Nested in org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'coreAutopatcher' defined in class path resource [config/migrationContext.xml]: Invocation of init method failed; nested exception is com.tacitknowledge.util.migration.MigrationException: Error applying patches:
-com.mchange.v2.resourcepool.CannotAcquireResourceException: A ResourcePool could not acquire a resource from its primary factory or source.
-at com.mchange.v2.resourcepool.BasicResourcePool.awaitAvailable(BasicResourcePool.java:1319)
-at com.mchange.v2.resourcepool.BasicResourcePool.prelimCheckoutResource(BasicResourcePool.java:557)
-at com.mchange.v2.resourcepool.BasicResourcePool.checkoutResource(BasicResourcePool.java:477)
-at com.mchange.v2.c3p0.impl.C3P0PooledConnectionPool.checkoutPooledConnection(C3P0PooledConnectionPool.java:525)
-</code></pre>
-
-<p>&ldquo;A ResourcePool could not acquire a resource from its primary factory or source&rdquo;.  Awesome.  Sooo helpful.  /wristsemoragegrowl</p>
-
-<p>Also, a WARN?  Seriously?  You&rsquo;re a connection pool.  Do you think not connecting to your underlying datasource warrants maybe something as stern as an ERROR?  Or, heaven forbid, a FATAL?</p>
-
-<p>I&rsquo;m sure I could have turned up logging somewhere, but I noticed Spring&rsquo;s DelegatingDataSource bean standing out from among the stack lines and set a break point on its called method to figure out exactly which of my many connections was unable to be resolved:</p>
-
-<p><img src="/img/what_am_i_connecting_to.png" alt="what_am_i_connecting_to" /></p>
-
-<p>There&rsquo;s the culprit!  <code>localhost:5455</code>.  You know, whoever the idiot is who runs that localhost server needs to get his act together.  I should call the guys from YouTube and have them do a Maury Povich-style video expose on why he can&rsquo;t keep any of his connections stable.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h2>
-    <p class="meta pull-right">Written on August 23, 2009 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
+    <h2><a class="title" href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h2>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | August 23, 2009</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>I am relatively new to Subversion &ndash; well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the &ldquo;trunk/branches/tags&rdquo; directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
 
-<pre><code>svn co http://domain.com/svnroot/project/trunk project
-</code></pre>
-
-<p>That way, when I go to the <code>project</code> directory, I do not have to then go into the <code>trunk</code> directory to get to my files.  Saving an extra directory level is not the best benefit though.  When I set up my IDE (yes, I use an IDE), I put the IDE files in that one directory and do not have to recreate them for each branch or tag that I might check out.  I essentially treat the &ldquo;trunk/branches/tags&rdquo; part of the directory as pure metadata, which makes perfect sense to me.</p>
-
-<p>When I switched over to this system, there was one big drawback.  I could not easily tell where I am just by looking at my prompt.  I had to run <code>svn info | grep URL</code> to see if I was on a branch.  So instead of letting my prompt handicap me, I decided to get smart about my prompt.  Using bash, my prompt used to look like this:</p>
-
-<pre><code>jeff:/opt/pose/main/report/src/main/java
-</code></pre>
-
-<p>but now it looks like this (supercharged with Subversion metadata):</p>
-
-<pre><code>jeff:/opt/pose/main/report/src/main/java [SVN: /main/report/trunk]
-</code></pre>
-
-<p>I&rsquo;m no bash expert, so I dug around on the web and learned a bit about how <code>PROMPT_COMMAND</code> works.  Here is what I have in my <code>.bash_profile</code> now:</p>
-
-<div class="highlight"><pre><code class="bash"><span class="k">function </span>spwd <span class="o">()</span> 
-<span class="o">{</span> 
-    stat .svn &gt; /dev/null 2&gt;&amp;1;
-    <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$?&quot;</span> <span class="o">==</span> <span class="s2">&quot;0&quot;</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">        </span><span class="nv">SURL</span><span class="o">=</span><span class="sb">`</span>svn info | grep URL | perl -pe <span class="s1">&#39;s/URL: (.*)/\1/&#39;</span><span class="sb">`</span>;
-        <span class="k">if</span> <span class="o">[</span> <span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | grep -E <span class="s2">&quot;branches|tags&quot;</span><span class="sb">`</span> <span class="o">]</span>; <span class="k">then</span>
-<span class="k">            </span><span class="nv">SVER</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*/(branches|tags)/(.*)}{\1/\2}&#39;</span> | cut -d/ -f1-2<span class="sb">`</span>;
-            <span class="nv">SPTH</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*svnroot/(.*)/(branches|tags)/.*}{/\1}&#39;</span><span class="sb">`</span>;
-            <span class="nv">SPWD</span><span class="o">=</span><span class="s2">&quot;${SPTH}/${SVER}&quot;</span>;
-        <span class="k">else</span>
-<span class="k">            </span><span class="nv">SPWD</span><span class="o">=</span><span class="sb">`</span><span class="nb">echo</span> <span class="k">${</span><span class="nv">SURL</span><span class="k">}</span> | perl -pe <span class="s1">&#39;s{.*svnroot/(.*)/trunk(.*)}{/\1/trunk}&#39;</span><span class="sb">`</span>;
-        <span class="k">fi</span>;
-        <span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\u:\w [SVN: $SPWD]\n$ &quot;</span>;
-    <span class="k">else</span>
-<span class="k">        </span><span class="nb">export </span><span class="nv">PS1</span><span class="o">=</span><span class="s2">&quot;\u:\w $ &quot;</span>;
-    <span class="k">fi</span>
-<span class="o">}</span>
-<span class="nb">export </span><span class="nv">PROMPT_COMMAND</span><span class="o">=</span>spwd
-</code></pre></div>
-
-<p>It may not be the most efficient way to do it, but it sure works well and lets me know in an instant what trunk, branch or tag I happen to be working on at that very moment.</p>
 
     </div>
   </div>

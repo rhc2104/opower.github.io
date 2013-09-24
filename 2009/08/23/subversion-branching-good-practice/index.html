@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,15 +54,16 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1><a href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h1>
-  <p class="meta pull-right">Written on August 23, 2009 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
-  <div class="clearfix"></div>
-</div>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2009/08/23/subversion-branching-good-practice">Subversion Branching "Good" Practice</a></h1>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | August 23, 2009</p>
+    <div class="clearfix"></div>
+  </div>
 
-<div class="post-content">
-<p>I am relatively new to Subversion &ndash; well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the &ldquo;trunk/branches/tags&rdquo; directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
+  <div class="post-content">
+    <p>I am relatively new to Subversion &ndash; well, two years into using it now, but this is the first project I have used it on.  Subversion, like any tool, has its quirks and works best when you really know how to use it.  When I started, I treated the &ldquo;trunk/branches/tags&rdquo; directory structure exactly like a directory structure.  It took me a little playing around until I stumbled on what I would call a best practice.  When I checkout a new project, I do it like so:</p>
 
 <pre><code>svn co http://domain.com/svnroot/project/trunk project
 </code></pre>
@@ -100,6 +104,7 @@
 
 <p>It may not be the most efficient way to do it, but it sure works well and lets me know in an instant what trunk, branch or tag I happen to be working on at that very moment.</p>
 
+  </div>
 </div>
 
 

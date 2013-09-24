@@ -1,16 +1,51 @@
 html,
 body {
-    height: 100%;
-    /* The html and body elements cannot have any padding or margin for the
-     * sticky footer to work. */
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin for the
+   * sticky footer to work. */
 }
 
 body {
-  background-color: #187ec0;
+  font-size: 14px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: #0088ce;
+}
+
+p {
+  margin-bottom: 22px;
+}
+
+/* Overriding pager styles */
+.pager {
+  margin-bottom: 50px;
+}
+
+.pager li > a {
+  background: #0175b0;
+  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #2599d5), color-stop(100%, #0175b0));
+  background-image: -webkit-linear-gradient(#2599d5, #0175b0);
+  background-image: -moz-linear-gradient(#2599d5, #0175b0);
+  background-image: -o-linear-gradient(#2599d5, #0175b0);
+  background-image: -ms-linear-gradient(#2599d5, #0175b0);
+  background-image: linear-gradient(#2599d5, #0175b0);
+  border: 1px solid #005487;
+  border-radius: 5px;
+  color: #fff;
+  margin-top: 40px;
+  text-shadow: 0 -1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.pager .disabled > a {
+  display: none;
 }
 
 /* Wrapper for page content to push down footer */
 #wrap {
+  background-color: #1876b3;
   min-height: 100%;
   height: auto !important;
   height: 100%;
@@ -22,10 +57,10 @@ body {
 
 /* Set the fixed height of the footer here */
 #footer {
-  height: 60px;
-  background-color: #187ec0;
+  height: 80px;
+  background-color: #4e4f51;
   color: #fff;
-  font-size: 75%;
+  font-size: 85%;
 }
 
 #footer .container {
@@ -66,7 +101,7 @@ body {
 }
 
 .navbar {
-  background-color: #187ec0;
+  background-color: #1876b3;
   color: #fff;
 }
 
@@ -76,7 +111,9 @@ body {
 }
 
 .navbar a.navbar-brand {
+  font-family: arial, sans-serif;
   font-size: 200%;
+  letter-spacing: 1px;
 }
 
 .navbar a.navbar-brand b {
@@ -90,5 +127,26 @@ body {
 }
 
 .project {
-  font-size: 75%;
+  font-size: 85%;
+}
+
+.panel .description {
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+}
+
+.panel .watchers {
+  margin-left: 50px;
+}
+
+.panel .forks,
+.panel .watchers {
+  color: #999;
+  display: inline-block;
+}
+
+.panel .forks .count,
+.panel .watchers .count {
+  color: #000;
 }

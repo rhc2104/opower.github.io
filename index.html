@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,222 +54,41 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1>Blog Posts</h1>
-</div>
-<div class="posts">
+                <div class="posts">
   
   <div class="post">
-    <h2><a href="/2013/09/01/the-big-data-elders-archeology-hour">The Big Data Elders, Archeology Hour</a></h2>
-    <p class="meta pull-right">Written on September 01, 2013 by <a href="/authors/alexandre-normand">Alexandre Normand</a>
+    <h2><a class="title" href="/2013/09/01/the-big-data-elders-archeology-hour">The Big Data Elders, Archeology Hour</a></h2>
+    <p class="meta">by <a href="/authors/alexandre-normand">Alexandre Normand</a>
  and <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
+ | September 01, 2013</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>After all that&rsquo;s been written about the <a href="/2013/07/07/the-story-of-the-big-data-elders">ancient Big Data elders</a>
 and their artful discoveries, it seems appropriate to now lift the curtain and
 reveal the modern, specific, and, sometimes dirty, details.</p>
 
-<p>Before we do, let&rsquo;s get something out in the open right now: working at 
-<a href="http://opower.com">Opower</a> is pretty great. We get to make an impact on this
- world, using fancy and effective behavioral science while working with cool 
- and exciting tech. Awesome, right?</p>
-
-<h3 id="a-brief-history-of-data-storage-at-opower">A brief history of data storage at Opower</h3>
-<p>We have been using MySQL as our main database since day one.  It has been good 
-to us, and we have figured out how to scale it well enough.  But as our 
-business has grown, so have our data storage needs.  Each of our utility 
-company clients gives us historical energy data for their customers, and we 
-store it indefinitely.  For utility companies that have smart meters 
-installed, we store energy reads that occur every 15 minutes, hour, or day.<br />
-For a meter with 15 minute resolution, we store 3000 times as much data as a 
-standard meter that is read once a month.</p>
-
-<p>As more and more utility companies install smart meters, we ingest more and 
-more of this higher resolution data, which comes in more frequently than 
-standard monthly data.  Those last two characteristics hit on two of the 
-&ldquo;<a href="http://whatis.techtarget.com/definition/3Vs">three V’s</a>&rdquo; that define &ldquo;Big
-Data&rdquo;: volume and velocity.  As we have collected the smart meter data over
-the last several years, we have figured out innovative ways to use it, and we 
-want to accelerate our learning using the data.  To achieve that, we needed a 
-system better suited to processing large amounts of data, and that is where 
-Hadoop and HBase fit in.</p>
-
-<p>We have a business case that fits HBase perfectly, because we need to perform 
-large batch calculations (running a disaggregation of A/C usage from your 
-energy data, for instance), and we need to serve up the results of those 
-calculations with low latency.  HBase gives us the perfect mix of those two 
-access patterns, and we have spent the last year working on our new storage 
-system to do exactly this.</p>
-
-<h3 id="using-it-is-one-thing-showing-it-is-another">Using it is one thing, showing it is another</h3>
-<p>All of this fancy Big Data is pretty amazing but it&rsquo;s also not very sexy to 
-the untrained eye. After several low-level demos making use of the terminal, 
-logs and job tracker UI, we decided it was time to try a little harder. Let&rsquo;s 
-ponder: what can we show to illustrate the fact that we process and store all 
-of this energy data without breaking a sweat? </p>
-
-<h4 id="table-size">Table size</h4>
-<p>Showing table size is an obvious one. People understand what a terabyte 
-represents (at the very least, they know it&rsquo;s bigger than their inbox). </p>
-
-<p>For the demo, we gathered the table size data while our big test was running. 
-We built a simple command-line tool that polls hdfs for the size of each 
-table&rsquo;s directory. It keeps track of the sizes and outputs a json time series 
-when the tool shuts down. It&rsquo;s designed to run from a gateway node that can 
-run the hadoop command and run <code>hadoop fs du</code> on hdfs.</p>
-
-<p>Source: <a href="https://github.com/opower/giant-squash">giant-squash</a></p>
-
-<h4 id="job-progress">Job progress</h4>
-<p>Showing the tables growing is interesting but it doesn&rsquo;t show all the work 
-that&rsquo;s done in Hadoop to get this data in HBase. Let&rsquo;s add the job progress 
-and input/output sizes. </p>
-
-<p>This is very similar to <a href="https://github.com/opower/giant-squash">giant-squash</a> 
-except that it collects data from the job tracker on the jobs that are running 
-on the cluster. It also collects the data in-memory and dumps a json time 
-series of the input/output sizes as well as map/reduce progress on exit.  </p>
-
-<p>Source: <a href="https://github.com/opower/little-rabbit">little-rabbit</a></p>
-
-<h4 id="putting-it-together">Putting it together</h4>
-<p>Now that we&rsquo;ve got the data collected and our test is complete, let&rsquo;s animate 
-it in fast-motion.</p>
-
-<p>Based on this nice d3.js <a href="http://bost.ocks.org/mike/nations/">Motion Chart</a> 
-demo, we created our version to animate the time series data. It reads the two 
-json dumps and merges this in one visualization. Granted, it violates some of 
-the <a href="http://moz.com/blog/data-visualization-principles-lessons-from-tufte">principles of data information visualization</a>
-but it does make for a cool presentation and it gets people interested enough to
-ask questions about it.</p>
-
-<p>Source: <a href="https://github.com/opower/bloom-harvester">bloom-harvester</a></p>
-
-<h4 id="hollywood-production">Hollywood production</h4>
-<p>Finally we wrapped it in with a nice summary of the digestible numbers and a 
-nice soundtrack and voilà.</p>
-
-<p>Where are the explosions I hear you say? Well, maybe next time. After all, 
-this is going to production in just a few weeks.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2013/07/07/the-story-of-the-big-data-elders">The Story of the Big Data Elders</a></h2>
-    <p class="meta pull-right">Written on July 07, 2013 by <a href="/authors/alexandre-normand">Alexandre Normand</a>
-</p>
+    <h2><a class="title" href="/2013/07/07/the-story-of-the-big-data-elders">The Story of the Big Data Elders</a></h2>
+    <p class="meta">by <a href="/authors/alexandre-normand">Alexandre Normand</a>
+ | July 07, 2013</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>There was a time, not so long ago, when everything was dark. Everything was 
 dark except for a few rapidly moving glyphs that none could really understand. 
 None could understand except for a few elders who had spent months of studying.  </p>
 
-<p><em>Terminals, tiny fonts, hadoop command lines and hbase scans.</em> </p>
-
-<p>The elders were wise but, in their learnings, they forgot what it was like to 
-<em>not</em> understand. They had forgotten what it was like before they finally 
-developed the ability to decipher it. </p>
-
-<p>So it was in much frustration that they tried to share with the villagers the
-meanings of these cryptic glyphs. They waved their hands, talked slowly and in
-exhaustive details about what they saw. But the villagers weren&rsquo;t seeing. 
-Nothing would do. They would stare in the darkness, not seeing the glyphs,
-not  interested. They would then stand up and walk away not knowing what they had been looking at.</p>
-
-<p><em>It&rsquo;s just hard to show Big Data to the non-initiated in a compelling way.</em></p>
-
-<p>The elders, sitting on their stools, wondered how they could get the villagers 
-interested. How could they ignite the fire of curiosity so that they too would 
-want to learn about these great things?</p>
-
-<p><em>This might have happened on <a href="http://campfirenow.com/">campfire</a></em>.</p>
-
-<p>One elder who had a funny accent was listening but didn&rsquo;t say a word.</p>
-
-<p><em>That&rsquo;s me, I&rsquo;m a <strong>Québécois</strong></em>.    </p>
-
-<p>The next morning, when everyone was busy working, he said</p>
-
-<blockquote>
-  <p>&ldquo;Dear friends, I have listened to you and I have a plan.&rdquo;</p>
-</blockquote>
-
-<blockquote>
-  <p>&ldquo;I will make them interested if you give me your full trust and support.&rdquo;</p>
-</blockquote>
-
-<p><em>A 4 story point JIRA ticket.</em></p>
-
-<p>The others elders looked at him, puzzled. </p>
-
-<p>They all offered their trust and the strange one told them what his plan was:</p>
-
-<blockquote>
-  <p>&ldquo;I will first build the tools that will record all of what is happening.&rdquo;</p>
-</blockquote>
-
-<p><em>Such as a java command-line tool that polls the jobtracker for job progress</em>
-<em>as well as counters + another one that polls and records the table sizes.</em></p>
-
-<blockquote>
-  <p>&ldquo;I will then summon the gods to make it rain the heaviest rain while the 
-tools record the history.&rdquo;</p>
-</blockquote>
-
-<p><em>A full test workflow executed via our runner runs while the tools record data</em>
-<em>about it.</em></p>
-
-<blockquote>
-  <p>&ldquo;When the rain stops, I will gather the fruits from the tools and I will 
-arrange a grandiose spectacle.&rdquo;</p>
-</blockquote>
-
-<p><em>A d3 visual animation of the jobs running overlaid with bars showing the</em>
-<em>tables growing as the map/reduce jobs progress.</em></p>
-
-<p>Finally, he added</p>
-
-<blockquote>
-  <p>&ldquo;The villagers will gather on the afternoon of the last Tuesday of the 6th 
-month to attend a showing of this majestic production.&rdquo;</p>
-</blockquote>
-
-<p><em>A video montage adding some jest to the whole extravaganza.</em> </p>
-
-<p>The elders cheered, albeit slightly skeptical at first. </p>
-
-<p>After 7 days of uninterrupted work, it was ready. The elders and the villagers 
-gathered around the stage where everything was ready for all eyes to see. The 
-strange one was absent but the elders proceeded, both anxious and excited. </p>
-
-<p><em>Demo day was on June 25th but I was on vacation so the team had to present</em>
-<em>the video.</em> </p>
-
-<p>When the beautiful bright sight started before their eyes, the villages stood 
-silent. The elders watched as everyone was all ears, eyes wide open seemingly
-seeing for the first time what this was all about. They did not understand it 
-immediately. They couldn&rsquo;t have. But when this was done, they asked to watch 
-it again. They reached to the elders to learn more about what it was that they 
-had seen. Some stayed and got interested enough to learn some of the glyphs. 
-The villagers talked for a while and came back to the elders with a reward. </p>
-
-<p><em>People were genuinely entertained, some people asked questions and some might</em>
-<em>now think that this thing they weren&rsquo;t sure what it was about looks pretty</em>
-<em>interesting.</em>  </p>
-
-<p>And so, it started…</p>
-
-<iframe width="600" height="337" src="http://player.vimeo.com/video/70606335" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen=""></iframe>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
-    <p class="meta pull-right">Written on March 29, 2013 by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
-</p>
+    <h2><a class="title" href="/2013/03/29/timeshifting-in-hbase">Timeshifting in HBase</a></h2>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | March 29, 2013</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>For our HBase table layout, we are following an entity-centric model,
@@ -285,213 +107,30 @@ That data does not need to be logically timestamped, and we always just want the
 most recent version of it.  Given this description, rows in the table look
 something like this:</p>
 
-<pre><code>timestamp    data     metadata
-   2013      1.09
-   2012      0.87
-   2011      0.93     "house"
-   2010      1.02
-   2009      0.98
-</code></pre>
-
-<p>This shows a row that has five timeseries values in it and a piece of metadata
-that we keep, a label describing where the data came from.  The metadata is
-stored at the timestamp when we wrote it into the table, which in this example
-is in 2011.  Since we imported historical data, and we use logical timestamps
-for the data column, we have data going back to 2009.  One typical access
-pattern is to query for all data from the beginning of &ldquo;last year&rdquo; up to now,
-because we need that much data for many analyses.  If we ran a <code>get</code> for this
-data, it would normally be set up like this (in pseudo-code, of course):</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Get</span><span class="o">(</span><span class="n">rowkey</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;data&quot;</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;metadata&quot;</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">setTimeRange</span><span class="o">(</span><span class="mi">2012</span><span class="o">,</span> <span class="mi">2013</span><span class="o">);</span>
-</code></pre></div>
-
-<p>Unfortunately that <code>get</code> would not return us any data for the metadata column,
-because there is no valid cell in that timerange.  We have two options: make
-a second <code>get</code> for the metadata or figure out some other solution.  That second
-solution is timeshifting.</p>
-
-<p>Instead of storing the metadata column with a true server timestamp of when it
-was written, we shift the timestamp by 50,000 years which makes the row data now
-look like this:</p>
-
-<pre><code>timestamp    data     metadata
-  52011               "house"
-   2013      1.09
-   2012      0.87
-   2011      0.93
-   2010      1.02
-   2009      0.98
-</code></pre>
-
-<p>Since we imported the data in 2011 and timeshifted the metadata column
-timestamp, its new timestamp is 52,011.  We now change our <code>get</code> slightly by
-setting an ending timestamp to be the logical &ldquo;end of time&rdquo;:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">Get</span> <span class="n">get</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Get</span><span class="o">(</span><span class="n">rowkey</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;data&quot;</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">addColumn</span><span class="o">(</span><span class="s">&quot;metadata&quot;</span><span class="o">);</span>
-<span class="n">get</span><span class="o">.</span><span class="na">setTimeRange</span><span class="o">(</span><span class="mi">2012</span><span class="o">,</span> <span class="n">Long</span><span class="o">.</span><span class="na">MAX_LONG</span><span class="o">);</span>
-</code></pre></div>
-
-<p>Now, we will get data for the data column and for the metadata column
-using only one RPC.  The benefit of HBase being a sparse datastore is that the
-data for the metadata column is stored on disk right next to the data for the
-data column even though they are logically separated by 50,000 years.
-There is no added overhead to the storage to account for this, and thus no added
-processing when fetching it.  Furthermore, fetching data for just the metadata column still works
-with <code>Result#getColumnLatest()</code>.</p>
-
-<p>Yes, there is a problem for the future us of the year 52,011, but I&rsquo;m betting we
-will all be using relational databases again by that point.</p>
-
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></h2>
-    <p class="meta pull-right">Written on October 12, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2012/10/12/with-all-apologies-to-psy">With all apologies to Psy</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | October 12, 2012</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Friday afternoon snippet of South Korea&rsquo;s Macarena by Opower&rsquo;s own Wayne Lin and Eddy Leung in our Arlington HQ elevator bank.</p>
 
-<iframe width="420" height="315" src="//www.youtube.com/embed/7Fa7KW5AfXQ?rel=0" frameborder="0" allowfullscreen=""></iframe>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h2>
-    <p class="meta pull-right">Written on September 06, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2012/09/06/upgrading-from-spring-3-0-x-to-spring-3-1-x">Upgrading from Spring 3.0.x to Spring 3.1.x</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | September 06, 2012</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&rsquo;d capture some of them here.</p>
 
-<p>Additionally, it&rsquo;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
-
-<h3 id="changes-to-theorgspringframeworkjdbccoresimple-package">Changes to the org.springframework.jdbc.core.simple package</h3>
-
-<p>The &lsquo;.simple&rsquo; package is deprecated (including the <code>SimpleJdbcTemplate</code> class) and there are two new classes you need to know about as you make the transition:</p>
-
-<ol>
-  <li>The <code>org.springframework.jdbc.JdbcTemplate</code> class is a drop-in replacement for the old <code>SimpleJdbcTemplate</code> class, <em>unless you&rsquo;re using named parameters in your queries.</em></li>
-  <li>If you run SQL queries with named parameters through the <code>JdbcTemplate</code> your code will compile fine but you&rsquo;ll get odd <code>Serialization</code> exceptions or <code>ArrayIndexOutOfBoundsExceptions</code>.  For named parameter queries, you&rsquo;ll need to use the <code>org.springframework.jdbc.namedparam.NamedParameterJdbcTemplate</code>.</li>
-</ol>
-
-<p>Luckily, the <code>NamedParameterJdbcTemplate</code> wraps the new <code>JdbcTemplate</code> (well, actually the new <code>JdbcOperations</code>) so if you&rsquo;re like Opower and you&rsquo;ve got a top level <code>AbstractJdbcDAO</code> class that your JdbcDAOs extend from, you can just swap your Abstract class to extend the <code>NamedParameterJdbcTemplate</code> and you&rsquo;ll be off to a good start.</p>
-
-<h3 id="supporting-named-parameter-queries-in-spring-312">Supporting named parameter queries in Spring-3.1.2</h3>
-
-<p>One thing to be aware of is a swap in the argument list to the <code>.query()</code> method on the <code>NamedParameterJdbcTemplate</code> that used to work with the <code>SimpleJdbcTemplate</code>.  Note this signature difference between the <code>JdbcTemplate</code> and <code>NamedParameter</code> version isn&rsquo;t &ldquo;new&rdquo; between Spring 3.0 and 3.1, it&rsquo;s just that you used be able to get away with passing named parameters through the <code>SimpleJdbcTemplate</code> and now you can&rsquo;t.  As you&rsquo;re converting to the 3.1 spec, you&rsquo;ll need to correct for that laziness.</p>
-
-<p>Let&rsquo;s say you&rsquo;ve got a SQL query containing named parameters and your code used to happily get by with this call to your <code>SimpleJdbcTemplate</code>&rsquo;s <code>.query</code> method:</p>
-
-<div class="highlight"><pre><code class="java"><span class="c1">// SQL query with named parameter ( the :zipCodes)</span>
-<span class="n">String</span> <span class="n">sql</span> <span class="o">=</span> <span class="s">&quot;SELECT blah FROM foo WHERE zip_code IN (:zipCodes)&quot;</span>
-
-<span class="c1">// Our row mapper</span>
-<span class="n">RowMapper</span> <span class="n">rowMapper</span> <span class="o">=</span> <span class="k">new</span> <span class="o">...</span>
-
-<span class="c1">// Our parameter Map for named parameter substitution</span>
-<span class="n">ImmutableMap</span> <span class="n">paramMap</span> <span class="o">=</span> <span class="n">ImmutableMap</span><span class="o">.</span><span class="na">of</span><span class="o">(</span><span class="s">&quot;zipCodes&quot;</span><span class="o">,</span> <span class="n">zipCodes</span><span class="o">);</span>
-
-<span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getSimpleJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">);</span>
-</code></pre></div>
-
-<p>When using the <code>NamedParameterJdbcTemplate</code> in Spring-3.1.2 you&rsquo;ll need switch the argument order of your <code>rowMapper</code> and your <code>paramMap</code>, e.g:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">List</span> <span class="n">blah</span> <span class="o">=</span> <span class="n">getNamedParameterJdbcTemplate</span><span class="o">().</span><span class="na">query</span><span class="o">(</span><span class="n">sql</span><span class="o">,</span> <span class="n">paramMap</span><span class="o">,</span> <span class="n">rowMapper</span><span class="o">);</span>
-</code></pre></div>
-
-<p>If you don&rsquo;t make the switch, your call to a <code>JdbcTemplate.query(sql, rowMapper, paramMap)</code> will happily compile because it meets the <code>JdbcTemplate</code>&rsquo;s method signature of</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span>  <span class="n">List</span> <span class="nf">query</span><span class="o">(</span><span class="n">String</span> <span class="n">sql</span><span class="o">,</span> <span class="n">RowMapper</span> <span class="n">rowMapper</span><span class="o">,</span> <span class="n">Object</span><span class="o">...</span> <span class="n">args</span><span class="o">)</span>
-    <span class="kd">throws</span> <span class="n">DataAccessException</span>
-</code></pre></div>
-
-<p>with the problem being that your <code>rowMapper</code> object gets passed in as the one and only varargs substitution variable to whatever &ldquo;?&rdquo; or &ldquo;:foo&rdquo; named parameter you may have in your query.  Depending on the query you&rsquo;re trying to run you&rsquo;ll get Serialization exceptions or something like this:</p>
-
-<div class="highlight"><pre><code class="java"><span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span><span class="o">;</span>
-    <span class="n">nested</span> <span class="n">exception</span> <span class="n">is</span> <span class="n">java</span><span class="o">.</span><span class="na">sql</span><span class="o">.</span><span class="na">SQLException</span><span class="o">:</span>
-        <span class="n">Invalid</span> <span class="n">argument</span> <span class="nl">value:</span> <span class="n">java</span><span class="o">.</span><span class="na">lang</span><span class="o">.</span><span class="na">ArrayIndexOutOfBoundsException</span>
-</code></pre></div>
-
-<h3 id="spring-batch-2x-needs-spring-30s-deprecated-jdbcoperations">Spring-Batch 2.x needs Spring 3.0&rsquo;s deprecated JdbcOperations</h3>
-
-<p>If you use Spring Batch&rsquo;s <code>org.springframework.batch.core.repository.dao.JdbcJobInstanceDao</code> you&rsquo;ll need to continue to support the deprecated spring-3.0.x <code>SimpleJdbcTemplate</code> because that&rsquo;s the only class allowed to be set on the <code>JdbcJobInstaceDAO</code> to help it query the DB to look up all the data out of your <code>BATCH_xxx</code> tables.  Track <a href="https://jira.springsource.org/browse/BATCH-1685">https://jira.springsource.org/browse/BATCH-1685</a> for details about when that deprecated requirement goes away.</p>
-
-<h3 id="spring-securitys-accessdecisionvoter-became-parameterized">Spring Security&rsquo;s AccessDecisionVoter became parameterized</h3>
-
-<p>We use Spring Security&rsquo;s <code>AccessDecisionVoter</code> to help us authorize (or not) SSO authenticated users.  We used to get away with this Spring-3.0 style implementation:</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span> <span class="o">{</span>
-<span class="o">...</span>
-<span class="nd">@Override</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// make a decision on authentication based on attributes</span>
-<span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>With the parameterization of the <code>AccessDecisionVoter</code>, the new implementation looks like:</p>
-
-<div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="kd">class</span> <span class="nc">SSOVoter</span> <span class="kd">implements</span> <span class="n">AccessDecisionVoter</span><span class="o">&lt;</span><span class="n">Object</span><span class="o">&gt;</span> <span class="o">{</span>
-<span class="o">...</span>
-<span class="nd">@Override</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">vote</span><span class="o">(</span><span class="n">Authentication</span> <span class="n">authentication</span><span class="o">,</span> <span class="n">Object</span> <span class="n">object</span><span class="o">,</span> <span class="n">Collection</span> <span class="n">attributes</span><span class="o">)</span> <span class="o">{</span>
-    <span class="c1">// make a decision on authentication based on attributes</span>
-<span class="o">...</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<h3 id="new-abstract-method-onorgspringframeworkhttpclientclienthttpresponse">New abstract method on org.springframework.http.client.ClientHttpResponse</h3>
-
-<p>If you use or mock Spring&rsquo;s <code>ClientHttpResponse</code> object, there&rsquo;s a new <code>public int getRawStatusCode() throws IOException</code> signature you&rsquo;ve got to implement.  With access to an <code>HttpStatus</code> object, that&rsquo;s pretty straightforward:</p>
-
-<div class="highlight"><pre><code class="java"><span class="nd">@Override</span>
-<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getRawStatusCode</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">httpStatus</span><span class="o">.</span><span class="na">value</span><span class="o">();</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<h3 id="pay-attention-to-your-spring-context-xsd-versions">Pay attention to your spring context XSD versions</h3>
-
-<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn&rsquo;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &ldquo;spring security tag 3.0 library incompatible with class &hellip; blah&rdquo; make sure:</p>
-
-<ol>
-  <li>your spring context&rsquo;s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
-  <li>your mvn dependency:tree is pulling in spring-security-3.1</li>
-</ol>
-
-<h3 id="spring-31-securitys-taglib-has-a-package-change">Spring 3.1 Security&rsquo;s Taglib has a package change.</h3>
-
-<p>On first load of one of WARs, our login page greeted me with a fat stack trace starting at &ldquo;TemplateModelException: Could not load taglib information&rdquo; and ending at &ldquo;Caused by: java.lang.ClassNotFoundException: org.springframework.security.taglibs.authz.AuthorizeTag&rdquo;.  The AuthorizeTag class has been renamed to &ldquo;JspAuthorizeTag&rdquo;, but there are a few minor formatting and documentation differences between the old and new (3.1) taglibs, so I just copied the whole security.tld taglib over top of the one I had in our WEB-INF from spring&rsquo;s fisheye site (google search for &ldquo;spring security.tld 3.1&rdquo;).</p>
-
-<h3 id="spring-31-may-mean-an-update-to-your-oauth-dependency">Spring 3.1 may mean an update to your OAuth dependency</h3>
-
-<p>Several of Opower&rsquo;s web apps leverage OAuth for aspects of our security.  When upgrading to spring-security 3.1, some problems will crop up if you&rsquo;re using ant-style filter chain maps in your <code>FilterChainProxy</code>.  For example, one of our <code>securityContext.xml</code> files contained this snippet:</p>
-
-<div class="highlight"><pre><code class="xml">xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans
-http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
-http://www.springframework.org/schema/security
-http://www.springframework.org/schema/security/spring-security-3.1.xsd
-http://www.springframework.org/schema/security/oauth
-http://www.springframework.org/schema/security/spring-security-oauth.xsd&quot;
-default-autowire=&quot;byName&quot;&gt;
-...snip...
-  <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;filterChainProxy&quot;</span> <span class="na">class=</span><span class="s">&quot;org.springframework.security.web.FilterChainProxy&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;sec:filter-chain-map</span> <span class="na">path-type=</span><span class="s">&quot;ant&quot;</span><span class="nt">&gt;</span>
-...snip...
-</code></pre></div>
-
-<p>When spinning up that context, I&rsquo;d get an error: &ldquo;java.lang.ClassNotFoundException: org.springframework.security.web.util.AntUrlPathMatcher.&rdquo;  Sure enough, there was no <code>AntUrlPathMatcher</code> in my spring-security-web-3.1.2 JAR on the classpath.  Fixing this necessitated an upgrade of our spring-security-oauth JAR from 1.0.0.M2 to 1.0.0.M6</p>
-
-<p>Upgrading to the 1.0.0.M6 version of the spring-security-oauth JAR caused some of its own problems which ended up just being another package change (the <code>ProtectedResourceProcessingFilter</code> class ended up moving from <code>org.springframework.security.oauth.provider</code> to <code>org.springframework.security.oauth.provider.filter</code>).</p>
 
     </div>
   </div>

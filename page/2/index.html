@@ -21,7 +21,10 @@
         <link rel="stylesheet" href="/css/pluggyfont.css">
 
         <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/archive.css">
         <link rel="stylesheet" href="/css/custom.css">
+        <link rel="stylesheet" href="/css/post.css">
+        <link rel="stylesheet" href="/css/profile.css">
 
     </head>
 
@@ -51,361 +54,64 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="page-header">
-  <h1>Blog Posts</h1>
-</div>
-<div class="posts">
+                <div class="posts">
   
   <div class="post">
-    <h2><a href="/2012/04/12/whos-inhabiting-your-code">Who's Inhabiting Your Code?</a></h2>
-    <p class="meta pull-right">Written on April 12, 2012 by <a href="/authors/ed-peters">Ed Peters</a>
-</p>
+    <h2><a class="title" href="/2012/04/12/whos-inhabiting-your-code">Who's Inhabiting Your Code?</a></h2>
+    <p class="meta">by <a href="/authors/ed-peters">Ed Peters</a>
+ | April 12, 2012</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Lately I&rsquo;ve been thinking about the notion of &ldquo;beautiful code&rdquo;, and finding it to be less and less satisfying as a goal.  First off, beauty is elusive: everyone seems to have a different concept of what it means (and except for mine, they&rsquo;re all wrong).  And second, even when you can label a piece of code as &ldquo;beautiful&rdquo;, it&rsquo;s not at all clear how that translates into other desirable characteristics like performance, maintainability, and so forth.</p>
 
-<p>In my reading, I came across a great article by Rebecca Wirfs-Brock<sup id="fnref:1"><a href="#fn:1" class="footnote">1</a></sup> in which she discusses the notion of &ldquo;habitable code&rdquo;.  This idea isn&rsquo;t original to her (she credits Richard Gabriel in Patterns of Software<sup id="fnref:2"><a href="#fn:2" class="footnote">2</a></sup>), but she provides a great explanation of the concept, and goes on to talk about its role in complex systems.</p>
-
-<p>Paraphrasing some key points &hellip;</p>
-
-<ul>
-  <li>
-    <p><em>Clarity for its own sake is an elusive goal</em>.  In my own experience, if I strive really hard to make some aspect of my code crystal clear (say, a challenging algorithm or data structure), it&rsquo;s at the expense of clarity in some other area. It&rsquo;s a bit like a game of <a href="http://en.wikipedia.org/wiki/Whac-A-Mole">Whac-A-Mole</a>.  Just as you can&rsquo;t write code that&rsquo;s infinitely flexible in the face of unknown future requirements, I don&rsquo;t think you can write code that&rsquo;s infinitely clear to an unknown future audience.</p>
-  </li>
-  <li>
-    <p><em>Beauty becomes a constraint for future authors</em>.  It&rsquo;s hard to extend or update excessively beautiful code without spoiling some of its inherent loveliness.  An analogy to industrial design &ndash; the MacBook Air achieves a certain level of elegance by ruthlessly eliminating functionality like replaceable batteries, integrated ethernet or a DVD drive.  How difficult would it be to add that stuff in later without compromising the original aesthetic?  Probably very.</p>
-  </li>
-  <li>
-    <p><em>Habitable code makes its structure and intentions easy to understand</em>.  Structure, sure, but as a professional developer, the &ldquo;and intentions&rdquo; part seems pretty important.  You can read code to understand what it&rsquo;s doing, but it&rsquo;s not always obvious what problem the original author thought it was solving.  This is a hard thing to do right &ndash; the best I&rsquo;ve been able to do is document the problem being solved, and make the structure of the code appropriate to the solution.  Code reviews are a huge help in identifying areas that need improvement in either direction.</p>
-  </li>
-  <li>
-    <p><em>Habitable code makes developers feel at home</em>.  At <a href="http://www.opower.com">Opower</a> we have a pretty good-sized body of coding conventions, some of which are automatically enforced using tools like Checkstyle and PMD.  To new hires, it sometimes seems totalitarian (it did to me). But once you&rsquo;ve been around awhile, you notice a funny thing: you can go almost anywhere in our source base and see things done in a similar fashion.  This helps us transition from artifact to artifact more easily, and reduces the overhead in sharing code. Habitable, indeed.</p>
-  </li>
-</ul>
-
-<p>Just like any other principles, these can be reduced to absurdity.  Giving up completely on clarity is obviously not the answer, nor is making your code horribly ugly so that future maintainers don&rsquo;t feel bad about rewriting it.  But it&rsquo;s interesting to think about where habitability differs from clarity and beauty, and what it demands of us as developers.</p>
-
-<p>So &hellip; who&rsquo;s inhabiting your code today?  Whose code are you inhabiting?  How is that going to change in a month?  Six months?  A year?  And what are you doing to make each other feel welcome and at home?</p>
-
-<div class="footnotes">
-  <ol>
-    <li id="fn:1">
-      <p><a href="http://www.wirfs-brock.com/PDFs/DoesBeautifulCodeImply.pdf">Does Beautiful Code Imply Beautiful Design</a> by Rebecca Wirfs-Brock.<a href="#fnref:1" class="reversefootnote">&#8617;</a></p>
-    </li>
-    <li id="fn:2">
-      <p><a href="http://dreamsongs.net/Files/PatternsOfSoftware.pdf">Patterns of Software: Tales from the Software Community</a> by Richard P. Gabriel.<a href="#fnref:2" class="reversefootnote">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2012/02/14/the-birth-of-omama">The Birth of OMAMA</a></h2>
-    <p class="meta pull-right">Written on February 14, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2012/02/14/the-birth-of-omama">The Birth of OMAMA</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | February 14, 2012</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p><img src="/img/bieber.jpg" alt="Justin Bieber" /></p>
 
-<p>Over the last 6 months, I have been slowly filling up the empty wall spaces in the engineering department with various posters of Nickleback, Justin Bieber and Edward from &ldquo;Twilight&rdquo;. These posters tended to get relocated and repositioned behind the desks of engineers who had recently broken the build or accidentally replied-to-all on an email thread.</p>
-
-<p>The posters were fun but admittedly a bit of an eyesore.  Last Friday Ben Foster, our VP of Product, said &ldquo;enough is enough&rdquo; and sent an email to the engineering and product teams announcing the immediate departure of Justin, Edward and Nickleback.  Ben&rsquo;s email was pretty good &ndash; complete with fake &ldquo;goodbye, I&rsquo;ll miss you&rdquo; messages, but it immediately raised the rabble in engineering.  &rdquo;What was <em>product</em> doing removing <em>engineering</em> posters??&rdquo;, etc. etc.  Adding fuel to the fire was Dan, our CEO, who saw that Ben had poked a sleeping bear and wondered aloud as to the state Ben would find his office when he came in to work on Monday morning&hellip;</p>
-
-<p>&ldquo;Love thine enemy&rdquo; formed the basis for engineering&rsquo;s response:  if Ben didn&rsquo;t appreciate crappy pop art, we&rsquo;d provide him with some higher scale fare.  Thus was born the Opower Modern Art Museum, Arlington or &ldquo;OMAMA.&rdquo;   Internationalization Team Leader Tyler Bronder and I spent Sunday morning at Michael&rsquo;s Arts &amp; Crafts and Home Depot collecting supplies and most of Sunday afternoon assembling the highest-brow art we could manage.</p>
-
-<p>Tyler and I thought a couple Rorschach knock-offs  would be quick and fun contributions to the museum&rsquo;s collection so we experimented on a few different paint-to-plastic-to-canvas transfer techniques before committing to imprinting on the large 4&rsquo;x3&rsquo; canvases we bought.</p>
-
-<p>It took a couple of trials and errors with transfer mediums and acrylic viscosity to get the exact technique down correctly, but once we had some confidence in what we were doing we produced a semi-creepy version of our logo which we titled &ldquo;Pluggy Deconstructed&rdquo; and a more traditional Rorschach blot that we titled &ldquo;Interaction Model.&rdquo;</p>
-
-<div class="gallery">
-<div class="row">
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/tom_cutting_transfer_plastic.jpg"><img width="150" height="150" src="/img/tom_cutting_transfer_plastic-150x150.jpg" alt="Me, cutting a plastic transfer for our large canvas" /></a>
-      <div class="caption">Me, cutting a plastic transfer for our large canvas</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/pluggy_decomposed.jpg"><img width="150" height="150" src="/img/pluggy_decomposed-150x150.jpg" alt="Pluggy Decomposed" /></a>
-      <div class="caption">Pluggy Decomposed</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/interaction_model.jpg"><img width="150" height="150" src="/img/interaction_model-150x150.jpg" alt="Interaction Model" /></a>
-      <div class="caption">Interaction Model</div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/tyler_starting_to_rorschach1.jpg"><img width="150" height="150" src="/img/tyler_starting_to_rorschach1-150x150.jpg" alt="Tyler starting to Rorschach" /></a>
-      <div class="caption">Tyler starting to Rorschach</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/energy_calc.jpg"><img width="150" height="150" src="/img/energy_calc-150x150.jpg" alt="Energy Calculator" /></a>
-      <div class="caption">Energy Calculator</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/composition_w_eligibility.jpg"><img width="150" height="150" src="/img/composition_w_eligibility-150x150.jpg" alt="&quot;Composition with Eligibility&quot;" /></a>
-      <div class="caption">&#8220;Composition with Eligibility&#8221;</div>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/self_portrait.jpg"><img width="150" height="150" src="/img/self_portrait-150x150.jpg" alt="Self Portrait" /></a>
-      <div class="caption">Self Portrait</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/self_portrait-back.jpg"><img width="150" height="150" src="/img/self_portrait-back-150x150.jpg" alt="Removing the &quot;Self Portrait&quot; will be difficult." /></a>
-      <div class="caption">Removing the &#8220;Self Portrait&#8221; will be difficult.</div>
-    </div>
-  </div>
-  <div class="col-lg-4">
-    <div class="thumbnail text-center">
-      <a href="/img/gallery_view.jpg"><img width="150" height="150" src="/img/gallery_view-150x150.jpg" alt="The final product came together nicely" /></a>
-      <div class="caption">The final product came together nicely</div>
-    </div>
-  </div>
-</div>
-</div>
-<p><!--/.gallery --></p>
-
-<p>We&rsquo;ve got a couple pieces of code that are central to the business that cause some newcomers to scratch their heads &ndash; our participant eligibility code and the orchestrating energy calculator code in particular have a certain notoriety.  Tyler and I thought those would make good fodder for abstract art, so we knocked off a Modrian and a Pollock to produce the next two works, &ldquo;Composition with Eligibility&rdquo; and &ldquo;Energy Calculator&rdquo;:</p>
-
-<p>The final (and best) pieces were put up in Ben&rsquo;s office.  &rdquo;Self Portrait&rdquo; is an 42.5&rdquo; x 77&rdquo; blow up of his facebook photo, pasted up inside his office window.  To discourage tampering with the gallery&rsquo;s centerpiece, Tyler and I cut a couple of pieces of plexiglass to fit and sealed it in to his window frame with some 1x2x80&rdquo;s and industrial sealing foam.</p>
-
-<p>Ben&rsquo;s been a great sport about it, but as the head of User Experience <em>and</em> Product, I&rsquo;m starting to get nervous at the creative energies he has at his disposal for the next battle in this war.  Stay tuned!</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h2>
-    <p class="meta pull-right">Written on January 20, 2012 by <a href="/authors/tom-vaughan">Tom Vaughan</a>
-</p>
+    <h2><a class="title" href="/2012/01/20/spring-configuration-and-library-decomposition">Spring Configuration and Library Decomposition</a></h2>
+    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
+ | January 20, 2012</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>Opower&rsquo;s evolved rapidly in the last 24 months and nowhere is that more true than in our code base.  Two years ago we had 2 flagship applications that shared model objects, DAOs and a handful of utility classes with one common JAR.  Since then we&rsquo;ve expanded to the point where (not even counting all the Ruby or Scala stuff) we&rsquo;re managing:</p>
 
-<ul>
-  <li>4 WAR applications</li>
-  <li>33 JAR libraries (1 open sourced @ <a href="https://github.com/opower/jpile">https://github.com/opower/jpile</a>)</li>
-  <li>14 &ldquo;pom artifacts&rdquo; that define groupings of projects and organize dependencies, versions, etc</li>
-</ul>
-
-<p>Not all of that growth was brand new, however.  As we expanded our product lines and thought more about the best way to scale our core features we invested heavily in the decomposition of existing WARs and improving the &ldquo;librarification&rdquo; of our code.  In addition to supporting scaling, improving the modularity of our code base also supports a move towards S.O.A. and improves the velocity of our scrum teams.  After all, it&rsquo;s a lot easier to focus on developing the stories in your iteration if you don&rsquo;t need to worry about stepping on another team&rsquo;s toes.  That&rsquo;s more easily achievable when your team aligns to one specific code artifact.</p>
-
-<p>A problem we quickly ran in to as we started decomposing WARs and JARs was the creation of a lot of redundant spring configuration files &ndash; especially in an integration test context.  Here&rsquo;s a crude picture of our initial state following some decomposition:</p>
-
-<p><a href="/img/pic11.png"><img src="/img/pic11-300x161.png" alt="One WAR depending on two JARs with duplicated spring bean configuration" /></a></p>
-
-<p>Note that the WAR includes the two JARs and wires together beans declared in the JARs with an applicationContext.xml defined in the WAR.  We thought it would be a good idea to adopt the policy of &ldquo;keep the tests close to the code that they stress.&rdquo;  That&rsquo;s a sensible policy, but resulted in duplication of context configuration found in the WAR for the purposes of spinning up Spring contexts during integration tests.</p>
-
-<p>Reducing that duplication was done by continuing the theme of decomposition and applying it to the Spring context as well.  For example, we adopted the policy that a JAR should export a sensible &ldquo;default wiring&rdquo; of the classes that it encapsulates.  We adopted naming conventions to facilitate the need to either explicitly or implicitly include a Spring context snippet.</p>
-
-<ul>
-  <li>If a JAR includes a context file ending in &ldquo;-spring.xml&rdquo; then it&rsquo;s automatically included by any WAR that declares a dependency on that JAR.</li>
-  <li>On the other hand, if a JAR includes a context file ending in &ldquo;Context.xml&rdquo; then it is only brought in to the WAR&rsquo;s context with an explicitly declared inclusion of that file.</li>
-</ul>
-
-<p>Here&rsquo;s what the picture looked like when we migrated to that model:</p>
-
-<p><a href="/img/pic21.png"><img src="/img/pic21-300x170.png" alt="One WAR with two JARs, but no duplicated bean configuration" /></a></p>
-
-<p>Integration tests that lived in our various JARs liked living in this model because they could always import &ldquo;*-spring.xml&rdquo; and their integration test context would come up and run just fine.</p>
-
-<p>This worked well until we encountered some situations where one JAR started depending on another JAR.  We wanted to ship sensible Spring context defaults from both JARs, but because of the &ldquo;*-spring.xml&rdquo; rule we ended up needing to duplicate all of the application properties that were needed to wire up the beans in the depended artifact from within the src/test/resources directory of the dependent JAR.  Here&rsquo;s a picture to explain what I mean:</p>
-
-<p><a href="/img/pic31.png"><img src="/img/pic31-300x184.png" alt="Application properties starting to proliferate" /></a></p>
-
-<p>This problem just got worse as you got more and more descended from a given library &ndash; for example, if jar-A depends on jar-B depends on jar-C and they all ship with their own &ldquo;*-spring.xml&rdquo; files we needed to define properties to configure C within jar-B <strong>and</strong> we needed to define properties to configure jar-B and jar-C within jar-A.  It was getting hairy.</p>
-
-<p>To solve this we adopted a new standard that basically amounts to &ldquo;provide sensible defaults for our sensible defaults&rdquo;: any bean in a &ldquo;*-spring.xml&rdquo; snippet that can be configured with a PropertyPlaceholderConfigurer must provide a sensible default for that property.  So a bean definition might have looked like this before:</p>
-
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;opower.Foo&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;locale&quot;</span> <span class="na">value=</span><span class="s">&quot;${locale}&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>
-</code></pre></div>
-
-<p>After:</p>
-
-<div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">name=</span><span class="s">&quot;foo&quot;</span> <span class="na">class=</span><span class="s">&quot;opower.Foo&quot;</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;locale&quot;</span> <span class="na">value=</span><span class="s">&quot;${locale:en_US}&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>
-</code></pre></div>
-
-<p>The defaulting of application properties allowed us to eliminate 90% of the boilerplate test properties and code that we would have otherwise needed and allows for a greater abstraction of thought when a developer decides to pull in a library.  Thus, our current setup looks something like this:</p>
-
-<p><a href="/img/pic41.png"><img src="/img/pic41-300x150.png" alt="Defaulted properties eliminates almost all configuration" /></a></p>
-
-<p>A couple of tricks to note when using this model:</p>
-
-<ul>
-  <li>There&rsquo;s a big difference in classpath context scanning between &ldquo;classpath:/<em>-spring.xml&rdquo; and &ldquo;classpath</em>:/<em>-spring.xml&rdquo;.  The first (with just one star) will pull in all the files that match &ldquo;</em>-spring.xml&rdquo; in the <em>first</em> directory on your classpath that contains any file matching that expression and then stop.  The second version (with classpath*) will do what you&rsquo;d expect&hellip; it pulls in all files that match &ldquo;*-spring.xml&rdquo; from every directory in scans in your classpath.</li>
-  <li>Application property defaulting accepts literals after the colon, so it&rsquo;s safe to do something like <code>${path:file:///blah}</code> to default the property to the string <code>file:///blah</code>.  You can also change the default string separator in the <code>PropertyPlaceholderConfigurer</code> bean so your defaults look more like this: <code>${path?file:///blah}</code>  (using a &ldquo;?&rdquo; as a separator)</li>
-  <li>It&rsquo;s tempting to eliminate application.properties wherever there&rsquo;s a default, but we avoided that for documentation reasons &ndash; we wanted to provide the implementers and users of our software with a one-stop location to discover and understand the configurability of our applications.  Thus, we adopted a standard that even if an application property is defaulted in a JAR&rsquo;s spring context snippet, we still explicitly declare that property in a WAR&rsquo;s top-level application.property and document how that property affects the system.</li>
-</ul>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></h2>
-    <p class="meta pull-right">Written on September 19, 2011 by <a href="/authors/dave-copeland">Dave Copeland</a>
-</p>
+    <h2><a class="title" href="/2011/09/19/our-scala-dsl-for-testing-our-web-product">Our Scala DSL for testing our web product</a></h2>
+    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
+ | September 19, 2011</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>This is actually a fairly old bit of tech for us, but I&rsquo;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&rsquo;s DSL Book</a>, and thought it might be good to talk about what we&rsquo;ve done.</p>
 
-<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&rsquo;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&rsquo;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
-
-<h3 id="the-domain-of-application-its-architecture">The domain of application: its architecture</h3>
-
-<p>To understand how it works, you need to understand how the apppilcation is architected.  While it&rsquo;s a Spring MVC web app, in the general sense, there&rsquo;s a lot more convention around how it&rsquo;s built.  If you&rsquo;ve used a &ldquo;web framework&rdquo; like Spring MVC, you know that it&rsquo;s really a giant library for responding to HTTP requests at its core, and that it&rsquo;s not very opinionated; it&rsquo;s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn&rsquo;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
-
-<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &ldquo;Hi, Dave!&rdquo; in the upper corner; that &ldquo;Hi, Dave&rdquo; would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what&rsquo;s needed to configure the modules on the page. All stateful information (e.g. &ldquo;who&rsquo;s logged in?&rdquo;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
-
-<p>This is all glued together via a souped-up version of a <code>&lt;jsp:include&gt;</code> tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.</p>
-
-<h3 id="testing-with-scala">Testing with Scala</h3>
-
-<p>Which brings us to our DSL for testing this stuff.  Essentially, a module&rsquo;s url can be requested and tested independently of any page; we don&rsquo;t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module&rsquo;s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
-
-<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&rsquo;s consider a module that renders a person&rsquo;s most recent bill.  Suppose we have two views of this module; in the &ldquo;large&rdquo; view, we want to see the bill&rsquo;s cost, KWh used, and an account number.  In the &ldquo;small&rdquo; view (that we might use on a dashboard page), we want to see just the bill&rsquo;s cost.  How might we test this?</p>
-
-<pre><code>resource for bill 34 from customer 123:
-  requires login as customer 123
-  contains "45.67" as the cost
-  has a view "small"
-  has a view "large"
-    that contains "156" as the kwh
-    that contains "655321" as the account number
-</code></pre>
-
-<p>I decided I wanted to write this in code, and have it work.  Not having time to write a parser (or invent a new language), I decided an internal DSL would be the way to go, and that Scala would let me get as close as possible to this:</p>
-
-<div class="highlight"><pre><code class="scala"><span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/123/bill/34&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
-  <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="mi">123</span><span class="o">))</span>
-  <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
-  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
-  <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span>
-    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;156&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
-    <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="s">&quot;655321&quot;</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>This code creates several data structures that our test can now walk.  Essentially, what this will test:</p>
-
-<ul>
-  <li>That accessing the url without being logged in gets an error</li>
-  <li>That, once logged in, requesting a view named &ldquo;small&rdquo; will not generate an error</li>
-  <li>That, once logged in, requesting a view named &ldquo;large&rdquo; will not generate an error</li>
-  <li>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</li>
-  <li>That both views contain a div with the id price that contains the text &ldquo;45.67&rdquo;</li>
-  <li>That the &ldquo;large&rdquo; view also contains a div with id kwh that contains &ldquo;156&rdquo; <strong>and</strong> a div with id &ldquo;accountNumber&rdquo; that contains &ldquo;655321&rdquo;</li>
-</ul>
-
-<h3 id="getting-fancy">Getting fancy</h3>
-
-<p>Since this is just Scala code, you can use this to do more sophisitcated things:</p>
-
-<div class="highlight"><pre><code class="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> 
-                <span class="n">kwh</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
-                <span class="n">accountNumber</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
-
-<span class="nc">Map</span><span class="o">(</span>
-<span class="s">&quot;123&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">34</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">Some</span><span class="o">(</span><span class="s">&quot;45.67&quot;</span><span class="o">),</span>
-                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
-                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
-<span class="s">&quot;876&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">45</span><span class="o">,</span><span class="nc">Some</span><span class="o">(</span><span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span> <span class="k">=</span> <span class="nc">None</span><span class="o">,</span>
-                       <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
-                       <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
-<span class="s">&quot;4565&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">86</span><span class="o">,</span><span class="nc">None</span><span class="o">)</span>
-<span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">customerId</span><span class="o">,</span><span class="n">testData</span><span class="o">)</span> <span class="k">=&gt;</span> 
-
-  <span class="k">val</span> <span class="n">billId</span><span class="o">,</span><span class="n">bill</span> <span class="k">=</span> <span class="n">testData</span>
-
-  <span class="n">resource</span><span class="o">(</span><span class="s">&quot;/customer/&quot;</span> <span class="o">+</span> <span class="n">customerId</span> <span class="o">+</span> <span class="s">&quot;/bill/&quot;</span> <span class="o">+</span> <span class="n">billId</span><span class="o">)</span> <span class="o">{</span> <span class="n">resource</span> <span class="k">=&gt;</span>
-    <span class="n">resource</span><span class="o">.</span><span class="n">requiresLoginAs</span><span class="o">(</span><span class="n">customer</span><span class="o">(</span><span class="n">customerId</span><span class="o">))</span>
-
-    <span class="n">bill</span> <span class="k">match</span> <span class="o">{</span>
-      <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">bill</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="n">bill</span><span class="o">.</span><span class="n">cost</span> <span class="k">match</span> <span class="o">{</span>
-          <span class="k">case</span> <span class="nc">Some</span><span class="o">(</span><span class="n">cost</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">cost</span><span class="o">).</span>
-                                      <span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
-          <span class="k">case</span> <span class="nc">None</span>       <span class="k">=&gt;</span> <span class="n">resource</span><span class="o">.</span><span class="n">shouldNotContainElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
-                                      <span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
-        <span class="o">}</span>
-        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
-        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span> 
-          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">kwh</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
-          <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">accountNumber</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
-                                            <span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>
-        <span class="o">}</span>
-      <span class="o">}</span>
-      <span class="k">case</span> <span class="nc">None</span> <span class="k">=&gt;</span> <span class="o">{</span>
-        <span class="n">resource</span><span class="o">.</span><span class="n">containsElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;noBill&quot;</span><span class="o">)</span>
-      <span class="o">}</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span>
-</code></pre></div>
-
-<p>I don&rsquo;t know if the developers are totally in love with this DSL, but there&rsquo;s so much you get for free, I&rsquo;m certain they&rsquo;d hate testing that by hand even more (or, worse, simply not test some of these things):</p>
-
-<ul>
-  <li>You never have to remember to check for authentication requirements</li>
-  <li>You never have to remember to check for missing message properties</li>
-  <li>You can dynamically generates tests via test-data (as demonstrated above)</li>
-  <li>Because making a new data structure in Scala is so easy, you can make very fluent tests and test data.</li>
-</ul>
-
-<p>Of course, this DSL is entirely useless to anyone but our web team.  It&rsquo;s tailor-made to test our web product and our web product only.  The win, other than conciseness, readability, and brevity, was that this could be implemented and documented very quickly; I didn&rsquo;t have to make the ultimate web-based tesitng DSL; just one that worked for our product.</p>
-
-<p>If you are considering creating a DSL, keep this in mind: make it exactly right for you, and fight the urge to make it more general.  Also, don&rsquo;t be afraid to use Scala for this; it&rsquo;s much easier than Java, and you can fully type-check and document it very easily.  I should note that I intentionally used very few of Scala&rsquo;s features to do this; developers only need to learn a few new concepts to understand what this code does.</p>
 
     </div>
   </div>
   
   <div class="post">
-    <h2><a href="/2011/07/05/attentive-programming">Attentive Programming</a></h2>
-    <p class="meta pull-right">Written on July 05, 2011 by <a href="/authors/paul-vancleave">Paul Van Cleave</a>
-</p>
+    <h2><a class="title" href="/2011/07/05/attentive-programming">Attentive Programming</a></h2>
+    <p class="meta">by <a href="/authors/paul-vancleave">Paul Van Cleave</a>
+ | July 05, 2011</p>
     <div class="clearfix"></div>
     <div class="post-content">
     <p>I&rsquo;m currently reading Matthew Crawford&rsquo;s &rdquo;Shop Class as Soulcraft&rdquo; who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: <em>assertiveness</em> and <em>attentiveness</em>. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.</p>
 
-<p>I believe that Crawford&rsquo;s categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is &ldquo;assertive&rdquo; and &ldquo;attentive&rdquo; software engineering? I&rsquo;ve always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.</p>
-
-<p>The assertive programmer is one who makes new or improves features. In this case, the engineer is on the cutting edge of product development and essentially makes something out of nothing. He or she &ldquo;asserts&rdquo; him or herself by creating new code or by combining or expanding infrastructure in new ways to make new things.</p>
-
-<p>This type of programming is fun and rewarding because you get to see something made. You also get a craftsman-level satisfaction and the pride of ownership knowing that the software is built well and that other people find it useful. Contrast this with the attentive programmer. The attentive programmer generally works with software that he or she didn&rsquo;t make. And is given a problem which has perplexed others.</p>
-
-<p>I think that I am more akin to this type of programmer. I am a Database Architect who works on the OPOWER Scale Team. On the Scale team, we handle problems that reflect scalability issues with the software. We also get a first crack at designing new features that are scalable out of the box, and I think that puts us firmly in the assertive camp.</p>
-
-<p>I want to reflect more upon our reactive scalability work because I think this sort of work takes a different mindset and possibly a different software engineering approach. To be an attentive programmer you almost have to have a Zen-like disposition and “listen” to the information that you find. You may think that you understand the problem but you must verify if the hypothesis is true. And if it&rsquo;s not, you must reexamine your assumptions, read the data again, and develop a new hypothesis to test.</p>
-
-<p>The attentive programmer knows that truth is the path to the right solution, and that&rsquo;s exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.</p>
-
-<p>To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I&rsquo;m always ready for the next problem and always wondering what I&rsquo;m going to learn from that puzzle.</p>
-
-<p>Are you an attentive or assertive programmer, or some combination of? Why? Thinking about how you approach software engineering may help you raise your game and bring with it the satisfaction of rising above the status quo.</p>
 
     </div>
   </div>
