@@ -7,6 +7,74 @@
         <atom:link href="http://opower.github.io/feed.xml" rel="self" type="application/rss+xml" />
         
         <item>
+            <title>How we fork at Opower</title>
+            <description>&lt;p&gt;We do not fork open source projects a lot, but when we need to, we do so
+with a standard process that ensures we have clean and reproducible builds.
+This post describes the process we use and how it has been useful to us.&lt;/p&gt;
+
+&lt;p&gt;We only decide to fork a project when we need to stay on the cutting edge.  In
+this case,  we still have to protect ourselves from the development cycles of
+the open source community.  We have been early adopters of &lt;a href=&quot;http://kiji.org&quot;&gt;the Kiji
+Project&lt;/a&gt;, and as early adopters, we found bugs that we needed fixed or
+features we wanted before the community was ready to promote them.  In these
+cases, we forked the projects with the intention to kill off our forks as soon
+as all of our changes made their way into the mainline.  Refer to &lt;a href=&quot;https://github.com/opower/kiji-schema/tree/opower-1.0.2&quot;&gt;our
+fork&lt;/a&gt; to see the full example of what is described.&lt;/p&gt;
+
+&lt;h3 id=&quot;fork-from-a-known-good-build&quot;&gt;Fork from a known good build&lt;/h3&gt;
+
+&lt;p&gt;A key to providing a stable software platform is being able to reproduce an
+exact artifact.  To ensure the code we build upon does not change, we start our
+build off of a known good build, which in the case of Kiji is a tagged version.
+Our version, named &lt;a href=&quot;https://github.com/opower/kiji-schema/tree/opower-1.0.2&quot;&gt;&lt;code&gt;opower-1.0.2&lt;/code&gt;&lt;/a&gt; is based on Kiji&amp;rsquo;s mainline tag
+&lt;a href=&quot;https://github.com/kijiproject/kiji-schema/tree/kiji-schema-root-1.0.2&quot;&gt;&lt;code&gt;1.0.2&lt;/code&gt;&lt;/a&gt;.  We do this by creating a branch from the tagged commit.&lt;/p&gt;
+
+&lt;p&gt;With the &lt;code&gt;upstream&lt;/code&gt; remote pointing to the Kiji Project main Git repository, we
+fetch the latest code and then create a branch based on the tagged commit as the
+start point:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ git fetch --tags upstream
+$ git checkout -b opower-1.0.2 kiji-schema-root-1.0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;add-fixes-as-patches&quot;&gt;Add fixes as patches&lt;/h3&gt;
+
+&lt;p&gt;We then create an &lt;a href=&quot;https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower&quot;&gt;&lt;code&gt;opower&lt;/code&gt;&lt;/a&gt; directory in the root of the project.
+Inside is a &lt;a href=&quot;https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower/patches&quot;&gt;directory of patches&lt;/a&gt; and a &lt;a href=&quot;https://github.com/opower/kiji-schema/blob/opower-1.0.2/opower/apply-patches.sh&quot;&gt;script&lt;/a&gt; used to apply the
+patches.  The patches define the changes we want to apply to our fork of the
+project.  Each new feature or fix is contained in its own patch so that we can
+easily determine what changes we have that are different from the mainline.
+While this mimics some of the functionality of a version control system, it is
+more straightforward than managing individual commits.  When it comes to
+migrating our features to the next tagged version of the project, we simply
+create a new branch from the latest tag and copy over the patches that have not
+already made it in.  That is much simpler than tracking down commit SHAs and
+cherry picking.&lt;/p&gt;
+
+&lt;h3 id=&quot;apply-patches-during-the-build&quot;&gt;Apply patches during the build&lt;/h3&gt;
+
+&lt;p&gt;The second item in the &lt;a href=&quot;https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower&quot;&gt;&lt;code&gt;opower&lt;/code&gt;&lt;/a&gt; directory is a &lt;a href=&quot;https://github.com/opower/kiji-schema/blob/opower-1.0.2/opower/apply-patches.sh&quot;&gt;script&lt;/a&gt; that applies
+the patches.  This script is invoked by our build system, after the code
+checkout and before the build begins.  With this script, we ensure the patches
+are applied before the code is built and the final artifact is pushed to our
+repository.&lt;/p&gt;
+
+&lt;h3 id=&quot;making-it-real&quot;&gt;Making it real&lt;/h3&gt;
+
+&lt;p&gt;Once the patches and script are in place, the developer pushes the new branch
+and requests a pull request to make it all official.  This process has kept our
+forks orderly and allowed us to confidently stay on the cutting edge of a new
+project.  All of our patches have been submitted back to the original projects,
+but while waiting for the committers to accept them, we have been able to go
+about our regularly scheduled releases, confident in the code we are running.&lt;/p&gt;
+
+</description>
+            <pubDate>Mon, 11 Nov 2013 00:00:00 -0800</pubDate>
+            <link>http://opower.github.io/2013/11/11/how-we-fork-at-opower</link>
+            <guid isPermaLink="true">http://opower.github.io/2013/11/11/how-we-fork-at-opower</guid>
+        </item>
+        
+        <item>
             <title>The Big Data Elders, Archeology Hour</title>
             <description>&lt;p&gt;After all that&amp;rsquo;s been written about the &lt;a href=&quot;/2013/07/07/the-story-of-the-big-data-elders&quot;&gt;ancient Big Data elders&lt;/a&gt;
 and their artful discoveries, it seems appropriate to now lift the curtain and
@@ -752,31 +820,6 @@ default-autowire=&amp;quot;byName&amp;quot;&amp;gt;
             <pubDate>Mon, 19 Sep 2011 10:34:57 -0700</pubDate>
             <link>http://opower.github.io/2011/09/19/our-scala-dsl-for-testing-our-web-product</link>
             <guid isPermaLink="true">http://opower.github.io/2011/09/19/our-scala-dsl-for-testing-our-web-product</guid>
-        </item>
-        
-        <item>
-            <title>Attentive Programming</title>
-            <description>&lt;p&gt;I&amp;rsquo;m currently reading Matthew Crawford&amp;rsquo;s &amp;rdquo;Shop Class as Soulcraft&amp;rdquo; who writes about how manual labor can make you spiritually whole. To get us to look at work in new ways, he describes work using the categories: &lt;em&gt;assertiveness&lt;/em&gt; and &lt;em&gt;attentiveness&lt;/em&gt;. Crawford writes that work is not exclusively assertive or attentive and that to obtain the spiritualism that comes from manual work, you need balanced quantities of both. Too much assertiveness, and you may destroy your work, while too much attentiveness and you could go out of business. Soulcraft is being able to apply just the right amount of each.&lt;/p&gt;
-
-&lt;p&gt;I believe that Crawford&amp;rsquo;s categories can extend beyond the realm of manual labor. His descriptions really got me thinking about how they would apply to software engineering. What is &amp;ldquo;assertive&amp;rdquo; and &amp;ldquo;attentive&amp;rdquo; software engineering? I&amp;rsquo;ve always felt that programming brings with it a sort of spiritualistic satisfaction. Now Crawford gives me tools to examine programming in new ways.&lt;/p&gt;
-
-&lt;p&gt;The assertive programmer is one who makes new or improves features. In this case, the engineer is on the cutting edge of product development and essentially makes something out of nothing. He or she &amp;ldquo;asserts&amp;rdquo; him or herself by creating new code or by combining or expanding infrastructure in new ways to make new things.&lt;/p&gt;
-
-&lt;p&gt;This type of programming is fun and rewarding because you get to see something made. You also get a craftsman-level satisfaction and the pride of ownership knowing that the software is built well and that other people find it useful. Contrast this with the attentive programmer. The attentive programmer generally works with software that he or she didn&amp;rsquo;t make. And is given a problem which has perplexed others.&lt;/p&gt;
-
-&lt;p&gt;I think that I am more akin to this type of programmer. I am a Database Architect who works on the OPOWER Scale Team. On the Scale team, we handle problems that reflect scalability issues with the software. We also get a first crack at designing new features that are scalable out of the box, and I think that puts us firmly in the assertive camp.&lt;/p&gt;
-
-&lt;p&gt;I want to reflect more upon our reactive scalability work because I think this sort of work takes a different mindset and possibly a different software engineering approach. To be an attentive programmer you almost have to have a Zen-like disposition and “listen” to the information that you find. You may think that you understand the problem but you must verify if the hypothesis is true. And if it&amp;rsquo;s not, you must reexamine your assumptions, read the data again, and develop a new hypothesis to test.&lt;/p&gt;
-
-&lt;p&gt;The attentive programmer knows that truth is the path to the right solution, and that&amp;rsquo;s exactly how we approach problems on the Scale team. I think the key to a good scalability engineer is attentiveness and checking preconceived notions at the door. This type of programmer needs lots of experience and must be open to a wide range of ideas where hunches based upon past experiences or fresh perspectives can be quickly dismissed or followed based upon the facts.&lt;/p&gt;
-
-&lt;p&gt;To me probably nothing is more satisfying than taking a piece of code, no matter how complicated, that no one has been able to make go fast and making it fly. I&amp;rsquo;m always ready for the next problem and always wondering what I&amp;rsquo;m going to learn from that puzzle.&lt;/p&gt;
-
-&lt;p&gt;Are you an attentive or assertive programmer, or some combination of? Why? Thinking about how you approach software engineering may help you raise your game and bring with it the satisfaction of rising above the status quo.&lt;/p&gt;
-</description>
-            <pubDate>Tue, 05 Jul 2011 11:00:34 -0700</pubDate>
-            <link>http://opower.github.io/2011/07/05/attentive-programming</link>
-            <guid isPermaLink="true">http://opower.github.io/2011/07/05/attentive-programming</guid>
         </item>
         
     </channel>

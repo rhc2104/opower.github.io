@@ -9,7 +9,7 @@
 
         <link rel="alternate" type="application/rss+xml" title="Opower Engineering Blog" href="/feed.xml" />
 
-        <title>Opower | Engineering Blog</title>
+        <title>Opower | How we fork at Opower</title>
 
         <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -54,78 +54,78 @@
             <div class="row">
                 <div class="col-lg-8">
 
-                <div class="posts">
-  
-  <div class="post">
-    <h2><a class="title" href="/2010/07/27/maven-izing-googles-data-client-java-library">Maven-izing Google's Data Client Java Library</a></h2>
-    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
- | July 27, 2010</p>
+                <div class="post">
+  <div class="page-header">
+    <h1><a class="title" href="/2013/11/11/how-we-fork-at-opower">How we fork at Opower</a></h1>
+    <p class="meta">by <a href="/authors/jeff-kolesky">Jeff Kolesky</a>
+ | November 11, 2013</p>
     <div class="clearfix"></div>
-    <div class="post-content">
-    <p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
-
-
-    </div>
   </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2010/07/26/heisenbergs-key-performance-indicators">Heisenberg's Key Performance Indicators</a></h2>
-    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
- | July 26, 2010</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p><img src="/img/Heisenberg.jpg" alt="A picture of Heisenberg." /></p>
+
+  <div class="post-content">
+    <p>We do not fork open source projects a lot, but when we need to, we do so
+with a standard process that ensures we have clean and reproducible builds.
+This post describes the process we use and how it has been useful to us.</p>
+
+<p>We only decide to fork a project when we need to stay on the cutting edge.  In
+this case,  we still have to protect ourselves from the development cycles of
+the open source community.  We have been early adopters of <a href="http://kiji.org">the Kiji
+Project</a>, and as early adopters, we found bugs that we needed fixed or
+features we wanted before the community was ready to promote them.  In these
+cases, we forked the projects with the intention to kill off our forks as soon
+as all of our changes made their way into the mainline.  Refer to <a href="https://github.com/opower/kiji-schema/tree/opower-1.0.2">our
+fork</a> to see the full example of what is described.</p>
+
+<h3 id="fork-from-a-known-good-build">Fork from a known good build</h3>
+
+<p>A key to providing a stable software platform is being able to reproduce an
+exact artifact.  To ensure the code we build upon does not change, we start our
+build off of a known good build, which in the case of Kiji is a tagged version.
+Our version, named <a href="https://github.com/opower/kiji-schema/tree/opower-1.0.2"><code>opower-1.0.2</code></a> is based on Kiji&rsquo;s mainline tag
+<a href="https://github.com/kijiproject/kiji-schema/tree/kiji-schema-root-1.0.2"><code>1.0.2</code></a>.  We do this by creating a branch from the tagged commit.</p>
+
+<p>With the <code>upstream</code> remote pointing to the Kiji Project main Git repository, we
+fetch the latest code and then create a branch based on the tagged commit as the
+start point:</p>
+
+<pre><code>$ git fetch --tags upstream
+$ git checkout -b opower-1.0.2 kiji-schema-root-1.0.2
+</code></pre>
+
+<h3 id="add-fixes-as-patches">Add fixes as patches</h3>
+
+<p>We then create an <a href="https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower"><code>opower</code></a> directory in the root of the project.
+Inside is a <a href="https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower/patches">directory of patches</a> and a <a href="https://github.com/opower/kiji-schema/blob/opower-1.0.2/opower/apply-patches.sh">script</a> used to apply the
+patches.  The patches define the changes we want to apply to our fork of the
+project.  Each new feature or fix is contained in its own patch so that we can
+easily determine what changes we have that are different from the mainline.
+While this mimics some of the functionality of a version control system, it is
+more straightforward than managing individual commits.  When it comes to
+migrating our features to the next tagged version of the project, we simply
+create a new branch from the latest tag and copy over the patches that have not
+already made it in.  That is much simpler than tracking down commit SHAs and
+cherry picking.</p>
+
+<h3 id="apply-patches-during-the-build">Apply patches during the build</h3>
+
+<p>The second item in the <a href="https://github.com/opower/kiji-schema/tree/opower-1.0.2/opower"><code>opower</code></a> directory is a <a href="https://github.com/opower/kiji-schema/blob/opower-1.0.2/opower/apply-patches.sh">script</a> that applies
+the patches.  This script is invoked by our build system, after the code
+checkout and before the build begins.  With this script, we ensure the patches
+are applied before the code is built and the final artifact is pushed to our
+repository.</p>
+
+<h3 id="making-it-real">Making it real</h3>
+
+<p>Once the patches and script are in place, the developer pushes the new branch
+and requests a pull request to make it all official.  This process has kept our
+forks orderly and allowed us to confidently stay on the cutting edge of a new
+project.  All of our patches have been submitted back to the original projects,
+but while waiting for the committers to accept them, we have been able to go
+about our regularly scheduled releases, confident in the code we are running.</p>
 
 
-    </div>
   </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2010/05/27/boxed-primitives-and">Boxed primitives and ==</a></h2>
-    <p class="meta">by <a href="/authors/dave-copeland">Dave Copeland</a>
- | May 27, 2010</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>One part of programming culture at OPOWER is to program defensively, providing useful information when contracts are violated.   What does this have to do with boxed primitives?  Getting an assertion message of &ldquo;Person 1001&rsquo;s customer id 109032 didn&rsquo;t match the passed-in customer&rsquo;s id of 109032&rdquo; seemed logically impossible, but was somehow true.</p>
-
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2010/05/24/the-standing-desk">The Standing Desk</a></h2>
-    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
- | May 24, 2010</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>Dave, My OPOWER colleague switched from a normal office desk &amp; chair situation to a standing desk more than a year ago and ever since, I&rsquo;d been considering doing the same.  For my entire programming career, I&rsquo;ve had terrible posture in my chair and tended to do &ldquo;the maxell pose&rdquo; where my wrists are resting at a severe angle on the lip of my desk.</p>
-
-
-    </div>
-  </div>
-  
-  <div class="post">
-    <h2><a class="title" href="/2010/05/05/cinco-de-failure">Cinco de Failure</a></h2>
-    <p class="meta">by <a href="/authors/tom-vaughan">Tom Vaughan</a>
- | May 05, 2010</p>
-    <div class="clearfix"></div>
-    <div class="post-content">
-    <p>If you&rsquo;ve ever seen Yoni or Jeff K, you would know that I have absolutely no chance of competing in a facial-hair competition with them on raw natural talent.  Thus, for the 2010 Cinco de Mustache event, I felt compelled to compete on ingenuity and engineering.</p>
-
-
-    </div>
-  </div>
-  
 </div>
-
-<ul class="pager">
-  
-  <li class="previous"><a href="/page/6">&larr; Older</a></li>
-  
-  
-  <li class="next"><a href="/page/4">Newer &rarr;</a></li>
-  
-</ul>
 
 
                 </div>
