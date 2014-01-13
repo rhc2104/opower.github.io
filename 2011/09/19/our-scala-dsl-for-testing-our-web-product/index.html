@@ -65,13 +65,13 @@
   <div class="post-content">
     <p>This is actually a fairly old bit of tech for us, but I&rsquo;ve been reading <a href="http://www.amazon.com/Domain-Specific-Languages-Addison-Wesley-Signature-Fowler/dp/0321712943">Martin Fowler&rsquo;s DSL Book</a>, and thought it might be good to talk about what we&rsquo;ve done.</p>
 
-<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development, and testing, respectively).  Our DSL&rsquo;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&rsquo;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
+<p>Our Domain-Specific Language is probably more domain-specific than you might be used to.  Frameworks like Ruby-on-Rails or ScalaTest are DSLs for very broad domains (web-app development and testing, respectively).  Our DSL&rsquo;s domain is <em>our web product</em>.  Not any web product, not any Spring app, <em>our</em> web app.  This is important, as it allows us to creating something that is very focused and specific to what we&rsquo;re doing.  In general, the more specific the domain, the more concise and powerful you can make your DSL.</p>
 
 <h3 id="the-domain-of-application-its-architecture">The domain of application: its architecture</h3>
 
-<p>To understand how it works, you need to understand how the apppilcation is architected.  While it&rsquo;s a Spring MVC web app, in the general sense, there&rsquo;s a lot more convention around how it&rsquo;s built.  If you&rsquo;ve used a &ldquo;web framework&rdquo; like Spring MVC, you know that it&rsquo;s really a giant library for responding to HTTP requests at its core, and that it&rsquo;s not very opinionated; it&rsquo;s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn&rsquo;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
+<p>To understand how it works, you need to understand how the appilcation is architected.  While it&rsquo;s a Spring MVC web app, in the general sense, there&rsquo;s a lot more convention around how it&rsquo;s built.  If you&rsquo;ve used a &ldquo;web framework&rdquo; like Spring MVC, you know that it&rsquo;s really a giant library for responding to HTTP requests at its core, and that it&rsquo;s not very opinionated; it&rsquo;s generally just as easy to do things one way as it is another (check out <a href="http://static.springsource.org/spring/docs/3.0.x/javadoc-api/org/springframework/web/bind/annotation/RequestMapping.html">this</a> if you disgree).  As such, you need conventions around how to use it. Developers shouldn&rsquo;t spend time asking how to wire up URLs, or where code should go; they should be getting to work and building features.</p>
 
-<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &ldquo;Hi, Dave!&rdquo; in the upper corner; that &ldquo;Hi, Dave&rdquo; would be controlled by  a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what&rsquo;s needed to configure the modules on the page. All stateful information (e.g. &ldquo;who&rsquo;s logged in?&rdquo;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
+<p>Our app is built along two main concepts: <em>pages</em>, and <em>modules</em>.  A Page is made up of one or more modules.  Each module contains a basic bit of information needed to display a page.  Think about websites that say &ldquo;Hi, Dave!&rdquo; in the upper corner; that &ldquo;Hi, Dave&rdquo; would be controlled by a module.  Each page is backed by a controller whose job it is to expose <strong>only</strong> what&rsquo;s needed to configure the modules on the page. All stateful information (e.g. &ldquo;who&rsquo;s logged in?&rdquo;) is in these controllers.  Modules, on the other hand, are stateless; they get all the information they need to render from the URL and query parameters.  Modules are made up of two parts: a resource, which identies the data to display, and a view, which renders that data.  A single resource can have many views, and together, they form a module.</p>
 
 <p>This is all glued together via a souped-up version of a <code>&lt;jsp:include&gt;</code> tag.  A page jsp-includes a bunch of urls, that happen to be modules, and conform to these conventions.  We have scaffolding scripts to generate the massive boilerplate required to make this happen.</p>
 
@@ -79,7 +79,7 @@
 
 <p>Which brings us to our DSL for testing this stuff.  Essentially, a module&rsquo;s url can be requested and tested independently of any page; we don&rsquo;t need to navigate through the application to test modules, since they are almost entirely stateless (typically, they might require a login, but this a cross-cutting concern).  By requesting the module&rsquo;s URL, and forcing it to render a view, we also get test coverage of our JSP pages, and can push our app to QA with high confidence that all pages will at least render, and that the correct information will be somewhere on the page.</p>
 
-<p>This can all be tested with HTMLUnit, however the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&rsquo;s consider a module that renders a person&rsquo;s most recent bill.  Suppose we have two views of this module; in the &ldquo;large&rdquo; view, we want to see the bill&rsquo;s cost, KWh used, and an account number.  In the &ldquo;small&rdquo; view (that we might use on a dashboard page), we want to see just the bill&rsquo;s cost.  How might we test this?</p>
+<p>This can all be tested with HTMLUnit, but the tests began to look like bloated assembly-language.  Enter Scala.  I started by writing out the ideal pattern of a test for a module.  Let&rsquo;s consider a module that renders a person&rsquo;s most recent bill.  Suppose we have two views of this module; in the &ldquo;large&rdquo; view, we want to see the bill&rsquo;s cost, KWh used, and an account number.  In the &ldquo;small&rdquo; view (that we might use on a dashboard page), we want to see just the bill&rsquo;s cost.  How might we test this?</p>
 
 <pre><code>resource for bill 34 from customer 123:
   requires login as customer 123
@@ -103,12 +103,12 @@
 <span class="o">}</span>
 </code></pre></div>
 
-<p>This code creates several data structures that our test can now walk.  Essentially, what this will test:</p>
+<p>This code creates several data structures that our test can now walk through.  Essentially, this will test:</p>
 
 <ul>
   <li>That accessing the url without being logged in gets an error</li>
-  <li>That, once logged in, requesting a view named &ldquo;small&rdquo; will not generate an error</li>
-  <li>That, once logged in, requesting a view named &ldquo;large&rdquo; will not generate an error</li>
+  <li>That once logged in, requesting a view named &ldquo;small&rdquo; will not generate an error</li>
+  <li>That once logged in, requesting a view named &ldquo;large&rdquo; will not generate an error</li>
   <li>That neither view has message properties that are missing their values (we aggresively use message properties to allow localization)</li>
   <li>That both views contain a div with the id price that contains the text &ldquo;45.67&rdquo;</li>
   <li>That the &ldquo;large&rdquo; view also contains a div with id kwh that contains &ldquo;156&rdquo; <strong>and</strong> a div with id &ldquo;accountNumber&rdquo; that contains &ldquo;655321&rdquo;</li>
@@ -116,10 +116,10 @@
 
 <h3 id="getting-fancy">Getting fancy</h3>
 
-<p>Since this is just Scala code, you can use this to do more sophisitcated things:</p>
+<p>Since this is just Scala code, you can use this to do more sophisticated things:</p>
 
-<div class="highlight"><pre><code class="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span> 
-                <span class="n">kwh</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span> 
+<div class="highlight"><pre><code class="scala"><span class="k">case</span> <span class="k">class</span> <span class="nc">Bill</span><span class="o">(</span><span class="n">cost</span><span class="k">:</span> <span class="kt">Option</span><span class="o">[</span><span class="kt">String</span><span class="o">],</span>
+                <span class="n">kwh</span><span class="k">:</span> <span class="kt">String</span><span class="o">,</span>
                 <span class="n">accountNumber</span><span class="k">:</span> <span class="kt">String</span><span class="o">)</span>
 
 <span class="nc">Map</span><span class="o">(</span>
@@ -130,7 +130,7 @@
                        <span class="n">kwh</span> <span class="k">=</span> <span class="s">&quot;156&quot;</span><span class="o">,</span>
                        <span class="n">accountNumber</span> <span class="k">=</span> <span class="s">&quot;655321&quot;</span><span class="o">))),</span>
 <span class="s">&quot;4565&quot;</span> <span class="o">-&gt;</span> <span class="o">(</span><span class="mi">86</span><span class="o">,</span><span class="nc">None</span><span class="o">)</span>
-<span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">customerId</span><span class="o">,</span><span class="n">testData</span><span class="o">)</span> <span class="k">=&gt;</span> 
+<span class="o">).</span><span class="n">foreach</span> <span class="o">{</span> <span class="k">case</span><span class="o">(</span><span class="n">customerId</span><span class="o">,</span><span class="n">testData</span><span class="o">)</span> <span class="k">=&gt;</span>
 
   <span class="k">val</span> <span class="n">billId</span><span class="o">,</span><span class="n">bill</span> <span class="k">=</span> <span class="n">testData</span>
 
@@ -146,7 +146,7 @@
                                       <span class="n">withId</span><span class="o">(</span><span class="s">&quot;price&quot;</span><span class="o">)</span>
         <span class="o">}</span>
         <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;small&quot;</span><span class="o">)</span>
-        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span> 
+        <span class="n">resource</span><span class="o">.</span><span class="n">hasView</span><span class="o">(</span><span class="s">&quot;large&quot;</span><span class="o">)</span> <span class="o">{</span> <span class="n">view</span> <span class="k">=&gt;</span>
           <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">kwh</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span><span class="n">withId</span><span class="o">(</span><span class="s">&quot;kwh&quot;</span><span class="o">)</span>
           <span class="n">view</span><span class="o">.</span><span class="n">contains</span><span class="o">(</span><span class="n">bill</span><span class="o">.</span><span class="n">accountNumber</span><span class="o">).</span><span class="n">inElement</span><span class="o">(</span><span class="s">&quot;div&quot;</span><span class="o">).</span>
                                             <span class="n">withId</span><span class="o">(</span><span class="s">&quot;accountNumber&quot;</span><span class="o">)</span>

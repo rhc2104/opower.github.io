@@ -69,7 +69,7 @@ SQL scripts to massage and gain insight into customer data. By using the
 lightning fast query DSL of Elasticsearch, we are able to craft targeted queries
 at a far higher level of abstraction than using raw SQL.</p>
 
-<p>As we traveled the path of adopting Elasticsearch we found a few places that
+<p>As we traveled the path of adopting Elasticsearch, we found a few places that
 needed additional code to fit in with our technology stack at Opower. In this
 post I will go over a few of these spots and how we chose to solve them.</p>
 
@@ -90,7 +90,7 @@ be exposed via Spring like:</p>
 
     <span class="kd">private</span> <span class="n">Client</span> <span class="n">client</span><span class="o">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">index</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">documents</span><span class="o">)</span> <span class="o">{</span> 
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">index</span><span class="o">(</span><span class="n">Iterable</span><span class="o">&lt;</span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span><span class="n">Object</span><span class="o">&gt;&gt;</span> <span class="n">documents</span><span class="o">)</span> <span class="o">{</span>
         <span class="c1">//use the provided client to bulk index this stream of documents.</span>
     <span class="o">}</span>
 
@@ -114,7 +114,7 @@ be exposed via Spring like:</p>
 </code></pre></div>
 
 <p>Using the dependency injection capabilities of Spring, we are able to
-significantly DRY up usage of common Elasticsearch tasks. Without Spring we end
+significantly DRY up usage of common Elasticsearch tasks. Without Spring, we end
 up with methods that take a <code>Client</code>, index name and alias name sprinkled
 everywhere. This is a fairly basic example but should provide an idea of what to
 expect when using the out of the box Java <code>Client</code>.</p>
@@ -122,8 +122,8 @@ expect when using the out of the box Java <code>Client</code>.</p>
 <h3 id="index-creation-and-maintenance">Index Creation and Maintenance</h3>
 
 <p>Immutability is one of the driving forces behind the speed and correctness of
-Elasticsearch. However embracing immutability comes with a price. When an index
-is created it is assigned an immutable number of shards. This is OK up to the
+Elasticsearch. However, embracing immutability comes with a price. When an index
+is created, it is assigned an immutable number of shards. This is OK up to the
 point that the size of your data in a given index grows beyond the capacity of
 the configured shard count. At this point you are faced with a choice: scale up
 or out. We developed a framework that allows us to easily scale indices out.</p>
@@ -133,8 +133,8 @@ without deleting it and recreating it with more shards assigned. Fortunately
 Elasticsearch provides a built in primitive to solve this problem:
 <a href="http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html">aliases</a>.
 Each alias may be assigned a number of indices. Users then query the alias and
-receives results from each underlying index. So using an alias we are able to
-transparently add more shards by adding new indices to the alias</p>
+receives results from each underlying index. So using an alias, we are able to
+transparently add more shards by adding new indices to the alias.</p>
 
 <p>Now that we have a way to add new indices, and ultimately shards, we need a way
 to create new indices that have identical mappings and settings. A simple way to
@@ -242,7 +242,7 @@ growing. Some examples of this are: log messages (See
 <div class="highlight"><pre><code class="xml"><span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;strategy&quot;</span>
       <span class="na">class=</span><span class="s">&quot;com.opower.elasticsearch.provisioning.TimeSeriesProvisionStrategy&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;property</span> <span class="na">name=</span><span class="s">&quot;client&quot;</span> <span class="na">ref=</span><span class="s">&quot;client&quot;</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/bean&gt;</span>    
+<span class="nt">&lt;/bean&gt;</span>
 
 <span class="nt">&lt;bean</span> <span class="na">id=</span><span class="s">&quot;indexProvisioningService&quot;</span>
       <span class="na">class=</span><span class="s">&quot;com.opower.elasticsearch.schema.SimpleIndexProvisioningService&quot;</span><span class="nt">&gt;</span>
@@ -251,14 +251,14 @@ growing. Some examples of this are: log messages (See
 <span class="nt">&lt;/bean&gt;</span>
 </code></pre></div>
 
-<p>In this case the <code>TimeSeriesProvisionStrategy</code> checks the document count in the
+<p>In this case, the <code>TimeSeriesProvisionStrategy</code> checks the document count in the
 active index then creates new indices if warranted. Consuming client code is only
-required to call <code>indexProvisioningService.provisionIndex(...)</code></p>
+required to call <code>indexProvisioningService.provisionIndex(...)</code>.</p>
 
 <h4 id="user-data">User data</h4>
 
 <p>User data grows in proportion to your user base. Initial shard counts could end
-up fitting your needs but that likely means your company is not growing. Let&rsquo;s
+up fitting your needs, but that likely means your company is not growing. Let&rsquo;s
 consider the more interesting case of growth. Ideally it is a simple matter of
 setting a few configuration parameters to expand the capacity of your existing
 index by automatically creating new shards.</p>
@@ -282,7 +282,7 @@ added.</p>
 
 <h4 id="when-returning-all-ids-from-a-query">When returning all IDs from a query</h4>
 
-<p>By default queries created by
+<p>By default, queries created by
 <a href="https://github.com/elasticsearch/elasticsearch/blob/c7f6c5266d15fefa1a5ce9ae7ffc519c5ff8abbe/src/main/java/org/elasticsearch/action/search/SearchRequestBuilder.java">SearchRequestBuilder</a>
 will return all stored fields in the <code>getHits()</code>. If you are returning say 100k
 documents from a query it can take up to a full minute to read all these
@@ -322,7 +322,7 @@ operation.</p>
 
 <h3 id="here-be-dragons">Here be dragons</h3>
 
-<p>Ultimately our experience with Elasticsearch has been incredibly positive.
+<p>Ultimately, our experience with Elasticsearch has been incredibly positive.
 Development by the Elasticsearch core team and the community at large continues
 at a breakneck pace. That being said, Elasticsearch is a relatively new
 datastore and is not for the faint of heart. A ready appetite for reading the

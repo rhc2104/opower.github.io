@@ -68,76 +68,76 @@
 and their artful discoveries, it seems appropriate to now lift the curtain and
 reveal the modern, specific, and, sometimes dirty, details.</p>
 
-<p>Before we do, let&rsquo;s get something out in the open right now: working at 
+<p>Before we do, let&rsquo;s get something out in the open right now: working at
 <a href="http://opower.com">Opower</a> is pretty great. We get to make an impact on this
- world, using fancy and effective behavioral science while working with cool 
+ world, using fancy and effective behavioral science while working with cool
  and exciting tech. Awesome, right?</p>
 
 <h3 id="a-brief-history-of-data-storage-at-opower">A brief history of data storage at Opower</h3>
-<p>We have been using MySQL as our main database since day one.  It has been good 
-to us, and we have figured out how to scale it well enough.  But as our 
-business has grown, so have our data storage needs.  Each of our utility 
-company clients gives us historical energy data for their customers, and we 
-store it indefinitely.  For utility companies that have smart meters 
-installed, we store energy reads that occur every 15 minutes, hour, or day.<br />
-For a meter with 15 minute resolution, we store 3000 times as much data as a 
+<p>We have been using MySQL as our main database since day one.  It has been good
+to us, and we have figured out how to scale it well enough.  But as our
+business has grown, so have our data storage needs.  Each of our utility
+company clients gives us historical energy data for their customers, and we
+store it indefinitely.  For utility companies that have smart meters
+installed, we store energy reads that occur every 15 minutes, hour, or day.
+For a meter with 15 minute resolution, we store 3000 times as much data as a
 standard meter that is read once a month.</p>
 
-<p>As more and more utility companies install smart meters, we ingest more and 
-more of this higher resolution data, which comes in more frequently than 
-standard monthly data.  Those last two characteristics hit on two of the 
+<p>As more and more utility companies install smart meters, we ingest more and
+more of this higher resolution data, which comes in more frequently than
+standard monthly data.  Those last two characteristics hit on two of the
 &ldquo;<a href="http://whatis.techtarget.com/definition/3Vs">three V’s</a>&rdquo; that define &ldquo;Big
 Data&rdquo;: volume and velocity.  As we have collected the smart meter data over
-the last several years, we have figured out innovative ways to use it, and we 
-want to accelerate our learning using the data.  To achieve that, we needed a 
-system better suited to processing large amounts of data, and that is where 
+the last several years, we have figured out innovative ways to use it, and we
+want to accelerate our learning using the data.  To achieve that, we needed a
+system better suited to processing large amounts of data, and that is where
 Hadoop and HBase fit in.</p>
 
-<p>We have a business case that fits HBase perfectly, because we need to perform 
-large batch calculations (running a disaggregation of A/C usage from your 
-energy data, for instance), and we need to serve up the results of those 
-calculations with low latency.  HBase gives us the perfect mix of those two 
-access patterns, and we have spent the last year working on our new storage 
+<p>We have a business case that fits HBase perfectly, because we need to perform
+large batch calculations (running a disaggregation of A/C usage from your
+energy data, for instance), and we need to serve up the results of those
+calculations with low latency.  HBase gives us the perfect mix of those two
+access patterns, and we have spent the last year working on our new storage
 system to do exactly this.</p>
 
 <h3 id="using-it-is-one-thing-showing-it-is-another">Using it is one thing, showing it is another</h3>
-<p>All of this fancy Big Data is pretty amazing but it&rsquo;s also not very sexy to 
-the untrained eye. After several low-level demos making use of the terminal, 
-logs and job tracker UI, we decided it was time to try a little harder. Let&rsquo;s 
-ponder: what can we show to illustrate the fact that we process and store all 
-of this energy data without breaking a sweat? </p>
+<p>All of this fancy Big Data is pretty amazing, but it&rsquo;s also not very sexy to
+the untrained eye. After several low-level demos making use of the terminal,
+logs and job tracker UI, we decided it was time to try a little harder. Let&rsquo;s
+ponder: what can we show to illustrate the fact that we process and store all
+of this energy data without breaking a sweat?</p>
 
 <h4 id="table-size">Table size</h4>
-<p>Showing table size is an obvious one. People understand what a terabyte 
-represents (at the very least, they know it&rsquo;s bigger than their inbox). </p>
+<p>Showing table size is an obvious one. People understand what a terabyte
+represents (at the very least, they know it&rsquo;s bigger than their inbox).</p>
 
-<p>For the demo, we gathered the table size data while our big test was running. 
-We built a simple command-line tool that polls hdfs for the size of each 
-table&rsquo;s directory. It keeps track of the sizes and outputs a json time series 
-when the tool shuts down. It&rsquo;s designed to run from a gateway node that can 
+<p>For the demo, we gathered the table size data while our big test was running.
+We built a simple command-line tool that polls hdfs for the size of each
+table&rsquo;s directory. It keeps track of the sizes and outputs a json time series
+when the tool shuts down. It&rsquo;s designed to run from a gateway node that can
 run the hadoop command and run <code>hadoop fs du</code> on hdfs.</p>
 
 <p>Source: <a href="https://github.com/opower/giant-squash">giant-squash</a></p>
 
 <h4 id="job-progress">Job progress</h4>
-<p>Showing the tables growing is interesting but it doesn&rsquo;t show all the work 
-that&rsquo;s done in Hadoop to get this data in HBase. Let&rsquo;s add the job progress 
-and input/output sizes. </p>
+<p>Showing the tables growing is interesting but it doesn&rsquo;t show all the work
+that&rsquo;s done in Hadoop to get this data in HBase. Let&rsquo;s add the job progress
+and input/output sizes.</p>
 
-<p>This is very similar to <a href="https://github.com/opower/giant-squash">giant-squash</a> 
-except that it collects data from the job tracker on the jobs that are running 
-on the cluster. It also collects the data in-memory and dumps a json time 
-series of the input/output sizes as well as map/reduce progress on exit.  </p>
+<p>This is very similar to <a href="https://github.com/opower/giant-squash">giant-squash</a>
+except that it collects data from the job tracker on the jobs that are running
+on the cluster. It also collects the data in-memory and dumps a json time
+series of the input/output sizes as well as map/reduce progress on exit.</p>
 
 <p>Source: <a href="https://github.com/opower/little-rabbit">little-rabbit</a></p>
 
 <h4 id="putting-it-together">Putting it together</h4>
-<p>Now that we&rsquo;ve got the data collected and our test is complete, let&rsquo;s animate 
+<p>Now that we&rsquo;ve got the data collected and our test is complete, let&rsquo;s animate
 it in fast-motion.</p>
 
-<p>Based on this nice d3.js <a href="http://bost.ocks.org/mike/nations/">Motion Chart</a> 
-demo, we created our version to animate the time series data. It reads the two 
-json dumps and merges this in one visualization. Granted, it violates some of 
+<p>Based on this nice d3.js <a href="http://bost.ocks.org/mike/nations/">Motion Chart</a>
+demo, we created our version to animate the time series data. It reads the two
+json dumps and merges this in one visualization. Granted, it violates some of
 the <a href="http://moz.com/blog/data-visualization-principles-lessons-from-tufte">principles of data information visualization</a>
 but it does make for a cool presentation and it gets people interested enough to
 ask questions about it.</p>
@@ -145,10 +145,10 @@ ask questions about it.</p>
 <p>Source: <a href="https://github.com/opower/bloom-harvester">bloom-harvester</a></p>
 
 <h4 id="hollywood-production">Hollywood production</h4>
-<p>Finally we wrapped it in with a nice summary of the digestible numbers and a 
+<p>Finally we wrapped it in with a nice summary of the digestible numbers and a
 nice soundtrack and voilà.</p>
 
-<p>Where are the explosions I hear you say? Well, maybe next time. After all, 
+<p>Where are the explosions I hear you say? Well, maybe next time. After all,
 this is going to production in just a few weeks.</p>
 
   </div>

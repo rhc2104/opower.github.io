@@ -63,9 +63,9 @@
   </div>
 
   <div class="post-content">
-    <p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on stackoverflow or the google, so I thought I&rsquo;d capture some of them here.</p>
+    <p>I recently had the pleasure of upgrading our Java code base from a Spring-3.0.6 base to the latest Spring-3.1.2 libraries.  There were a couple unexpected hiccups I encountered that didn&rsquo;t have a ton of solutions on StackOverflow or the Google, so I thought I&rsquo;d capture some of them here.</p>
 
-<p>Additionally, it&rsquo;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the spring guys published for just this kind of operation.</p>
+<p>Additionally, it&rsquo;s pretty useful to <a href="http://static.springsource.org/spring/docs/3.0.6.RELEASE_to_3.1.0.BUILD-SNAPSHOT/changes.html">look over the method deprecation and removal page</a> that the Spring guys published for just this kind of operation.</p>
 
 <h3 id="changes-to-theorgspringframeworkjdbccoresimple-package">Changes to the org.springframework.jdbc.core.simple package</h3>
 
@@ -154,10 +154,10 @@
 
 <h3 id="pay-attention-to-your-spring-context-xsd-versions">Pay attention to your spring context XSD versions</h3>
 
-<p>At Opower, we explicitly spell out what XSD versions we pull in to our spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the spring tag library we were using for spring-security wasn&rsquo;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &ldquo;spring security tag 3.0 library incompatible with class &hellip; blah&rdquo; make sure:</p>
+<p>At Opower, we explicitly spell out what XSD versions we pull in to our Spring contexts (instead of just leaving the version off which defaults to the latest published version).  This makes upgrades like this more tedious, and in one case caused some digging to figure out that the Spring tag library we were using for spring-security wasn&rsquo;t compatible with a transitive spring-security dependency being pulled in from spring-security-oauth.  If you get errors like &ldquo;spring security tag 3.0 library incompatible with class &hellip; blah&rdquo; make sure:</p>
 
 <ol>
-  <li>your spring context&rsquo;s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
+  <li>your Spring context&rsquo;s XSD is pointing to <code>http://www.springframework.org/schema/security/spring-security-3.1.xsd</code></li>
   <li>your mvn dependency:tree is pulling in spring-security-3.1</li>
 </ol>
 

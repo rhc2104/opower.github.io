@@ -102,7 +102,7 @@ data, it would normally be set up like this (in pseudo-code, of course):</p>
 <span class="n">get</span><span class="o">.</span><span class="na">setTimeRange</span><span class="o">(</span><span class="mi">2012</span><span class="o">,</span> <span class="mi">2013</span><span class="o">);</span>
 </code></pre></div>
 
-<p>Unfortunately that <code>get</code> would not return us any data for the metadata column,
+<p>Unfortunately, that <code>get</code> would not return us any data for the metadata column,
 because there is no valid cell in that timerange.  We have two options: make
 a second <code>get</code> for the metadata or figure out some other solution.  That second
 solution is timeshifting.</p>
@@ -138,7 +138,7 @@ There is no added overhead to the storage to account for this, and thus no added
 processing when fetching it.  Furthermore, fetching data for just the metadata column still works
 with <code>Result#getColumnLatest()</code>.</p>
 
-<p>Yes, there is a problem for the future us of the year 52,011, but I&rsquo;m betting we
+<p>Yes, there is a problem for the future us of the year 52011, but I&rsquo;m betting we
 will all be using relational databases again by that point.</p>
 
 

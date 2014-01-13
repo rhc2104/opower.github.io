@@ -101,7 +101,7 @@
 <span class="o">}</span>
 </code></pre></div>
 
-<p><code>Validate.*</code>  methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
+<p><code>Validate.*</code> methods essentially throw <code>IllegalArgumentException</code> if what they are checking for fails.
 We use this pattern extensively, even in constructors of simple data-structure style objects.  This (plus keeping this things immutable) allows users of these objects to safely rely upon the <code>get</code> methods behaving properly. I had need of a class to hold both a <code>Person</code> (representing a website user) and a <code>Customer</code> (representing a utility-company customer).  This class (called, naturally, <code>PersonAndCustomer</code>), takes both objects in its constructor and requires that they are both non-null.  As a further sanity check, I wanted to make sure that the <code>Person</code>&rsquo;s <code>customerId</code> matched the id of the <code>Customer</code> that was being passed in (i.e. that they represented the same actual human in the real world):</p>
 
 <div class="highlight"><pre><code class="java"><span class="kd">public</span> <span class="nf">PersonAndCustomer</span><span class="o">(</span><span class="n">Person</span> <span class="n">p</span><span class="o">,</span> <span class="n">Customer</span> <span class="n">c</span><span class="o">)</span> <span class="o">{</span>

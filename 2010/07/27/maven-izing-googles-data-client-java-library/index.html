@@ -63,11 +63,11 @@
   </div>
 
   <div class="post-content">
-    <p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our hudson slave) to complete and I got sucked in to a different project involving automatically downloading google analytics for all the traffic on all the websites we host for our clients.</p>
+    <p>OPOWER&rsquo;s first Innovation Day was a lot of fun.  I was waiting about 30 minutes for my primary project (building an AWS machine image for our Hudson slave) to complete and I got sucked in to a different project involving automatically downloading Google Analytics for all the traffic on all the websites we host for our clients.</p>
 
-<p>Clicking around google&rsquo;s well-documented &ldquo;get started&rdquo; guides, it looked like they haven&rsquo;t made their client JARs available in any MVN repos anywhere.  There is a (not-google-sponsored) source forge project that points to a sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&rsquo;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&rsquo;s repo (thereby making them accessible to all our developer&rsquo;s boxes).</p>
+<p>Clicking around Google&rsquo;s well-documented &ldquo;get started&rdquo; guides, it looked like they haven&rsquo;t made their client JARs available in any mvn repos anywhere.  There is a (not-google-sponsored) SourceForge project that points to a Sonatype repo, but instead of adding another 3rd party repo to our small but growing list, I figured it&rsquo;d be easier for small proof of concept purposes to just manually install the google JARs in OPOWER&rsquo;s repo (thereby making them accessible to all our developer&rsquo;s boxes).</p>
 
-<p>It quickly became clear that the number of JARs google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo, my gift to the world:</p>
+<p>It quickly became clear that the number of JARs Google ships with makes it faster and less error prone to script the mvn repo installation than doing manual command line copy &amp; pasting.  Lo and behold, my gift to the world:</p>
 
 <ol>
   <li>Grab latest JARs from the &ldquo;gdata-java&rdquo; link here: <a href="http://code.google.com/p/gdata-java-client/downloads/list">http://code.google.com/p/gdata-java-client/downloads/list</a></li>
@@ -136,14 +136,14 @@
 </code></pre>
   </li>
   <li>Don&rsquo;t forget to <code>chmod 755 *.pl</code></li>
-  <li>Then just run <code>./installall.pl</code> and all those google JARs should get installed in your repo</li>
+  <li>Then just run <code>./installall.pl</code> and all those Google JARs should get installed in your repo</li>
 </ol>
 
 <p>That assumes the &ldquo;mvn&rdquo; executable was in your path and that you run the scripts from within the same directory as all the JARs, but it&rsquo;s easily modified for whatever your situation may be.</p>
 
-<p>Note that relative to <code>./lib</code> there are 2 jars in <code>../deps/</code> that you should also install in your repo because the google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
+<p>Note that relative to <code>./lib</code>, there are 2 jars in <code>../deps/</code> that you should also install in your repo because the Google JARs to avoid ClassNotFoundExceptions in some runtime code paths.</p>
 
-<p>Once in, you should be able to boot strap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
+<p>Once in, you should be able to bootstrap a mvn client project against a Google Data source with a pom not too dissimilar from:</p>
 
 <div class="highlight"><pre><code class="xml"><span class="cp">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span>
 <span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0&quot;</span> <span class="na">xmlns:xsi=</span><span class="s">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span> <span class="na">xsi:schemaLocation=</span><span class="s">&quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd&quot;</span><span class="nt">&gt;</span>
@@ -152,11 +152,11 @@
   <span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
   <span class="nt">&lt;version&gt;</span>1.0.0-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
   <span class="nt">&lt;name&gt;</span>Google Client Example<span class="nt">&lt;/name&gt;</span>
-    
+
   <span class="nt">&lt;scm&gt;</span>
     <span class="nt">&lt;developerConnection&gt;</span>foo<span class="nt">&lt;/developerConnection&gt;</span>
   <span class="nt">&lt;/scm&gt;</span>
-    
+
   <span class="nt">&lt;dependencies&gt;</span>
     <span class="nt">&lt;dependency&gt;</span>
         <span class="nt">&lt;groupId&gt;</span>com.google.gdata<span class="nt">&lt;/groupId&gt;</span>
